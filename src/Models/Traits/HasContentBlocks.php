@@ -1,7 +1,7 @@
 <?php
 
-    namespace Statikbe\FilamentFlexibleContentBlocks\Models\Traits;
+namespace Statikbe\FilamentFlexibleContentBlocks\Models\Traits;
 
-    trait HasContentBlocks {
-
+    trait HasContentBlocks
+    {
     }
