@@ -1,0 +1,31 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up()
+    {
+        Schema::create('laravel_filament_flexible_content_blocks_table', function (Blueprint $table) {
+            $table->id();
+
+            $table->string('title');
+
+            //Publishing:
+            $table->timestamp('publishing_begins_at')->nullable();
+            $table->timestamp('publishing_ends_at')->nullable();
+
+            //SEO:
+            $table->string('seo_title')->nullable();
+            $table->string('seo_description')->nullable();
+
+            //Overview:
+            $table->string('overview_title')->nullable();
+            $table->string('overview_description')->nullable();
+
+            $table->timestamps();
+        });
+    }
+};

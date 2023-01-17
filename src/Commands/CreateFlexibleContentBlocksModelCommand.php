@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Statikbe\FilamentFlexibleContentBlocks\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class FilamentFlexibleContentBlocksCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-filament-flexible-content-blocks';
 
     public $description = 'My command';
 
