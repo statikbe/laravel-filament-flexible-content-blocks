@@ -4,9 +4,9 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Commands;
 
 use Illuminate\Console\Command;
 
-class FilamentFlexibleContentBlocksCommand extends Command
+class CreateFlexibleContentBlocksModelCommand extends Command
 {
-    public $signature = 'laravel-filament-flexible-content-blocks';
+    public $signature = 'filament-flexible-content-blocks:model';
 
     public $description = 'My command';
 

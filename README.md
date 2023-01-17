@@ -27,6 +27,7 @@ You can publish and run the migrations with:
 
 ```bash
 php artisan vendor:publish --tag="laravel-filament-flexible-content-blocks-migrations"
+php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="migrations"
 php artisan migrate
 ```
 
