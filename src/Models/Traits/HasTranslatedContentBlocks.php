@@ -2,16 +2,16 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Models\Traits;
 
-    use Spatie\Translatable\HasTranslations;
+use Spatie\Translatable\HasTranslations;
 
-    trait HasTranslatedContentBlocks
+trait HasTranslatedContentBlocks
+{
+    use HasTranslations;
+    use HasTranslatedAttributes;
+    use HasContentBlocks;
+
+    public function initializeHasTranslatedContentBlocks(): void
     {
-        use HasTranslations;
-        use HasTranslatedAttributes;
-        use HasContentBlocks;
-
-        public function initializeHasTranslatedContentBlocks(): void
-        {
-            $this->mergeTranslatable(['content_blocks']);
-        }
+        $this->mergeTranslatable(['content_blocks']);
     }
+}

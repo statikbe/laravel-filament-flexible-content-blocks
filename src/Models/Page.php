@@ -3,7 +3,6 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Translatable\HasTranslations;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Traits\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Traits\HasOverviewAttributes;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Traits\HasPageAttributes;

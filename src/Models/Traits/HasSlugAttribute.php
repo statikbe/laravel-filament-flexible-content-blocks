@@ -2,34 +2,34 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Models\Traits;
 
-    use Spatie\Sluggable\HasSlug;
-    use Spatie\Sluggable\SlugOptions;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
+
+/**
+ * @property string $slug
+ */
+trait HasSlugAttribute
+{
+    use HasSlug;
 
     /**
-     * @property string $slug
+     * Get the options for generating the slug.
      */
-    trait HasSlugAttribute
+    public function getSlugOptions(): SlugOptions
     {
-        use HasSlug;
-
-        /**
-         * Get the options for generating the slug.
-         */
-        public function getSlugOptions(): SlugOptions
-        {
-            return SlugOptions::create()
-                ->generateSlugsFrom('title')
-                ->saveSlugsTo('slug')
-                ->doNotGenerateSlugsOnUpdate();
-        }
-
-        /**
-         * Get the route key for the model.
-         *
-         * @return string
-         */
-        public function getRouteKeyName()
-        {
-            return 'slug';
-        }
+        return SlugOptions::create()
+            ->generateSlugsFrom('title')
+            ->saveSlugsTo('slug')
+            ->doNotGenerateSlugsOnUpdate();
     }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+}
