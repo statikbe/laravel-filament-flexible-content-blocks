@@ -45,8 +45,7 @@ trait HasOverviewAttributes
         $this->addMediaCollection($this->getOverviewImageCollection())
             ->registerMediaConversions(function (Media $media) {
                 $this->addMediaConversion($this->getOverviewImageConversionName())
-                    ->fit(Manipulations::FIT_CROP, 600, 600)
-                    ->nonQueued();
+                    ->fit(Manipulations::FIT_CROP, 600, 600);
             });
     }
 

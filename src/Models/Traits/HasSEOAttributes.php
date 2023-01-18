@@ -38,8 +38,7 @@ trait HasSEOAttributes
         $this->addMediaCollection($this->getSEOImageCollection())
             ->registerMediaConversions(function (Media $media) {
                 $this->addMediaConversion($this->getSEOImageConversionName())
-                    ->fit(Manipulations::FIT_CROP, 1200, 630)
-                    ->nonQueued();
+                    ->fit(Manipulations::FIT_CROP, 1200, 630);
             });
     }
 
