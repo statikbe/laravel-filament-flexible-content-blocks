@@ -14,7 +14,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Models\Traits;
     {
         use InteractsWithMedia;
 
-        public function initialiseHasSEOAttributes(): void
+        public function initializeHasSEOAttributes(): void
         {
             $this->registerSEOImageMediaCollectionAndConversion();
         }

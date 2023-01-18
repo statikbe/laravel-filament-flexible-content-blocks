@@ -16,9 +16,10 @@ class FilamentFlexibleContentBlocksServiceProvider extends PluginServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package
-            ->name('laravel-filament-flexible-content-blocks')
+            ->name('filament-flexible-content-blocks')
             ->hasConfigFile()
             ->hasViews()
+            //->hasViewComponents('flexible-block')
             ->hasMigration('create_default_pages_table')
             ->hasCommand(CreateFlexibleContentBlocksModelCommand::class);
     }
