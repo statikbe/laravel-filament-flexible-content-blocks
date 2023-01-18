@@ -2,6 +2,9 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Models\Traits;
 
+/**
+ * @property array $translatable
+ */
 trait HasTranslatedAttributes
 {
     protected function mergeTranslatable(array $translatableAttributes): void
