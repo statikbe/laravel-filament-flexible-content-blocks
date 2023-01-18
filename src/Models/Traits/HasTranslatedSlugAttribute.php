@@ -4,7 +4,6 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Models\Traits;
 
 use Spatie\Sluggable\HasTranslatableSlug;
 use Spatie\Sluggable\SlugOptions;
-use Spatie\Translatable\HasTranslations;
 
 trait HasTranslatedSlugAttribute
 {

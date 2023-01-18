@@ -2,8 +2,6 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Models\Traits;
 
-use Spatie\Translatable\HasTranslations;
-
 trait HasTranslatedPageAttributes
 {
     use HasTranslatedAttributes;
