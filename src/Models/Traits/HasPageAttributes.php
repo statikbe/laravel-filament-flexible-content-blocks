@@ -5,9 +5,9 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Models\Traits;
     use Carbon\Carbon;
 
     /**
-     * @property string $title
-     * @property Carbon $publishing_begins_at
-     * @property Carbon $publishing_ends_at
+     * @property string|null $title
+     * @property Carbon|null $publishing_begins_at
+     * @property Carbon|null $publishing_ends_at
      */
     trait HasPageAttributes
     {

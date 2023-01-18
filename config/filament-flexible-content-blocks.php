@@ -1,7 +1,7 @@
 <?php
 
 // config for Statikbe/FilamentFlexibleContentBlocks
-use App\Models\Page;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Page;
 use Spatie\Image\Manipulations;
 
 return [

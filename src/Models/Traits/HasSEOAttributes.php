@@ -7,8 +7,8 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Models\Traits;
     use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
     /**
-     * @property string $seo_title
-     * @property string $seo_description
+     * @property string|null $seo_title
+     * @property string|null $seo_description
      */
     trait HasSEOAttributes
     {

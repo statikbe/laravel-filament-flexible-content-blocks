@@ -6,7 +6,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Models\Traits;
     use Spatie\Sluggable\SlugOptions;
 
     /**
-     * @property string $slug
+     * @property string|null $slug
      */
     trait HasSlugAttribute
     {

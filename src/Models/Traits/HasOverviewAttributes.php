@@ -7,8 +7,8 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
- * @property string $overview_title
- * @property string $overview_description
+ * @property string|null $overview_title
+ * @property string|null $overview_description
  */
 trait HasOverviewAttributes
 {
