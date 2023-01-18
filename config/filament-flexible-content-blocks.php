@@ -1,8 +1,8 @@
 <?php
 
 // config for Statikbe/FilamentFlexibleContentBlocks
-use Statikbe\FilamentFlexibleContentBlocks\Models\Page;
 use Spatie\Image\Manipulations;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Page;
 
 return [
     'default_flexible_blocks' => [

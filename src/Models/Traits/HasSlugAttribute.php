@@ -16,6 +16,7 @@ trait HasSlugAttribute
      * Get the options for generating the slug.
      *
      * @property string|null $slug
+     *
      * @return SlugOptions
      */
     public function getSlugOptions(): SlugOptions

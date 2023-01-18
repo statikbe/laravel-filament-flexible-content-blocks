@@ -6,7 +6,6 @@ use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-
 /**
  * @property string|null $seo_title
  * @property string|null $seo_description
