@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Traits\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Traits\HasOverviewAttributes;
@@ -11,6 +12,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Traits\HasSlugAttribute;
 
 class Page extends Model
 {
+    use HasFactory;
     use HasPageAttributes;
     use HasSEOAttributes;
     use HasOverviewAttributes;

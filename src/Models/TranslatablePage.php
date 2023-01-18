@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Traits\HasTranslatedContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Traits\HasTranslatedOverviewAttributes;
@@ -11,6 +12,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Traits\HasTranslatedSlugAttrib
 
 class TranslatablePage extends Model
 {
+    use HasFactory;
     use HasTranslatedPageAttributes;
     use HasTranslatedSlugAttribute;
     use HasTranslatedSEOAttributes;

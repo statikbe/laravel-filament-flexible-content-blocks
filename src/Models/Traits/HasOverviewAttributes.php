@@ -16,6 +16,8 @@ trait HasOverviewAttributes
 
     public function initializeHasOverviewAttributes(): void
     {
+        $this->mergeFillable(['overview_title', 'overview_description']);
+
         $this->registerOverviewImageMediaCollectionAndConversion();
     }
 

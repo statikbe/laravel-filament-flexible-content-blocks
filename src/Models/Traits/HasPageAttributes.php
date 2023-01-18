@@ -13,14 +13,13 @@ trait HasPageAttributes
 {
     public function initializeHasPageAttributes(): void
     {
+        $this->mergeFillable(['title', 'publishing_begins_at', 'publishing_ends_at']);
+
         //set casts of attributes:
-        $this->casts = array_merge(
-            parent::getCasts(),
-            [
-                'publishing_begins_at' => 'datetime',
-                'publishing_ends_at' => 'datetime',
-            ]
-        );
+        $this->mergeCasts([
+            'publishing_begins_at' => 'datetime',
+            'publishing_ends_at' => 'datetime',
+        ]);
     }
 
     public function isPublished(): bool

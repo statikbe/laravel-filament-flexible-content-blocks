@@ -12,6 +12,11 @@ trait HasSlugAttribute
 {
     use HasSlug;
 
+    public function initializeHasSlugAttribute(): void
+    {
+        $this->mergeFillable(['slug']);
+    }
+
     /**
      * Get the options for generating the slug.
      *

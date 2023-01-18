@@ -10,12 +10,10 @@ trait HasContentBlocks
     public function initializeHasContentBlocks(): void
     {
         //set casts of attributes:
-        $this->casts = array_merge(
-            parent::getCasts(),
-            [
-                'content_blocks' => 'array',
-            ]
-        );
+        $this->mergeCasts([
+            'content_blocks' => 'array',
+        ]);
+        $this->mergeFillable(['content_blocks']);
     }
 
     /**

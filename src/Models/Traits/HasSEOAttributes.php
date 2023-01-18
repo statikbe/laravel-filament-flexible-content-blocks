@@ -16,6 +16,8 @@ trait HasSEOAttributes
 
     public function initializeHasSEOAttributes(): void
     {
+        $this->mergeFillable(['seo_title', 'seo_description']);
+
         $this->registerSEOImageMediaCollectionAndConversion();
     }
 

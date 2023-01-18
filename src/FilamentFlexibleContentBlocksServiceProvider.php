@@ -20,7 +20,7 @@ class FilamentFlexibleContentBlocksServiceProvider extends PluginServiceProvider
             ->hasConfigFile()
             ->hasViews()
             //->hasViewComponents('flexible-block')
-            ->hasMigration('create_default_pages_table')
+            ->hasMigrations(['create_default_pages_table', 'create_default_translatable_pages_table'])
             ->hasCommand(CreateFlexibleContentBlocksModelCommand::class);
     }
 }

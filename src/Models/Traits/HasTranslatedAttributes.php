@@ -11,6 +11,8 @@ trait HasTranslatedAttributes
 {
     use HasTranslations;
 
+    public $translatable = [];
+
     protected function mergeTranslatable(array $translatableAttributes): void
     {
         $this->translatable = array_merge(
