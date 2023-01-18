@@ -6,7 +6,6 @@ use Spatie\Translatable\HasTranslations;
 
 trait HasTranslatedPageAttributes
 {
-    use HasTranslations;
     use HasTranslatedAttributes;
     use HasPageAttributes;
 

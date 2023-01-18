@@ -6,7 +6,6 @@ use Spatie\Translatable\HasTranslations;
 
 trait HasTranslatedOverviewAttributes
 {
-    use HasTranslations;
     use HasTranslatedAttributes;
     use HasOverviewAttributes;
 

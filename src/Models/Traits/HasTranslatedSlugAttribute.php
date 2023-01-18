@@ -8,7 +8,6 @@ use Spatie\Translatable\HasTranslations;
 
 trait HasTranslatedSlugAttribute
 {
-    use HasTranslations;
     use HasTranslatableSlug;
     use HasTranslatedAttributes;
 

@@ -6,7 +6,6 @@ use Spatie\Translatable\HasTranslations;
 
 trait HasTranslatedSEOAttributes
 {
-    use HasTranslations;
     use HasTranslatedAttributes;
     use HasSEOAttributes;
 

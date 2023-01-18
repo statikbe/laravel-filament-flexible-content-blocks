@@ -6,7 +6,6 @@ use Spatie\Translatable\HasTranslations;
 
 trait HasTranslatedContentBlocks
 {
-    use HasTranslations;
     use HasTranslatedAttributes;
     use HasContentBlocks;
 
