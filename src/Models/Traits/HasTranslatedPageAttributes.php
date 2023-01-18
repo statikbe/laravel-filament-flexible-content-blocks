@@ -2,16 +2,16 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Models\Traits;
 
-    use Spatie\Translatable\HasTranslations;
+use Spatie\Translatable\HasTranslations;
 
-    trait HasTranslatedPageAttributes
+trait HasTranslatedPageAttributes
+{
+    use HasTranslations;
+    use HasTranslatedAttributes;
+    use HasPageAttributes;
+
+    public function initializeHasTranslatedPageAttributes(): void
     {
-        use HasTranslations;
-        use HasTranslatedAttributes;
-        use HasPageAttributes;
-
-        public function initializeHasTranslatedPageAttributes(): void
-        {
-            $this->mergeTranslatable(['title']);
-        }
+        $this->mergeTranslatable(['title']);
     }
+}

@@ -2,16 +2,16 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Models\Traits;
 
-    use Spatie\Translatable\HasTranslations;
+use Spatie\Translatable\HasTranslations;
 
-    trait HasTranslatedSEOAttributes
+trait HasTranslatedSEOAttributes
+{
+    use HasTranslations;
+    use HasTranslatedAttributes;
+    use HasSEOAttributes;
+
+    public function initializeHasTranslatedSEOAttributes(): void
     {
-        use HasTranslations;
-        use HasTranslatedAttributes;
-        use HasSEOAttributes;
-
-        public function initializeHasTranslatedSEOAttributes(): void
-        {
-            $this->mergeTranslatable(['seo_title', 'seo_description']);
-        }
+        $this->mergeTranslatable(['seo_title', 'seo_description']);
     }
+}

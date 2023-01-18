@@ -2,13 +2,13 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Models\Traits;
 
-    trait HasTranslatedAttributes
+trait HasTranslatedAttributes
+{
+    protected function mergeTranslatable(array $translatableAttributes): void
     {
-        protected function mergeTranslatable(array $translatableAttributes): void
-        {
-            $this->translatable = array_merge(
-                parent::getTranslatableAttributes(),
-                $translatableAttributes
-            );
-        }
+        $this->translatable = array_merge(
+            parent::getTranslatableAttributes(),
+            $translatableAttributes
+        );
     }
+}
