@@ -20,7 +20,6 @@ class PublishAction extends Action
     {
         $this->action(function () {
             try {
-                /* @var Model&HasPageAttributes $page */
                 $page = $this->getRecord();
                 if (method_exists($page, 'isPublished') && ! $page->isPublished()) {
                     $page->publishing_begins_at = Carbon::now();
