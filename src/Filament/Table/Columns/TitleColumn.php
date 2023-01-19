@@ -1,10 +1,11 @@
 <?php
 
-    namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Columns;
+namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Columns;
 
-    use \Filament\Tables\Columns\TextColumn;
+    use Filament\Tables\Columns\TextColumn;
 
-    class TitleColumn extends \Filament\Tables\Columns\TextColumn {
+    class TitleColumn extends \Filament\Tables\Columns\TextColumn
+    {
         public static function create(): static
         {
             return static::make('title')
