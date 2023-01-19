@@ -24,6 +24,7 @@ trait HasPageAttributes
 
     /**
      * Returns whether the page is published or visible, based on the begin and end publishing dates.
+     *
      * @return bool
      */
     public function isPublished(): bool
@@ -42,25 +43,31 @@ trait HasPageAttributes
 
     /**
      * Returns whether the page will be published, based on the begin publishing date.
+     *
      * @return bool
      */
-    public function willBecomePublished(): bool {
-        return (isset($this->publishing_begins_at) && $this->publishing_begins_at && $this->publishing_begins_at->isFuture());
+    public function willBecomePublished(): bool
+    {
+        return isset($this->publishing_begins_at) && $this->publishing_begins_at && $this->publishing_begins_at->isFuture();
     }
 
     /**
      * Returns whether the page will be unpublished, based on the end publishing date.
+     *
      * @return bool
      */
-    public function willBecomeUnpublished(): bool {
-        return (isset($this->publishing_ends_at) && $this->publishing_ends_at && $this->publishing_ends_at->isFuture());
+    public function willBecomeUnpublished(): bool
+    {
+        return isset($this->publishing_ends_at) && $this->publishing_ends_at && $this->publishing_ends_at->isFuture();
     }
 
     /**
      * Returns whether this page was published in the past and its publication ended.
+     *
      * @return bool
      */
-    public function wasUnpublished(): bool {
-        return (isset($this->publishing_ends_at) && $this->publishing_ends_at && $this->publishing_ends_at->isPast());
+    public function wasUnpublished(): bool
+    {
+        return isset($this->publishing_ends_at) && $this->publishing_ends_at && $this->publishing_ends_at->isPast();
     }
 }
