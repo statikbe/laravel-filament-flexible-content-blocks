@@ -4,6 +4,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Columns;
 
 use Filament\Tables\Columns\BadgeColumn;
 use Illuminate\Database\Eloquent\Model;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Traits\HasPageAttributes;
 
 class PublishedColumn extends BadgeColumn
 {

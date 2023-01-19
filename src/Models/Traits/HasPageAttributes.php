@@ -48,7 +48,7 @@ trait HasPageAttributes
      */
     public function willBecomePublished(): bool
     {
-        return isset($this->publishing_begins_at) && $this->publishing_begins_at && $this->publishing_begins_at->isFuture();
+        return $this->publishing_begins_at && $this->publishing_begins_at->isFuture();
     }
 
     /**
@@ -58,7 +58,7 @@ trait HasPageAttributes
      */
     public function willBecomeUnpublished(): bool
     {
-        return isset($this->publishing_ends_at) && $this->publishing_ends_at && $this->publishing_ends_at->isFuture();
+        return $this->publishing_ends_at && $this->publishing_ends_at->isFuture();
     }
 
     /**
@@ -68,6 +68,6 @@ trait HasPageAttributes
      */
     public function wasUnpublished(): bool
     {
-        return isset($this->publishing_ends_at) && $this->publishing_ends_at && $this->publishing_ends_at->isPast();
+        return $this->publishing_ends_at && $this->publishing_ends_at->isPast();
     }
 }
