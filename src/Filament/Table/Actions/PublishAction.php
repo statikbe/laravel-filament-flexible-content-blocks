@@ -20,7 +20,7 @@ class PublishAction extends Action
     {
         $this->action(function () {
             try {
-                /** @var Model|HasPageAttributes $page */
+                /* @var Model&HasPageAttributes $page */
                 $page = $this->getRecord();
                 if (method_exists($page, 'isPublished') && ! $page->isPublished()) {
                     $page->publishing_begins_at = Carbon::now();
@@ -56,7 +56,7 @@ class PublishAction extends Action
             return response();
         });
         $this->label(function () {
-            /** @var Model|HasPageAttributes $page */
+            /* @var Model|HasPageAttributes $page */
             $page = $this->getRecord();
             if (method_exists($page, 'isPublished') && $page->isPublished()) {
                 return trans('filament-flexible-content-blocks::filament-flexible-content-blocks.table_action.publish.unpublish_lbl');
