@@ -1,12 +1,13 @@
 <?php
 
-    namespace Statikbe\FilamentFlexibleContentBlocks\Models\Traits;
+namespace Statikbe\FilamentFlexibleContentBlocks\Models\Traits;
 
     use Spatie\Image\Manipulations;
     use Spatie\MediaLibrary\InteractsWithMedia;
     use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-    trait HasHeroImage {
+    trait HasHeroImage
+    {
         use InteractsWithMedia;
 
         public function initializeHasHeroImage(): void

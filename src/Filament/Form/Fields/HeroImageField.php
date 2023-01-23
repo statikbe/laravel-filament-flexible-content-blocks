@@ -1,11 +1,12 @@
 <?php
 
-    namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
+namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
 
     use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
     use Illuminate\Database\Eloquent\Model;
 
-    class HeroImageField extends SpatieMediaLibraryFileUpload {
+    class HeroImageField extends SpatieMediaLibraryFileUpload
+    {
         public static function create()
         {
             return SpatieMediaLibraryFileUpload::make('hero_image')
