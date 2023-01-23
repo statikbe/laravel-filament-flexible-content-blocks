@@ -2,22 +2,22 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
 
-    use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\TextInput;
 
-    class TitleField extends TextInput
+class TitleField extends TextInput
+{
+    public static function create(bool $required = false): static
     {
-        public static function create(bool $required = false): static
-        {
-            $field = static::getFieldName();
+        $field = static::getFieldName();
 
-            return self::make($field)
-                ->label(trans("filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.{$field}_lbl"))
-                ->maxLength(255)
-                ->required($required);
-        }
-
-        protected static function getFieldName(): string
-        {
-            return 'title';
-        }
+        return self::make($field)
+            ->label(trans("filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.{$field}_lbl"))
+            ->maxLength(255)
+            ->required($required);
     }
+
+    protected static function getFieldName(): string
+    {
+        return 'title';
+    }
+}
