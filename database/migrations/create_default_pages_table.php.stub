@@ -19,11 +19,11 @@ return new class extends Migration
 
             //SEO:
             $table->string('seo_title')->nullable();
-            $table->string('seo_description')->nullable();
+            $table->text('seo_description')->nullable();
 
             //Overview:
             $table->string('overview_title')->nullable();
-            $table->string('overview_description')->nullable();
+            $table->text('overview_description')->nullable();
 
             //Content blocks:
             $table->json('content_blocks')->default('[]');

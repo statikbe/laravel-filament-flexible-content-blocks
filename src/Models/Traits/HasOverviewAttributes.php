@@ -48,6 +48,9 @@ trait HasOverviewAttributes
             ->registerMediaConversions(function (Media $media) {
                 $this->addMediaConversion($this->getOverviewImageConversionName())
                     ->fit(Manipulations::FIT_CROP, 600, 600);
+                //for filament upload field
+                $this->addMediaConversion('thumbnail')
+                    ->fit(Manipulations::FIT_CROP, 400, 400);
             });
     }
 

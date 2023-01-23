@@ -1,13 +1,13 @@
 <?php
 
-    namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
+namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
 
     use Filament\Forms\Components\Fieldset;
-    use Filament\Forms\Components\Grid;
 
-    class PublishingDateFields extends Fieldset {
-
-        public static function make(string $title=null): static {
+    class PublishingDateFields extends Fieldset
+    {
+        public static function make(string $title = null): static
+        {
             return parent::make($title ?? trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.publishing_title'))
                 ->columns(2);
         }

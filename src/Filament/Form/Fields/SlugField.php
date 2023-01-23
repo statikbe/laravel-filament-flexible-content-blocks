@@ -1,11 +1,13 @@
 <?php
 
-    namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
+namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
 
     use Filament\Forms\Components\TextInput;
 
-    class SlugField extends TextInput {
-        public static function create(bool $disabled=true): static {
+    class SlugField extends TextInput
+    {
+        public static function create(bool $disabled = true): static
+        {
             return self::make('slug')
                 ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.slug_lbl'))
                 ->disabled($disabled)

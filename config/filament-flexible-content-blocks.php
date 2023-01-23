@@ -40,5 +40,5 @@ return [
 
     'formatting' => [
         'publishing_dates' => 'd/m/Y G:i',
-    ]
+    ],
 ];

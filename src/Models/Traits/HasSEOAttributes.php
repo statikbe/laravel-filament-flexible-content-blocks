@@ -41,6 +41,9 @@ trait HasSEOAttributes
             ->registerMediaConversions(function (Media $media) {
                 $this->addMediaConversion($this->getSEOImageConversionName())
                     ->fit(Manipulations::FIT_CROP, 1200, 630);
+                //for filament upload field
+                $this->addMediaConversion('thumbnail')
+                    ->fit(Manipulations::FIT_CROP, 400, 400);
             });
     }
 
