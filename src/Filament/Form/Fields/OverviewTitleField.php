@@ -2,10 +2,10 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
 
-    class OverviewTitleField extends TitleField
+class OverviewTitleField extends TitleField
+{
+    protected static function getFieldName(): string
     {
-        protected static function getFieldName(): string
-        {
-            return 'overview_title';
-        }
+        return 'overview_title';
     }
+}
