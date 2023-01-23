@@ -31,6 +31,11 @@ return new class extends Migration
             //Slug:
             $table->string('slug');
 
+            //Author:
+            $table->unsignedBigInteger('author_id')->nullable();
+            $table->foreign('author_id')
+                ->references('id')->on('users')->onDelete('set null');
+
             $table->timestamps();
         });
     }

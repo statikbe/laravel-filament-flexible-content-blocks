@@ -29,4 +29,6 @@
         'form_component.overview_title_lbl' => 'Overzichtstitel',
         'form_component.overview_description_lbl' => 'Overzichtsbeschrijving',
         'form_component.overview_image_lbl' => 'Overzichtsafbeelding',
+        'form_component.author_lbl' => 'Auteur',
+        'form_component.hero_image_lbl' => 'Hoofdafbeelding',
     ];
