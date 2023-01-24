@@ -31,4 +31,5 @@
         'form_component.overview_image_lbl' => 'Overview image',
         'form_component.author_lbl' => 'Author',
         'form_component.hero_image_lbl' => 'Hero image',
+        'form_component.intro_lbl' => 'Introduction',
     ];

@@ -13,6 +13,9 @@ return new class extends Migration
 
             $table->string('title');
 
+            //Intro:
+            $table->text('intro')->nullable();
+
             //Publishing:
             $table->timestamp('publishing_begins_at')->nullable();
             $table->timestamp('publishing_ends_at')->nullable();
