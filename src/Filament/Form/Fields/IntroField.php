@@ -2,10 +2,10 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
 
-    class IntroField extends DescriptionField
+class IntroField extends DescriptionField
+{
+    protected static function getFieldName(): string
     {
-        protected static function getFieldName(): string
-        {
-            return 'intro';
-        }
+        return 'intro';
     }
+}

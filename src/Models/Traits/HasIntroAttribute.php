@@ -2,13 +2,13 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Models\Traits;
 
-    /**
-     * @property string|null $intro
-     */
-    trait HasIntroAttribute
+/**
+ * @property string|null $intro
+ */
+trait HasIntroAttribute
+{
+    public function initializeHasIntroAttribute(): void
     {
-        public function initializeHasIntroAttribute(): void
-        {
-            $this->mergeFillable(['intro']);
-        }
+        $this->mergeFillable(['intro']);
     }
+}
