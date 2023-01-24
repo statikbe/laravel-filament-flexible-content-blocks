@@ -32,4 +32,5 @@
         'form_component.author_lbl' => 'Auteur',
         'form_component.hero_image_lbl' => 'Hoofdafbeelding',
         'form_component.intro_lbl' => 'Introductie',
+        'form_component.content_blocks_lbl' => 'Inhoud',
     ];

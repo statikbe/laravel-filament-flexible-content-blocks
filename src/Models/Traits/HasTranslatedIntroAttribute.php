@@ -1,8 +1,9 @@
 <?php
 
-    namespace Statikbe\FilamentFlexibleContentBlocks\Models\Traits;
+namespace Statikbe\FilamentFlexibleContentBlocks\Models\Traits;
 
-    trait HasTranslatedIntroAttribute {
+    trait HasTranslatedIntroAttribute
+    {
         use HasTranslatedAttributes;
         use HasIntroAttribute;
 
