@@ -1,6 +1,6 @@
 <?php
 
-    namespace Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks;
+namespace Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks;
 
     use Filament\Forms\Components\Builder\Block;
     use Filament\Forms\Components\Textarea;
@@ -8,13 +8,12 @@
 
     class VideoBlock extends AbstractContentBlock
     {
-
         public ?string $embedCode;
 
         /**
          * Create a new component instance.
          *
-         * @param array|null $blockData
+         * @param  array|null  $blockData
          */
         public function __construct(?array $blockData)
         {
@@ -45,7 +44,8 @@
             return view('components.content-blocks.video');
         }
 
-        public static function getName(): string {
+        public static function getName(): string
+        {
             return 'video';
         }
     }

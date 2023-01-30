@@ -1,10 +1,11 @@
 <?php
-    namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Resource;
+
+namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Resource;
 
     use Filament\Forms\Components\Builder\Block;
 
-    interface HasContentBlocks {
-
+    interface HasContentBlocks
+    {
         /**
          * Returns an array of all allowed content blocks for this resource. The order will be the order in which they
          * are presented to the user.

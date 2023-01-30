@@ -1,14 +1,16 @@
 <?php
 
-    namespace Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks;
+namespace Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks;
 
     use Filament\Forms\Components\Builder\Block;
     use Filament\Forms\Components\Textarea;
 
-    class HtmlBlock extends AbstractContentBlock {
+    class HtmlBlock extends AbstractContentBlock
+    {
         public ?string $content;
 
-        public static function getName(): string {
+        public static function getName(): string
+        {
             return 'html';
         }
 
@@ -22,7 +24,8 @@
             $this->content = $blockData['content'] ?? null;
         }
 
-        public static function getFilamentBlock(): Block {
+        public static function getFilamentBlock(): Block
+        {
             return parent::getFilamentBlock()
                 ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.content_block_html.title'))
                 ->schema([
@@ -35,7 +38,8 @@
                 ])->icon('heroicon-o-view-list');
         }
 
-        public function render() {
+        public function render()
+        {
             return view('components.content-blocks.html');
         }
     }

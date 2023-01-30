@@ -3,7 +3,6 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
 
 use Filament\Forms\Components\Builder;
-use phpDocumentor\Reflection\Types\ClassString;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Resource\HasContentBlocks;
 
 class ContentBlocksField extends Builder
