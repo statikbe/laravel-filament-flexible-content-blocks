@@ -9,5 +9,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks;
     {
         abstract public static function getName(): string;
 
-        abstract public static function getFilamentBlock(): Block;
+        public static function getFilamentBlock(): Block {
+            return Block::make(static::getName());
+        }
     }

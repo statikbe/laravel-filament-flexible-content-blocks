@@ -33,4 +33,13 @@
         'form_component.hero_image_lbl' => 'Hoofdafbeelding',
         'form_component.intro_lbl' => 'Introductie',
         'form_component.content_blocks_lbl' => 'Inhoud',
+
+        'content_block_text.title' => 'Tekst',
+        'content_block_text.content_lbl' => 'Tekst',
+        'content_block_video.video_lbl' => 'Video embed code',
+        'content_block_video.video_help' => 'Voeg de embed code van de share optie van YouTube of Vimeo toe.',
+        'content_block_html.title' => 'HTML',
+        'content_block_html.content_lbl' => 'HTML',
+        'content_block_html.html_help' => 'Let op dat de ingevoerde HTML geen kwaadaardige scripts of styles bevat die de pagina kunnen stuk maken.',
+
     ];
