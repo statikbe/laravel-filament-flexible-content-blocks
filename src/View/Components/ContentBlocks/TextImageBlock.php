@@ -2,11 +2,10 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks;
 
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
-use Illuminate\Database\Eloquent\Model;
 
 class TextImageBlock extends AbstractContentBlock
 {
