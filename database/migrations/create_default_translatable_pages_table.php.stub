@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('translatable_pages', function (Blueprint $table) {
             $table->id();
 
-            $table->json('title')->default('{}');
+            $table->json('title')->default('{}'); //Default only works on JSON on MySQL 8 or newer
 
             //Intro:
             $table->json('intro')->default('{}');
@@ -29,7 +29,7 @@ return new class extends Migration
             $table->json('overview_description')->nullable();
 
             //Content blocks:
-            $table->json('content_blocks')->default('[]');
+            $table->json('content_blocks')->default('[]'); //Default only works on JSON on MySQL 8 or newer
 
             //Slug:
             $table->json('slug')->default('{}');

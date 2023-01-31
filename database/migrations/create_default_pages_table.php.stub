@@ -29,7 +29,7 @@ return new class extends Migration
             $table->text('overview_description')->nullable();
 
             //Content blocks:
-            $table->json('content_blocks')->default('[]');
+            $table->json('content_blocks')->default('[]'); //Default only works on JSON on MySQL 8 or newer
 
             //Slug:
             $table->string('slug');

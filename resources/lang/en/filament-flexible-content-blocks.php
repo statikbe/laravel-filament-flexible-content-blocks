@@ -33,4 +33,10 @@
         'form_component.hero_image_lbl' => 'Hero image',
         'form_component.intro_lbl' => 'Introduction',
         'form_component.content_blocks_lbl' => 'Body',
+
+        'form_component.content_blocks.text.label' => 'Text',
+        'form_component.content_blocks.text.content' => 'Text',
+        'form_component.content_blocks.text-image.label' => 'Text (+ image)',
+        'form_component.content_blocks.text-image.title' => 'Title',
+        'form_component.content_blocks.text-image.content' => 'Text',
     ];

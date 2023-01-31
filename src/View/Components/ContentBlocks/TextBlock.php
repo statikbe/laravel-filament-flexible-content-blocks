@@ -5,7 +5,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\RichEditor;
 
-class Text extends AbstractContentBlock
+class TextBlock extends AbstractContentBlock
 {
     public ?string $content;
 
@@ -24,13 +24,13 @@ class Text extends AbstractContentBlock
         return 'text';
     }
 
-    public static function getFilamentBlock(): Block
+    public static function make(): Block
     {
         return Block::make(self::getName())
-            ->label(trans('merchants.article.body_paragraph'))
+            ->label(self::getLabel())
             ->schema([
                 RichEditor::make('content')
-                    ->label(trans('merchants.article.body_paragraph_content'))
+                    ->label(self::getFieldLabel('content'))
                     ->disableToolbarButtons([
                         'attachFiles',
                     ])
@@ -45,6 +45,6 @@ class Text extends AbstractContentBlock
      */
     public function render()
     {
-        return view('components.blocks.paragraph');
+        return view('components.blocks.text');
     }
 }

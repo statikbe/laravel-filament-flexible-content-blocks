@@ -33,4 +33,10 @@
         'form_component.hero_image_lbl' => 'Hoofdafbeelding',
         'form_component.intro_lbl' => 'Introductie',
         'form_component.content_blocks_lbl' => 'Inhoud',
+
+        'form_component.content_blocks.text.label' => 'Tekst',
+        'form_component.content_blocks.text.content' => 'Tekst',
+        'form_component.content_blocks.text-image.label' => 'Tekst (+ afbeelding)',
+        'form_component.content_blocks.text-image.title' => 'Titel',
+        'form_component.content_blocks.text-image.content' => 'Tekst',
     ];
