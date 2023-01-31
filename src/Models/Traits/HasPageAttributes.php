@@ -75,13 +75,24 @@ trait HasPageAttributes
 
     public function scopePublished(Builder $query): Builder
     {
-        //TODO fix query
-        return $query->whereNotNull('publishing_begins_at')
-            ->whereDate('publishing_begins_at', '<=', now());
-        /*select * from pages where (publishing_ends_at is not null and publishing_ends_at > now())
-            or (publishing_begins_at is not null and publishing_begins_at < now()
-                and publishing_ends_at is not null and publishing_ends_at > now())
-            or (publishing_begins_at is not null and publishing)*/
+        return $query->where(function(Builder $publishedQuery){
+            $publishedQuery->orWhere(function(Builder $option1){
+                    $option1->whereNull('publishing_begins_at')
+                        ->whereNotNull('publishing_ends_at')
+                        ->where('publishing_ends_at', '>', 'now()');
+                })->orWhere(function(Builder $option2){
+                    $option2->whereNotNull('publishing_begins_at')
+                        ->whereNotNull('publishing_ends_at')
+                        ->whereBetween('now()', ['publishing_begins_at', 'publishing_ends_at']);
+                })->orWhere(function(Builder $option3){
+                    $option3->whereNotNull('publishing_begins_at')
+                        ->whereNull('publishing_ends_at')
+                    ->where('publishing_ends_at', '<', 'now()');
+                })->orWhere(function(Builder $option4){
+                    $option4->whereNull('publishing_begins_at')
+                        ->whereNull('publishing_ends_at');
+                });
+        });
     }
 
     public function publishedOnFormatted(): Attribute
