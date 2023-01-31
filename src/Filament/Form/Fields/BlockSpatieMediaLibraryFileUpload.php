@@ -16,7 +16,7 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
 
         //Extend the media library load logic to also look at the given state (in our case the uuids of the images)
         $this->loadStateFromRelationshipsUsing(static function (SpatieMediaLibraryFileUpload $component, HasMedia $record, $state): void {
-            if (is_string($state)){
+            if (is_string($state)) {
                 $state = [$state];
             }
 
@@ -50,7 +50,6 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
 
             $component->state($files);
         });
-
 
         //Make sure the uuid of the image is added to the form data
         $this->dehydrated(true);
