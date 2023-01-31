@@ -39,4 +39,12 @@
         'form_component.content_blocks.text-image.label' => 'Text (+ image)',
         'form_component.content_blocks.text-image.title' => 'Title',
         'form_component.content_blocks.text-image.content' => 'Text',
+
+        'content_block_text.title' => 'Text',
+        'content_block_text.content_lbl' => 'Text',
+        'content_block_video.video_lbl' => 'Video embed code',
+        'content_block_video.video_help' => 'Add the embed code of the share functionality from YouTube or Vimeo.',
+        'content_block_html.title' => 'HTML',
+        'content_block_html.content_lbl' => 'HTML',
+        'content_block_html.html_help' => 'Pay attention that the HTML is sanitised and does not contain malicious scripts or styling that breaks the default page.',
     ];

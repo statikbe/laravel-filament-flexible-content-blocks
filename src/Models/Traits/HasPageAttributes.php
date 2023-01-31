@@ -3,6 +3,8 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Models\Traits;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 /**
  * @property string|null $title
@@ -69,5 +71,23 @@ trait HasPageAttributes
     public function wasUnpublished(): bool
     {
         return $this->publishing_ends_at && $this->publishing_ends_at->isPast();
+    }
+
+    public function scopePublished(Builder $query): Builder
+    {
+        //TODO fix query
+        return $query->whereNotNull('publishing_begins_at')
+            ->whereDate('publishing_begins_at', '<=', now());
+        /*select * from pages where (publishing_ends_at is not null and publishing_ends_at > now())
+            or (publishing_begins_at is not null and publishing_begins_at < now()
+                and publishing_ends_at is not null and publishing_ends_at > now())
+            or (publishing_begins_at is not null and publishing)*/
+    }
+
+    public function publishedOnFormatted(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value, $attributes) => optional($this->published_on)->format(config('leudis.datetime_format')),
+        );
     }
 }
