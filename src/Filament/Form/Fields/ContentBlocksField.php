@@ -3,14 +3,23 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
 
 use Filament\Forms\Components\Builder;
-use Statikbe\FilamentFlexibleContentBlocks\Filament\Resource\HasContentBlocks;
+use Filament\Forms\Components\Builder\Block;
+use Illuminate\Database\Eloquent\Model;
 
 class ContentBlocksField extends Builder
 {
-    public static function create(HasContentBlocks $resource)
+    /**
+     * @param  array<Block>  $contentBlocks
+     * @return Builder
+     */
+    public static function create(array $contentBlocks): static
     {
         return Builder::make('content_blocks')
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_lbl'))
-            ->blocks($resource::getContentBlocks());
+            ->childComponents(function (Model $record) {
+                dump('inside content block field');
+                dd($record);
+            })
+            ->blocks($contentBlocks);
     }
 }

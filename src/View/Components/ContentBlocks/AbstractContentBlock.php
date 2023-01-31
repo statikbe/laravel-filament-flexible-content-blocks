@@ -10,7 +10,7 @@ abstract class AbstractContentBlock extends Component
     /**
      * Create a new component instance.
      *
-     * @param array|null $blockData
+     * @param  array|null  $blockData
      */
     abstract public function __construct(?array $blockData);
 

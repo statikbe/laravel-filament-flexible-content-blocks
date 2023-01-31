@@ -2,11 +2,9 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks;
 
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
-use Illuminate\Database\Eloquent\Model;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\BlockSpatieMediaLibraryFileUpload;
 
 class TextImageBlock extends AbstractContentBlock
@@ -44,7 +42,6 @@ class TextImageBlock extends AbstractContentBlock
                     ->required(),
                 BlockSpatieMediaLibraryFileUpload::make('image')
                     ->collection('test')
-                    ->multiple()
                     ->label(self::getFieldLabel('image')),
                 //https://github.com/filamentphp/filament/issues/1284
             ])->icon('heroicon-o-view-list');
