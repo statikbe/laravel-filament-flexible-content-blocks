@@ -17,7 +17,7 @@ class ContentBlocksField extends Builder
         return Builder::make('content_blocks')
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_lbl'))
             ->childComponents(function(Model $record){
-                dump('inside content block field');ø
+                dump('inside content block field');
                 dd($record);
             })
             ->blocks($contentBlocks);
