@@ -16,6 +16,10 @@ return new class extends Migration
             //Intro:
             $table->json('intro')->default('{}');
 
+            //Hero image:
+            $table->json('hero_image_copyright')->default('{}');
+            $table->json('hero_image_title')->default('{}');
+
             //Publishing:
             $table->timestamp('publishing_begins_at')->nullable();
             $table->timestamp('publishing_ends_at')->nullable();

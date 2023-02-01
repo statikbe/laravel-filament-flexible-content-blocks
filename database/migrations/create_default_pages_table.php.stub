@@ -16,6 +16,10 @@ return new class extends Migration
             //Intro:
             $table->text('intro')->nullable();
 
+            //Hero image:
+            $table->string('hero_image_copyright')->nullable();
+            $table->string('hero_image_title')->nullable();
+
             //Publishing:
             $table->timestamp('publishing_begins_at')->nullable();
             $table->timestamp('publishing_ends_at')->nullable();

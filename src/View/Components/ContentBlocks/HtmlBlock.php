@@ -9,11 +9,6 @@ class HtmlBlock extends AbstractContentBlock
 {
     public ?string $content;
 
-    public static function getName(): string
-    {
-        return 'html';
-    }
-
     /**
      * Create a new component instance.
      *
@@ -24,18 +19,27 @@ class HtmlBlock extends AbstractContentBlock
         $this->content = $blockData['content'] ?? null;
     }
 
-    public static function getFilamentBlock(): Block
+    public static function getName(): string
     {
-        return parent::getFilamentBlock()
-            ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.content_block_html.title'))
+        return 'html';
+    }
+
+    public static function getIcon(): string
+    {
+        return 'heroicon-o-code';
+    }
+
+    public static function make(): Block
+    {
+        return parent::make()
             ->schema([
                 Textarea::make('content')
-                    ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.content_block_html.content_lbl'))
-                    ->hint(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.content_block_html.html_help'))
+                    ->label(static::getFieldLabel('label'))
+                    ->hint(static::getFieldLabel('help'))
                     ->hintIcon('heroicon-s-question-mark-circle')
                     ->rows(5)
                     ->required(),
-            ])->icon('heroicon-o-view-list');
+            ]);
     }
 
     public function render()

@@ -3,7 +3,6 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Models\Traits;
 
 use Carbon\Carbon;
-use DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 

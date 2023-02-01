@@ -20,18 +20,27 @@ class VideoBlock extends AbstractContentBlock
         $this->embedCode = $blockData['embed_code'] ?? null;
     }
 
-    public static function getFilamentBlock(): Block
+    public static function getName(): string
     {
-        return parent::getFilamentBlock()
-            ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.content_block_video.title'))
+        return 'video';
+    }
+
+    public static function getIcon(): string
+    {
+        return 'heroicon-o-video-camera';
+    }
+
+    public static function make(): Block
+    {
+        return parent::make()
             ->schema([
                 Textarea::make('embed_code')
-                    ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.content_block_video.embed_code_lbl'))
-                    ->hint(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.content_block_video.video_help'))
+                    ->label(static::getFieldLabel('label'))
+                    ->hint(static::getFieldLabel('help'))
                     ->hintIcon('heroicon-s-question-mark-circle')
                     ->rows(2)
                     ->required(),
-            ])->icon('heroicon-o-video-camera');
+            ]);
     }
 
     /**
@@ -42,10 +51,5 @@ class VideoBlock extends AbstractContentBlock
     public function render()
     {
         return view('components.content-blocks.video');
-    }
-
-    public static function getName(): string
-    {
-        return 'video';
     }
 }

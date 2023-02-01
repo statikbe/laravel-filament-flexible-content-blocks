@@ -21,7 +21,7 @@ trait HasSEOAttributes
         $this->registerSEOImageMediaCollectionAndConversion();
     }
 
-    public function getSEOTitle(): string
+    public function getSEOTitle(): ?string
     {
         if (! $this->seo_title && isset($this->title)) {
             return $this->title;
@@ -30,8 +30,12 @@ trait HasSEOAttributes
         return $this->seo_title;
     }
 
-    public function getSEODescription(): string
+    public function getSEODescription(): ?string
     {
+        if (! $this->seo_description && isset($this->intro)) {
+            return $this->intro;
+        }
+
         return $this->seo_description;
     }
 
@@ -63,7 +67,7 @@ trait HasSEOAttributes
         return 'seo_image';
     }
 
-    public function getSEOImageUrl(string $conversion = null): string
+    public function getSEOImageUrl(string $conversion = null): ?string
     {
         return $this->getFirstMediaUrl($this->getSEOImageCollection(), $conversion ?? $this->getSEOImageConversionName());
     }

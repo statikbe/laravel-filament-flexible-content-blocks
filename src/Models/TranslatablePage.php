@@ -5,7 +5,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Traits\HasAuthorAttribute;
-use Statikbe\FilamentFlexibleContentBlocks\Models\Traits\HasHeroImage;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Traits\HasHeroImageAttributes;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Traits\HasTranslatedContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Traits\HasTranslatedIntroAttribute;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Traits\HasTranslatedOverviewAttributes;
@@ -19,7 +19,7 @@ class TranslatablePage extends Model
     use HasTranslatedPageAttributes;
     use HasTranslatedIntroAttribute;
     use HasAuthorAttribute;
-    use HasHeroImage;
+    use HasHeroImageAttributes;
     use HasTranslatedSlugAttribute;
     use HasTranslatedSEOAttributes;
     use HasTranslatedContentBlocks;

@@ -16,6 +16,8 @@ abstract class AbstractContentBlock extends Component
 
     abstract public static function getName(): string;
 
+    abstract public static function getIcon(): string;
+
     public static function getLabel(): string
     {
         $name = static::getName();
@@ -31,9 +33,14 @@ abstract class AbstractContentBlock extends Component
     }
 
     /**
-     * Make a new FilamentBlock instance for this block.
+     * Make a new Filament Block instance for this flexible block.
      */
-    abstract public static function make(): Block;
+    public static function make(): Block
+    {
+        return Block::make(static::getName())
+            ->label(self::getLabel())
+            ->icon(static::getIcon());
+    }
 
     /**
      * Get the view / contents that represent the component.

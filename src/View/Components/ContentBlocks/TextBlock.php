@@ -24,18 +24,22 @@ class TextBlock extends AbstractContentBlock
         return 'text';
     }
 
+    public static function getIcon(): string
+    {
+        return 'heroicon-o-view-list';
+    }
+
     public static function make(): Block
     {
-        return Block::make(self::getName())
-            ->label(self::getLabel())
+        return parent::make()
             ->schema([
                 RichEditor::make('content')
-                    ->label(self::getFieldLabel('content'))
+                    ->label(self::getFieldLabel('label'))
                     ->disableToolbarButtons([
                         'attachFiles',
                     ])
                     ->required(),
-            ])->icon('heroicon-o-view-list');
+            ]);
     }
 
     /**

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Traits\HasAuthorAttribute;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Traits\HasContentBlocks;
-use Statikbe\FilamentFlexibleContentBlocks\Models\Traits\HasHeroImage;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Traits\HasHeroImageAttributes;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Traits\HasIntroAttribute;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Traits\HasOverviewAttributes;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Traits\HasPageAttributes;
@@ -19,7 +19,7 @@ class Page extends Model
     use HasPageAttributes;
     use HasIntroAttribute;
     use HasAuthorAttribute;
-    use HasHeroImage;
+    use HasHeroImageAttributes;
     use HasSEOAttributes;
     use HasOverviewAttributes;
     use HasContentBlocks;

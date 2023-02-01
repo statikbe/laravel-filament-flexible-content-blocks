@@ -26,10 +26,14 @@ class TextImageBlock extends AbstractContentBlock
         return 'text-image';
     }
 
+    public static function getIcon(): string
+    {
+        return 'heroicon-o-view-list';
+    }
+
     public static function make(): Block
     {
-        return Block::make(self::getName())
-            ->label(self::getLabel())
+        return parent::make()
             ->schema([
                 TextInput::make('title')
                     ->label(self::getFieldLabel('title'))
@@ -45,7 +49,7 @@ class TextImageBlock extends AbstractContentBlock
                     ->customProperties(['test' => 1])
                     ->label(self::getFieldLabel('image')),
                 //https://github.com/filamentphp/filament/issues/1284
-            ])->icon('heroicon-o-view-list');
+            ]);
     }
 
     /**

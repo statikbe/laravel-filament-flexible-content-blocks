@@ -4,6 +4,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Resource\Traits;
 
 use Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks\HtmlBlock;
 use Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks\TextBlock;
+use Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks\TextImageBlock;
 use Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks\VideoBlock;
 
 /**
@@ -14,10 +15,10 @@ trait HasDefaultContentBlocks
     public static function getContentBlocks(): array
     {
         return [
-            TextBlock::getFilamentBlock(),
-            VideoBlock::getFilamentBlock(),
-            HtmlBlock::getFilamentBlock(),
-
+            TextBlock::make(),
+            VideoBlock::make(),
+            HtmlBlock::make(),
+            TextImageBlock::make(),
         ];
     }
 }

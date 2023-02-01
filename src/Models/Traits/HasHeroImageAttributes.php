@@ -6,13 +6,18 @@ use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-trait HasHeroImage
+/**
+ * @property ?string $hero_image_title
+ * @property ?string $hero_image_copyright
+ */
+trait HasHeroImageAttributes
 {
     use InteractsWithMedia;
 
     public function initializeHasHeroImage(): void
     {
         $this->registerHeroImageMediaCollectionAndConversion();
+        $this->mergeFillable(['hero_image_title', 'hero_image_copyright']);
     }
 
     protected function registerHeroImageMediaCollectionAndConversion()
