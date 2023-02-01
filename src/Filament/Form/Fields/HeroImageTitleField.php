@@ -2,10 +2,10 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
 
-    class HeroImageTitleField extends TitleField
+class HeroImageTitleField extends TitleField
+{
+    protected static function getFieldName(): string
     {
-        protected static function getFieldName(): string
-        {
-            return 'hero_image_title';
-        }
+        return 'hero_image_title';
     }
+}
