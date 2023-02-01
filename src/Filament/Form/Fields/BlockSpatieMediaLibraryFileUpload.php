@@ -8,6 +8,11 @@ use Illuminate\Support\Collection;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
+/**
+ * An extension to the spatie media-library field of Filament to also allow to save the UUID to a block.
+ *
+ * @see https://github.com/filamentphp/filament/issues/1284
+ */
 class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
 {
     protected function setUp(): void

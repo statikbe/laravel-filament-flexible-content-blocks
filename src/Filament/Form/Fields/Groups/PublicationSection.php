@@ -8,7 +8,8 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\PublishingEndsAt
 
 class PublicationSection extends Section
 {
-    public static function create(): static {
+    public static function create(): static
+    {
         return static::make(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.publication_section_title'))
             ->schema([
                 PublishingBeginsAtField::create(),

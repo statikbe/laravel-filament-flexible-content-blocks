@@ -2,6 +2,8 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Models\Traits;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Spatie\Sluggable\HasTranslatableSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -34,5 +36,32 @@ trait HasTranslatedSlugAttribute
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function getLocalizedRouteKey($locale)
+    {
+        return $this->getTranslation('slug', $locale);
+    }
+
+    /**
+     * This method is overwritten to make filament resolve the model with a translated slug key.
+     * {@inheritDoc}
+     */
+    public function resolveRouteBindingQuery($query, $value, $field = null): Builder|Relation
+    {
+        $field = $field ?? $this->getRouteKeyName();
+
+        if (! $this->isTranslatableAttribute($field)) {
+            return parent::resolveRouteBindingQuery($query, $value, $field);
+        }
+
+        return $query->where(function (Builder $query) use ($field, $value) {
+            //TODO add locales as config
+            foreach (array_keys(config('laravellocalization.supportedLocales')) as $locale) {
+                $query->orWhere("{$field}->{$locale}", $value);
+            }
+
+            return $query;
+        });
     }
 }
