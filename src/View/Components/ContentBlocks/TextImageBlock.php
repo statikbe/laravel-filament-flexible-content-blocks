@@ -4,8 +4,8 @@ namespace Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks;
 
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\BlockSpatieMediaLibraryFileUpload;
 
 class TextImageBlock extends AbstractContentBlock
 {
@@ -44,9 +44,8 @@ class TextImageBlock extends AbstractContentBlock
                         'attachFiles',
                     ])
                     ->required(),
-                SpatieMediaLibraryFileUpload::make('image')
+                BlockSpatieMediaLibraryFileUpload::make('image')
                     ->collection('test')
-                    ->customProperties(['test' => 1])
                     ->label(self::getFieldLabel('image')),
                 //https://github.com/filamentphp/filament/issues/1284
             ]);
