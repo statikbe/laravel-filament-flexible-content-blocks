@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Spatie\Sluggable\HasTranslatableSlug;
 use Spatie\Sluggable\SlugOptions;
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks;
 
 trait HasTranslatedSlugAttribute
 {
@@ -56,8 +57,7 @@ trait HasTranslatedSlugAttribute
         }
 
         return $query->where(function (Builder $query) use ($field, $value) {
-            //TODO add locales as config
-            foreach (array_keys(config('laravellocalization.supportedLocales')) as $locale) {
+            foreach (array_keys(FilamentFlexibleContentBlocks::getLocales()) as $locale) {
                 $query->orWhere("{$field}->{$locale}", $value);
             }
 

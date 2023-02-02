@@ -24,4 +24,16 @@ class FilamentFlexibleContentBlocksServiceProvider extends PluginServiceProvider
             ->hasTranslations()
             ->hasCommand(CreateFlexibleContentBlocksModelCommand::class);
     }
+
+    public function packageBooted(): void
+    {
+        $this->mergeConfigFrom(__DIR__.'/../config/'.$this->package->name.'.php', $this->package->name);
+
+        $supportedLocales = config(
+            $this->package->name.'.supported_locales',
+            config('app.supported_locales', ['en'])
+        );
+
+        FilamentFlexibleContentBlocks::setLocales($supportedLocales);
+    }
 }
