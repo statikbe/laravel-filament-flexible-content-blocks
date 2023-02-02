@@ -57,7 +57,7 @@ trait HasTranslatedSlugAttribute
         }
 
         return $query->where(function (Builder $query) use ($field, $value) {
-            foreach (array_keys(FilamentFlexibleContentBlocks::getLocales()) as $locale) {
+            foreach (array_values(FilamentFlexibleContentBlocks::getLocales()) as $locale) {
                 $query->orWhere("{$field}->{$locale}", $value);
             }
 
