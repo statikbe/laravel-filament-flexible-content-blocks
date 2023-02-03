@@ -37,7 +37,7 @@ return [
 ];
 ```
 
-Optionally, you can publish the views using
+Optionally, you can publish the views (e.g. if you want to tweak the content blocks) using:
 
 ```bash
 php artisan vendor:publish --tag="laravel-filament-flexible-content-blocks-views"

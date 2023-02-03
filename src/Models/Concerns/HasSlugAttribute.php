@@ -1,6 +1,6 @@
 <?php
 
-namespace Statikbe\FilamentFlexibleContentBlocks\Models\Traits;
+namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;

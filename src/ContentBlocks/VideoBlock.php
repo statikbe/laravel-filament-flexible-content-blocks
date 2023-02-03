@@ -1,10 +1,8 @@
 <?php
 
-namespace Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks;
+namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
-use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Textarea;
-use Illuminate\View\Component;
 
 class VideoBlock extends AbstractContentBlock
 {
@@ -30,17 +28,19 @@ class VideoBlock extends AbstractContentBlock
         return 'heroicon-o-video-camera';
     }
 
-    public static function make(): Block
+    /**
+     * {@inheritDoc}
+     */
+    protected static function makeFilamentSchema(): array|\Closure
     {
-        return parent::make()
-            ->schema([
-                Textarea::make('embed_code')
-                    ->label(static::getFieldLabel('label'))
-                    ->hint(static::getFieldLabel('help'))
-                    ->hintIcon('heroicon-s-question-mark-circle')
-                    ->rows(2)
-                    ->required(),
-            ]);
+        return [
+            Textarea::make('embed_code')
+                ->label(static::getFieldLabel('label'))
+                ->hint(static::getFieldLabel('help'))
+                ->hintIcon('heroicon-s-question-mark-circle')
+                ->rows(2)
+                ->required(),
+        ];
     }
 
     /**
@@ -50,6 +50,6 @@ class VideoBlock extends AbstractContentBlock
      */
     public function render()
     {
-        return view('components.content-blocks.video');
+        return view('filament-flexible-content-blocks::content-blocks.video');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Statikbe\FilamentFlexibleContentBlocks\Models\Traits;
+namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 
 trait HasTranslatedPageAttributes
 {

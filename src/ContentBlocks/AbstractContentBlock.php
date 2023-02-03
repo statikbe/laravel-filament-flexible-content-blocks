@@ -1,7 +1,8 @@
 <?php
 
-namespace Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks;
+namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
+use Closure;
 use Filament\Forms\Components\Builder\Block;
 use Illuminate\View\Component;
 
@@ -34,13 +35,23 @@ abstract class AbstractContentBlock extends Component
 
     /**
      * Make a new Filament Block instance for this flexible block.
+     *
+     * @return Block
      */
     public static function make(): Block
     {
         return Block::make(static::getName())
-            ->label(self::getLabel())
-            ->icon(static::getIcon());
+            ->label(static::getLabel())
+            ->icon(static::getIcon())
+            ->schema(static::makeFilamentSchema());
     }
+
+    /**
+     * Returns the block's form schema consisting of an list of Filament form components or a closure that returns such a list.
+     *
+     * @return array<\Filament\Forms\Components\Component>|Closure
+     */
+    abstract protected static function makeFilamentSchema(): array|Closure;
 
     /**
      * Get the view / contents that represent the component.

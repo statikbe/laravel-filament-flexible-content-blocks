@@ -1,6 +1,6 @@
 <?php
 
-namespace Statikbe\FilamentFlexibleContentBlocks\Models\Traits;
+namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;

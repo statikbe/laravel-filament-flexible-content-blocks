@@ -5,6 +5,8 @@ namespace Statikbe\FilamentFlexibleContentBlocks;
 use Filament\PluginServiceProvider;
 use Spatie\LaravelPackageTools\Package;
 use Statikbe\FilamentFlexibleContentBlocks\Commands\CreateFlexibleContentBlocksModelCommand;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextImageBlock;
+use Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks;
 
 class FilamentFlexibleContentBlocksServiceProvider extends PluginServiceProvider
 {
@@ -19,7 +21,7 @@ class FilamentFlexibleContentBlocksServiceProvider extends PluginServiceProvider
             ->name('filament-flexible-content-blocks')
             ->hasConfigFile()
             ->hasViews()
-            //->hasViewComponents('flexible-block')
+            ->hasViewComponents('flexible', ContentBlocks::class, TextImageBlock::class)
             ->hasMigrations(['create_default_pages_table', 'create_default_translatable_pages_table'])
             ->hasTranslations()
             ->hasCommand(CreateFlexibleContentBlocksModelCommand::class);

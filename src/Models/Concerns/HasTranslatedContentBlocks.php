@@ -1,11 +1,11 @@
 <?php
 
-namespace Statikbe\FilamentFlexibleContentBlocks\Models\Traits;
+namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 
 trait HasTranslatedContentBlocks
 {
     use HasTranslatedAttributes;
-    use HasContentBlocks;
+    use HasContentBlocksTrait;
 
     public function initializeHasTranslatedContentBlocks(): void
     {

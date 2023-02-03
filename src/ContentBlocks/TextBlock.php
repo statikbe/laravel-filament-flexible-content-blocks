@@ -1,8 +1,7 @@
 <?php
 
-namespace Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks;
+namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
-use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\RichEditor;
 
 class TextBlock extends AbstractContentBlock
@@ -29,17 +28,19 @@ class TextBlock extends AbstractContentBlock
         return 'heroicon-o-view-list';
     }
 
-    public static function make(): Block
+    /**
+     * {@inheritDoc}
+     */
+    protected static function makeFilamentSchema(): array|\Closure
     {
-        return parent::make()
-            ->schema([
-                RichEditor::make('content')
-                    ->label(self::getFieldLabel('label'))
-                    ->disableToolbarButtons([
-                        'attachFiles',
-                    ])
-                    ->required(),
-            ]);
+        return [
+            RichEditor::make('content')
+                ->label(self::getFieldLabel('label'))
+                ->disableToolbarButtons([
+                    'attachFiles',
+                ])
+                ->required(),
+        ];
     }
 
     /**
@@ -49,6 +50,6 @@ class TextBlock extends AbstractContentBlock
      */
     public function render()
     {
-        return view('components.blocks.text');
+        return view('filament-flexible-content-blocks::content-blocks.text');
     }
 }

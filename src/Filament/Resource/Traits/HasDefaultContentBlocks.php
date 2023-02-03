@@ -2,23 +2,28 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Resource\Traits;
 
-use Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks\HtmlBlock;
-use Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks\TextBlock;
-use Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks\TextImageBlock;
-use Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks\VideoBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\HtmlBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextImageBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\VideoBlock;
 
 /**
- * An implementation of the HasContentBlocks interface for all blocks offered by the library.
+ * An implementation of the HasFilamentContentBlocks interface for all blocks offered by the library.
  */
 trait HasDefaultContentBlocks
 {
-    public static function getContentBlocks(): array
+    use HasContentBlocks;
+
+    /**
+     * {@inheritDoc}
+     */
+    public static function getContentBlockClasses(): array
     {
         return [
-            TextBlock::make(),
-            VideoBlock::make(),
-            HtmlBlock::make(),
-            TextImageBlock::make(),
+            TextBlock::class,
+            VideoBlock::class,
+            HtmlBlock::class,
+            TextImageBlock::class,
         ];
     }
 }
