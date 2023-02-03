@@ -2,15 +2,15 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Models\Contracts;
 
+/**
+ * @property array $content_blocks
+ */
+interface HasContentBlocks
+{
     /**
-     * @property array $content_blocks
+     * Extract all searchable text from the content blocks, to enable simple searching in content blocks.
+     *
+     * @return string|null
      */
-    interface HasContentBlocks
-    {
-        /**
-         * Extract all searchable text from the content blocks, to enable simple searching in content blocks.
-         *
-         * @return string|null
-         */
-        public function getSearchableContent(): ?string;
-    }
+    public function getSearchableContent(): ?string;
+}
