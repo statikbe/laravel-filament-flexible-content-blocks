@@ -15,7 +15,7 @@ class AuthorField extends Select
             ->relationship('author', 'name')
             ->default(Auth::user()->id)
             ->searchable()
-            ->getSearchResultsUsing(fn (string $searchQuery) => User::where('name', 'like', "%{$searchQuery}%")
+            ->getSearchResultsUsing(fn (string $searchQuery) => User::query()->where('name', 'like', "%{$searchQuery}%")
                     ->orWhere('email', 'like', "%{$searchQuery}%")
                     ->orderBy('name', 'asc')
                     ->limit(50)

@@ -10,11 +10,12 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  * @property string|null $seo_title
  * @property string|null $seo_description
  */
-trait HasSEOAttributes
+trait HasSEOAttributesTrait
 {
     use InteractsWithMedia;
+    use HasMediaAttributesTrait;
 
-    public function initializeHasSEOAttributes(): void
+    public function initializeHasSEOAttributesTrait(): void
     {
         $this->mergeFillable(['seo_title', 'seo_description']);
 
@@ -46,8 +47,7 @@ trait HasSEOAttributes
                 $this->addMediaConversion($this->getSEOImageConversionName())
                     ->fit(Manipulations::FIT_CROP, 1200, 630);
                 //for filament upload field
-                $this->addMediaConversion('thumbnail')
-                    ->fit(Manipulations::FIT_CROP, 400, 400);
+                $this->addFilamentThumbnailMediaConversion();
             });
     }
 

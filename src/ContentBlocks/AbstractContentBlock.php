@@ -5,33 +5,60 @@ namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 use Closure;
 use Filament\Forms\Components\Builder\Block;
 use Illuminate\View\Component;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
 
+/**
+ * This is the base class from which all flexible content blocks should inherit.
+ */
 abstract class AbstractContentBlock extends Component
 {
+    public HasContentBlocks&HasMedia $record;
+
+    public ?array $blockData;
+
     /**
      * Create a new component instance.
      *
+     * @param  HasContentBlocks&HasMedia  $record
      * @param  array|null  $blockData
      */
-    abstract public function __construct(?array $blockData);
+    public function __construct(HasContentBlocks&HasMedia $record, ?array $blockData)
+    {
+        $this->record = $record;
+        $this->blockData = $blockData;
+    }
 
+    /**
+     * Get the name/type of this block
+     *
+     * @return string
+     */
     abstract public static function getName(): string;
 
+    /**
+     * Get the heroicon of this block
+     *
+     * @return string
+     */
     abstract public static function getIcon(): string;
 
-    public static function getLabel(): string
-    {
-        $name = static::getName();
+    /**
+     * Get translated label of this block
+     *
+     * @return string
+     */
+    abstract public static function getLabel(): string;
 
-        return trans("filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.{$name}.label");
-    }
-
-    public static function getFieldLabel(string $field): string
-    {
-        $name = static::getName();
-
-        return trans("filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.{$name}.{$field}");
-    }
+    /**
+     * Get the translated label of the given field.
+     *
+     * @param  string  $field
+     * @return string
+     */
+    abstract public static function getFieldLabel(string $field): string;
 
     /**
      * Make a new Filament Block instance for this flexible block.
@@ -59,4 +86,46 @@ abstract class AbstractContentBlock extends Component
      * @return \Illuminate\Contracts\View\View|\Closure|string
      */
     abstract public function render();
+
+    /**
+     * Registers media collection and conversions for the media fields of this block to the model.
+     *
+     * @param  HasMedia&HasMediaAttributes  $record
+     * @return void
+     */
+    public static function addMediaCollectionAndConversion(HasMedia&HasMediaAttributes $record): void
+    {
+        //overwrite to add collection and conversion here if the block has images
+    }
+
+    /**
+     * Returns an HTML view of the first image
+     *
+     * @param  string  $conversion
+     * @param  string|null  $imageTitle
+     * @param  array  $attributes
+     * @param  string|null  $collection
+     * @return HtmlableMedia|null
+     */
+    protected function getHtmlableMedia(string $conversion, ?string $imageTitle, array $attributes = [], ?string $collection = null): ?HtmlableMedia
+    {
+        $media = $this->record->getMedia($collection ?? static::getName())->first();
+        $html = null;
+
+        if ($media) {
+            $html = $media->img()
+                ->conversion($conversion);
+
+            if ($imageTitle) {
+                $attributes = array_merge([
+                    'title' => $imageTitle,
+                    'alt' => $imageTitle,
+                ], $attributes);
+            }
+
+            $html->attributes($attributes);
+        }
+
+        return $html;
+    }
 }

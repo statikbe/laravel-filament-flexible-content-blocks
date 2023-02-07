@@ -3,22 +3,27 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
 use Filament\Forms\Components\Textarea;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\BlockSpatieMediaLibraryFileUpload;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 
-class VideoBlock extends AbstractContentBlock
+class VideoBlock extends AbstractFilamentFlexibleContentBlock
 {
     public ?string $embedCode;
 
     /**
      * Create a new component instance.
      *
+     * @param  HasContentBlocks  $record
      * @param  array|null  $blockData
      */
-    public function __construct(?array $blockData)
+    public function __construct(HasContentBlocks $record, ?array $blockData)
     {
+        parent::__construct($record, $blockData);
+
         $this->embedCode = $blockData['embed_code'] ?? null;
     }
 
-    public static function getName(): string
+    public static function getNameSuffix(): string
     {
         return 'video';
     }
@@ -40,6 +45,9 @@ class VideoBlock extends AbstractContentBlock
                 ->hintIcon('heroicon-s-question-mark-circle')
                 ->rows(2)
                 ->required(),
+            BlockSpatieMediaLibraryFileUpload::make('overlay_image')
+                ->collection('test')
+                ->label(self::getFieldLabel('overlay_image')),
         ];
     }
 

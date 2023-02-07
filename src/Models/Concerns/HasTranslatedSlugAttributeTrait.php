@@ -8,12 +8,12 @@ use Spatie\Sluggable\HasTranslatableSlug;
 use Spatie\Sluggable\SlugOptions;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks;
 
-trait HasTranslatedSlugAttribute
+trait HasTranslatedSlugAttributeTrait
 {
     use HasTranslatableSlug;
-    use HasTranslatedAttributes;
+    use HasTranslatedAttributesTrait;
 
-    public function initializeHasTranslatedSlugAttribute(): void
+    public function initializeHasTranslatedSlugAttributeTrait(): void
     {
         $this->mergeTranslatable(['slug']);
     }

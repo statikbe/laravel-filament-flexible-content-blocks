@@ -2,12 +2,12 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 
-trait HasTranslatedContentBlocks
+trait HasTranslatedContentBlocksTrait
 {
-    use HasTranslatedAttributes;
+    use HasTranslatedAttributesTrait;
     use HasContentBlocksTrait;
 
-    public function initializeHasTranslatedContentBlocks(): void
+    public function initializeHasTranslatedContentBlocksTrait(): void
     {
         $this->mergeTranslatable(['content_blocks']);
     }

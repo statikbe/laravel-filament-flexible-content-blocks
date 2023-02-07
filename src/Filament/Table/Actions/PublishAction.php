@@ -7,7 +7,7 @@ use Filament\Notifications\Notification;
 use Filament\Tables\Actions\Action;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
-use Statikbe\FilamentFlexibleContentBlocks\Models\Traits\HasPageAttributes;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasPageAttributes;
 
 class PublishAction extends Action
 {
@@ -20,7 +20,7 @@ class PublishAction extends Action
     {
         $this->action(function () {
             try {
-                /* @var mixed $page */
+                /** @var Model&HasPageAttributes $page */
                 $page = $this->getRecord();
                 if (method_exists($page, 'isPublished') && ! $page->isPublished()) {
                     $page->publishing_begins_at = Carbon::now();

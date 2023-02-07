@@ -1,23 +1,24 @@
 <?php
 
-namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Resource\Traits;
+namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\HtmlBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextImageBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\VideoBlock;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 
 /**
- * An implementation of the HasFilamentContentBlocks interface for all blocks offered by the library.
+ * @mixin HasContentBlocks
  */
-trait HasDefaultContentBlocks
+trait HasDefaultContentBlocksTrait
 {
-    use HasContentBlocks;
+    use HasContentBlocksTrait;
 
     /**
      * {@inheritDoc}
      */
-    public static function getContentBlockClasses(): array
+    public static function registerContentBlocks(): array
     {
         return [
             TextBlock::class,

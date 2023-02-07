@@ -4,17 +4,19 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  * @property string|null $overview_title
  * @property string|null $overview_description
  */
-trait HasOverviewAttributes
+trait HasOverviewAttributesTrait
 {
     use InteractsWithMedia;
+    use HasMediaAttributesTrait;
 
-    public function initializeHasOverviewAttributes(): void
+    public function initializeHasOverviewAttributesTrait(): void
     {
         $this->mergeFillable(['overview_title', 'overview_description']);
 
@@ -47,10 +49,11 @@ trait HasOverviewAttributes
         $this->addMediaCollection($this->getOverviewImageCollection())
             ->registerMediaConversions(function (Media $media) {
                 $this->addMediaConversion($this->getOverviewImageConversionName())
-                    ->fit(Manipulations::FIT_CROP, 600, 600);
+                    ->withResponsiveImages()
+                    ->fit(Manipulations::FIT_CROP, 600, 600)
+                    ->format(Manipulations::FORMAT_WEBP);
                 //for filament upload field
-                $this->addMediaConversion('thumbnail')
-                    ->fit(Manipulations::FIT_CROP, 400, 400);
+                $this->addFilamentThumbnailMediaConversion();
             });
     }
 
@@ -73,5 +76,10 @@ trait HasOverviewAttributes
     public function getOverviewImageUrl(string $conversion = null): string
     {
         return $this->getFirstMediaUrl($this->getOverviewImageCollection(), $conversion ?? $this->getOverviewImageConversionName());
+    }
+
+    public function getOverviewImageMedia(array $attributes = []): ?HtmlableMedia
+    {
+        return $this->getImageHtml($this->getFirstMedia($this->getOverviewImageCollection()), $this->getOverviewImageConversionName(), $this->overview_title, $attributes);
     }
 }

@@ -7,7 +7,7 @@ use Spatie\Translatable\HasTranslations;
 /**
  * @property array $translatable
  */
-trait HasTranslatedAttributes
+trait HasTranslatedAttributesTrait
 {
     use HasTranslations;
 

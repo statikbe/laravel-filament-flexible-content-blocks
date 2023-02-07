@@ -41,6 +41,8 @@
         'form_component.content_blocks.text-image.title' => 'Title',
         'form_component.content_blocks.text-image.content' => 'Text',
         'form_component.content_blocks.text-image.image' => 'Image',
+        'form_component.content_blocks.text-image.image_title' => 'Image title',
+        'form_component.content_blocks.text-image.image_copyright' => 'Image copyright',
         'form_component.content_blocks.text.title' => 'Text',
         'form_component.content_blocks.text.label' => 'Text',
         'form_component.content_blocks.video.label' => 'Video embed code',

@@ -3,22 +3,26 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
 use Filament\Forms\Components\Textarea;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 
-class HtmlBlock extends AbstractContentBlock
+class HtmlBlock extends AbstractFilamentFlexibleContentBlock
 {
     public ?string $content;
 
     /**
      * Create a new component instance.
      *
+     * @param  HasContentBlocks  $record
      * @param  array|null  $blockData
      */
-    public function __construct(?array $blockData)
+    public function __construct(HasContentBlocks $record, ?array $blockData)
     {
+        parent::__construct($record, $blockData);
+
         $this->content = $blockData['content'] ?? null;
     }
 
-    public static function getName(): string
+    public static function getNameSuffix(): string
     {
         return 'html';
     }

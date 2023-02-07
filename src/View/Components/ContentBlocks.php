@@ -2,10 +2,8 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\View\Components;
 
-use Filament\Facades\Filament;
 use Illuminate\View\Component;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
-use Statikbe\FilamentFlexibleContentBlocks\Filament\Resource\HasFilamentContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 
 class ContentBlocks extends Component
@@ -13,33 +11,32 @@ class ContentBlocks extends Component
     /**
      * @var array|AbstractContentBlock[]
      */
-    public array $contentBlocks;
+    public array $contentBlocks = [];
 
     /**
-     * @param  HasContentBlocks  $record
+     * @param  HasContentBlocks  $page
      */
-    public function __construct(HasContentBlocks $record)
+    public function __construct(HasContentBlocks $page)
     {
-        $this->contentBlocks = $this->createBlocks($record);
+        $this->contentBlocks = $this->createBlocks($page);
     }
 
     /**
      * Transforms the JSON block data into content block components that can be rendered.
      *
+     * @param  HasContentBlocks  $page
      * @return array<AbstractContentBlock>
      */
-    private function createBlocks(HasContentBlocks $record): array
+    private function createBlocks(HasContentBlocks $page): array
     {
-        $resource = Filament::getModelResource($record::class);
-        /* @var HasFilamentContentBlocks $resource */
-        $blockClasses = $resource::getContentBlockClasses();
+        $blockClasses = $page::registerContentBlocks();
         $blockClassIndex = collect($blockClasses)->mapWithKeys(fn ($item, $key) => [$item::getName() => $item]);
         $blocks = [];
 
-        foreach ($record->content_blocks as $blockData) {
+        foreach ($page->content_blocks as $blockData) {
             if ($blockClassIndex->has($blockData['type'])) {
                 $blockClass = $blockClassIndex->get($blockData['type']);
-                $blocks[] = new $blockClass($blockData['data']);
+                $blocks[] = new $blockClass($page, $blockData['data']);
             }
         }
 

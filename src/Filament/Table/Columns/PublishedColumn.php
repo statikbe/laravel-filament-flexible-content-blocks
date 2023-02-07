@@ -4,6 +4,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Columns;
 
 use Filament\Tables\Columns\BadgeColumn;
 use Illuminate\Database\Eloquent\Model;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasPageAttributes;
 
 class PublishedColumn extends BadgeColumn
 {
@@ -21,6 +22,7 @@ class PublishedColumn extends BadgeColumn
         return static::make('is_published')
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.columns.is_published'))
             ->getStateUsing(function (Model $record) {
+                /** @var HasPageAttributes $record */
                 if ($record->isPublished()) {
                     return static::STATE_PUBLISHED;
                 } else {
@@ -29,6 +31,7 @@ class PublishedColumn extends BadgeColumn
             })
             ->enum($options)
             ->formatStateUsing(function (BadgeColumn $column, string $state) use ($options): string {
+                /** @var HasPageAttributes $record */
                 $record = $column->getRecord();
                 $formattedState = $options[$state];
                 if ($record->willBecomePublished()) {

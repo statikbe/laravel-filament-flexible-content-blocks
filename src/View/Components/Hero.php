@@ -1,0 +1,54 @@
+<?php
+
+namespace Statikbe\FilamentFlexibleContentBlocks\View\Components;
+
+    use Illuminate\View\Component;
+    use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
+    use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasHeroImageAttributes;
+    use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasIntroAttribute;
+    use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasPageAttributes;
+
+    class Hero extends Component
+    {
+        public HasPageAttributes|HasHeroImageAttributes|HasIntroAttribute $page;
+
+        public string $title;
+
+        public ?string $intro = null;
+
+        public ?string $heroImageTitle;
+
+        public ?string $heroImageCopyright;
+
+        public function __construct(HasPageAttributes|HasHeroImageAttributes|HasIntroAttribute $page)
+        {
+            $this->page = $page;
+            $this->title = $page->title;
+
+            if (isset($page->intro)) {
+                $this->intro = $page->intro;
+            }
+
+            if (isset($page->hero_image_title)) {
+                $this->heroImageTitle = $page->hero_image_title;
+            }
+
+            if (isset($page->hero_image_copyright)) {
+                $this->heroImageCopyright = $page->hero_image_copyright;
+            }
+        }
+
+        public function getHeroImageMedia(array $attributes = []): ?HtmlableMedia
+        {
+            if (method_exists($this->page, 'getHeroImageMedia')) {
+                return $this->page->getHeroImageMedia($attributes);
+            }
+
+            return null;
+        }
+
+        public function render()
+        {
+            return view('filament-flexible-content-blocks::components.hero');
+        }
+    }

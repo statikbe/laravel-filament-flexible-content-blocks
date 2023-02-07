@@ -5,15 +5,14 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasPageAttributes;
 
 /**
- * @property string|null $title
- * @property Carbon|null $publishing_begins_at
- * @property Carbon|null $publishing_ends_at
+ * @mixin HasPageAttributes
  */
-trait HasPageAttributes
+trait HasPageAttributesTrait
 {
-    public function initializeHasPageAttributes(): void
+    public function initializeHasPageAttributesTrait(): void
     {
         $this->mergeFillable(['title', 'publishing_begins_at', 'publishing_ends_at']);
 
@@ -25,9 +24,7 @@ trait HasPageAttributes
     }
 
     /**
-     * Returns whether the page is published or visible, based on the begin and end publishing dates.
-     *
-     * @return bool
+     * {@inheritDoc}
      */
     public function isPublished(): bool
     {
@@ -44,9 +41,7 @@ trait HasPageAttributes
     }
 
     /**
-     * Returns whether the page will be published, based on the begin publishing date.
-     *
-     * @return bool
+     * {@inheritDoc}
      */
     public function willBecomePublished(): bool
     {
@@ -54,9 +49,7 @@ trait HasPageAttributes
     }
 
     /**
-     * Returns whether the page will be unpublished, based on the end publishing date.
-     *
-     * @return bool
+     * {@inheritDoc}
      */
     public function willBecomeUnpublished(): bool
     {
@@ -64,15 +57,16 @@ trait HasPageAttributes
     }
 
     /**
-     * Returns whether this page was published in the past and its publication ended.
-     *
-     * @return bool
+     * {@inheritDoc}
      */
     public function wasUnpublished(): bool
     {
         return $this->publishing_ends_at && $this->publishing_ends_at->isPast();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function scopePublished(Builder $query): Builder
     {
         //we need to cover each situation where publishing_begins_at and publishing_ends_at are null:
@@ -96,10 +90,23 @@ trait HasPageAttributes
         });
     }
 
-    public function publishedOnFormatted(): Attribute
+    /**
+     * {@inheritDoc}
+     */
+    public function publishingBeginsAtFormatted(): Attribute
     {
         return Attribute::make(
-            get: fn ($value, $attributes) => optional($this->published_on)->format(config('leudis.datetime_format')),
+            get: fn ($value, $attributes) => optional($this->publishing_begins_at)->format(config('filament-flexible-content-blocks.formatting.publishing_dates')),
+        );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function publishingEndsAtFormatted(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value, $attributes) => optional($this->publishing_ends_at)->format(config('filament-flexible-content-blocks.formatting.publishing_dates')),
         );
     }
 }

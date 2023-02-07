@@ -8,11 +8,11 @@ use Spatie\Sluggable\SlugOptions;
 /**
  * @property string $slug
  */
-trait HasSlugAttribute
+trait HasSlugAttributeTrait
 {
     use HasSlug;
 
-    public function initializeHasSlugAttribute(): void
+    public function initializeHasSlugAttributeTrait(): void
     {
         $this->mergeFillable(['slug']);
     }
