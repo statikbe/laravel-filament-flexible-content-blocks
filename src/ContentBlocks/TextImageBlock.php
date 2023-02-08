@@ -8,6 +8,7 @@ use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImage;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\BlockSpatieMediaLibraryFileUpload;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\ImagePositionField;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
@@ -15,6 +16,8 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
 
 class TextImageBlock extends AbstractFilamentFlexibleContentBlock
 {
+    use HasImage;
+
     const CONVERSION_DEFAULT = 'default';
 
     public ?string $title;
@@ -54,7 +57,7 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
 
     public static function getIcon(): string
     {
-        return 'heroicon-o-view-list';
+        return 'heroicon-o-photograph';
     }
 
     /**
@@ -74,7 +77,8 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
                 ->required(),
             BlockSpatieMediaLibraryFileUpload::make('image')
                 ->collection(static::getName())
-                ->label(self::getFieldLabel('image')),
+                ->label(self::getFieldLabel('image'))
+                ->maxFiles(1),
             //https://github.com/filamentphp/filament/issues/1284
             TextInput::make('image_title')
                 ->label(self::getFieldLabel('image_title'))
@@ -84,26 +88,6 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
                 ->maxLength(255),
             ImagePositionField::create(),
         ];
-    }
-
-    public function getImageUrl(): ?string
-    {
-        //TODO refactor
-        if (! $this->imageId) {
-            return null;
-        }
-
-        /* @var HasMedia $recordWithMedia */
-        $recordWithMedia = $this->record;
-        $media = $recordWithMedia->getMedia(static::getName(), function (Media $media) {
-            return $media->uuid === $this->imageId;
-        });
-
-        if (! $media->isEmpty()) {
-            return $media[0]->getFullUrl();
-        } else {
-            return null;
-        }
     }
 
     /**
@@ -124,6 +108,14 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
 
     public function getImageMedia(array $attributes = []): ?HtmlableMedia
     {
-        return $this->getHtmlableMedia(self::CONVERSION_DEFAULT, $this->imageTitle, $attributes);
+        return $this->getHtmlableMedia($this->imageId, self::CONVERSION_DEFAULT, $this->imageTitle, $attributes);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getImageUrl(): ?string
+    {
+        return $this->getMediaUrl($this->imageId);
     }
 }

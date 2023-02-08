@@ -55,6 +55,10 @@
         'form_component.content_blocks.quote.label' => 'Citaat',
         'form_component.content_blocks.quote.quote' => 'Citaat',
         'form_component.content_blocks.quote.author' => 'Auteur',
+        'form_component.content_blocks.image.label' => 'Afbeelding',
+        'form_component.content_blocks.image.image' => 'Afbeelding',
+        'form_component.content_blocks.image.image_title' => 'Titel van de afbeelding',
+        'form_component.content_blocks.image.image_copyright' => 'Auteursrechten van de afbeelding',
 
         'form_component.content_blocks.image_position.left' => 'Links',
         'form_component.content_blocks.image_position.center' => 'Midden',

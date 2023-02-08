@@ -55,6 +55,10 @@
         'form_component.content_blocks.quote.label' => 'Quote',
         'form_component.content_blocks.quote.quote' => 'Quote',
         'form_component.content_blocks.quote.author' => 'Author',
+        'form_component.content_blocks.image.label' => 'Image',
+        'form_component.content_blocks.image.image' => 'Image',
+        'form_component.content_blocks.image.image_title' => 'Image title',
+        'form_component.content_blocks.image.image_copyright' => 'Image copyright',
 
         'form_component.content_blocks.image_position.left' => 'Left',
         'form_component.content_blocks.image_position.center' => 'Center',

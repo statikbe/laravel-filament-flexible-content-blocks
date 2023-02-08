@@ -6,7 +6,6 @@ use Closure;
 use Filament\Forms\Components\Builder\Block;
 use Illuminate\View\Component;
 use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
 
@@ -96,36 +95,5 @@ abstract class AbstractContentBlock extends Component
     public static function addMediaCollectionAndConversion(HasMedia&HasMediaAttributes $record): void
     {
         //overwrite to add collection and conversion here if the block has images
-    }
-
-    /**
-     * Returns an HTML view of the first image
-     *
-     * @param  string  $conversion
-     * @param  string|null  $imageTitle
-     * @param  array  $attributes
-     * @param  string|null  $collection
-     * @return HtmlableMedia|null
-     */
-    protected function getHtmlableMedia(string $conversion, ?string $imageTitle, array $attributes = [], ?string $collection = null): ?HtmlableMedia
-    {
-        $media = $this->record->getMedia($collection ?? static::getName())->first();
-        $html = null;
-
-        if ($media) {
-            $html = $media->img()
-                ->conversion($conversion);
-
-            if ($imageTitle) {
-                $attributes = array_merge([
-                    'title' => $imageTitle,
-                    'alt' => $imageTitle,
-                ], $attributes);
-            }
-
-            $html->attributes($attributes);
-        }
-
-        return $html;
     }
 }
