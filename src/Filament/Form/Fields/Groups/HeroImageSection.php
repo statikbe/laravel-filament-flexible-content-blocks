@@ -9,7 +9,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\HeroImageTitleFi
 
 class HeroImageSection extends Section
 {
-    public static function create(bool $translatableImage=false): static
+    public static function create(bool $translatableImage = false): static
     {
         return static::make(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.hero_image_section_title'))
             ->schema([

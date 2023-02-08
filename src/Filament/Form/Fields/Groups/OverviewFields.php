@@ -9,7 +9,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\OverviewTitleFie
 
 class OverviewFields
 {
-    public static function create(int $columns=1, bool $translatableImage=false): Grid
+    public static function create(int $columns = 1, bool $translatableImage = false): Grid
     {
         return Grid::make($columns)
             ->schema([

@@ -1,16 +1,16 @@
 <?php
 
-    namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
+namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
 
     use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 
-    abstract class ImageField {
-        protected static function createImageField(string $field, bool $translatable=false): SpatieMediaLibraryFileUpload
+    abstract class ImageField
+    {
+        protected static function createImageField(string $field, bool $translatable = false): SpatieMediaLibraryFileUpload
         {
-            if($translatable){
+            if ($translatable) {
                 $fileUploadClass = TranslatableSpatieMediaLibraryFileUpload::class;
-            }
-            else {
+            } else {
                 $fileUploadClass = SpatieMediaLibraryFileUpload::class;
             }
 

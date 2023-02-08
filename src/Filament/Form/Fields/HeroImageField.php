@@ -8,7 +8,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasHeroImageAttribut
 
 class HeroImageField extends ImageField
 {
-    public static function create(bool $translatable=false): SpatieMediaLibraryFileUpload
+    public static function create(bool $translatable = false): SpatieMediaLibraryFileUpload
     {
         return static::createImageField('hero_image', $translatable)
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.hero_image_lbl'))

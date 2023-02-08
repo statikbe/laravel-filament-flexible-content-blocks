@@ -8,7 +8,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasOverviewAttribute
 
 class OverviewImageField extends ImageField
 {
-    public static function create(bool $translatable=false): SpatieMediaLibraryFileUpload
+    public static function create(bool $translatable = false): SpatieMediaLibraryFileUpload
     {
         return static::createImageField('overview_image', $translatable)
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.overview_image_lbl'))

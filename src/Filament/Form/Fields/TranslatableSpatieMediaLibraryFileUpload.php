@@ -1,6 +1,6 @@
 <?php
 
-    namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
+namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
 
     use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
     use Illuminate\Database\Eloquent\Model;
@@ -9,13 +9,15 @@
     use Spatie\MediaLibrary\HasMedia;
     use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-    class TranslatableSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload {
-        protected function setUp(): void {
+    class TranslatableSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
+    {
+        protected function setUp(): void
+        {
             parent::setUp();
 
             $this->loadStateFromRelationshipsUsing(static function (SpatieMediaLibraryFileUpload $component, HasMedia $record, Livewire $livewire): void {
                 $mediaFilters = [];
-                if(method_exists($livewire, 'getActiveFormLocale')){
+                if (method_exists($livewire, 'getActiveFormLocale')) {
                     $mediaFilters['locale'] = $livewire->getActiveFormLocale();
                 }
 
@@ -35,11 +37,12 @@
                 $component->state($files);
             });
 
-            $this->customProperties(function(Livewire $livewire){
+            $this->customProperties(function (Livewire $livewire) {
                 $properties = [];
-                if(method_exists($livewire, 'getActiveFormLocale')){
+                if (method_exists($livewire, 'getActiveFormLocale')) {
                     $properties['locale'] = $livewire->getActiveFormLocale();
                 }
+
                 return $properties;
             });
         }
