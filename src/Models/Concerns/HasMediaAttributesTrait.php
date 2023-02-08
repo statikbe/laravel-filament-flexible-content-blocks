@@ -28,6 +28,19 @@ trait HasMediaAttributesTrait
     }
 
     /**
+     * Returns the first media for the given collection. First, we check if there is a locale specific version.
+     * @param string $collection
+     * @return Media|null
+     */
+    public function getImageMedia(string $collection): ?Media {
+        $media = $this->getFirstMedia($collection, ['locale' => app()->getLocale()]);
+        if(!$media){
+            $media = $this->getFirstMedia($collection);
+        }
+        return $media;
+    }
+
+    /**
      * Returns the image HTML for a given media object.
      *
      * @param  Media|null  $media

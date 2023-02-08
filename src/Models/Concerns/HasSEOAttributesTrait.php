@@ -69,6 +69,7 @@ trait HasSEOAttributesTrait
 
     public function getSEOImageUrl(string $conversion = null): ?string
     {
-        return $this->getFirstMediaUrl($this->getSEOImageCollection(), $conversion ?? $this->getSEOImageConversionName());
+        $media = $this->getImageMedia($this->getSEOImageCollection());
+        return $media?->getUrl($conversion ?? $this->getSEOImageConversionName());
     }
 }

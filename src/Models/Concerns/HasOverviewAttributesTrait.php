@@ -80,6 +80,10 @@ trait HasOverviewAttributesTrait
 
     public function getOverviewImageMedia(array $attributes = []): ?HtmlableMedia
     {
-        return $this->getImageHtml($this->getFirstMedia($this->getOverviewImageCollection()), $this->getOverviewImageConversionName(), $this->overview_title, $attributes);
+        return $this->getImageHtml(
+            $this->getImageMedia($this->getOverviewImageCollection()),
+            $this->getOverviewImageConversionName(),
+            $this->overview_title,
+            $attributes);
     }
 }

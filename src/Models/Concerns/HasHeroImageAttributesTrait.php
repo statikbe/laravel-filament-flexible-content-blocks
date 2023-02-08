@@ -58,6 +58,10 @@ trait HasHeroImageAttributesTrait
 
     public function getHeroImageMedia(array $attributes = []): ?HtmlableMedia
     {
-        return $this->getImageHtml($this->getFirstMedia($this->getHeroImageCollection()), $this->getHeroImageConversionName(), $this->hero_image_title, $attributes);
+        return $this->getImageHtml(
+            $this->getImageMedia($this->getHeroImageCollection()),
+            $this->getHeroImageConversionName(),
+            $this->hero_image_title,
+            $attributes);
     }
 }
