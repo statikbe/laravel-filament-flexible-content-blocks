@@ -38,6 +38,7 @@
         'form_component.content_blocks_lbl' => 'Inhoud',
         'form_component.image_position_lbl' => 'Uitlijning afbeelding',
         'form_component.image_position_help' => 'Selecteer de positie van de afbeelding in relatie met de tekst.',
+        'form_component.image_width_lbl' => 'Breedte van de afbeelding',
 
         'form_component.content_blocks.text.label' => 'Tekst',
         'form_component.content_blocks.text.content' => 'Tekst',
@@ -47,8 +48,10 @@
         'form_component.content_blocks.text-image.image' => 'Afbeelding',
         'form_component.content_blocks.text-image.image_title' => 'Titel van de afbeelding',
         'form_component.content_blocks.text-image.image_copyright' => 'Auteursrechten van de afbeelding',
-        'form_component.content_blocks.video.label' => 'Video embed code',
+        'form_component.content_blocks.video.label' => 'Video',
+        'form_component.content_blocks.video.embed_code' => 'Video embed code',
         'form_component.content_blocks.video.help' => 'Voeg de embed code van de share optie van YouTube of Vimeo toe.',
+        'form_component.content_blocks.video.overlay_image' => 'Preview afbeelding',
         'form_component.content_blocks.html.title' => 'HTML',
         'form_component.content_blocks.html.label' => 'HTML',
         'form_component.content_blocks.html.help' => 'Let op dat de ingevoerde HTML geen kwaadaardige scripts of styles bevat die de pagina kunnen stuk maken.',
@@ -63,4 +66,10 @@
         'form_component.content_blocks.image_position.left' => 'Links',
         'form_component.content_blocks.image_position.center' => 'Midden',
         'form_component.content_blocks.image_position.right' => 'Rechts',
+
+        'form_component.content_blocks.image_width.100%' => 'Volledig',
+        'form_component.content_blocks.image_width.75%' => '3/4',
+        'form_component.content_blocks.image_width.50%' => '1/2',
+        'form_component.content_blocks.image_width.33%' => '1/3',
+        'form_component.content_blocks.image_width.25%' => '1/4',
     ];

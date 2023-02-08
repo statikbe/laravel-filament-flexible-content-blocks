@@ -64,6 +64,32 @@ return [
         'default' => 'left',
     ],
 
+    'image_width' => [
+        'options' => [
+            '100%' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.100%',
+                'class' => 'w-full',
+            ],
+            '75%' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.75%',
+                'class' => 'w-3/4',
+            ],
+            '50%' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.50%',
+                'class' => 'w-1/2',
+            ],
+            '33%' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.33%',
+                'class' => 'w-1/3',
+            ],
+            '25%' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.25%',
+                'class' => 'w-1/4',
+            ],
+        ],
+        'default' => 'full',
+    ],
+
     'formatting' => [
         'publishing_dates' => 'd/m/Y G:i',
     ],

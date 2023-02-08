@@ -38,6 +38,7 @@
         'form_component.content_blocks_lbl' => 'Body',
         'form_component.image_position_lbl' => 'Image position',
         'form_component.image_position_help' => 'Select the position of the image in relation to the text block.',
+        'form_component.image_width_lbl' => 'Image width',
 
         'form_component.content_blocks.text-image.label' => 'Text (+ image)',
         'form_component.content_blocks.text-image.title' => 'Title',
@@ -47,8 +48,10 @@
         'form_component.content_blocks.text-image.image_copyright' => 'Image copyright',
         'form_component.content_blocks.text.title' => 'Text',
         'form_component.content_blocks.text.label' => 'Text',
-        'form_component.content_blocks.video.label' => 'Video embed code',
+        'form_component.content_blocks.video.label' => 'Video',
+        'form_component.content_blocks.video.embed_code' => 'Video embed code',
         'form_component.content_blocks.video.help' => 'Add the embed code of the share functionality from YouTube or Vimeo.',
+        'form_component.content_blocks.video.overlay_image' => 'Overlay image',
         'form_component.content_blocks.html.title' => 'HTML',
         'form_component.content_blocks.html.label' => 'HTML',
         'form_component.content_blocks.html.help' => 'Pay attention that the HTML is sanitised and does not contain malicious scripts or styling that breaks the default page.',
@@ -63,4 +66,10 @@
         'form_component.content_blocks.image_position.left' => 'Left',
         'form_component.content_blocks.image_position.center' => 'Center',
         'form_component.content_blocks.image_position.right' => 'Right',
+
+        'form_component.content_blocks.image_width.100%' => 'Full',
+        'form_component.content_blocks.image_width.75%' => '3/4',
+        'form_component.content_blocks.image_width.50%' => '1/2',
+        'form_component.content_blocks.image_width.33%' => '1/3',
+        'form_component.content_blocks.image_width.25%' => '1/4',
     ];
