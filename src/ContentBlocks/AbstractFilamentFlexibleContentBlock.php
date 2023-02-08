@@ -1,6 +1,6 @@
 <?php
 
-    namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
+namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
     use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocksServiceProvider;
 
@@ -41,7 +41,8 @@
             return trans("filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.{$name}.{$field}");
         }
 
-        public function render() {
+        public function render()
+        {
             return view('filament-flexible-content-blocks::content-blocks.'.static::getNameSuffix());
         }
     }
