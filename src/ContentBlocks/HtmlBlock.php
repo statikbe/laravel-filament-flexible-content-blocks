@@ -46,9 +46,4 @@ class HtmlBlock extends AbstractFilamentFlexibleContentBlock
                 ->required(),
         ];
     }
-
-    public function render()
-    {
-        return view('filament-flexible-content-blocks::content-blocks.html');
-    }
 }

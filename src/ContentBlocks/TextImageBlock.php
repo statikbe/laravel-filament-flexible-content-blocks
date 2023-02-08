@@ -9,6 +9,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\BlockSpatieMediaLibraryFileUpload;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\ImagePositionField;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
 
@@ -26,6 +27,8 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
 
     public ?string $imageCopyright;
 
+    public ?string $imagePosition;
+
     /**
      * Create a new component instance.
      *
@@ -41,6 +44,7 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
         $this->imageId = $blockData['image'] ?? null;
         $this->imageTitle = $blockData['image_title'] ?? null;
         $this->imageCopyright = $blockData['image_copyright'] ?? null;
+        $this->imagePosition = $blockData['image_position'] ?? null;
     }
 
     public static function getNameSuffix(): string
@@ -78,11 +82,13 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
             TextInput::make('image_copyright')
                 ->label(self::getFieldLabel('image_copyright'))
                 ->maxLength(255),
+            ImagePositionField::create(),
         ];
     }
 
     public function getImageUrl(): ?string
     {
+        //TODO refactor
         if (! $this->imageId) {
             return null;
         }
@@ -98,16 +104,6 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
         } else {
             return null;
         }
-    }
-
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
-    public function render()
-    {
-        return view('filament-flexible-content-blocks::content-blocks.text-image');
     }
 
     /**

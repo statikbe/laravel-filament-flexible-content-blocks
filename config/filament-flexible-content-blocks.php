@@ -55,6 +55,15 @@ return [
         ],
     ],
 
+    'image_position' => [
+        'options' => [
+            'left' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_position.left',
+            'center' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_position.center',
+            'right' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_position.right',
+        ],
+        'default' => 'left',
+    ],
+
     'formatting' => [
         'publishing_dates' => 'd/m/Y G:i',
     ],

@@ -3,6 +3,7 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\HtmlBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\QuoteBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextImageBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\VideoBlock;
@@ -25,6 +26,7 @@ trait HasDefaultContentBlocksTrait
             VideoBlock::class,
             HtmlBlock::class,
             TextImageBlock::class,
+            QuoteBlock::class,
         ];
     }
 }

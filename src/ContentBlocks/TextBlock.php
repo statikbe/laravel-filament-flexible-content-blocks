@@ -46,14 +46,4 @@ class TextBlock extends AbstractFilamentFlexibleContentBlock
                 ->required(),
         ];
     }
-
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
-    public function render()
-    {
-        return view('filament-flexible-content-blocks::content-blocks.text');
-    }
 }

@@ -36,6 +36,8 @@
         'form_component.hero_image_section_title' => 'Hero image',
         'form_component.intro_lbl' => 'Introduction',
         'form_component.content_blocks_lbl' => 'Body',
+        'form_component.image_position_lbl' => 'Image position',
+        'form_component.image_position_help' => 'Select the position of the image in relation to the text block.',
 
         'form_component.content_blocks.text-image.label' => 'Text (+ image)',
         'form_component.content_blocks.text-image.title' => 'Title',
@@ -50,4 +52,11 @@
         'form_component.content_blocks.html.title' => 'HTML',
         'form_component.content_blocks.html.label' => 'HTML',
         'form_component.content_blocks.html.help' => 'Pay attention that the HTML is sanitised and does not contain malicious scripts or styling that breaks the default page.',
+        'form_component.content_blocks.quote.label' => 'Quote',
+        'form_component.content_blocks.quote.quote' => 'Quote',
+        'form_component.content_blocks.quote.author' => 'Author',
+
+        'form_component.content_blocks.image_position.left' => 'Left',
+        'form_component.content_blocks.image_position.center' => 'Center',
+        'form_component.content_blocks.image_position.right' => 'Right',
     ];

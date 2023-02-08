@@ -36,6 +36,8 @@
         'form_component.hero_image_section_title' => 'Hoofdafbeelding',
         'form_component.intro_lbl' => 'Introductie',
         'form_component.content_blocks_lbl' => 'Inhoud',
+        'form_component.image_position_lbl' => 'Uitlijning afbeelding',
+        'form_component.image_position_help' => 'Selecteer de positie van de afbeelding in relatie met de tekst.',
 
         'form_component.content_blocks.text.label' => 'Tekst',
         'form_component.content_blocks.text.content' => 'Tekst',
@@ -50,5 +52,11 @@
         'form_component.content_blocks.html.title' => 'HTML',
         'form_component.content_blocks.html.label' => 'HTML',
         'form_component.content_blocks.html.help' => 'Let op dat de ingevoerde HTML geen kwaadaardige scripts of styles bevat die de pagina kunnen stuk maken.',
+        'form_component.content_blocks.quote.label' => 'Citaat',
+        'form_component.content_blocks.quote.quote' => 'Citaat',
+        'form_component.content_blocks.quote.author' => 'Auteur',
 
+        'form_component.content_blocks.image_position.left' => 'Links',
+        'form_component.content_blocks.image_position.center' => 'Midden',
+        'form_component.content_blocks.image_position.right' => 'Rechts',
     ];

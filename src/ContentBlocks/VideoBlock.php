@@ -50,14 +50,4 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
                 ->label(self::getFieldLabel('overlay_image')),
         ];
     }
-
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
-    public function render()
-    {
-        return view('filament-flexible-content-blocks::content-blocks.video');
-    }
 }
