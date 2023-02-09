@@ -86,7 +86,7 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
             TextInput::make('image_copyright')
                 ->label(self::getFieldLabel('image_copyright'))
                 ->maxLength(255),
-            ImagePositionField::create(),
+            ImagePositionField::create(self::class),
         ];
     }
 

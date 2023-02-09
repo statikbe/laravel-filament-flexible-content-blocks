@@ -23,7 +23,7 @@ trait HasDefaultContentBlocksTrait
      */
     public static function registerContentBlocks(): array
     {
-        return [
+        return config('filament-flexible-content-blocks.default_flexible_blocks', [
             TextBlock::class,
             VideoBlock::class,
             ImageBlock::class,
@@ -31,6 +31,6 @@ trait HasDefaultContentBlocksTrait
             TextImageBlock::class,
             OverviewBlock::class,
             QuoteBlock::class,
-        ];
+        ]);
     }
 }

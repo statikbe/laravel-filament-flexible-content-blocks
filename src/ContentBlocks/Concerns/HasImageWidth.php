@@ -10,6 +10,6 @@ trait HasImageWidth
 
     public function getImageWidthClass(): ?string
     {
-        return ImageWidthField::getImageWidthClass($this->imageWidth);
+        return ImageWidthField::getImageWidthClass(self::class, $this->imageWidth);
     }
 }

@@ -18,10 +18,11 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasHeroImageAttributes;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasIntroAttribute;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasOverviewAttributes;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasPageAttributes;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasSEOAttributes;
 
-class TranslatablePage extends Model implements HasMedia, HasMediaAttributes, HasPageAttributes, HasHeroImageAttributes, HasContentBlocks, HasIntroAttribute, HasSEOAttributes
+class TranslatablePage extends Model implements HasMedia, HasMediaAttributes, HasPageAttributes, HasHeroImageAttributes, HasContentBlocks, HasIntroAttribute, HasSEOAttributes, HasOverviewAttributes
 {
     use HasFactory;
     use HasTranslatedPageAttributesTrait;

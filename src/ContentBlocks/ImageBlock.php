@@ -77,7 +77,7 @@ class ImageBlock extends AbstractFilamentFlexibleContentBlock
                 ->label(self::getFieldLabel('image_copyright'))
                 ->maxLength(255),
             Grid::make()->schema([
-                ImagePositionField::create(),
+                ImagePositionField::create(self::class),
                 ImageWidthField::create(),
             ]),
         ];
