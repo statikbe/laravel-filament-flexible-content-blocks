@@ -8,7 +8,7 @@ trait HasImageWidth
 {
     public ?string $imageWidth;
 
-    public function getImageWidth(?string $imageWidthType): ?string
+    public function getImageWidthClass(?string $imageWidthType): ?string
     {
         return ImageWidthField::getImageWidthClass($imageWidthType);
     }

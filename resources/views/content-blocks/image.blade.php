@@ -4,5 +4,5 @@
     <span>&checkmark; {{$imageTitle}}</span>
     <span>&copy; {{$imageCopyright}}</span>
     <span>{{$imagePosition}}</span>
-    <span>{{$getImageWidth()}}</span>
+    <span>{{$getImageWidthClass()}}</span>
 </div>
