@@ -3,5 +3,6 @@
 
     <span>&checkmark; {{$imageTitle}}</span>
     <span>&copy; {{$imageCopyright}}</span>
-    {{$imagePosition}}
+    <span>{{$imagePosition}}</span>
+    <span>{{$getImageWidth()}}</span>
 </div>

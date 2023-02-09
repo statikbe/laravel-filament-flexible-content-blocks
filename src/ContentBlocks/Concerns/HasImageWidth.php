@@ -5,7 +5,9 @@
     use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\ImageWidthField;
 
     trait HasImageWidth {
-        public function getImageWidth(?string $imageWidthType): ?string {
-            return ImageWidthField::getImageWidthClass($imageWidthType);
+        public ?string $imageWidth;
+
+        public function getImageWidth(): ?string {
+            return ImageWidthField::getImageWidthClass($this->imageWidth);
         }
     }

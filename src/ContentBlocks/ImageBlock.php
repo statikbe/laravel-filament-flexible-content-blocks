@@ -45,6 +45,7 @@ class ImageBlock extends AbstractFilamentFlexibleContentBlock
         $this->imageTitle = $blockData['image_title'] ?? null;
         $this->imageCopyright = $blockData['image_copyright'] ?? null;
         $this->imagePosition = $blockData['image_position'] ?? null;
+        $this->imageWidth = $blockData['image_width'] ?? null;
     }
 
     public static function getNameSuffix(): string
