@@ -78,7 +78,7 @@ class ImageBlock extends AbstractFilamentFlexibleContentBlock
                 ->maxLength(255),
             Grid::make()->schema([
                 ImagePositionField::create(self::class),
-                ImageWidthField::create(),
+                ImageWidthField::create(self::class),
             ]),
         ];
     }

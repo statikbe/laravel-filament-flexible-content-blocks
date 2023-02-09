@@ -2,18 +2,15 @@
 
     namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
-    use App\Models\Page;
     use Closure;
+    use Filament\Facades\Filament;
     use Filament\Forms\Components\Grid;
-    use Filament\Forms\Components\MorphToSelect;
     use Filament\Forms\Components\Repeater;
     use Filament\Forms\Components\Select;
     use Filament\Forms\Components\TextInput;
-    use ReflectionClass;
+    use Illuminate\Support\Str;
     use Spatie\MediaLibrary\HasMedia;
     use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
-    use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasOverviewAttributes;
-    use Statikbe\FilamentFlexibleContentBlocks\Models\TranslatablePage;
 
     class OverviewBlock extends AbstractFilamentFlexibleContentBlock {
 
@@ -33,6 +30,12 @@
         }
 
         protected static function makeFilamentSchema(): array|Closure {
+            $overviewModels = static::getOverviewModels();
+            $overviewModelOptions = collect($overviewModels)->mapWithKeys(function($item, $key){
+                //make label based on configurable filament resource model name:
+                return [$item => Str::ucfirst(Filament::getModelResource($item)::getModelLabel() ?? "Define $item resource model label")];
+            });
+
             return [
                 TextInput::make('title')
                     ->label(self::getFieldLabel('title'))
@@ -42,12 +45,12 @@
                     ->schema([
                         Grid::make(6)
                             ->schema([
-                                Select::make('model')
-                                    ->label(self::getFieldLabel('item_model'))
-                                    ->options(static::getOverviewModels())
+                                Select::make('overview_model')
+                                    ->label(self::getFieldLabel('overview_model'))
+                                    ->options($overviewModelOptions)
                                     ->columnSpan(2),
                                 Select::make('overview_item')
-                                    ->label(self::getFieldLabel('item_id'))
+                                    ->label(self::getFieldLabel('overview_item'))
                                     ->columnSpan(4),
                             ])
                     ]),
@@ -58,14 +61,9 @@
             return 'overview';
         }
 
-        private static function getOverviewModels(): array {
-            $classes = get_declared_classes();
-            $implementsOverview = array();
-            foreach($classes as $klass) {
-                $reflect = new ReflectionClass($klass);
-                if($reflect->implementsInterface(HasOverviewAttributes::class))
-                    $implementsOverview[] = $klass;
-            }
-            return $implementsOverview;
+        public static function getOverviewModels(): array {
+            return config("filament-flexible-content-blocks.block_specific." . self::class . ".overview_models",
+                config('filament-flexible-content-blocks.overview_models', [])
+            );
         }
     }
