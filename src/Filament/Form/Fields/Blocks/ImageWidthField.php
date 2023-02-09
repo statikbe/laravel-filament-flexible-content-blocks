@@ -21,8 +21,9 @@ class ImageWidthField extends Select
             ->required($required);
     }
 
-    public static function getImageWidthClass(?string $widthType): ?string {
-        if(!static::$imageWidthClassMap){
+    public static function getImageWidthClass(?string $widthType): ?string
+    {
+        if (! static::$imageWidthClassMap) {
             static::$imageWidthClassMap = collect(config('filament-flexible-content-blocks.image_width.options', []))
                 ->mapWithKeys(fn ($item, $key) => [$key => trans($item['class'])]);
         }
