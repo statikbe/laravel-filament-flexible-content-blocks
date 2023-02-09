@@ -8,8 +8,8 @@ use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
 class ImageWidthField extends Select
 {
     /**
-     * @param class-string<AbstractContentBlock> $blockClass
-     * @param bool $required
+     * @param  class-string<AbstractContentBlock>  $blockClass
+     * @param  bool  $required
      * @return static
      */
     public static function create(string $blockClass, bool $required = true): static
@@ -29,8 +29,8 @@ class ImageWidthField extends Select
     }
 
     /**
-     * @param class-string<AbstractContentBlock> $blockClass
-     * @param string|null $widthType
+     * @param  class-string<AbstractContentBlock>  $blockClass
+     * @param  string|null  $widthType
      * @return string|null
      */
     public static function getImageWidthClass(string $blockClass, ?string $widthType): ?string
@@ -43,10 +43,11 @@ class ImageWidthField extends Select
     }
 
     /**
-     * @param class-string<AbstractContentBlock> $blockClass
+     * @param  class-string<AbstractContentBlock>  $blockClass
      * @return array
      */
-    private static function getImageWidthConfig(string $blockClass): array {
+    private static function getImageWidthConfig(string $blockClass): array
+    {
         return config("filament-flexible-content-blocks.block_specific.$blockClass.image_width",
             config('filament-flexible-content-blocks.image_width', [])
         );

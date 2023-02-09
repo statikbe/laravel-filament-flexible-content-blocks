@@ -2,14 +2,14 @@
 
 // config for Statikbe/FilamentFlexibleContentBlocks
 use Spatie\Image\Manipulations;
-    use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\HtmlBlock;
-    use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\ImageBlock;
-    use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\OverviewBlock;
-    use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\QuoteBlock;
-    use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextBlock;
-    use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextImageBlock;
-    use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\VideoBlock;
-    use Statikbe\FilamentFlexibleContentBlocks\Models\Page;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\HtmlBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\ImageBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\OverviewBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\QuoteBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextImageBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\VideoBlock;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Page;
 
 return [
     /*
@@ -129,7 +129,7 @@ return [
                 ],
                 'default' => 'left',
             ],
-        ]
-    ]
+        ],
+    ],
 
 ];
