@@ -50,15 +50,17 @@ trait HasContentBlocksTrait
         }
     }
 
-
-    public function getLinkableModels(): array {
+    public function getLinkableModels(): array
+    {
         $classes = get_declared_classes();
-        $implementsLinkable = array();
-        foreach($classes as $klass) {
+        $implementsLinkable = [];
+        foreach ($classes as $klass) {
             $reflect = new ReflectionClass($klass);
-            if($reflect->implementsInterface('IModule'))
+            if ($reflect->implementsInterface('IModule')) {
                 $implementsLinkable[] = $klass;
+            }
         }
+
         return $implementsLinkable;
     }
 }
