@@ -4,6 +4,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\HtmlBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\ImageBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\OverviewBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\QuoteBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextImageBlock;
@@ -28,6 +29,7 @@ trait HasDefaultContentBlocksTrait
             ImageBlock::class,
             HtmlBlock::class,
             TextImageBlock::class,
+            OverviewBlock::class,
             QuoteBlock::class,
         ];
     }

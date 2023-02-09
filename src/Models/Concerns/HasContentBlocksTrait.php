@@ -49,4 +49,16 @@ trait HasContentBlocksTrait
             $blockClass::addMediaCollectionAndConversion($this);
         }
     }
+
+
+    public function getLinkableModels(): array {
+        $classes = get_declared_classes();
+        $implementsLinkable = array();
+        foreach($classes as $klass) {
+            $reflect = new ReflectionClass($klass);
+            if($reflect->implementsInterface('IModule'))
+                $implementsLinkable[] = $klass;
+        }
+        return $implementsLinkable;
+    }
 }
