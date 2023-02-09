@@ -9,6 +9,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImage;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImageWidth;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockSpatieMediaLibraryFileUpload;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\ImagePositionField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\ImageWidthField;
@@ -18,6 +19,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
 class ImageBlock extends AbstractFilamentFlexibleContentBlock
 {
     use HasImage;
+    use HasImageWidth;
 
     const CONVERSION_DEFAULT = 'default';
 
