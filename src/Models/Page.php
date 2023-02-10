@@ -20,8 +20,9 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasOverviewAttributes;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasPageAttributes;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasSEOAttributes;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\Linkable;
 
-class Page extends Model implements HasMedia, HasMediaAttributes, HasPageAttributes, HasHeroImageAttributes, HasContentBlocks, HasIntroAttribute, HasSEOAttributes, HasOverviewAttributes
+class Page extends Model implements HasMedia, HasMediaAttributes, HasPageAttributes, HasHeroImageAttributes, HasContentBlocks, HasIntroAttribute, HasSEOAttributes, HasOverviewAttributes, Linkable
 {
     use HasFactory;
     use HasPageAttributesTrait;
@@ -32,4 +33,10 @@ class Page extends Model implements HasMedia, HasMediaAttributes, HasPageAttribu
     use HasOverviewAttributesTrait;
     use HasDefaultContentBlocksTrait;
     use HasSlugAttributeTrait;
+
+    public function getViewUrl(): string
+    {
+        //todo implement controller and add route:
+        return config('app.url');
+    }
 }
