@@ -64,7 +64,7 @@
         'form_component.content_blocks.image.image_copyright' => 'Auteursrechten van de afbeelding',
         'form_component.content_blocks.overview.label' => 'Overzichtlijst',
         'form_component.content_blocks.overview.title' => 'Titel',
-        'form_component.content_blocks.overview.items' => 'Pagina\'s',
+        'form_component.content_blocks.overview.items' => 'Overzicht',
         'form_component.content_blocks.overview.overview_model' => 'Type',
         'form_component.content_blocks.overview.overview_item' => 'Pagina',
 

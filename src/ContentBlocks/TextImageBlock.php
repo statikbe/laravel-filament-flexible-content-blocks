@@ -67,8 +67,7 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
     {
         return [
             TextInput::make('title')
-                ->label(self::getFieldLabel('title'))
-                ->required(),
+                ->label(self::getFieldLabel('title')),
             RichEditor::make('content')
                 ->label(self::getFieldLabel('content'))
                 ->disableToolbarButtons([

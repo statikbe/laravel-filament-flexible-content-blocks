@@ -50,9 +50,9 @@ trait HasMediaAttributesTrait
      * @param  string  $conversion
      * @param  string|null  $title
      * @param  array  $attributes
-     * @return HtmlableMedia
+     * @return HtmlableMedia|null
      */
-    public function getImageHtml(?Media $media, string $conversion, string $title = null, array $attributes = []): HtmlableMedia
+    public function getImageHtml(?Media $media, string $conversion, string $title = null, array $attributes = []): ?HtmlableMedia
     {
         $html = null;
 

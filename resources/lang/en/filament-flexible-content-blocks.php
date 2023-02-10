@@ -41,9 +41,9 @@
         'form_component.image_width_lbl' => 'Image width',
         'form_component.content_blocks.overview.label' => 'Overview list',
         'form_component.content_blocks.overview.title' => 'Title',
-        'form_component.content_blocks.overview.items' => 'Pages',
+        'form_component.content_blocks.overview.items' => 'Overview',
         'form_component.content_blocks.overview.overview_model' => 'Type',
-        'form_component.content_blocks.overview.overview_item' => 'Page',
+        'form_component.content_blocks.overview.overview_item' => 'Item',
 
         'form_component.content_blocks.text-image.label' => 'Text (+ image)',
         'form_component.content_blocks.text-image.title' => 'Title',

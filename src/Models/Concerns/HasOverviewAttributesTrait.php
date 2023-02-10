@@ -83,7 +83,7 @@ trait HasOverviewAttributesTrait
         return $this->getImageHtml(
             $this->getImageMedia($this->getOverviewImageCollection()),
             $this->getOverviewImageConversionName(),
-            $this->overview_title,
+            $this->getOverviewTitle(),
             $attributes);
     }
 }
