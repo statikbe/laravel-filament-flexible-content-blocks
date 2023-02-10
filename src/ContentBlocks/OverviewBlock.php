@@ -12,11 +12,11 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\OverviewI
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasOverviewAttributes;
 
-    class OverviewBlock extends AbstractFilamentFlexibleContentBlock
-    {
-        public ?string $title;
+class OverviewBlock extends AbstractFilamentFlexibleContentBlock
+{
+    public ?string $title;
 
-        public array $items = [];
+    public array $items = [];
 
     private ?Collection $overviewItems;
 
@@ -24,9 +24,9 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasOverviewAttribute
     {
         parent::__construct($record, $blockData);
 
-            $this->title = $blockData['title'] ?? null;
-            $this->items = $blockData['items'] ?? null;
-        }
+        $this->title = $blockData['title'] ?? null;
+        $this->items = $blockData['items'] ?? null;
+    }
 
         public static function getIcon(): string
         {
