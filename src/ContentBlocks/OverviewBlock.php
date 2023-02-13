@@ -36,6 +36,8 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
     protected static function makeFilamentSchema(): array|Closure
     {
         $overviewModels = static::getOverviewModels();
+        $overviewItemField = OverviewItemField::make('overview_item')
+            ->types(collect(static::getOverviewModels())->map(fn ($item) => new OverviewType($item))->toArray());
 
         return [
             TextInput::make('title')
@@ -44,9 +46,13 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
             Repeater::make('items')
                 ->label(self::getFieldLabel('items'))
                 ->schema([
-                    OverviewItemField::make('overview_item')
-                        ->types(collect(static::getOverviewModels())->map(fn ($item) => new OverviewType($item))->toArray()),
-                ]),
+                    $overviewItemField
+                ])
+                ->itemLabel(function(array $state) use($overviewItemField): ?string {
+                    return $overviewItemField->getTypes()[$state['overview_model']]->getLabel() . ' #' . $state['overview_id'] ?? null;
+                })
+                ->collapsible()
+                ->minItems(1),
         ];
     }
 
