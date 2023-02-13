@@ -46,10 +46,10 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
             Repeater::make('items')
                 ->label(self::getFieldLabel('items'))
                 ->schema([
-                    $overviewItemField
+                    $overviewItemField,
                 ])
-                ->itemLabel(function(array $state) use($overviewItemField): ?string {
-                    return $overviewItemField->getTypes()[$state['overview_model']]->getLabel() . ' #' . $state['overview_id'] ?? null;
+                ->itemLabel(function (array $state) use ($overviewItemField): ?string {
+                    return $overviewItemField->getTypes()[$state['overview_model']]->getLabel().' #'.$state['overview_id'] ?? null;
                 })
                 ->collapsible()
                 ->minItems(1),
