@@ -36,8 +36,12 @@ class TranslatableSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpl
 
             $component->state($files);
         });
+    }
 
-        $this->customProperties(function (Livewire $livewire) {
+    public function getCustomProperties(): array
+    {
+        //we get the locale properties and combine them with the custom properties set by customisation:
+        $localeProperties = $this->evaluate(function (Livewire $livewire) {
             $properties = [];
             if (method_exists($livewire, 'getActiveFormLocale')) {
                 $properties['locale'] = $livewire->getActiveFormLocale();
@@ -45,5 +49,8 @@ class TranslatableSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpl
 
             return $properties;
         });
+        $customProperties = $this->evaluate($this->customProperties) ?? [];
+
+        return array_merge($customProperties, $localeProperties);
     }
 }
