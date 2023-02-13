@@ -9,16 +9,16 @@ interface HasOverviewAttributes
     /**
      * Returns the overview title
      *
-     * @return string
+     * @return string|null
      */
-    public function getOverviewTitle(): string;
+    public function getOverviewTitle(): ?string;
 
     /**
      * Returns the overview description
      *
-     * @return string
+     * @return string|null
      */
-    public function getOverviewDescription(): string;
+    public function getOverviewDescription(): ?string;
 
     /**
      * Add overview image to the model
@@ -46,9 +46,9 @@ interface HasOverviewAttributes
      * Returns the overview image url
      *
      * @param  string|null  $conversion
-     * @return string
+     * @return string|null
      */
-    public function getOverviewImageUrl(string $conversion = null): string;
+    public function getOverviewImageUrl(string $conversion = null): ?string;
 
     /**
      * Get the html view of the overview image

@@ -8,14 +8,10 @@
             /* @var \Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasOverviewAttributes&Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\Linkable $overviewItem */
         @endphp
 
-        <div class="card">
-            {{$overviewItem->getOverviewImageMedia()}}
-            <h3>
-                <a href="{{$overviewItem->getViewUrl()}}">{{$overviewItem->getOverviewTitle()}}</a>
-            </h3>
-            <div>{!! $overviewItem->getOverviewDescription() !!}</div>
-            <a class="btn btn-link btn-primary" href="{{$overviewItem->getViewUrl()}}">&rarr;</a>
-        </div>
+        <x-flexible-overview-card :title="$overviewItem->getOverviewTitle()"
+                                  :description="$overviewItem->getOverviewDescription()"
+                                  :image="$overviewItem->getOverviewImageMedia()"
+                                  :url="$overviewItem->getViewUrl()"></x-flexible-overview-card>
     @endforeach
     </div>
 </div>

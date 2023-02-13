@@ -7,6 +7,7 @@ use Spatie\LaravelPackageTools\Package;
 use Statikbe\FilamentFlexibleContentBlocks\Commands\CreateFlexibleContentBlocksModelCommand;
 use Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\View\Components\Hero;
+use Statikbe\FilamentFlexibleContentBlocks\View\Components\OverviewCard;
 
 class FilamentFlexibleContentBlocksServiceProvider extends PluginServiceProvider
 {
@@ -23,7 +24,7 @@ class FilamentFlexibleContentBlocksServiceProvider extends PluginServiceProvider
             ->name(static::$name)
             ->hasConfigFile()
             ->hasViews()
-            ->hasViewComponents('flexible', ContentBlocks::class, Hero::class)
+            ->hasViewComponents('flexible', ContentBlocks::class, Hero::class, OverviewCard::class)
             ->hasMigrations(['create_default_pages_table', 'create_default_translatable_pages_table'])
             ->hasTranslations()
             ->hasCommand(CreateFlexibleContentBlocksModelCommand::class);

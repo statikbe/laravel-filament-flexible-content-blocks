@@ -23,7 +23,7 @@ trait HasOverviewAttributesTrait
         $this->registerOverviewImageMediaCollectionAndConversion();
     }
 
-    public function getOverviewTitle(): string
+    public function getOverviewTitle(): ?string
     {
         if (! $this->overview_title && isset($this->title)) {
             return $this->title;
@@ -35,7 +35,7 @@ trait HasOverviewAttributesTrait
         return $this->overview_title;
     }
 
-    public function getOverviewDescription(): string
+    public function getOverviewDescription(): ?string
     {
         if (! $this->overview_description && isset($this->seo_description)) {
             return $this->seo_description;
@@ -73,7 +73,7 @@ trait HasOverviewAttributesTrait
         return 'overview_image';
     }
 
-    public function getOverviewImageUrl(string $conversion = null): string
+    public function getOverviewImageUrl(string $conversion = null): ?string
     {
         return $this->getFirstMediaUrl($this->getOverviewImageCollection(), $conversion ?? $this->getOverviewImageConversionName());
     }
