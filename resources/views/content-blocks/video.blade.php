@@ -1,6 +1,34 @@
-<div class="max-w-5xl">
-    {{$getOverlayImageMedia()}}
-    <div class="embed-container">
-        {!! $embedCode !!}
+<div class="py-20 section section--default">
+    <div class="container px-4 mx-auto">
+        @if($overlayImageId)
+            <div x-data="{isPlaying: false, embedUrl: '{{ $embedCode }}'}" class="cursor-pointer group">
+                <div class="relative flex items-center justify-center" x-show="!isPlaying" x-transition x-transition.delay.300ms>
+                    {{$getOverlayImageMedia(['alt' => '', 'class' => 'w-full', 'loading' => 'lazy'])}}
+                    <div class="absolute inset-0">
+                        <div class="flex items-center justify-center h-full">
+                            <button class="flex items-center justify-center before:transition-all before:duration-300 before:ease-in-out group-hover:before:bg-black/30 before:absolute before:bg-black/0 before:inset-0" @click="
+                                isPlaying = !isPlaying;
+                                $nextTick(() => { $refs.iframeElement.setAttribute('src', embedUrl) });">
+                                <span class="sr-only">Play video</span>
+                                <div class="relative z-10 p-0.5 bg-white rounded-full shadow-lg">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-12 h-12 fill-primary-500" aria-hidden="true">
+                                        <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm14.024-.983a1.125 1.125 0 010 1.966l-5.603 3.113A1.125 1.125 0 019 15.113V8.887c0-.857.921-1.4 1.671-.983l5.603 3.113z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-200" x-show="isPlaying" x-transition x-transition.delay.300ms x-cloak>
+                    <iframe title="youtube embed" x-ref="iframeElement" src="" class="w-full aspect-video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        @else
+            <div class="flex items-center justify-center">
+                <div class="w-full">
+                    <iframe title="youtube embed" src="{{ $embedCode }}" class="w-full aspect-video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        @endif
     </div>
 </div>
