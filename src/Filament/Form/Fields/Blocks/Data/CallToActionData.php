@@ -19,7 +19,6 @@ class CallToActionData
 
     /**
      * @param  array{cta_model: string, entry_id: ?string, url: ?string, button_style: ?string, button_label: ?string, button_open_new_window: ?boolean}  $callToActionBlockData
-     * @return self
      */
     public static function create(array $callToActionBlockData, array $buttonStyleClasses): self
     {
