@@ -51,6 +51,7 @@
         'form_component.content_blocks.text-image.image' => 'Image',
         'form_component.content_blocks.text-image.image_title' => 'Image title',
         'form_component.content_blocks.text-image.image_copyright' => 'Image copyright',
+        'form_component.content_blocks.text-image.call_to_action' => 'Call to action',
         'form_component.content_blocks.text.title' => 'Text',
         'form_component.content_blocks.text.label' => 'Text',
         'form_component.content_blocks.video.label' => 'Video',
@@ -77,4 +78,23 @@
         'form_component.content_blocks.image_width.50%' => '1/2',
         'form_component.content_blocks.image_width.33%' => '1/3',
         'form_component.content_blocks.image_width.25%' => '1/4',
+
+        'form_component.content_blocks.call_to_action_btn.primary' => 'Primary',
+        'form_component.content_blocks.call_to_action_btn.primary_chevron' => 'Primary >',
+        'form_component.content_blocks.call_to_action_btn.secondary' => 'Secundary',
+        'form_component.content_blocks.call_to_action_btn.secondary_chevron' => 'Secundary >',
+        'form_component.content_blocks.call_to_action_btn.ghost' => 'Transparent',
+        'form_component.content_blocks.call_to_action_btn.ghost_chevron' => 'Transparent >',
+        'form_component.content_blocks.call_to_action_btn.link' => 'Link',
+        'form_component.content_blocks.call_to_action_btn.link_chevron' => 'Link >',
+
+        'form_component.content_blocks.call_to_action_lbl' => 'Call to action',
+        'form_component.content_blocks.add_call_to_action' => 'Add call to action',
+        'form_component.content_blocks.call_to_action_model_type_url' => 'URL',
+        'form_component.content_blocks.call_to_action_cta_model' => 'Type',
+        'form_component.content_blocks.call_to_action_entry_id' => 'Page',
+        'form_component.content_blocks.call_to_action_button_style' => 'Button style',
+        'form_component.content_blocks.call_to_action_button_label' => 'Button label',
+        'form_component.content_blocks.call_to_action_button_open_in_new_window' => 'Open in new window?',
+
     ];

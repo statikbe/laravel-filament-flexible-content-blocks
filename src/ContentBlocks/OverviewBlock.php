@@ -7,8 +7,8 @@ use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Support\Collection;
 use Spatie\MediaLibrary\HasMedia;
-use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Overview\OverviewType;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\OverviewItemField;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Type\OverviewType;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasOverviewAttributes;
 

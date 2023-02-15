@@ -37,6 +37,7 @@ return [
         QuoteBlock::class,
     ],
 
+    //not implemented yet!
     'image_conversions' => [
         'default' => [
             'seo_image' => [
@@ -74,7 +75,7 @@ return [
         'App\Models\TranslatableFlexiblePage',
     ],
 
-    'linkable_models' => [
+    'call_to_action_models' => [
         'App\Models\FlexiblePage',
         'App\Models\TranslatableFlexiblePage',
     ],
@@ -114,11 +115,50 @@ return [
         'default' => 'full',
     ],
 
+    'call_to_action_buttons' => [
+        'options' => [
+            'primary' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.primary',
+                'class' => 'btn-primary',
+            ],
+            'primary_chevron' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.primary_chevron',
+                'class' => 'btn-primary btn-chevron',
+            ],
+            'secondary' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.secondary',
+                'class' => 'btn-secondary',
+            ],
+            'secondary_chevron' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.secondary_chevron',
+                'class' => 'btn-secondary btn-chevron',
+            ],
+            'ghost' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.ghost',
+                'class' => 'btn-ghost',
+            ],
+            'ghost_chevron' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.ghost_chevron',
+                'class' => 'btn-ghost btn-chevron',
+            ],
+            'link' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.link',
+                'class' => 'btn-link',
+            ],
+            'link_chevron' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.link_chevron',
+                'class' => 'btn-link btn-chevron',
+            ],
+        ],
+        'default' => 'full',
+    ],
+
     'formatting' => [
         'publishing_dates' => 'd/m/Y G:i',
     ],
 
     'author_model' => 'App\Models\User',
+    //TODO configurable author search fields
 
     'block_specific' => [
         TextImageBlock::class => [

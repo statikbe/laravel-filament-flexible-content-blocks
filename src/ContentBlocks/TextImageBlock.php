@@ -8,8 +8,10 @@ use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasCallToAction;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImage;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockSpatieMediaLibraryFileUpload;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToActionBuilder;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\ImagePositionField;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
@@ -17,6 +19,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
 class TextImageBlock extends AbstractFilamentFlexibleContentBlock
 {
     use HasImage;
+    use HasCallToAction;
 
     const CONVERSION_DEFAULT = 'default';
 
@@ -86,6 +89,10 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
                 ->label(self::getFieldLabel('image_copyright'))
                 ->maxLength(255),
             ImagePositionField::create(self::class),
+            CallToActionBuilder::make('call_to_action')
+                ->callToActionTypes(self::getCallToActionTypes())
+                ->minItems(0)
+                ->maxItems(1),
         ];
     }
 

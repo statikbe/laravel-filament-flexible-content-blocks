@@ -12,7 +12,7 @@ use Filament\Forms\Components\Concerns\HasName;
 use Filament\Forms\Components\Select;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Str;
-use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Overview\OverviewType;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Type\OverviewType;
 
 class OverviewItemField extends Component
 {
