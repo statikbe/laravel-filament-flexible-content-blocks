@@ -13,8 +13,6 @@ class FilamentFlexibleContentBlocks
 
     /**
      * Set the supported locales array for translated content blocks.
-     *
-     * @param  array  $locales
      */
     public static function setLocales(array $locales)
     {
@@ -23,8 +21,6 @@ class FilamentFlexibleContentBlocks
 
     /**
      * Get the supported locales array for translated content blocks.
-     *
-     * @return array
      */
     public static function getLocales(): array
     {

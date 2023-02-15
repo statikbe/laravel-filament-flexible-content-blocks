@@ -37,9 +37,6 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
 
     /**
      * Create a new component instance.
-     *
-     * @param  HasContentBlocks&HasMedia  $record
-     * @param  array|null  $blockData
      */
     public function __construct(HasContentBlocks&HasMedia $record, ?array $blockData)
     {
@@ -117,9 +114,6 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
         return $this->getHtmlableMedia($this->imageId, self::CONVERSION_DEFAULT, $this->imageTitle, $attributes);
     }
 
-    /**
-     * @return string|null
-     */
     public function getImageUrl(): ?string
     {
         return $this->getMediaUrl($this->imageId);
