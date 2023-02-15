@@ -24,9 +24,6 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
 
     /**
      * Create a new component instance.
-     *
-     * @param  HasContentBlocks&HasMedia  $record
-     * @param  array|null  $blockData
      */
     public function __construct(HasContentBlocks&HasMedia $record, ?array $blockData)
     {
@@ -86,9 +83,6 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
         return $this->getHtmlableMedia($this->overlayImageId, self::CONVERSION_DEFAULT, null, $attributes);
     }
 
-    /**
-     * @return string|null
-     */
     public function getOverlayImageUrl(): ?string
     {
         return $this->getMediaUrl($this->overlayImageId);

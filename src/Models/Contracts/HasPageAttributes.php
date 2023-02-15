@@ -15,37 +15,26 @@ interface HasPageAttributes
 {
     /**
      * Returns whether the page is published or visible, based on the begin and end publishing dates.
-     *
-     * @return bool
      */
     public function isPublished(): bool;
 
     /**
      * Returns whether the page will be published, based on the begin publishing date.
-     *
-     * @return bool
      */
     public function willBecomePublished(): bool;
 
     /**
      * Returns whether the page will be unpublished, based on the end publishing date.
-     *
-     * @return bool
      */
     public function willBecomeUnpublished(): bool;
 
     /**
      * Returns whether this page was published in the past and its publication ended.
-     *
-     * @return bool
      */
     public function wasUnpublished(): bool;
 
     /**
      * Find the published pages based on the publishing dates.
-     *
-     * @param  Builder  $query
-     * @return Builder
      */
     public function scopePublished(Builder $query): Builder;
 

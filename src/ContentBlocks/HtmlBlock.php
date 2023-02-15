@@ -11,9 +11,6 @@ class HtmlBlock extends AbstractFilamentFlexibleContentBlock
 
     /**
      * Create a new component instance.
-     *
-     * @param  HasContentBlocks  $record
-     * @param  array|null  $blockData
      */
     public function __construct(HasContentBlocks $record, ?array $blockData)
     {

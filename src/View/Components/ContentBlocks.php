@@ -13,9 +13,6 @@ class ContentBlocks extends Component
      */
     public array $contentBlocks = [];
 
-    /**
-     * @param  HasContentBlocks  $page
-     */
     public function __construct(HasContentBlocks $page)
     {
         $this->contentBlocks = $this->createBlocks($page);
@@ -24,7 +21,6 @@ class ContentBlocks extends Component
     /**
      * Transforms the JSON block data into content block components that can be rendered.
      *
-     * @param  HasContentBlocks  $page
      * @return array<AbstractContentBlock>
      */
     private function createBlocks(HasContentBlocks $page): array

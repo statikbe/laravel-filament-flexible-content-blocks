@@ -15,9 +15,6 @@ trait HasTranslatedContentBlocksTrait
     /**
      * Overrides default getter, to be able to json decode the translated content blocks.
      * By default spatie/laravel-translatable does not parse the translated JSON to an array, but just returns a string.
-     *
-     * @param  string|array|null  $translatedContentBlocks
-     * @return array
      */
     public function getContentBlocksAttribute(string|array|null $translatedContentBlocks): array
     {

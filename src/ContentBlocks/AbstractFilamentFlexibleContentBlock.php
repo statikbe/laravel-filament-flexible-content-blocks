@@ -15,8 +15,6 @@ abstract class AbstractFilamentFlexibleContentBlock extends AbstractContentBlock
     /**
      * Returns the last part of the name of the block. For the filament flexible content blocks package we prefix each
      * block name with the package name.
-     *
-     * @return string
      */
     abstract public static function getNameSuffix(): string;
 

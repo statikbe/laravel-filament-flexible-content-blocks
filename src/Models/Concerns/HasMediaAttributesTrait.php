@@ -17,7 +17,6 @@ trait HasMediaAttributesTrait
     /**
      * Sets the default media conversion for the Filament upload field.
      *
-     * @return void
      *
      * @throws \Spatie\Image\Exceptions\InvalidManipulation
      */
@@ -29,9 +28,6 @@ trait HasMediaAttributesTrait
 
     /**
      * Returns the first media for the given collection. First, we check if there is a locale specific version.
-     *
-     * @param  string  $collection
-     * @return Media|null
      */
     public function getImageMedia(string $collection): ?Media
     {
@@ -45,12 +41,6 @@ trait HasMediaAttributesTrait
 
     /**
      * Returns the image HTML for a given media object.
-     *
-     * @param  Media|null  $media
-     * @param  string  $conversion
-     * @param  string|null  $title
-     * @param  array  $attributes
-     * @return HtmlableMedia|null
      */
     public function getImageHtml(?Media $media, string $conversion, string $title = null, array $attributes = []): ?HtmlableMedia
     {

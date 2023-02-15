@@ -10,9 +10,6 @@ use Livewire\Component as Livewire;
 
 class ContentBlocksField extends Builder
 {
-    /**
-     * @return static
-     */
     public static function create(): static
     {
         return self::make('content_blocks')

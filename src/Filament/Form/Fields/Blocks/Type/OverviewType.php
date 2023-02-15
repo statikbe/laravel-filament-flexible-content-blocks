@@ -18,7 +18,6 @@ class OverviewType extends AbstractType
 
     /**
      * @param  class-string<HasOverviewAttributes>  $model
-     * @return static
      */
     public static function make(string $model): static
     {
