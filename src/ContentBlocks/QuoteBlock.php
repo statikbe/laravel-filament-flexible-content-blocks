@@ -6,10 +6,14 @@ use Closure;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Spatie\MediaLibrary\HasMedia;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBackgroundColour;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BackgroundColourField;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 
 class QuoteBlock extends AbstractFilamentFlexibleContentBlock
 {
+    use HasBackgroundColour;
+
     public ?string $quote;
 
     public ?string $author;
@@ -20,6 +24,7 @@ class QuoteBlock extends AbstractFilamentFlexibleContentBlock
 
         $this->quote = $blockData['quote'] ?? null;
         $this->author = $blockData['author'] ?? null;
+        $this->backgroundColourType = $blockData['background_colour'] ?? null;
     }
 
     public static function getNameSuffix(): string
@@ -44,6 +49,7 @@ class QuoteBlock extends AbstractFilamentFlexibleContentBlock
             TextInput::make('author')
                 ->label(self::getFieldLabel('author'))
                 ->maxLength(255),
+            BackgroundColourField::create(self::class),
         ];
     }
 }

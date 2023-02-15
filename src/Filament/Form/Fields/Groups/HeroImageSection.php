@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Groups;
 
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\HeroImageCopyrightField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\HeroImageField;
@@ -13,9 +14,14 @@ class HeroImageSection extends Section
     {
         return static::make(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.hero_image_section_title'))
             ->schema([
-                HeroImageTitleField::create(),
-                HeroImageCopyrightField::create(),
-                HeroImageField::create($translatableImage),
+                Grid::make(2)->schema([
+                    HeroImageField::create($translatableImage),
+
+                    Grid::make(1)->schema([
+                        HeroImageTitleField::create(),
+                        HeroImageCopyrightField::create(),
+                    ])->columnSpan(1),
+                ]),
             ]);
     }
 }

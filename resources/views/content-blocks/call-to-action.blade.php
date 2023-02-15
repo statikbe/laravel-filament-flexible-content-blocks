@@ -1,6 +1,6 @@
 <div class="py-20 section section--default">
     <div class="container px-4 mx-auto">
-        <div @class(['flex flex-wrap -mx-4', 'md:flex-row-reverse' => $hasImage() && $imagePosition === 'right'])>
+        <div @class(['flex flex-wrap -mx-4'])>
             @if($hasImage())
                 <div class="w-full px-4 mb-4 md:w-1/2 md:mb-0">
                     {{$getImageMedia(['class'=> 'w-full', 'loading' => 'lazy'])}}

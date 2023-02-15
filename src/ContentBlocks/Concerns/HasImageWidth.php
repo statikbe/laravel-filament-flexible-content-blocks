@@ -2,7 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns;
 
-use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\ImageWidthField;
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 
 trait HasImageWidth
 {
@@ -10,6 +10,6 @@ trait HasImageWidth
 
     public function getImageWidthClass(): ?string
     {
-        return ImageWidthField::getImageWidthClass(self::class, $this->imageWidth);
+        return FilamentFlexibleBlocksConfig::getImageWidthClass(self::class, $this->imageWidth);
     }
 }

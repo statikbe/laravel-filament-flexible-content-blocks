@@ -14,6 +14,8 @@ class ContentBlocksField extends Builder
     {
         return self::make('content_blocks')
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_lbl'))
+            ->createItemButtonLabel(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_add_lbl'))
+            ->createItemBetweenButtonLabel(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_add_lbl'))
             ->childComponents(function (Livewire $livewire) {
                 /** @var Page $livewire */
                 //to set the blocks, filament uses the childComponents.

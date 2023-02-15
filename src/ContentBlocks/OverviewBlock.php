@@ -7,6 +7,8 @@ use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Support\Collection;
 use Spatie\MediaLibrary\HasMedia;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBackgroundColour;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BackgroundColourField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\OverviewItemField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Type\OverviewType;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
@@ -14,6 +16,8 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasOverviewAttribute
 
 class OverviewBlock extends AbstractFilamentFlexibleContentBlock
 {
+    use HasBackgroundColour;
+
     public ?string $title;
 
     public array $items = [];
@@ -24,6 +28,7 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
 
         $this->title = $blockData['title'] ?? null;
         $this->items = $blockData['items'] ?? null;
+        $this->backgroundColourType = $blockData['background_colour'] ?? null;
     }
 
         public static function getIcon(): string
@@ -33,7 +38,6 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
 
     protected static function makeFilamentSchema(): array|Closure
     {
-        $overviewModels = static::getOverviewModels();
         $overviewItemField = OverviewItemField::make('overview_item')
             ->types(collect(static::getOverviewModels())->map(fn ($item) => new OverviewType($item))->toArray());
 
@@ -55,6 +59,7 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
                 })
                 ->collapsible()
                 ->minItems(1),
+            BackgroundColourField::create(self::class),
         ];
     }
 

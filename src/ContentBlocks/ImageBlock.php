@@ -8,8 +8,10 @@ use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBackgroundColour;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImage;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImageWidth;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BackgroundColourField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockSpatieMediaLibraryFileUpload;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\ImagePositionField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\ImageWidthField;
@@ -20,6 +22,7 @@ class ImageBlock extends AbstractFilamentFlexibleContentBlock
 {
     use HasImage;
     use HasImageWidth;
+    use HasBackgroundColour;
 
     const CONVERSION_DEFAULT = 'default';
 
@@ -43,6 +46,7 @@ class ImageBlock extends AbstractFilamentFlexibleContentBlock
         $this->imageCopyright = $blockData['image_copyright'] ?? null;
         $this->imagePosition = $blockData['image_position'] ?? null;
         $this->imageWidth = $blockData['image_width'] ?? null;
+        $this->backgroundColourType = $blockData['background_colour'] ?? null;
     }
 
     public static function getNameSuffix(): string
@@ -61,21 +65,22 @@ class ImageBlock extends AbstractFilamentFlexibleContentBlock
     protected static function makeFilamentSchema(): array|\Closure
     {
         return [
-            BlockSpatieMediaLibraryFileUpload::make('image')
-                ->collection(static::getName())
-                ->label(self::getFieldLabel('image'))
-                ->maxFiles(1)
-                ->required(),
-            //https://github.com/filamentphp/filament/issues/1284
-            TextInput::make('image_title')
-                ->label(self::getFieldLabel('image_title'))
-                ->maxLength(255),
-            TextInput::make('image_copyright')
-                ->label(self::getFieldLabel('image_copyright'))
-                ->maxLength(255),
-            Grid::make()->schema([
-                ImagePositionField::create(self::class),
-                ImageWidthField::create(self::class),
+            Grid::make(2)->schema([
+                BlockSpatieMediaLibraryFileUpload::make('image')
+                    ->collection(static::getName())
+                    ->label(self::getFieldLabel('image'))
+                    ->maxFiles(1),
+                Grid::make(1)->schema([
+                    TextInput::make('image_title')
+                        ->label(self::getFieldLabel('image_title'))
+                        ->maxLength(255),
+                    TextInput::make('image_copyright')
+                        ->label(self::getFieldLabel('image_copyright'))
+                        ->maxLength(255),
+                    ImagePositionField::create(self::class),
+                    ImageWidthField::create(self::class),
+                ])->columnSpan(1),
+                BackgroundColourField::create(self::class),
             ]),
         ];
     }

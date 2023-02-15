@@ -2,6 +2,7 @@
 
 // config for Statikbe/FilamentFlexibleContentBlocks
 use Spatie\Image\Manipulations;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\CallToActionBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\HtmlBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\ImageBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\OverviewBlock;
@@ -35,6 +36,7 @@ return [
         TextImageBlock::class,
         OverviewBlock::class,
         QuoteBlock::class,
+        CallToActionBlock::class,
     ],
 
     //not implemented yet!
@@ -151,6 +153,28 @@ return [
             ],
         ],
         'default' => 'full',
+    ],
+
+    'background_colours' => [
+        'options' => [
+            'default' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.default',
+                'class' => '',
+            ],
+            'primary' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.primary',
+                'class' => 'bg-primary-400',
+            ],
+            'secondary' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.secondary',
+                'class' => 'bg-secondary-400',
+            ],
+            'grey' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.grey',
+                'class' => 'bg-gray-400',
+            ],
+        ],
+        'default' => 'default',
     ],
 
     'formatting' => [
