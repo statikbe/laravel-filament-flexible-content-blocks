@@ -18,8 +18,6 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
 
     public array $items = [];
 
-    private ?Collection $overviewItems;
-
     public function __construct(HasMedia&HasContentBlocks $record, ?array $blockData)
     {
         parent::__construct($record, $blockData);
@@ -49,7 +47,10 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
                     $overviewItemField,
                 ])
                 ->itemLabel(function (array $state) use ($overviewItemField): ?string {
-                    return $overviewItemField->getTypes()[$state['overview_model']]->getLabel().' #'.$state['overview_id'] ?? null;
+                    if($state['overview_model'] && $state['overview_id'] && $overviewItemField->getTypes()[$state['overview_model']]) {
+                        return $overviewItemField->getTypes()[$state['overview_model']]->getLabel() . ' #' . $state['overview_id'];
+                    }
+                    else return null;
                 })
                 ->collapsible()
                 ->minItems(1),

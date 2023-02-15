@@ -12,6 +12,8 @@ use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasCallToActio
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImage;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockSpatieMediaLibraryFileUpload;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToActionBuilder;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToActionField;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CallToActionData;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\ImagePositionField;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
@@ -35,6 +37,8 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
 
     public ?string $imagePosition;
 
+    public ?CallToActionData $callToAction;
+
     /**
      * Create a new component instance.
      *
@@ -51,6 +55,7 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
         $this->imageTitle = $blockData['image_title'] ?? null;
         $this->imageCopyright = $blockData['image_copyright'] ?? null;
         $this->imagePosition = $blockData['image_position'] ?? null;
+        $this->callToAction = $blockData['call_to_action'][0]['data'] ? CallToActionData::create($blockData['call_to_action'][0]['data'], CallToActionField::getButtonStyleClasses(self::class)) : null;
     }
 
     public static function getNameSuffix(): string
@@ -89,7 +94,7 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
                 ->label(self::getFieldLabel('image_copyright'))
                 ->maxLength(255),
             ImagePositionField::create(self::class),
-            CallToActionBuilder::make('call_to_action')
+            CallToActionBuilder::create('call_to_action', self::class)
                 ->callToActionTypes(self::getCallToActionTypes())
                 ->minItems(0)
                 ->maxItems(1),

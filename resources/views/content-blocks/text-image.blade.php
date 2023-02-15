@@ -19,6 +19,9 @@
                         {!! $content !!}
                     </div>
                 @endif
+                @if($callToAction)
+                    <x-flexible-call-to-action :data="$callToAction"></x-flexible-call-to-action>
+                @endif
             </div>
         </div>
     </div>
