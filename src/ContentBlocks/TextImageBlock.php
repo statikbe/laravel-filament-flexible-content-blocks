@@ -14,8 +14,7 @@ use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasCallToActio
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImage;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BackgroundColourField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockSpatieMediaLibraryFileUpload;
-use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToActionBuilder;
-use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToActionField;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToActionRepeater;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CallToActionData;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\ImagePositionField;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
@@ -41,7 +40,8 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
 
     public ?string $imagePosition;
 
-    public ?CallToActionData $callToAction;
+    /* @var CallToActionData[] $callToActions */
+    public ?array $callToActions;
 
     /**
      * Create a new component instance.
@@ -56,7 +56,7 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
         $this->imageTitle = $blockData['image_title'] ?? null;
         $this->imageCopyright = $blockData['image_copyright'] ?? null;
         $this->imagePosition = $blockData['image_position'] ?? null;
-        $this->callToAction = $blockData['call_to_action'][0]['data'] ? CallToActionData::create($blockData['call_to_action'][0]['data'], CallToActionField::getButtonStyleClasses(self::class)) : null;
+        $this->callToActions = $this->createMultipleCallToActions($blockData);
         $this->backgroundColourType = $blockData['background_colour'] ?? null;
     }
 
@@ -102,7 +102,7 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
             Grid::make(2)->schema([
                 BackgroundColourField::create(self::class),
             ]),
-            CallToActionBuilder::create('call_to_action', self::class)
+            CallToActionRepeater::create('call_to_action', self::class)
                 ->callToActionTypes(self::getCallToActionTypes())
                 ->minItems(0)
                 ->maxItems(1),

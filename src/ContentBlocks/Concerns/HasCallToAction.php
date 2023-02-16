@@ -2,6 +2,8 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns;
 
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToActionField;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CallToActionData;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Type\CallToActionType;
 
 trait HasCallToAction
@@ -28,5 +30,36 @@ trait HasCallToAction
         $types = collect(static::getCallToActionModels())->map(fn ($item) => new CallToActionType($item))->toArray();
 
         return array_merge(['url' => $urlType], $types);
+    }
+
+    /**
+     * @param  array{call_to_action: array}  $blockData
+     * @return CallToActionData|null
+     */
+    public function createSingleCallToAction(array $blockData): ?CallToActionData
+    {
+        if (! empty($blockData['call_to_action'])) {
+            return CallToActionData::create($blockData['call_to_action'][0], CallToActionField::getButtonStyleClasses(self::class));
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * @param  array{call_to_action: array}  $blockData
+     * @return CallToActionData[]
+     */
+    public function createMultipleCallToActions(array $blockData): array
+    {
+        if (! empty($blockData['call_to_action'])) {
+            $data = [];
+            foreach ($blockData['call_to_action'] as $callToAction) {
+                $data[] = CallToActionData::create($callToAction, CallToActionField::getButtonStyleClasses(self::class));
+            }
+
+            return $data;
+        } else {
+            return [];
+        }
     }
 }

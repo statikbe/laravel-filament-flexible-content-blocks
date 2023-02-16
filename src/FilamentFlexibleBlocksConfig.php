@@ -8,6 +8,28 @@ class FilamentFlexibleBlocksConfig
 {
     /**
      * @param  class-string<AbstractContentBlock>  $blockClass
+     * @return int[]
+     */
+    public static function getGridColumnsConfig(string $blockClass): array
+    {
+        return config("filament-flexible-content-blocks.block_specific.$blockClass.grid_columns",
+            config('filament-flexible-content-blocks.grid_columns', [])
+        );
+    }
+
+    /**
+     * @param  class-string<AbstractContentBlock>  $blockClass
+     * @return array<int, int>
+     */
+    public static function getGridColumnsSelectOptions(string $blockClass): array
+    {
+        return collect(self::getGridColumnsConfig($blockClass))
+            ->mapWithKeys(fn ($item, $key) => [$item => $item])
+            ->toArray();
+    }
+
+    /**
+     * @param  class-string<AbstractContentBlock>  $blockClass
      * @return array{options: array<string, array{label: string, class: string}>, default: string}
      */
     public static function getImageWidthConfig(string $blockClass): array

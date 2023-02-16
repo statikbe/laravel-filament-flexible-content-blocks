@@ -3,10 +3,10 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks;
 
 use Closure;
-use Filament\Forms\Components\Builder;
+use Filament\Forms\Components\Repeater;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
 
-class CallToActionBuilder extends Builder
+class CallToActionRepeater extends Repeater
 {
     protected array|Closure|null $callToActionTypes = null;
 
@@ -30,21 +30,16 @@ class CallToActionBuilder extends Builder
     {
         parent::setUp();
 
-        $this->blocks([
-            Builder\Block::make('call_to_action')
-                ->schema([
-                    CallToActionField::make('call_to_action', self::class)
-                        ->types(fn () => $this->getCallToActionTypes())
-                        ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_lbl'))
-                        ->view('forms::components.grid'),
-                ])
+        $this->schema([
+            CallToActionField::make('call_to_action', self::class)
+                ->types(fn () => $this->getCallToActionTypes())
                 ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_lbl'))
-                ->icon('heroicon-o-cursor-click'),
+                ->view('forms::components.grid'),
         ]);
+        $this->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_lbl'));
 
         $this->disableLabel();
         $this->createItemButtonLabel(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.add_call_to_action'));
-        $this->createItemBetweenButtonLabel(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.add_call_to_action'));
     }
 
     public function callToActionTypes(array|Closure|null $types): static

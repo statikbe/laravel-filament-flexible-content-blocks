@@ -77,6 +77,12 @@
         'form_component.content_blocks.call-to-action.image_title' => 'Image title',
         'form_component.content_blocks.call-to-action.image_copyright' => 'Image copyright',
         'form_component.content_blocks.call-to-action.call_to_action' => 'Call to action',
+        'form_component.content_blocks.cards.label' => 'Cards',
+        'form_component.content_blocks.cards.title' => 'Title',
+        'form_component.content_blocks.cards.cards' => 'Cards',
+        'form_component.content_blocks.cards.card_title' => 'Card title',
+        'form_component.content_blocks.cards.card_text' => 'Card text',
+        'form_component.content_blocks.cards.card_image' => 'Card image',
 
         'form_component.content_blocks.image_position.left' => 'Left',
         'form_component.content_blocks.image_position.center' => 'Center',
@@ -90,8 +96,8 @@
 
         'form_component.content_blocks.call_to_action_btn.primary' => 'Primary',
         'form_component.content_blocks.call_to_action_btn.primary_chevron' => 'Primary >',
-        'form_component.content_blocks.call_to_action_btn.secondary' => 'Secundary',
-        'form_component.content_blocks.call_to_action_btn.secondary_chevron' => 'Secundary >',
+        'form_component.content_blocks.call_to_action_btn.secondary' => 'Secondary',
+        'form_component.content_blocks.call_to_action_btn.secondary_chevron' => 'Secondary >',
         'form_component.content_blocks.call_to_action_btn.ghost' => 'Transparent',
         'form_component.content_blocks.call_to_action_btn.ghost_chevron' => 'Transparent >',
         'form_component.content_blocks.call_to_action_btn.link' => 'Link',
@@ -111,4 +117,5 @@
         'form_component.content_blocks.background_colour.secondary' => 'Secondary',
         'form_component.content_blocks.background_colour.grey' => 'Grey',
 
+        'form_component.grid_columns_lbl' => 'Number of columns',
     ];

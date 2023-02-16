@@ -19,8 +19,10 @@
                         {!! $text !!}
                     </div>
                 @endif
-                @if($callToAction)
-                    <x-flexible-call-to-action :data="$callToAction"></x-flexible-call-to-action>
+                @if($callToActions)
+                    @foreach($callToActions as $callToAction)
+                        <x-flexible-call-to-action :data="$callToAction"></x-flexible-call-to-action>
+                    @endforeach
                 @endif
             </div>
         </div>

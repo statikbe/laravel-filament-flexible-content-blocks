@@ -3,6 +3,7 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\CallToActionBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\CardsBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\HtmlBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\ImageBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\OverviewBlock;
@@ -33,6 +34,7 @@ trait HasDefaultContentBlocksTrait
             OverviewBlock::class,
             QuoteBlock::class,
             CallToActionBlock::class,
+            CardsBlock::class,
         ]);
     }
 }

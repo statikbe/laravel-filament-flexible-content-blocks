@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Textarea;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
@@ -49,16 +50,18 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
     protected static function makeFilamentSchema(): array|\Closure
     {
         return [
-            Textarea::make('embed_code')
-                ->label(static::getFieldLabel('embed_code'))
-                ->hint(static::getFieldLabel('help'))
-                ->hintIcon('heroicon-s-question-mark-circle')
-                ->rows(2)
-                ->required(),
-            BlockSpatieMediaLibraryFileUpload::make('overlay_image')
-                ->collection(static::getName())
-                ->label(self::getFieldLabel('overlay_image'))
-                ->maxFiles(1),
+            Grid::make(2)->schema([
+                Textarea::make('embed_code')
+                    ->label(static::getFieldLabel('embed_code'))
+                    ->hint(static::getFieldLabel('help'))
+                    ->hintIcon('heroicon-s-question-mark-circle')
+                    ->rows(7)
+                    ->required(),
+                BlockSpatieMediaLibraryFileUpload::make('overlay_image')
+                    ->collection(static::getName())
+                    ->label(self::getFieldLabel('overlay_image'))
+                    ->maxFiles(1),
+            ]),
         ];
     }
 

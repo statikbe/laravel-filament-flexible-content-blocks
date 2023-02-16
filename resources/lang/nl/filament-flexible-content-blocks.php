@@ -77,6 +77,13 @@
         'form_component.content_blocks.call-to-action.image_title' => 'Titel van de afbeelding',
         'form_component.content_blocks.call-to-action.image_copyright' => 'Auteursrechten van de afbeelding',
         'form_component.content_blocks.call-to-action.call_to_action' => 'Call to action',
+        'form_component.content_blocks.cards.label' => 'Kaarten',
+        'form_component.content_blocks.cards.title' => 'Titel',
+        'form_component.content_blocks.cards.grid_columns' => 'Aantal kolommen',
+        'form_component.content_blocks.cards.cards' => 'Kaarten',
+        'form_component.content_blocks.cards.card_title' => 'Kaarttitel',
+        'form_component.content_blocks.cards.card_text' => 'Kaarttekst',
+        'form_component.content_blocks.cards.card_image' => 'Kaartafbeelding',
 
         'form_component.content_blocks.image_position.left' => 'Links',
         'form_component.content_blocks.image_position.center' => 'Midden',
@@ -110,4 +117,6 @@
         'form_component.content_blocks.background_colour.primary' => 'Primair',
         'form_component.content_blocks.background_colour.secondary' => 'Secundair',
         'form_component.content_blocks.background_colour.grey' => 'Grijs',
+
+        'form_component.grid_columns_lbl' => 'Aantal kolommen',
     ];

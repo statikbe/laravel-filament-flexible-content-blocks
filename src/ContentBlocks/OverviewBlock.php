@@ -10,6 +10,7 @@ use Illuminate\Support\Collection;
 use Spatie\MediaLibrary\HasMedia;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBackgroundColour;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BackgroundColourField;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\GridColumnsField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\OverviewItemField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Type\OverviewType;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
@@ -23,6 +24,8 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
 
     public array $items = [];
 
+    public int $gridColumns = 3;
+
     public function __construct(HasMedia&HasContentBlocks $record, ?array $blockData)
     {
         parent::__construct($record, $blockData);
@@ -30,11 +33,12 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
         $this->title = $blockData['title'] ?? null;
         $this->items = $blockData['items'] ?? null;
         $this->backgroundColourType = $blockData['background_colour'] ?? null;
+        $this->gridColumns = $blockData['grid_columns'] ?? null;
     }
 
         public static function getIcon(): string
         {
-            return 'heroicon-o-view-list';
+            return 'heroicon-o-collection';
         }
 
     protected static function makeFilamentSchema(): array|Closure
@@ -46,6 +50,10 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
             TextInput::make('title')
                 ->label(self::getFieldLabel('title'))
                 ->maxLength(255),
+            Grid::make(2)->schema([
+                BackgroundColourField::create(self::class),
+                GridColumnsField::create(self::class, true),
+            ]),
             Repeater::make('items')
                 ->label(self::getFieldLabel('items'))
                 ->schema([
@@ -60,9 +68,6 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
                 })
                 ->collapsible()
                 ->minItems(1),
-            Grid::make(2)->schema([
-                BackgroundColourField::create(self::class),
-            ]),
         ];
     }
 
@@ -91,7 +96,9 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
         foreach ($models as $model) {
             $modelName = app($model)->getMorphClass();
 
-            $overviewItems[$modelName] = app($model)::find($modelIds->get($modelName))->keyBy('id');
+            if ($modelIds->has($modelName)) {
+                $overviewItems[$modelName] = app($model)::find($modelIds->get($modelName))->keyBy('id');
+            }
         }
 
         return collect($this->items)->map(function ($item) use ($overviewItems) {

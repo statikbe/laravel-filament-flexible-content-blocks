@@ -3,6 +3,7 @@
 // config for Statikbe/FilamentFlexibleContentBlocks
 use Spatie\Image\Manipulations;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\CallToActionBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\CardsBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\HtmlBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\ImageBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\OverviewBlock;
@@ -37,6 +38,7 @@ return [
         OverviewBlock::class,
         QuoteBlock::class,
         CallToActionBlock::class,
+        CardsBlock::class,
     ],
 
     //not implemented yet!
@@ -175,6 +177,10 @@ return [
             ],
         ],
         'default' => 'default',
+    ],
+
+    'grid_columns' => [
+        1, 2, 3, 4,
     ],
 
     'formatting' => [
