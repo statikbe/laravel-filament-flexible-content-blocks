@@ -11,7 +11,7 @@ class BackgroundColourField extends Select
     /**
      * @param  class-string<AbstractContentBlock>  $blockClass
      */
-    public static function create(string $blockClass, bool $required = true): static
+    public static function create(string $blockClass, bool $required = false): static
     {
         return static::make('background_colour')
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.background_colour_lbl'))
