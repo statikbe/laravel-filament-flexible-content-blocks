@@ -1,6 +1,6 @@
 <?php
 
-    namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
+namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
     use Closure;
     use Filament\Forms\Components\Grid;
