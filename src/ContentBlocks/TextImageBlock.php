@@ -99,7 +99,9 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
                     ImagePositionField::create(self::class),
                 ])->columnSpan(1),
             ]),
-            BackgroundColourField::create(self::class),
+            Grid::make(2)->schema([
+                BackgroundColourField::create(self::class),
+            ]),
             CallToActionBuilder::create('call_to_action', self::class)
                 ->callToActionTypes(self::getCallToActionTypes())
                 ->minItems(0)

@@ -3,6 +3,7 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
 use Closure;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Support\Collection;
@@ -59,7 +60,9 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
                 })
                 ->collapsible()
                 ->minItems(1),
-            BackgroundColourField::create(self::class),
+            Grid::make(2)->schema([
+                BackgroundColourField::create(self::class),
+            ]),
         ];
     }
 

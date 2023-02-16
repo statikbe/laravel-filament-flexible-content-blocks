@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\RichEditor;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBackgroundColour;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BackgroundColourField;
@@ -46,7 +47,9 @@ class TextBlock extends AbstractFilamentFlexibleContentBlock
                     'attachFiles',
                 ])
                 ->required(),
-            BackgroundColourField::create(self::class),
+            Grid::make(2)->schema([
+                BackgroundColourField::create(self::class),
+            ]),
         ];
     }
 }

@@ -106,4 +106,9 @@
         'form_component.content_blocks.call_to_action_button_label' => 'Button label',
         'form_component.content_blocks.call_to_action_button_open_in_new_window' => 'Open in new window?',
 
+        'form_component.content_blocks.background_colour.default' => 'Default',
+        'form_component.content_blocks.background_colour.primary' => 'Primary',
+        'form_component.content_blocks.background_colour.secondary' => 'Secondary',
+        'form_component.content_blocks.background_colour.grey' => 'Grey',
+
     ];

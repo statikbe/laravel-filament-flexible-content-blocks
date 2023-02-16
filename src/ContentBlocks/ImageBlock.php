@@ -79,8 +79,8 @@ class ImageBlock extends AbstractFilamentFlexibleContentBlock
                         ->maxLength(255),
                     ImagePositionField::create(self::class),
                     ImageWidthField::create(self::class),
+                    BackgroundColourField::create(self::class),
                 ])->columnSpan(1),
-                BackgroundColourField::create(self::class),
             ]),
         ];
     }

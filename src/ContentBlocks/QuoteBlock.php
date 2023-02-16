@@ -3,6 +3,7 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
 use Closure;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Spatie\MediaLibrary\HasMedia;
@@ -49,7 +50,9 @@ class QuoteBlock extends AbstractFilamentFlexibleContentBlock
             TextInput::make('author')
                 ->label(self::getFieldLabel('author'))
                 ->maxLength(255),
-            BackgroundColourField::create(self::class),
+            Grid::make(2)->schema([
+                BackgroundColourField::create(self::class),
+            ]),
         ];
     }
 }
