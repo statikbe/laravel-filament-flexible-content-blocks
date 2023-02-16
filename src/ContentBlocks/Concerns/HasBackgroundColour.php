@@ -2,14 +2,14 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns;
 
-    use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 
-    trait HasBackgroundColour
+trait HasBackgroundColour
+{
+    public ?string $backgroundColourType;
+
+    public function getBackgroundColourClass(): ?string
     {
-        public ?string $backgroundColourType;
-
-        public function getBackgroundColourClass(): ?string
-        {
-            return FilamentFlexibleBlocksConfig::getBackgroundColourClass(self::class, $this->backgroundColourType);
-        }
+        return FilamentFlexibleBlocksConfig::getBackgroundColourClass(self::class, $this->backgroundColourType);
     }
+}

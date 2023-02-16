@@ -10,8 +10,6 @@ class ImageWidthField extends Select
 {
     /**
      * @param  class-string<AbstractContentBlock>  $blockClass
-     * @param  bool  $required
-     * @return static
      */
     public static function create(string $blockClass, bool $required = true): static
     {
