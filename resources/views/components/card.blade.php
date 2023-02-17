@@ -2,7 +2,7 @@
     /* @var \Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CardData $card */
 @endphp
 
-<div class="card">
+<div class="relative transition-all duration-300 ease-out bg-white group hover:shadow-lg">
     @if(!$slot->isEmpty())
         {{-- Image slot --}}
         {{$slot}}
@@ -13,21 +13,23 @@
              @if($card->title) alt="{{$card->title}}" @endif />
     @endif
 
-    @if($card->title)
-        <h3>
-            @if($getTitleUrl())<a href="{{$getTitleUrl()}}">@endif
-                {{$card->title}}
-            @if($getTitleUrl())</a>@endif
-        </h3>
-    @endif
+    <div class="p-4 prose sm:p-6 max-w-none">
+        @if($card->title)
+            <h3>
+                @if($getTitleUrl())<a href="{{$getTitleUrl()}}">@endif
+                    {{$card->title}}
+                @if($getTitleUrl())</a>@endif
+            </h3>
+        @endif
 
-    @if($card->text)
-        <div>{!! $card->text !!}</div>
-    @endif
+        @if($card->text)
+            <div>{!! $card->text !!}</div>
+        @endif
 
-    @if($card->callToActions)
-        @foreach($card->callToActions as $callToAction)
-            <x-flexible-call-to-action :data="$callToAction"></x-flexible-call-to-action>
-        @endforeach
-    @endif
+        @if($card->callToActions)
+            @foreach($card->callToActions as $callToAction)
+                <x-flexible-call-to-action :data="$callToAction"></x-flexible-call-to-action>
+            @endforeach
+        @endif
+    </div>
 </div>
