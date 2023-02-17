@@ -1,16 +1,11 @@
 <?php
 
-    namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data;
+namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data;
 
     class CardData
     {
         /**
-         * @param  string|null  $title
-         * @param  string|null  $text
          * @param  array<CallToActionData>|null  $callToActions
-         * @param  string|null  $imageId
-         * @param  string|null  $imageUrl
-         * @param  string|null  $imageHtml
          */
         public function __construct(
             public ?string $title,
@@ -27,13 +22,6 @@
             return $this->callToActions[0]->url ?? null;
         }
 
-        /**
-         * @param  array  $cardBlockData
-         * @param  string|null  $imageUrl
-         * @param  string|null  $imageHtml
-         * @param  array  $buttonStyleClasses
-         * @return self
-         */
         public static function create(array $cardBlockData, ?string $imageUrl, ?string $imageHtml, array $buttonStyleClasses): self
         {
             $callToActions = [];

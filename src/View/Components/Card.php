@@ -1,6 +1,6 @@
 <?php
 
-    namespace Statikbe\FilamentFlexibleContentBlocks\View\Components;
+namespace Statikbe\FilamentFlexibleContentBlocks\View\Components;
 
     use Illuminate\View\Component;
     use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CallToActionData;
@@ -11,9 +11,7 @@
         public CardData $card;
 
         /**
-         * @param  string|null  $title
          * @param  string|null  $description
-         * @param  string|null  $image
          * @param  CallToActionData[]|null  $callToActions
          */
         public function __construct(
