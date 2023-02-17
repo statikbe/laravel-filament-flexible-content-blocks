@@ -4,7 +4,7 @@
     @endif
     <div class="p-4 prose max-w-none sm:p-6">
         @if($title)
-            <a href="{{$url}}" class="no-underline before:absolute before:inset-0">
+            <a href="{{$url}}" class="before:absolute before:inset-0">
                 <h3 @if(!$image)class="mt-0"@endif>{{$title}}</h3>
             </a>
         @endif
