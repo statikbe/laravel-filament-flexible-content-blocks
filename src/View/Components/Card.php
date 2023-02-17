@@ -1,6 +1,6 @@
 <?php
 
-    namespace Statikbe\FilamentFlexibleContentBlocks\View\Components;
+namespace Statikbe\FilamentFlexibleContentBlocks\View\Components;
 
     use Illuminate\View\Component;
     use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CallToActionData;
@@ -10,15 +10,21 @@
     {
         public CardData $card;
 
+        private ?string $titleUrl;
+
         /**
+         * @param  CardData|null  $data
          * @param  string|null  $title
-         * @param  string|null  $description
-         * @param  string|null  $image
+         * @param  string|null  $titleUrl
+         * @param  string|null  $text
          * @param  CallToActionData[]|null  $callToActions
+         * @param  string|null  $image
+         * @param  string|null  $imageUrl
          */
         public function __construct(
             ?CardData $data = null,
             ?string $title = null,
+            ?string $titleUrl = null,
             ?string $text = null,
             ?array $callToActions = [],
             ?string $image = null,
@@ -29,6 +35,17 @@
             } else {
                 $this->card = new CardData($title, $text, $callToActions, null, $imageUrl, $image);
             }
+
+            $this->titleUrl = $titleUrl;
+        }
+
+        public function getTitleUrl(): ?string
+        {
+            if (! $this->titleUrl) {
+                $this->titleUrl = $this->callToActions[0]->url ?? null;
+            }
+
+            return $this->titleUrl;
         }
 
         public function render()

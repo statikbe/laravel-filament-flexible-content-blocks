@@ -1,6 +1,6 @@
 <?php
 
-    namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data;
+namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data;
 
     class CardData
     {
@@ -20,11 +20,6 @@
             public ?string $imageUrl = null,
             public ?string $imageHtml = null,
         ) {
-        }
-
-        public function getTitleUrl(): ?string
-        {
-            return $this->callToActions[0]->url ?? null;
         }
 
         /**

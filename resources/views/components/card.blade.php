@@ -15,7 +15,9 @@
 
     @if($card->title)
         <h3>
-            <a href="{{$card->getTitleUrl()}}">{{$card->title}}</a>
+            @if($getTitleUrl())<a href="{{$getTitleUrl()}}">@endif
+                {{$card->title}}
+            @if($getTitleUrl())</a>@endif
         </h3>
     @endif
 

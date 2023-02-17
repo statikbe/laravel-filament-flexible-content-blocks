@@ -8,10 +8,8 @@
                 /* @var \Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CardData $card */
             @endphp
 
-            <x-flexible-card :title="$card->title"
-                             :text="$card->text"
-                             :call-to-actions="$card->callToActions"
-                             :image="$getCardImageMedia($card->imageId, $card->title)">
+            <x-flexible-card :data="$card">
+                {!! $getCardImageMedia($card->imageId, $card->title) !!}
             </x-flexible-card>
         @endforeach
     </div>
