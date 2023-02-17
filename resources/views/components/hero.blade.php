@@ -1,9 +1,9 @@
-<div class="" x-data="">
+<div class="" x-data="{imageUrl: $refs.heroImage.currentSrc || $refs.heroImage.src}">
     <div class="container px-4 mx-auto">
-        <div class="w-full h-48 bg-center bg-cover sm:h-96" :style="`background-image: url(${imageUrl})`"></div>
+        <div :class="imageUrl ? 'w-full h-48 bg-center bg-cover sm:h-96' : ''" :style="`background-image: url(${imageUrl})`"></div>
         @if($getHeroImageMedia)
-            <div class="relative">
-                {{$getHeroImageMedia(['class' => 'w-full sr-only', 'loading' => 'lazy', 'x-ref' => 'heroImage', 'x-on:load' => 'imageUrl = $refs.heroImage.currentSrc || $refs.heroImage.src'])}}
+            <div :class="imageUrl ? 'sr-only' : 'relative'">
+                {{$getHeroImageMedia(['class' => 'w-full', 'loading' => 'lazy', 'x-ref' => 'heroImage', 'x-on:load' => 'imageUrl = $refs.heroImage.currentSrc || $refs.heroImage.src'])}}
                 @if($heroImageCopyright)
                     <span class="absolute bottom-0 left-0 px-2 py-1 text-sm text-white bg-black/30">&copy; {{$heroImageCopyright}}</span>
                 @endif

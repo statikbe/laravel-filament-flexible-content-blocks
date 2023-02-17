@@ -1,4 +1,4 @@
-<div class="relative transition-all duration-300 ease-out bg-white group hover:shadow-lg">
+<div class="relative transition-all duration-300 ease-out bg-white group hover:shadow-md">
     @if($image)
         {!! $image !!}
     @endif
@@ -12,7 +12,9 @@
             <div>{!! $description !!}</div>
         @endif
         @if($url)
-            <span class="btn btn-link btn-primary">&rarr;</span>
+            <div class="flex justify-end">
+                <span class="transition-transform duration-300 ease-out group-hover:translate-x-0.5">&rarr;</span>
+            </div>
         @endif
     </div>
 </div>
