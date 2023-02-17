@@ -1,4 +1,4 @@
-<div class="relative py-12">
+<div class="relative py-12 {{ $getBackgroundColourClass() }}">
     <div class="container px-4 mx-auto">
         @if($title)
             <div class="mb-6 prose max-w-none">
@@ -8,7 +8,7 @@
         <div class="grid sm:grid-cols-2 md:grid-cols-{{$gridColumns ?? 3}} gap-4">
             @foreach($cards as $card)
                 @php
-                    /* @var \Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CardData $card */
+                     /* @var \Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CardData $card */
                 @endphp
 
                 <x-flexible-card :data="$card">
