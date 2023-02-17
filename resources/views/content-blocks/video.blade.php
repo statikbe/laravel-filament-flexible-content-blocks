@@ -1,4 +1,4 @@
-<div class="py-20 section section--default">
+<div class="py-12 section section--default">
     <div class="container px-4 mx-auto">
         @if($overlayImageId)
             <div x-data="{isPlaying: false, embedUrl: '{{ $embedCode }}'}" class="cursor-pointer group">

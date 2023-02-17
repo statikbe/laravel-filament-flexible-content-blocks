@@ -1,4 +1,4 @@
-<div class="py-20 section section--default">
+<div class="py-12 section section--default">
     <div class="container px-4 mx-auto">
         <blockquote class="pl-6 border-l-2 border-gray-200">
             <div class="text-2xl">

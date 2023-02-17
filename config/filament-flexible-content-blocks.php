@@ -165,15 +165,15 @@ return [
             ],
             'primary' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.primary',
-                'class' => 'bg-primary-400',
+                'class' => 'bg-primary-500 text-primary-contrast',
             ],
             'secondary' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.secondary',
-                'class' => 'bg-secondary-400',
+                'class' => 'bg-secondary text-secondary-contrast',
             ],
             'grey' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.grey',
-                'class' => 'bg-gray-400',
+                'class' => 'bg-slate-200',
             ],
         ],
         'default' => 'default',
