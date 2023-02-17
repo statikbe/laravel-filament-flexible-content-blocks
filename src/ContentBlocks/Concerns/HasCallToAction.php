@@ -34,7 +34,6 @@ trait HasCallToAction
 
     /**
      * @param  array{call_to_action: array}  $blockData
-     * @return CallToActionData|null
      */
     public function createSingleCallToAction(array $blockData): ?CallToActionData
     {

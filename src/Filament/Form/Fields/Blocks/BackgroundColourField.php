@@ -10,7 +10,6 @@ class BackgroundColourField extends Select
 {
     /**
      * @param  class-string<AbstractContentBlock>  $blockClass
-     * @param  bool  $required
      */
     public static function create(string $blockClass, bool $required = false): static
     {
