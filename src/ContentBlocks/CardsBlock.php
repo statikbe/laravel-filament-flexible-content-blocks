@@ -120,6 +120,11 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
         return $this->getHtmlableMedia($imageId, self::CONVERSION_DEFAULT, $imageTitle, $attributes);
     }
 
+    public function getCardImageUrl(string $imageId): ?string
+    {
+        return $this->getMediaUrl($imageId);
+    }
+
     /**
      * @return CardData[]
      */
@@ -127,14 +132,13 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
     {
         $cardData = [];
         foreach ($cardsBlockData as $card) {
-            $cardData[] = CardData::create($card, CallToActionField::getButtonStyleClasses(self::class), $this);
+            $cardData[] = CardData::create(
+                $card,
+                $this->getCardImageUrl($card['image']),
+                $this->getCardImageMedia($card['image'], $card['title']),
+                CallToActionField::getButtonStyleClasses(self::class));
         }
 
         return $cardData;
-    }
-
-    public function getCardImageUrl(string $imageId): ?string
-    {
-        return $this->getMediaUrl($imageId);
     }
 }

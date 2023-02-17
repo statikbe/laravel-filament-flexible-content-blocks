@@ -4,23 +4,42 @@ namespace Statikbe\FilamentFlexibleContentBlocks\View\Components;
 
 use Illuminate\View\Component;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CallToActionData;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CardData;
 
 class Card extends Component
 {
-    public ?string $titleUrl;
+    public CardData $card;
+
+    private ?string $titleUrl;
 
     /**
      * @param  CallToActionData[]|null  $callToActions
      */
     public function __construct(
-            public ?string $title = null,
-            public ?string $description = null,
-            public ?string $image = null,
-            public ?array $callToActions = [],
+            ?CardData $data = null,
+            ?string $title = null,
+            ?string $titleUrl = null,
+            ?string $text = null,
+            ?array $callToActions = [],
+            ?string $image = null,
+            ?string $imageUrl = null,
         ) {
-        if ($this->callToActions && ! empty($this->callToActions)) {
-            $this->titleUrl = $this->callToActions[0]->url;
+        if ($data) {
+            $this->card = $data;
+        } else {
+            $this->card = new CardData($title, $text, $callToActions, null, $imageUrl, $image);
         }
+
+        $this->titleUrl = $titleUrl;
+    }
+
+    public function getTitleUrl(): ?string
+    {
+        if (! $this->titleUrl) {
+            $this->titleUrl = $this->callToActions[0]->url ?? null;
+        }
+
+        return $this->titleUrl;
     }
 
     public function render()
