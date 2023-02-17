@@ -1,4 +1,4 @@
-<div class="py-12 section section--default">
+<div class="py-12 section section--default {{ $getBackgroundColourClass() }}">
     <div class="container px-4 mx-auto">
         <div @class(['flex flex-wrap -mx-4', 'md:flex-row-reverse' => $hasImage() && $imagePosition === 'right'])>
             @if($hasImage())
