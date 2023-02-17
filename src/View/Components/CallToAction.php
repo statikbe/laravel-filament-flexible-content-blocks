@@ -8,6 +8,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\Call
 class CallToAction extends Component
 {
     public CallToActionData $callToAction;
+    public bool $isFullyClickable = false;
 
     public function __construct(
             ?CallToActionData $data = null,
@@ -15,6 +16,7 @@ class CallToAction extends Component
             ?string $label = null,
             ?string $buttonStyle = null,
             bool $openNewWindow = false,
+            bool $isFullyClickable = false,
         ) {
         if ($data) {
             $this->callToAction = $data;
@@ -26,6 +28,7 @@ class CallToAction extends Component
                 $openNewWindow
             );
         }
+        $this->isFullyClickable = $isFullyClickable;
     }
 
     public function render()
