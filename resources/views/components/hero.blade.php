@@ -1,4 +1,4 @@
-<div class="" x-data="{imageUrl: $refs.heroImage.currentSrc || $refs.heroImage.src}">
+<div class="" x-data="">
     <div class="container px-4 mx-auto">
         <div class="w-full h-48 bg-center bg-cover sm:h-96" :style="`background-image: url(${imageUrl})`"></div>
         @if($getHeroImageMedia)

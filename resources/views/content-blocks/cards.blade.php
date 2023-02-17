@@ -5,7 +5,7 @@
                 <h2>{{$title}}</h2>
             </div>
         @endif
-        <div class="grid grid-cols-{{$gridColumns ?? 3}} gap-4">
+        <div class="grid sm:grid-cols-2 md:grid-cols-{{$gridColumns ?? 3}} gap-4">
             @foreach($cards as $card)
                 @php
                     /* @var \Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CardData $card */

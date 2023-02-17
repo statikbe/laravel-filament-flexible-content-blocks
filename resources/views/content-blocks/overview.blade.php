@@ -1,9 +1,11 @@
 <div class="py-12">
     <div class="container px-4 mx-auto">
         @if($title)
-            <h2>{{$title}}</h2>
+            <div class="mb-6 prose max-w-none">
+                <h2>{{$title}}</h2>
+            </div>
         @endif
-        <div class="grid grid-cols-3 gap-4">
+        <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
             @foreach($getOverviewItems() as $overviewItem)
                 @php
                     /* @var \Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasOverviewAttributes&Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\Linkable $overviewItem */
