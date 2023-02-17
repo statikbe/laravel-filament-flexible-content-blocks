@@ -36,7 +36,7 @@ class Card extends Component
     public function getTitleUrl(): ?string
     {
         if (! $this->titleUrl) {
-            $this->titleUrl = $this->callToActions[0]->url ?? null;
+            $this->titleUrl = $this->card->callToActions[0]->url ?? null;
         }
 
         return $this->titleUrl;
