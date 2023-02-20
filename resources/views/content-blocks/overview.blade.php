@@ -5,7 +5,7 @@
                 <h2>{{$title}}</h2>
             </div>
         @endif
-        <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+        <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-{{$gridColumns ?? 3}}">
             @foreach($getOverviewItems() as $overviewItem)
                 @php
                     /* @var \Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasOverviewAttributes&Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\Linkable $overviewItem */

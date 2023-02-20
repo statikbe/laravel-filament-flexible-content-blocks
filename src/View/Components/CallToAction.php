@@ -9,12 +9,15 @@ class CallToAction extends Component
 {
     public CallToActionData $callToAction;
 
+    public bool $isFullyClickable = false;
+
     public function __construct(
             ?CallToActionData $data = null,
             string $url = null,
             ?string $label = null,
             ?string $buttonStyle = null,
             bool $openNewWindow = false,
+            bool $isFullyClickable = false,
         ) {
         if ($data) {
             $this->callToAction = $data;
@@ -26,6 +29,7 @@ class CallToAction extends Component
                 $openNewWindow
             );
         }
+        $this->isFullyClickable = $isFullyClickable;
     }
 
     public function render()

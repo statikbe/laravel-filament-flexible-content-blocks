@@ -2,7 +2,7 @@
     /* @var \Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CardData $card */
 @endphp
 
-<div class="relative transition-all duration-300 ease-out bg-white group hover:shadow-md">
+<div class="relative transition-all duration-300 ease-out bg-white group @if($isFullyClickable()) hover:shadow-md @endif">
     @if(!$slot->isEmpty())
         {{-- Image slot --}}
         {{$slot}}
@@ -27,9 +27,11 @@
         @endif
 
         @if($card->callToActions)
-            @foreach($card->callToActions as $callToAction)
-                <x-flexible-call-to-action :data="$callToAction" :fullyClickable="true"></x-flexible-call-to-action>
-            @endforeach
+            <div class="flex flex-wrap gap-4">
+                @foreach($card->callToActions as $callToAction)
+                    <x-flexible-call-to-action :data="$callToAction" :isFullyClickable="$isFullyClickable()"></x-flexible-call-to-action>
+                @endforeach
+            </div>
         @endif
     </div>
 </div>

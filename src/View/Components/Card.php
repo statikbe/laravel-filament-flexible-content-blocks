@@ -42,6 +42,11 @@ class Card extends Component
         return $this->titleUrl;
     }
 
+    public function isFullyClickable(): bool
+    {
+        return count($this->card->callToActions) === 1;
+    }
+
     public function render()
     {
         return view('filament-flexible-content-blocks::components.card');
