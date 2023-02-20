@@ -14,12 +14,6 @@ use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks;
  */
 class CopyContentBlocksToLocalesActionHandler
 {
-    /**
-     * @param  Model  $record
-     * @param  Component  $livewire
-     * @param  array|null  $contentBlocks
-     * @return void
-     */
     public function handle(Model $record, Component $livewire, ?array $contentBlocks): void
     {
         /* @var Model|HasTranslations $record */
