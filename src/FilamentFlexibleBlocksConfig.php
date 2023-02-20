@@ -8,7 +8,6 @@ class FilamentFlexibleBlocksConfig
 {
     /**
      * @param  class-string<AbstractContentBlock>  $blockClass
-     * @return array
      */
     public static function getTemplatesConfig(string $blockClass): array
     {
@@ -178,8 +177,6 @@ class FilamentFlexibleBlocksConfig
 
     /**
      * @param  class-string<AbstractContentBlock>  $blockClass
-     * @param  string  $configField
-     * @return array
      */
     private static function getConfig(string $blockClass, string $configField): array
     {
