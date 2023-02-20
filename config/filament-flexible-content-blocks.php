@@ -8,6 +8,7 @@ use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\HtmlBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\ImageBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\OverviewBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\QuoteBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TemplateBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextImageBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\VideoBlock;
@@ -39,6 +40,7 @@ return [
         QuoteBlock::class,
         CallToActionBlock::class,
         CardsBlock::class,
+        TemplateBlock::class,
     ],
 
     //not implemented yet!
@@ -181,6 +183,10 @@ return [
 
     'grid_columns' => [
         1, 2, 3, 4,
+    ],
+
+    'templates' => [
+        'partials.footer-nav' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.templates_options.footer',
     ],
 
     'formatting' => [

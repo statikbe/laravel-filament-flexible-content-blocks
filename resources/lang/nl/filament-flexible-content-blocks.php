@@ -84,6 +84,8 @@
         'form_component.content_blocks.cards.card_title' => 'Kaarttitel',
         'form_component.content_blocks.cards.card_text' => 'Kaarttekst',
         'form_component.content_blocks.cards.card_image' => 'Kaartafbeelding',
+        'form_component.content_blocks.template.label' => 'Template',
+        'form_component.content_blocks.template.template' => 'Template',
 
         'form_component.content_blocks.image_position.left' => 'Links',
         'form_component.content_blocks.image_position.center' => 'Midden',
@@ -119,4 +121,6 @@
         'form_component.content_blocks.background_colour.grey' => 'Grijs',
 
         'form_component.grid_columns_lbl' => 'Aantal kolommen',
+
+        'form_component.content_blocks.templates_options.footer' => 'Voettekst',
     ];

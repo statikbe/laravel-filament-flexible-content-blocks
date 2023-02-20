@@ -118,4 +118,6 @@
         'form_component.content_blocks.background_colour.grey' => 'Grey',
 
         'form_component.grid_columns_lbl' => 'Number of columns',
+
+        'form_component.content_blocks.templates_options.footer' => 'Footer',
     ];

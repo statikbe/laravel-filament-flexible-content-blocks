@@ -14,6 +14,8 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
  */
 abstract class AbstractContentBlock extends Component
 {
+    protected static Block $block;
+
     public HasContentBlocks&HasMedia $record;
 
     public ?array $blockData;
@@ -55,7 +57,8 @@ abstract class AbstractContentBlock extends Component
         return Block::make(static::getName())
             ->label(static::getLabel())
             ->icon(static::getIcon())
-            ->schema(static::makeFilamentSchema());
+            ->schema(static::makeFilamentSchema())
+            ->visible(static::visible());
     }
 
     /**
@@ -78,5 +81,15 @@ abstract class AbstractContentBlock extends Component
     public static function addMediaCollectionAndConversion(HasMedia&HasMediaAttributes $record): void
     {
         //overwrite to add collection and conversion here if the block has images
+    }
+
+    /**
+     * Sets the visibility of the block in the builder. Call this to hide or show the block in the builder selector.
+     *
+     * @return bool|Closure $condition
+     */
+    public static function visible(): bool|Closure
+    {
+        return true;
     }
 }

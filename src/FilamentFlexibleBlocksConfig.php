@@ -8,13 +8,29 @@ class FilamentFlexibleBlocksConfig
 {
     /**
      * @param  class-string<AbstractContentBlock>  $blockClass
+     * @return array
+     */
+    public static function getTemplatesConfig(string $blockClass): array
+    {
+        return self::getConfig($blockClass, 'templates');
+    }
+
+    public static function getTemplatesSelectOptions(string $blockClass): array
+    {
+        $config = self::getTemplatesConfig($blockClass);
+
+        return collect($config ?? [])
+            ->mapWithKeys(fn ($item, $key) => [$key => trans($item)])
+            ->toArray();
+    }
+
+    /**
+     * @param  class-string<AbstractContentBlock>  $blockClass
      * @return int[]
      */
     public static function getGridColumnsConfig(string $blockClass): array
     {
-        return config("filament-flexible-content-blocks.block_specific.$blockClass.grid_columns",
-            config('filament-flexible-content-blocks.grid_columns', [])
-        );
+        return self::getConfig($blockClass, 'grid_columns');
     }
 
     /**
@@ -34,9 +50,7 @@ class FilamentFlexibleBlocksConfig
      */
     public static function getImageWidthConfig(string $blockClass): array
     {
-        return config("filament-flexible-content-blocks.block_specific.$blockClass.image_width",
-            config('filament-flexible-content-blocks.image_width', [])
-        );
+        return self::getConfig($blockClass, 'image_width');
     }
 
     /**
@@ -69,9 +83,7 @@ class FilamentFlexibleBlocksConfig
      */
     public static function getImagePositionConfig(string $blockClass): array
     {
-        return config("filament-flexible-content-blocks.block_specific.$blockClass.image_position",
-            config('filament-flexible-content-blocks.image_position', [])
-        );
+        return self::getConfig($blockClass, 'image_position');
     }
 
     /**
@@ -104,9 +116,7 @@ class FilamentFlexibleBlocksConfig
      */
     public static function getBackgroundColoursConfig(string $blockClass): array
     {
-        return config("filament-flexible-content-blocks.block_specific.$blockClass.background_colours",
-            config('filament-flexible-content-blocks.background_colours', [])
-        );
+        return self::getConfig($blockClass, 'background_colours');
     }
 
     /**
@@ -139,9 +149,7 @@ class FilamentFlexibleBlocksConfig
      */
     public static function getCallToActionButtonsConfig(string $blockClass): array
     {
-        return config("filament-flexible-content-blocks.block_specific.$blockClass.call_to_action_buttons",
-            config('filament-flexible-content-blocks.call_to_action_buttons', [])
-        );
+        return self::getConfig($blockClass, 'call_to_action_buttons');
     }
 
     /**
@@ -166,6 +174,18 @@ class FilamentFlexibleBlocksConfig
     public static function getCallToActionButtonDefault(string $blockClass): ?string
     {
         return self::getDefault(self::getCallToActionButtonsConfig($blockClass));
+    }
+
+    /**
+     * @param  class-string<AbstractContentBlock>  $blockClass
+     * @param  string  $configField
+     * @return array
+     */
+    private static function getConfig(string $blockClass, string $configField): array
+    {
+        return config("filament-flexible-content-blocks.block_specific.$blockClass.$configField",
+            config("filament-flexible-content-blocks.$configField", [])
+        );
     }
 
     /**

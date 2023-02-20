@@ -4,6 +4,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\RichEditor;
+use Spatie\MediaLibrary\HasMedia;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBackgroundColour;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BackgroundColourField;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
@@ -17,7 +18,7 @@ class TextBlock extends AbstractFilamentFlexibleContentBlock
     /**
      * Create a new component instance.
      */
-    public function __construct(HasContentBlocks $record, ?array $blockData)
+    public function __construct(HasContentBlocks&HasMedia $record, ?array $blockData)
     {
         parent::__construct($record, $blockData);
 
