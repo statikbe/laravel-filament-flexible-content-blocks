@@ -7,6 +7,8 @@ use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
 
 class ImagePositionField extends Select
 {
+    const FIELD = 'image_position';
+
     /**
      * @param  class-string<AbstractContentBlock>  $blockClass
      */
@@ -21,7 +23,7 @@ class ImagePositionField extends Select
         $defaultPosition = config("filament-flexible-content-blocks.block_specific.$blockClass.image_position.default",
             config('filament-flexible-content-blocks.image_position.default', 'left'));
 
-        return static::make('image_position')
+        return static::make(self::FIELD)
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.image_position_lbl'))
             ->helperText(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.image_position_help'))
             ->options($positionOptions)

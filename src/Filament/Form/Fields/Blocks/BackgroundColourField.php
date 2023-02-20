@@ -8,12 +8,14 @@ use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 
 class BackgroundColourField extends Select
 {
+    const FIELD = 'background_colour';
+
     /**
      * @param  class-string<AbstractContentBlock>  $blockClass
      */
     public static function create(string $blockClass, bool $required = false): static
     {
-        return static::make('background_colour')
+        return static::make(self::FIELD)
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.background_colour_lbl'))
             ->options(FilamentFlexibleBlocksConfig::getBackgroundColoursSelectOptions($blockClass))
             ->default(FilamentFlexibleBlocksConfig::getBackgroundColourDefault($blockClass))

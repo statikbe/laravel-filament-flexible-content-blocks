@@ -7,9 +7,11 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthorField extends Select
 {
+    const FIELD = 'author_id';
+
     public static function create(): static
     {
-        return self::make('author_id')
+        return self::make(self::FIELD)
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.author_lbl'))
             ->relationship('author', 'name')
             ->default(Auth::user()->id)

@@ -8,6 +8,8 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasSEOAttributes;
 
 class SEOImageField extends ImageField
 {
+    const FIELD = 'seo_image';
+
     public static function create(bool $translatable = false): SpatieMediaLibraryFileUpload
     {
         return static::createImageField('seo_image', $translatable)

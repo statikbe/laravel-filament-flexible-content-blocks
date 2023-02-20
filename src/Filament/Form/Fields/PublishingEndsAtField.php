@@ -6,6 +6,8 @@ use Filament\Forms\Components\DateTimePicker;
 
 class PublishingEndsAtField extends DateTimePicker
 {
+    const FIELD = 'publishing_ends_at';
+
     public static function create(): static
     {
         return static::make('publishing_ends_at')

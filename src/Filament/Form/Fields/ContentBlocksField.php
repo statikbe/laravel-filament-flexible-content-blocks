@@ -10,9 +10,11 @@ use Livewire\Component as Livewire;
 
 class ContentBlocksField extends Builder
 {
+    const FIELD = 'content_blocks';
+
     public static function create(): static
     {
-        return self::make('content_blocks')
+        return self::make(self::FIELD)
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_lbl'))
             ->createItemButtonLabel(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_add_lbl'))
             ->createItemBetweenButtonLabel(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_add_lbl'))

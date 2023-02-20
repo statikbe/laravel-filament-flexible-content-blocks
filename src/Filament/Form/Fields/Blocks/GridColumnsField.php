@@ -8,12 +8,14 @@ use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 
 class GridColumnsField extends Select
 {
+    const FIELD = 'grid_columns';
+
     /**
      * @param  class-string<AbstractContentBlock>  $blockClass
      */
     public static function create(string $blockClass, bool $required = true): self
     {
-        return self::make('grid_columns')
+        return self::make(self::FIELD)
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.grid_columns_lbl'))
             ->options(FilamentFlexibleBlocksConfig::getGridColumnsSelectOptions($blockClass))
             ->required($required);
