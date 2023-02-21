@@ -18,7 +18,7 @@ class FilamentFlexibleBlocksConfig
     {
         $config = self::getTemplatesConfig($blockClass);
 
-        return collect($config ?? [])
+        return collect($config)
             ->mapWithKeys(fn ($item, $key) => [$key => trans($item)])
             ->toArray();
     }
@@ -45,7 +45,7 @@ class FilamentFlexibleBlocksConfig
 
     /**
      * @param  class-string<AbstractContentBlock>  $blockClass
-     * @return array{options: array<string, array{label: string, class: string}>, default: string}
+     * @return array{options?: array<string, array{label: string, class: string}>, default?: string}
      */
     public static function getImageWidthConfig(string $blockClass): array
     {
@@ -78,7 +78,7 @@ class FilamentFlexibleBlocksConfig
 
     /**
      * @param  class-string<AbstractContentBlock>  $blockClass
-     * @return array{options: array<string, array{label: string, class: string}>, default: string}
+     * @return array{options?: array<string, array{label: string, class: string}>, default?: string}
      */
     public static function getImagePositionConfig(string $blockClass): array
     {
@@ -111,7 +111,7 @@ class FilamentFlexibleBlocksConfig
 
     /**
      * @param  class-string<AbstractContentBlock>  $blockClass
-     * @return array{options: array<string, array{label: string, class: string}>, default: string}
+     * @return array{options?: array<string, array{label: string, class: string}>, default?: string}
      */
     public static function getBackgroundColoursConfig(string $blockClass): array
     {
@@ -144,7 +144,7 @@ class FilamentFlexibleBlocksConfig
 
     /**
      * @param  class-string<AbstractContentBlock>  $blockClass
-     * @return array{options: array<string, array{label: string, class: string}>, default: string}
+     * @return array{options?: array<string, array{label: string, class: string}>, default?: string}
      */
     public static function getCallToActionButtonsConfig(string $blockClass): array
     {
@@ -186,7 +186,7 @@ class FilamentFlexibleBlocksConfig
     }
 
     /**
-     * @param  array{options: array<string, array{label: string, class: string}>, default: string}  $config
+     * @param  array{options?: array<string, array{label: string, class: string}>, default?: string}  $config
      */
     private static function getCssClass(array $config, ?string $type): ?string
     {
@@ -201,7 +201,7 @@ class FilamentFlexibleBlocksConfig
     }
 
     /**
-     * @param  array{options: array<string, array{label: string, class: string}>, default: string}  $config
+     * @param  array{options?: array<string, array{label: string, class: string}>, default?: string}  $config
      */
     private static function getDefault(array $config): ?string
     {
@@ -209,7 +209,7 @@ class FilamentFlexibleBlocksConfig
     }
 
     /**
-     * @param  array{options: array<string, array{label: string, class: string}>, default: string}  $config
+     * @param  array{options?: array<string, array{label: string, class: string}>, default?: string}  $config
      * @return array<string, string>
      */
     private static function getSelectOptions(array $config): array

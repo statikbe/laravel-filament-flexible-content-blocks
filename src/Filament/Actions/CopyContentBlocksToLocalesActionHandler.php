@@ -6,7 +6,6 @@ use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
-use Spatie\Translatable\HasTranslations;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks;
 
 /**
@@ -22,12 +21,20 @@ class CopyContentBlocksToLocalesActionHandler
      */
     public function handle(Model $record, Component $livewire, ?array $contentBlocks): void
     {
-        /* @var Model|HasTranslations $record */
-        if ($record && $contentBlocks) {
+        if ($contentBlocks) {
             //check if the LocaleSwitch action is implemented:
             if (! method_exists($livewire, 'getActiveFormLocale')) {
                 Notification::make()
                     ->title(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.copy_content_blocks_to_other_locales.error_resource_not_translatable'))
+                    ->danger()
+                    ->send();
+
+                return;
+            }
+
+            if (! method_exists($record, 'setTranslation')) {
+                Notification::make()
+                    ->title(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.copy_content_blocks_to_other_locales.error_model_not_translatable'))
                     ->danger()
                     ->send();
 

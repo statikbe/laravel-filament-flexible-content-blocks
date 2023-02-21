@@ -38,6 +38,9 @@ return new class extends Migration
             //Slug:
             $table->json('slug')->default('{}');
 
+            //Unique code:
+            $table->string('code')->nullable()->unique();
+
             $table->timestamps();
         });
     }

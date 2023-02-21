@@ -3,6 +3,7 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Resource\Pages\Actions;
 
 use Filament\Pages\Actions\Action;
+use Filament\Resources\Pages\EditRecord;
 use Filament\Support\Actions\Concerns\CanCustomizeProcess;
 use Illuminate\Database\Eloquent\Model;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Actions\CopyContentBlocksToLocalesActionHandler;
@@ -32,8 +33,10 @@ class CopyContentBlocksToLocalesAction extends Action
         $this->icon('heroicon-o-translate');
 
         $this->action(function () {
-            /* @var Model|HasContentBlocks $record */
-            $record = $this->livewire->getRecord();
+            /** @var EditRecord $page * */
+            $page = $this->livewire;
+            /* @var Model&HasContentBlocks $record */
+            $record = $page->getRecord();
             $handler = new CopyContentBlocksToLocalesActionHandler();
             $handler->handle($record, $this->livewire, $record->content_blocks);
         });
