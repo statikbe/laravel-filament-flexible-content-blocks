@@ -41,4 +41,9 @@ class TranslatablePage extends Model implements HasMedia, HasMediaAttributes, Ha
         //todo implement controller and add route:
         return config('app.url');
     }
+
+    public function getPreviewUrl(): string
+    {
+        return $this->getViewUrl();
+    }
 }

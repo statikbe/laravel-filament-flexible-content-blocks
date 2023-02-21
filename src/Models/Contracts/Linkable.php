@@ -6,6 +6,16 @@ interface Linkable
 {
     /**
      * Returns the URL of the view route of this model. This is used to create links from the model instance.
+     *
+     * @return string
      */
     public function getViewUrl(): string;
+
+    /**
+     * Returns the URL of the view route of this model, that is used to preview the page. This url should show the page also if it is not yet published, or other restriction are set.
+     * Tip: only show the page for logged in roles, or maybe by using signed urls for unpublished pages.
+     *
+     * @return string
+     */
+    public function getPreviewUrl(): string;
 }

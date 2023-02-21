@@ -16,6 +16,7 @@
         'table_action.publish.unpublish_notification_error_title' => 'Error',
         'table_action.publish.publish_lbl' => 'Publiceer',
         'table_action.publish.unpublish_lbl' => 'Depubliceer',
+        'table_action.view_page_lbl' => 'Bekijk',
 
         'form_component.title_lbl' => 'Titel',
         'form_component.slug_lbl' => 'Slug',

@@ -37,8 +37,9 @@ class CallToActionRepeater extends Repeater
                 ->view('forms::components.grid'),
         ]);
         $this->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_lbl'));
-
-        $this->disableLabel();
+        $this->itemLabel(function (array $state): ?string {
+            return $state[CallToActionField::FIELD_BUTTON_LABEL] ?? null;
+        });
         $this->createItemButtonLabel(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.add_call_to_action'));
     }
 

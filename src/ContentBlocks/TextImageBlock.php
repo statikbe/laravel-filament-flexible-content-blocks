@@ -105,7 +105,7 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
             CallToActionRepeater::create('call_to_action', self::class)
                 ->callToActionTypes(self::getCallToActionTypes())
                 ->minItems(0)
-                ->maxItems(1),
+                ->maxItems(2),
         ];
     }
 

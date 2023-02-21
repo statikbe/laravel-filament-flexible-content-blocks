@@ -26,6 +26,18 @@ class CallToActionField extends Component
     use HasLoadingMessage;
     use HasName;
 
+    const FIELD_CTA_MODEL = 'cta_model';
+
+    const FIELD_ENTRY_ID = 'entry_id';
+
+    const FIELD_URL = 'url';
+
+    const FIELD_BUTTON_STYLE = 'button_style';
+
+    const FIELD_BUTTON_LABEL = 'button_label';
+
+    const FIELD_BUTTON_OPEN_NEW_WINDOW = 'button_open_new_window';
+
     protected string $view = 'forms::components.fieldset';
 
     public bool|Closure $isRequired = false;
@@ -85,7 +97,7 @@ class CallToActionField extends Component
         return [
             Grid::make(6)
                 ->schema([
-                    Select::make('cta_model')
+                    Select::make(self::FIELD_CTA_MODEL)
                         ->columnSpan(2)
                         ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_cta_model'))
                         ->options(array_map(
@@ -97,7 +109,7 @@ class CallToActionField extends Component
                         ->afterStateUpdated(function (Closure $set) {
                             $set('entry_id', null);
                         }),
-                    Select::make('entry_id')
+                    Select::make(self::FIELD_ENTRY_ID)
                         ->columnSpan(4)
                         ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_entry_id'))
                         ->options($selectedType?->getOptionsUsing)
@@ -114,7 +126,7 @@ class CallToActionField extends Component
                         ->allowHtml($this->isHtmlAllowed())
                         ->optionsLimit($this->getOptionsLimit())
                         ->preload($this->isPreloaded()),
-                    TextInput::make('url')
+                    TextInput::make(self::FIELD_URL)
                         ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_model_type_url'))
                         ->columnSpan(4)
                         ->placeholder('https://')
@@ -123,17 +135,17 @@ class CallToActionField extends Component
                 ]),
             Grid::make(6)
                 ->schema([
-                    Select::make('button_style')
-                    ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_button_style'))
-                    ->options($buttonStyleOptions)
-                    ->default($buttonStyleDefault)
-                    ->columnSpan(2),
-                    TextInput::make('button_label')
-                    ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_button_label'))
-                    ->columnSpan(3),
-                    Checkbox::make('button_open_new_window')
-                    ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_button_open_in_new_window'))
-                    ->columnSpan(1),
+                    Select::make(self::FIELD_BUTTON_STYLE)
+                        ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_button_style'))
+                        ->options($buttonStyleOptions)
+                        ->default($buttonStyleDefault)
+                        ->columnSpan(2),
+                    TextInput::make(self::FIELD_BUTTON_LABEL)
+                        ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_button_label'))
+                        ->columnSpan(3),
+                    Checkbox::make(self::FIELD_BUTTON_OPEN_NEW_WINDOW)
+                        ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_button_open_in_new_window'))
+                        ->columnSpan(1),
                 ]),
         ];
     }

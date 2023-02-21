@@ -16,6 +16,7 @@
         'table_action.publish.unpublish_notification_error_title' => 'Error',
         'table_action.publish.publish_lbl' => 'Publish',
         'table_action.publish.unpublish_lbl' => 'Unpublish',
+        'table_action.view_page_lbl' => 'View',
 
         'form_component.title_lbl' => 'Title',
         'form_component.slug_lbl' => 'Slug',
