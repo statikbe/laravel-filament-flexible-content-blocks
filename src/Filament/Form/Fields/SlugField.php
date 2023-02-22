@@ -1,6 +1,6 @@
 <?php
 
-    namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
+namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
 
     use Filament\Forms\Components\TextInput;
     use Filament\Resources\Pages\Page;

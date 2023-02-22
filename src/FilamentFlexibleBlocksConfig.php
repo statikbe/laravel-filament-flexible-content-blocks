@@ -36,17 +36,11 @@ class FilamentFlexibleBlocksConfig
         ]);
     }
 
-    /**
-     * @return string
-     */
     public static function getAuthorModel(): string
     {
         return config('filament-flexible-content-blocks.author_model', 'Illuminate\Foundation\Auth\User');
     }
 
-    /**
-     * @return string
-     */
     public static function getPublishingDateFormatting(): string
     {
         return config('filament-flexible-content-blocks.formatting.publishing_dates', 'd/m/Y G:i');
