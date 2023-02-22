@@ -5,6 +5,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 
 /**
  * @property string|null $seo_title
@@ -44,8 +45,9 @@ trait HasSEOAttributesTrait
     {
         $this->addMediaCollection($this->getSEOImageCollection())
             ->registerMediaConversions(function (Media $media) {
-                $this->addMediaConversion($this->getSEOImageConversionName())
+                $conversion = $this->addMediaConversion($this->getSEOImageConversionName())
                     ->fit(Manipulations::FIT_CROP, 1200, 630);
+                FilamentFlexibleBlocksConfig::mergeConfiguredModelImageConversion(self::class, $this->getSEOImageCollection(), $this->getSEOImageConversionName(), $conversion);
                 //for filament upload field
                 $this->addFilamentThumbnailMediaConversion();
             });

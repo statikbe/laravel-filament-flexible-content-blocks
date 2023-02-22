@@ -43,35 +43,42 @@ return [
         TemplateBlock::class,
     ],
 
-    //not implemented yet!
     'image_conversions' => [
-        'default' => [
-            'seo_image' => [
+        'models' => [
+            'default' => [
                 'seo_image' => [
-                    'fit' => Manipulations::FIT_CROP,
-                    'width' => 1200,
-                    'height' => 630,
-                    'responsive' => true,
+                    'seo_image' => [
+                        'fit' => Manipulations::FIT_CROP,
+                        'width' => 1200,
+                        'height' => 630,
+                        'responsive' => true,
+                    ],
+                ],
+                'overview_image' => [
+                    'overview_image' => [
+                        'fit' => Manipulations::FIT_CROP,
+                        'width' => 500,
+                        'height' => 500,
+                        'responsive' => true,
+                    ],
                 ],
             ],
-            'overview_image' => [
-                'overview_image' => [
-                    'fit' => Manipulations::FIT_CROP,
-                    'width' => 600,
-                    'height' => 600,
-                    'responsive' => true,
+            'specific' => [
+                Page::class => [
+                    'overview_image' => [
+                        'thumb' => [
+                            'fit' => Manipulations::FIT_CROP,
+                            'width' => 400,
+                            'height' => 400,
+                            'responsive' => true,
+                        ],
+                    ],
                 ],
             ],
         ],
-        Page::class => [
-            'overview_image' => [
-                'thumb' => [
-                    'fit' => Manipulations::FIT_CROP,
-                    'width' => 400,
-                    'height' => 400,
-                    'responsive' => true,
-                ],
-            ],
+        'flexible_blocks' => [
+            'default' => [],
+            'specific' => [],
         ],
     ],
 

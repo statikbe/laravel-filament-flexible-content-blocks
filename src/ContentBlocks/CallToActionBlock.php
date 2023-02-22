@@ -17,6 +17,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Backgroun
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockSpatieMediaLibraryFileUpload;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToActionRepeater;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CallToActionData;
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
 
@@ -107,10 +108,12 @@ class CallToActionBlock extends AbstractFilamentFlexibleContentBlock
     {
         $record->addMediaCollection(self::getName())
             ->registerMediaConversions(function (Media $media) use ($record) {
-                $record->addMediaConversion(static::CONVERSION_DEFAULT)
+                $conversion = $record->addMediaConversion(static::CONVERSION_DEFAULT)
                     ->withResponsiveImages()
                     ->fit(Manipulations::FIT_CROP, 1200, 630)
                     ->format(Manipulations::FORMAT_WEBP);
+                FilamentFlexibleBlocksConfig::mergeConfiguredFlexibleBlockImageConversion(self::class, self::getName(), self::CONVERSION_DEFAULT, $conversion);
+
                 //for filament upload field
                 $record->addFilamentThumbnailMediaConversion();
             });

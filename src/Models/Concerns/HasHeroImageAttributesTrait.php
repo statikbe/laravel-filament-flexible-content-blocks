@@ -6,6 +6,7 @@ use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasHeroImageAttributes;
 
 /**
@@ -26,10 +27,12 @@ trait HasHeroImageAttributesTrait
     {
         $this->addMediaCollection($this->getHeroImageCollection())
             ->registerMediaConversions(function (Media $media) {
-                $this->addMediaConversion($this->getHeroImageConversionName())
+                $conversion = $this->addMediaConversion($this->getHeroImageConversionName())
                     ->withResponsiveImages()
                     ->fit(Manipulations::FIT_CROP, 1200, 630)
                     ->format(Manipulations::FORMAT_WEBP);
+                FilamentFlexibleBlocksConfig::mergeConfiguredModelImageConversion(self::class, $this->getHeroImageCollection(), $this->getHeroImageConversionName(), $conversion);
+
                 //for filament upload field
                 $this->addFilamentThumbnailMediaConversion();
             });

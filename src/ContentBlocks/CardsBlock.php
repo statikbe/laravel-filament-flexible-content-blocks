@@ -20,6 +20,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToAct
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToActionRepeater;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CardData;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\GridColumnsField;
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
 
@@ -102,10 +103,12 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
     {
         $record->addMediaCollection(self::getName())
             ->registerMediaConversions(function (Media $media) use ($record) {
-                $record->addMediaConversion(static::CONVERSION_DEFAULT)
+                $conversion = $record->addMediaConversion(static::CONVERSION_DEFAULT)
                     ->withResponsiveImages()
                     ->fit(Manipulations::FIT_CROP, 800, 420)
                     ->format(Manipulations::FORMAT_WEBP);
+                FilamentFlexibleBlocksConfig::mergeConfiguredFlexibleBlockImageConversion(self::class, self::getName(), self::CONVERSION_DEFAULT, $conversion);
+
                 //for filament upload field
                 $record->addFilamentThumbnailMediaConversion();
             });

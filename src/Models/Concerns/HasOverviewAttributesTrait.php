@@ -6,6 +6,7 @@ use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 
 /**
  * @property string|null $overview_title
@@ -48,10 +49,12 @@ trait HasOverviewAttributesTrait
     {
         $this->addMediaCollection($this->getOverviewImageCollection())
             ->registerMediaConversions(function (Media $media) {
-                $this->addMediaConversion($this->getOverviewImageConversionName())
+                $conversion = $this->addMediaConversion($this->getOverviewImageConversionName())
                     ->withResponsiveImages()
                     ->fit(Manipulations::FIT_CROP, 600, 600)
                     ->format(Manipulations::FORMAT_WEBP);
+                FilamentFlexibleBlocksConfig::mergeConfiguredModelImageConversion(self::class, $this->getOverviewImageCollection(), $this->getOverviewImageConversionName(), $conversion);
+
                 //for filament upload field
                 $this->addFilamentThumbnailMediaConversion();
             });

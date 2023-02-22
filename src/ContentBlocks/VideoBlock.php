@@ -10,6 +10,7 @@ use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImage;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockSpatieMediaLibraryFileUpload;
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
 
@@ -72,10 +73,12 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
     {
         $record->addMediaCollection(self::getName())
             ->registerMediaConversions(function (Media $media) use ($record) {
-                $record->addMediaConversion(static::CONVERSION_DEFAULT)
+                $conversion = $record->addMediaConversion(static::CONVERSION_DEFAULT)
                     ->withResponsiveImages()
                     ->fit(Manipulations::FIT_CROP, 1200, 675)
                     ->format(Manipulations::FORMAT_WEBP);
+                FilamentFlexibleBlocksConfig::mergeConfiguredFlexibleBlockImageConversion(self::class, self::getName(), self::CONVERSION_DEFAULT, $conversion);
+
                 //for filament upload field
                 $record->addFilamentThumbnailMediaConversion();
             });

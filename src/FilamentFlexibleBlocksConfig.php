@@ -2,6 +2,9 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks;
 
+use Illuminate\Database\Eloquent\Model;
+use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\Conversions\Conversion;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\CallToActionBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\CardsBlock;
@@ -17,6 +20,98 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasOverviewAttribute
 
 class FilamentFlexibleBlocksConfig
 {
+    /**
+     * @param  class-string<Model>  $modelClass
+     * @param  string  $collectionName
+     * @param  string  $conversionName
+     * @param  Conversion  $conversion
+     * @return Conversion
+     *
+     * @throws \Spatie\Image\Exceptions\InvalidManipulation
+     */
+    public static function mergeConfiguredModelImageConversion(string $modelClass, string $collectionName, string $conversionName, Conversion &$conversion): Conversion
+    {
+        $configuredConversions = self::getModelImageConversionConfig($modelClass);
+
+        return self::mergeConfiguredImageConversions($configuredConversions, $collectionName, $conversionName, $conversion);
+    }
+
+    /**
+     * @param  class-string<AbstractContentBlock>  $blockClass
+     * @param  string  $collectionName
+     * @param  string  $conversionName
+     * @param  Conversion  $conversion
+     * @return Conversion
+     *
+     * @throws \Spatie\Image\Exceptions\InvalidManipulation
+     */
+    public static function mergeConfiguredFlexibleBlockImageConversion(string $blockClass, string $collectionName, string $conversionName, Conversion &$conversion): Conversion
+    {
+        $configuredConversions = self::getFlexibleBlockImageConversionConfig($blockClass);
+
+        return self::mergeConfiguredImageConversions($configuredConversions, $collectionName, $conversionName, $conversion);
+    }
+
+    /**
+     * @param  array<string, array>  $configuredConversions
+     * @param  string  $collectionName
+     * @param  string  $conversionName
+     * @param  Conversion  $conversion
+     * @return Conversion
+     *
+     * @throws \Spatie\Image\Exceptions\InvalidManipulation
+     */
+    private static function mergeConfiguredImageConversions(array $configuredConversions, string $collectionName, string $conversionName, Conversion &$conversion): Conversion
+    {
+        if (isset($configuredConversions[$collectionName][$conversionName])) {
+            $configuredConversion = $configuredConversions[$collectionName][$conversionName];
+            $alreadyDoneConversions = [];
+            //specific cases for specific method calls on the conversion object:
+            if (isset($configuredConversion['fit']) && isset($configuredConversion['width']) && isset($configuredConversion['height'])) {
+                $conversion->fit($configuredConversion['fit'], $configuredConversion['width'], $configuredConversion['height']);
+                $alreadyDoneConversions = ['fit', 'width', 'height'];
+            }
+            if (isset($configuredConversion['responsive']) && $configuredConversion['responsive']) {
+                $conversion->withResponsiveImages();
+                $alreadyDoneConversions[] = 'responsive';
+            }
+            if (isset($configuredConversion['queued']) && $configuredConversion['queued']) {
+                $conversion->queued();
+                $alreadyDoneConversions[] = 'queued';
+            }
+            //do the manipulations that are left:
+            foreach ($configuredConversion as $operation => $value) {
+                if (! in_array($operation, $alreadyDoneConversions)) {
+                    $conversion->{$operation}($value);
+                }
+            }
+        }
+
+        return $conversion;
+    }
+
+    /**
+     * @param  class-string<Model>  $modelClass
+     * @return array
+     */
+    public static function getModelImageConversionConfig(string $modelClass): array
+    {
+        return config('filament-flexible-content-blocks.image_conversions.models.specific.'.$modelClass,
+            config('filament-flexible-content-blocks.image_conversions.models.default', [])
+        );
+    }
+
+    /**
+     * @param  class-string<AbstractContentBlock>  $blockClass
+     * @return array
+     */
+    public static function getFlexibleBlockImageConversionConfig(string $blockClass): array
+    {
+        return config('filament-flexible-content-blocks.image_conversions.flexible_blocks.specific.'.$blockClass,
+            config('filament-flexible-content-blocks.image_conversions.flexible_blocks.default', [])
+        );
+    }
+
     /**
      * @return array<class-string<AbstractContentBlock>>
      */
