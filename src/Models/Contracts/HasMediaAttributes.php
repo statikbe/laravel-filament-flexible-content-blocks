@@ -24,9 +24,6 @@ interface HasMediaAttributes
     /**
      * This function is provided by the spatie/laravel-media-library trait, InteractsWithMedia, but is not defined in an interface.
      * To resolve phpstan errors and make the typing of this package stronger, we define it here.
-     *
-     * @param  string  $name
-     * @return MediaCollection
      */
     public function addMediaCollection(string $name): MediaCollection;
 }
