@@ -15,7 +15,8 @@ class CodeField extends TextInput
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.code_lbl'))
             ->helperText(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.code_help'))
             ->maxLength(255)
-            ->disabled(fn (Model $record) => ! empty($record->code))
+            //disable the field once the code is set, to avoid it breaks the implementation.
+            ->disabled(fn (?Model $record) => $record && ! empty($record->code))
             ->required($required);
     }
 
