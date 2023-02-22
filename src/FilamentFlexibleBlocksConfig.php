@@ -3,9 +3,77 @@
 namespace Statikbe\FilamentFlexibleContentBlocks;
 
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\CallToActionBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\CardsBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\HtmlBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\ImageBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\OverviewBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\QuoteBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TemplateBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextImageBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\VideoBlock;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasOverviewAttributes;
 
 class FilamentFlexibleBlocksConfig
 {
+    /**
+     * @return array<class-string<AbstractContentBlock>>
+     */
+    public static function getDefaultFlexibleBlocks(): array
+    {
+        return config('filament-flexible-content-blocks.default_flexible_blocks', [
+            TextBlock::class,
+            VideoBlock::class,
+            ImageBlock::class,
+            HtmlBlock::class,
+            TextImageBlock::class,
+            OverviewBlock::class,
+            QuoteBlock::class,
+            CallToActionBlock::class,
+            CardsBlock::class,
+            TemplateBlock::class,
+        ]);
+    }
+
+    /**
+     * @return string
+     */
+    public static function getAuthorModel(): string
+    {
+        return config('filament-flexible-content-blocks.author_model', 'Illuminate\Foundation\Auth\User');
+    }
+
+    /**
+     * @return string
+     */
+    public static function getPublishingDateFormatting(): string
+    {
+        return config('filament-flexible-content-blocks.formatting.publishing_dates', 'd/m/Y G:i');
+    }
+
+    /**
+     * @param  class-string<AbstractContentBlock>  $blockClass
+     * @return array<class-string<HasOverviewAttributes>>
+     */
+    public static function getOverviewModels(string $blockClass): array
+    {
+        return config('filament-flexible-content-blocks.block_specific.'.$blockClass.'.overview_models',
+            config('filament-flexible-content-blocks.overview_models', [])
+        );
+    }
+
+    /**
+     * @param  class-string<AbstractContentBlock>  $blockClass
+     * @return array<class-string>
+     */
+    public static function getCallToActionModels(string $blockClass): array
+    {
+        return config('filament-flexible-content-blocks.block_specific.'.$blockClass.'.call_to_action_models',
+            config('filament-flexible-content-blocks.call_to_action_models', [])
+        );
+    }
+
     /**
      * @param  class-string<AbstractContentBlock>  $blockClass
      */
@@ -90,7 +158,9 @@ class FilamentFlexibleBlocksConfig
      */
     public static function getImagePositionSelectOptions(string $blockClass): array
     {
-        return self::getSelectOptions(self::getImagePositionConfig($blockClass));
+        return collect(self::getImagePositionConfig($blockClass)['options'])
+            ->mapWithKeys(fn ($item, $key) => [$key => trans($item)])
+            ->toArray();
     }
 
     /**

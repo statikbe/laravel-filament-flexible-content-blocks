@@ -13,6 +13,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Backgroun
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\GridColumnsField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\OverviewItemField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Type\OverviewType;
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasOverviewAttributes;
 
@@ -44,7 +45,7 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
     protected static function makeFilamentSchema(): array|Closure
     {
         $overviewItemField = OverviewItemField::make('overview_item')
-            ->types(collect(static::getOverviewModels())->map(fn ($item) => new OverviewType($item))->toArray());
+            ->types(collect(FilamentFlexibleBlocksConfig::getOverviewModels(self::class))->map(fn ($item) => new OverviewType($item))->toArray());
 
         return [
             TextInput::make('title')
@@ -76,19 +77,12 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
             return 'overview';
         }
 
-    public static function getOverviewModels(): array
-    {
-        return config('filament-flexible-content-blocks.block_specific.'.self::class.'.overview_models',
-            config('filament-flexible-content-blocks.overview_models', [])
-        );
-    }
-
     /**
      * @return Collection<HasOverviewAttributes>
      */
     public function getOverviewItems(): Collection
     {
-        $models = self::getOverviewModels();
+        $models = FilamentFlexibleBlocksConfig::getOverviewModels(self::class);
         $modelIds = collect($this->items)->mapToGroups(function ($item, $key) {
             return [$item['overview_model'] => $item['overview_id']];
         });

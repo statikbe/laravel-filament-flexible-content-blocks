@@ -17,6 +17,7 @@ use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Str;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Type\CallToActionType;
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 
 class CallToActionField extends Component
 {
@@ -84,16 +85,6 @@ class CallToActionField extends Component
         })] ?? null;
         $selectedTypeIsUrl = $selectedType?->isUrlType() ?? false;
 
-        $buttonStyles = config("filament-flexible-content-blocks.block_specific.$this->blockClass.call_to_action_buttons.options",
-            config('filament-flexible-content-blocks.call_to_action_buttons.options', [])
-        );
-        $buttonStyleOptions = collect($buttonStyles)
-            ->mapWithKeys(fn ($item, $key) => [$key => trans($item['label'])]);
-
-        $buttonStyleDefault = config("filament-flexible-content-blocks.block_specific.$this->blockClass.call_to_action_buttons.default",
-            config('filament-flexible-content-blocks.call_to_action_buttons.default', null)
-        );
-
         return [
             Grid::make(6)
                 ->schema([
@@ -137,8 +128,8 @@ class CallToActionField extends Component
                 ->schema([
                     Select::make(self::FIELD_BUTTON_STYLE)
                         ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_button_style'))
-                        ->options($buttonStyleOptions)
-                        ->default($buttonStyleDefault)
+                        ->options(FilamentFlexibleBlocksConfig::getCallToActionButtonsSelectOptions(self::class))
+                        ->default(FilamentFlexibleBlocksConfig::getCallToActionButtonDefault(self::class))
                         ->columnSpan(2),
                     TextInput::make(self::FIELD_BUTTON_LABEL)
                         ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_button_label'))
@@ -210,11 +201,7 @@ class CallToActionField extends Component
      */
     public static function getButtonStyleClasses(string $blockClass): array
     {
-        $buttonStyles = config("filament-flexible-content-blocks.block_specific.$blockClass.call_to_action_buttons.options",
-            config('filament-flexible-content-blocks.call_to_action_buttons.options', [])
-        );
-
-        return collect($buttonStyles)
+        return collect(FilamentFlexibleBlocksConfig::getCallToActionButtonsConfig($blockClass)['options'])
             ->mapWithKeys(fn ($item, $key) => [$key => $item['class']])
             ->toArray();
     }

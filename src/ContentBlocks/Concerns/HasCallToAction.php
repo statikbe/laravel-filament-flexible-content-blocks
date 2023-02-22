@@ -5,19 +5,10 @@ namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToActionField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CallToActionData;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Type\CallToActionType;
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 
 trait HasCallToAction
 {
-    /**
-     * @return array<class-string>
-     */
-    public static function getCallToActionModels(): array
-    {
-        return config('filament-flexible-content-blocks.block_specific.'.self::class.'.call_to_action_models',
-            config('filament-flexible-content-blocks.call_to_action_models', [])
-        );
-    }
-
     /**
      * @return array<string, CallToActionType>
      */
@@ -27,7 +18,7 @@ trait HasCallToAction
         $urlType->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_model_type_url'))
             ->setAsUrlType();
 
-        $types = collect(static::getCallToActionModels())->map(fn ($item) => new CallToActionType($item))->toArray();
+        $types = collect(FilamentFlexibleBlocksConfig::getCallToActionModels(self::class))->map(fn ($item) => new CallToActionType($item))->toArray();
 
         return array_merge(['url' => $urlType], $types);
     }

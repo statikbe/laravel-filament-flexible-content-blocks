@@ -4,6 +4,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 
 /**
  * @property Model $author
@@ -18,6 +19,6 @@ trait HasAuthorAttributeTrait
 
     public function author(): BelongsTo
     {
-        return $this->belongsTo(config('filament-flexible-content-blocks.author_model', 'Illuminate\Foundation\Auth\User'), 'author_id');
+        return $this->belongsTo(FilamentFlexibleBlocksConfig::getAuthorModel(), 'author_id');
     }
 }

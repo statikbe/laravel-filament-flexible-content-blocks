@@ -4,6 +4,8 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
 
 use Filament\Forms\Components\Select;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 
 class AuthorField extends Select
 {
@@ -17,12 +19,15 @@ class AuthorField extends Select
             ->default(Auth::user()->id)
             ->searchable()
             //this is a default search query, add your own implementation by implementing getSearchResultsUsing on creation of the field.
-            ->getSearchResultsUsing(fn (string $searchQuery) => config('filament-flexible-content-blocks.author_model', 'Illuminate\Foundation\Auth\User')::query()
-                    //TODO make search fields configurable
-                    ->where('name', 'like', "%{$searchQuery}%")
-                    ->orWhere('email', 'like', "%{$searchQuery}%")
+            ->getSearchResultsUsing(function (string $searchQuery) {
+                $searchQuery = trim(Str::lower($searchQuery));
+
+                return FilamentFlexibleBlocksConfig::getAuthorModel()::query()
+                    ->whereRaw('LOWER(`name`) LIKE ? ', "%{$searchQuery}%")
+                    ->orWhereRaw('LOWER(`email`) LIKE ? ', "%{$searchQuery}%")
                     ->orderBy('name', 'asc')
                     ->limit(50)
-                    ->pluck('name', 'id'));
+                    ->pluck('name', 'id');
+            });
     }
 }

@@ -5,6 +5,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasPageAttributes;
 
 /**
@@ -96,7 +97,7 @@ trait HasPageAttributesTrait
     public function publishingBeginsAtFormatted(): Attribute
     {
         return Attribute::make(
-            get: fn ($value, $attributes) => optional($this->publishing_begins_at)->format(config('filament-flexible-content-blocks.formatting.publishing_dates')),
+            get: fn ($value, $attributes) => optional($this->publishing_begins_at)->format(FilamentFlexibleBlocksConfig::getPublishingDateFormatting()),
         );
     }
 
@@ -106,7 +107,7 @@ trait HasPageAttributesTrait
     public function publishingEndsAtFormatted(): Attribute
     {
         return Attribute::make(
-            get: fn ($value, $attributes) => optional($this->publishing_ends_at)->format(config('filament-flexible-content-blocks.formatting.publishing_dates')),
+            get: fn ($value, $attributes) => optional($this->publishing_ends_at)->format(FilamentFlexibleBlocksConfig::getPublishingDateFormatting()),
         );
     }
 }
