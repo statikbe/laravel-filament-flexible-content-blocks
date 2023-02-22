@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Actions;
 
+use Filament\Resources\Pages\Page;
 use Filament\Tables\Actions\Action;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\Linkable;
 
@@ -24,7 +25,14 @@ class ViewAction extends Action
 
         $this->disableForm();
 
-        $this->url(fn (Linkable $record) => $record->getPreviewUrl())
+        $this->url(function (Linkable $record, Page $livewire): string {
+            $locale = app()->getLocale();
+            if (method_exists($livewire, 'getActiveTableLocale')) {
+                $locale = $livewire->getActiveTableLocale();
+            }
+
+            return $record->getPreviewUrl($locale);
+        })
             ->openUrlInNewTab();
     }
 }

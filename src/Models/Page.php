@@ -34,14 +34,14 @@ class Page extends Model implements HasMedia, HasMediaAttributes, HasPageAttribu
     use HasDefaultContentBlocksTrait;
     use HasSlugAttributeTrait;
 
-    public function getViewUrl(): string
+    public function getViewUrl(?string $locale = null): string
     {
         //todo implement controller and add route:
         return config('app.url');
     }
 
-    public function getPreviewUrl(): string
+    public function getPreviewUrl(?string $locale = null): string
     {
-        return $this->getViewUrl();
+        return $this->getViewUrl($locale);
     }
 }

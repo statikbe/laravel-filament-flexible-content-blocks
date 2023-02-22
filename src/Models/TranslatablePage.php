@@ -36,14 +36,14 @@ class TranslatablePage extends Model implements HasMedia, HasMediaAttributes, Ha
     use HasDefaultContentBlocksTrait;
     use HasTranslatedOverviewAttributesTrait;
 
-    public function getViewUrl(): string
+    public function getViewUrl(?string $locale = null): string
     {
         //todo implement controller and add route:
         return config('app.url');
     }
 
-    public function getPreviewUrl(): string
+    public function getPreviewUrl(?string $locale = null): string
     {
-        return $this->getViewUrl();
+        return $this->getViewUrl($locale);
     }
 }
