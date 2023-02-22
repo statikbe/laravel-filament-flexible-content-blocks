@@ -17,6 +17,6 @@ class SlugField extends TextInput
             ->helperText(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.slug_desc'))
             ->prefix(config('app.url').'/.../')
             //make the slug required on edit. on create, the slug is not required so if kept blank a slug is generated.
-            ->required(fn(?Model $record): bool => $record && $record->id > 0);
+            ->required(fn (?Model $record): bool => $record && $record->id > 0);
     }
 }
