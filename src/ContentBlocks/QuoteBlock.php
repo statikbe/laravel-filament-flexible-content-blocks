@@ -8,12 +8,15 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Spatie\MediaLibrary\HasMedia;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBackgroundColour;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBlockStyle;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BackgroundColourField;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockStyleField;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 
 class QuoteBlock extends AbstractFilamentFlexibleContentBlock
 {
     use HasBackgroundColour;
+    use HasBlockStyle;
 
     public ?string $quote;
 
@@ -26,6 +29,7 @@ class QuoteBlock extends AbstractFilamentFlexibleContentBlock
         $this->quote = $blockData['quote'] ?? null;
         $this->author = $blockData['author'] ?? null;
         $this->backgroundColourType = $blockData['background_colour'] ?? null;
+        $this->setBlockStyle($blockData);
     }
 
     public static function getNameSuffix(): string
@@ -42,16 +46,17 @@ class QuoteBlock extends AbstractFilamentFlexibleContentBlock
     {
         return [
             RichEditor::make('quote')
-                ->label(self::getFieldLabel('quote'))
+                ->label(static::getFieldLabel('quote'))
                 ->disableToolbarButtons([
                     'attachFiles',
                 ])
                 ->required(),
             TextInput::make('author')
-                ->label(self::getFieldLabel('author'))
+                ->label(static::getFieldLabel('author'))
                 ->maxLength(255),
             Grid::make(2)->schema([
-                BackgroundColourField::create(self::class),
+                BackgroundColourField::create(static::class),
+                BlockStyleField::create(static::class),
             ]),
         ];
     }

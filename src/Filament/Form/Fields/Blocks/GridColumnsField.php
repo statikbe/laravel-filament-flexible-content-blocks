@@ -15,7 +15,7 @@ class GridColumnsField extends Select
      */
     public static function create(string $blockClass, bool $required = true): self
     {
-        return self::make(self::FIELD)
+        return static::make(static::FIELD)
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.grid_columns_lbl'))
             ->options(FilamentFlexibleBlocksConfig::getGridColumnsSelectOptions($blockClass))
             ->required($required);

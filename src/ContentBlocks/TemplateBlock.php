@@ -18,7 +18,7 @@ class TemplateBlock extends AbstractFilamentFlexibleContentBlock
     {
         parent::__construct($record, $blockData);
 
-        $this->template = $blockData[self::FIELD_TEMPLATE] ?? null;
+        $this->template = $blockData[static::FIELD_TEMPLATE] ?? null;
     }
 
     public static function getIcon(): string
@@ -29,9 +29,9 @@ class TemplateBlock extends AbstractFilamentFlexibleContentBlock
     protected static function makeFilamentSchema(): array|Closure
     {
         return [
-            Select::make(self::FIELD_TEMPLATE)
-                ->label(self::getFieldLabel(self::FIELD_TEMPLATE))
-                ->options(FilamentFlexibleBlocksConfig::getTemplatesSelectOptions(self::class)),
+            Select::make(static::FIELD_TEMPLATE)
+                ->label(static::getFieldLabel(static::FIELD_TEMPLATE))
+                ->options(FilamentFlexibleBlocksConfig::getTemplatesSelectOptions(static::class)),
         ];
     }
 
@@ -43,6 +43,6 @@ class TemplateBlock extends AbstractFilamentFlexibleContentBlock
     public static function visible(): bool|Closure
     {
         //only show block when templates are set in the config:
-        return ! empty(FilamentFlexibleBlocksConfig::getTemplatesConfig(self::class));
+        return ! empty(FilamentFlexibleBlocksConfig::getTemplatesConfig(static::class));
     }
 }

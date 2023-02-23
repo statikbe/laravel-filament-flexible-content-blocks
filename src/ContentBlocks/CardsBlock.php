@@ -12,10 +12,12 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBackgroundColour;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBlockStyle;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasCallToAction;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImage;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BackgroundColourField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockSpatieMediaLibraryFileUpload;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockStyleField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToActionField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToActionRepeater;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CardData;
@@ -29,6 +31,7 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
     use HasImage;
     use HasCallToAction;
     use HasBackgroundColour;
+    use HasBlockStyle;
 
     const CONVERSION_DEFAULT = 'default';
 
@@ -46,6 +49,7 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
         $this->cards = $this->createCards($blockData['cards']);
         $this->backgroundColourType = $blockData['background_colour'] ?? null;
         $this->gridColumns = $blockData['grid_columns'] ?? null;
+        $this->setBlockStyle($blockData);
     }
 
     public static function getIcon(): string
@@ -57,29 +61,30 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
     {
         return [
             TextInput::make('title')
-                ->label(self::getFieldLabel('title'))
+                ->label(static::getFieldLabel('title'))
                 ->maxLength(255),
-            Grid::make(2)->schema([
-                GridColumnsField::create(self::class, true),
-                BackgroundColourField::create(self::class),
+            Grid::make(static::hasBlockStyles() ? 3 : 2)->schema([
+                GridColumnsField::create(static::class, true),
+                BackgroundColourField::create(static::class),
+                BlockStyleField::create(static::class),
             ]),
             Repeater::make('cards')
-                ->label(self::getFieldLabel('cards'))
+                ->label(static::getFieldLabel('cards'))
                 ->schema([
                     TextInput::make('title')
-                        ->label(self::getFieldLabel('card_title'))
+                        ->label(static::getFieldLabel('card_title'))
                         ->maxLength(255),
                     RichEditor::make('text')
-                        ->label(self::getFieldLabel('card_text'))
+                        ->label(static::getFieldLabel('card_text'))
                         ->disableToolbarButtons([
                             'attachFiles',
                         ]),
                     BlockSpatieMediaLibraryFileUpload::make('image')
                         ->collection(static::getName())
-                        ->label(self::getFieldLabel('card_image'))
+                        ->label(static::getFieldLabel('card_image'))
                         ->maxFiles(1),
-                    CallToActionRepeater::create('card_call_to_action', self::class)
-                        ->callToActionTypes(self::getCallToActionTypes())
+                    CallToActionRepeater::create('card_call_to_action', static::class)
+                        ->callToActionTypes(static::getCallToActionTypes())
                         ->minItems(0)
                         ->maxItems(2),
                 ])
@@ -101,13 +106,13 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
      */
     public static function addMediaCollectionAndConversion(HasMedia&HasMediaAttributes $record): void
     {
-        $record->addMediaCollection(self::getName())
+        $record->addMediaCollection(static::getName())
             ->registerMediaConversions(function (Media $media) use ($record) {
                 $conversion = $record->addMediaConversion(static::CONVERSION_DEFAULT)
                     ->withResponsiveImages()
                     ->fit(Manipulations::FIT_CROP, 800, 420)
                     ->format(Manipulations::FORMAT_WEBP);
-                FilamentFlexibleBlocksConfig::mergeConfiguredFlexibleBlockImageConversion(self::class, self::getName(), self::CONVERSION_DEFAULT, $conversion);
+                FilamentFlexibleBlocksConfig::mergeConfiguredFlexibleBlockImageConversion(static::class, static::getName(), static::CONVERSION_DEFAULT, $conversion);
 
                 //for filament upload field
                 $record->addFilamentThumbnailMediaConversion();
@@ -120,7 +125,7 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
             return null;
         }
 
-        return $this->getHtmlableMedia($imageId, self::CONVERSION_DEFAULT, $imageTitle, $attributes);
+        return $this->getHtmlableMedia($imageId, static::CONVERSION_DEFAULT, $imageTitle, $attributes);
     }
 
     public function getCardImageUrl(string $imageId): ?string
@@ -139,7 +144,7 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
                 $card,
                 $this->getCardImageUrl($card['image']),
                 $this->getCardImageMedia($card['image'], $card['title']),
-                CallToActionField::getButtonStyleClasses(self::class));
+                CallToActionField::getButtonStyleClasses(static::class));
         }
 
         return $cardData;

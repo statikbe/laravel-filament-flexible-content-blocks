@@ -10,6 +10,6 @@ trait HasBackgroundColour
 
     public function getBackgroundColourClass(): ?string
     {
-        return FilamentFlexibleBlocksConfig::getBackgroundColourClass(self::class, $this->backgroundColourType);
+        return FilamentFlexibleBlocksConfig::getBackgroundColourClass(static::class, $this->backgroundColourType);
     }
 }

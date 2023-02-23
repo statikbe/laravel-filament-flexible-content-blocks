@@ -43,7 +43,7 @@ class CallToActionType extends AbstractType
     public function getAlias(): string
     {
         if ($this->isUrlType) {
-            return self::TYPE_URL;
+            return static::TYPE_URL;
         }
 
         return app($this->getModel())->getMorphClass();

@@ -60,7 +60,7 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
                     ->required(),
                 BlockSpatieMediaLibraryFileUpload::make('overlay_image')
                     ->collection(static::getName())
-                    ->label(self::getFieldLabel('overlay_image'))
+                    ->label(static::getFieldLabel('overlay_image'))
                     ->maxFiles(1),
             ]),
         ];
@@ -71,13 +71,13 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
      */
     public static function addMediaCollectionAndConversion(HasMedia&HasMediaAttributes $record): void
     {
-        $record->addMediaCollection(self::getName())
+        $record->addMediaCollection(static::getName())
             ->registerMediaConversions(function (Media $media) use ($record) {
                 $conversion = $record->addMediaConversion(static::CONVERSION_DEFAULT)
                     ->withResponsiveImages()
                     ->fit(Manipulations::FIT_CROP, 1200, 675)
                     ->format(Manipulations::FORMAT_WEBP);
-                FilamentFlexibleBlocksConfig::mergeConfiguredFlexibleBlockImageConversion(self::class, self::getName(), self::CONVERSION_DEFAULT, $conversion);
+                FilamentFlexibleBlocksConfig::mergeConfiguredFlexibleBlockImageConversion(static::class, static::getName(), static::CONVERSION_DEFAULT, $conversion);
 
                 //for filament upload field
                 $record->addFilamentThumbnailMediaConversion();
@@ -86,7 +86,7 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
 
     public function getOverlayImageMedia(array $attributes = []): ?HtmlableMedia
     {
-        return $this->getHtmlableMedia($this->overlayImageId, self::CONVERSION_DEFAULT, null, $attributes);
+        return $this->getHtmlableMedia($this->overlayImageId, static::CONVERSION_DEFAULT, null, $attributes);
     }
 
     public function getOverlayImageUrl(): ?string

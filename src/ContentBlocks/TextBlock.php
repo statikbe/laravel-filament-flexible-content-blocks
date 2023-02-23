@@ -7,12 +7,15 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Spatie\MediaLibrary\HasMedia;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBackgroundColour;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBlockStyle;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BackgroundColourField;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockStyleField;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 
 class TextBlock extends AbstractFilamentFlexibleContentBlock
 {
     use HasBackgroundColour;
+    use HasBlockStyle;
 
     public ?string $content;
 
@@ -28,6 +31,7 @@ class TextBlock extends AbstractFilamentFlexibleContentBlock
         $this->content = $blockData['content'] ?? null;
         $this->backgroundColourType = $blockData['background_colour'] ?? null;
         $this->title = $blockData['title'] ?? null;
+        $this->setBlockStyle($blockData);
     }
 
     public static function getNameSuffix(): string
@@ -47,15 +51,16 @@ class TextBlock extends AbstractFilamentFlexibleContentBlock
     {
         return [
             TextInput::make('title')
-                ->label(self::getFieldLabel('title')),
+                ->label(static::getFieldLabel('title')),
             RichEditor::make('content')
-                ->label(self::getFieldLabel('label'))
+                ->label(static::getFieldLabel('label'))
                 ->disableToolbarButtons([
                     'attachFiles',
                 ])
                 ->required(),
             Grid::make(2)->schema([
-                BackgroundColourField::create(self::class),
+                BackgroundColourField::create(static::class),
+                BlockStyleField::create(static::class),
             ]),
         ];
     }

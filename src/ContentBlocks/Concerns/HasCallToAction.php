@@ -18,7 +18,7 @@ trait HasCallToAction
         $urlType->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_model_type_url'))
             ->setAsUrlType();
 
-        $types = collect(FilamentFlexibleBlocksConfig::getCallToActionModels(self::class))->map(fn ($item) => new CallToActionType($item))->toArray();
+        $types = collect(FilamentFlexibleBlocksConfig::getCallToActionModels(static::class))->map(fn ($item) => new CallToActionType($item))->toArray();
 
         return array_merge(['url' => $urlType], $types);
     }
@@ -29,7 +29,7 @@ trait HasCallToAction
     public function createSingleCallToAction(array $blockData): ?CallToActionData
     {
         if (! empty($blockData['call_to_action'])) {
-            return CallToActionData::create($blockData['call_to_action'][0], CallToActionField::getButtonStyleClasses(self::class));
+            return CallToActionData::create($blockData['call_to_action'][0], CallToActionField::getButtonStyleClasses(static::class));
         } else {
             return null;
         }
@@ -44,7 +44,7 @@ trait HasCallToAction
         if (! empty($blockData['call_to_action'])) {
             $data = [];
             foreach ($blockData['call_to_action'] as $callToAction) {
-                $data[] = CallToActionData::create($callToAction, CallToActionField::getButtonStyleClasses(self::class));
+                $data[] = CallToActionData::create($callToAction, CallToActionField::getButtonStyleClasses(static::class));
             }
 
             return $data;

@@ -42,6 +42,8 @@
         'form_component.content_blocks_add_lbl' => 'Add block',
         'form_component.image_position_lbl' => 'Image position',
         'form_component.image_position_help' => 'Select the position of the image in relation to the text block.',
+        'form_component.block_style_lbl' => 'Block style',
+        'form_component.block_style_help' => 'This will render the block in a different way.',
         'form_component.image_width_lbl' => 'Image width',
         'form_component.background_colour_lbl' => 'Background colour',
         'form_component.copy_content_blocks_to_other_locales_lbl' => 'Copy content blocks to other languages',
@@ -127,6 +129,8 @@
         'form_component.content_blocks.background_colour.primary' => 'Primary',
         'form_component.content_blocks.background_colour.secondary' => 'Secondary',
         'form_component.content_blocks.background_colour.grey' => 'Grey',
+
+        'form_component.content_blocks.block_styles.default' => 'Default',
 
         'form_component.grid_columns_lbl' => 'Number of columns',
 

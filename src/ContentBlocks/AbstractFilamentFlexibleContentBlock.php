@@ -41,6 +41,14 @@ abstract class AbstractFilamentFlexibleContentBlock extends AbstractContentBlock
 
     public function render()
     {
-        return view('filament-flexible-content-blocks::content-blocks.'.static::getNameSuffix());
+        $templateSuffix = static::getNameSuffix();
+        if (method_exists($this, 'getBlockStyleTemplateSuffix')) {
+            $blockStyle = $this->getBlockStyleTemplateSuffix();
+            if (! empty($blockStyle)) {
+                $templateSuffix .= $blockStyle;
+            }
+        }
+
+        return view('filament-flexible-content-blocks::content-blocks.'.$templateSuffix);
     }
 }

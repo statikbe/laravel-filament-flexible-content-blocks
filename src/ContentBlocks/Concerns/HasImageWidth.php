@@ -10,6 +10,6 @@ trait HasImageWidth
 
     public function getImageWidthClass(): ?string
     {
-        return FilamentFlexibleBlocksConfig::getImageWidthClass(self::class, $this->imageWidth);
+        return FilamentFlexibleBlocksConfig::getImageWidthClass(static::class, $this->imageWidth);
     }
 }

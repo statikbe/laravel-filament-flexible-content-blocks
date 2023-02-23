@@ -31,7 +31,7 @@ class CallToActionRepeater extends Repeater
         parent::setUp();
 
         $this->schema([
-            CallToActionField::make('call_to_action', self::class)
+            CallToActionField::make('call_to_action', $this->blockClass)
                 ->types(fn () => $this->getCallToActionTypes())
                 ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_lbl'))
                 ->view('forms::components.grid'),

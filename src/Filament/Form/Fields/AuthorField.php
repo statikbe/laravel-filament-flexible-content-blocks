@@ -13,7 +13,7 @@ class AuthorField extends Select
 
     public static function create(): static
     {
-        return self::make(self::FIELD)
+        return static::make(static::FIELD)
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.author_lbl'))
             ->relationship('author', 'name')
             ->default(Auth::user()->id)

@@ -44,6 +44,8 @@
         'form_component.image_position_help' => 'Selecteer de positie van de afbeelding in relatie met de tekst.',
         'form_component.image_width_lbl' => 'Breedte van de afbeelding',
         'form_component.background_colour_lbl' => 'Achtergrondkleur',
+        'form_component.block_style_lbl' => 'Blokstijl',
+        'form_component.block_style_help' => 'Dit zal het blok tonen in een andere stijl.',
         'form_component.copy_content_blocks_to_other_locales_lbl' => 'Kopieer inhoudsblokken naar andere talen',
         'form_component.copy_content_blocks_to_other_locales.error_resource_not_translatable' => 'De Filament resource is niet vertaalbaar, of deze pagina heeft geen LocaleSwitch actie, zie Filament documentatie.',
         'form_component.copy_content_blocks_to_other_locales.error_model_not_translatable' => 'Het model is niet vertaalbaar.',
@@ -131,6 +133,8 @@
         'form_component.content_blocks.background_colour.primary' => 'Primair',
         'form_component.content_blocks.background_colour.secondary' => 'Secundair',
         'form_component.content_blocks.background_colour.grey' => 'Grijs',
+
+        'form_component.content_blocks.block_styles.default' => 'Standaard',
 
         'form_component.grid_columns_lbl' => 'Aantal kolommen',
 

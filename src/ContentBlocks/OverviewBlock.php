@@ -9,7 +9,9 @@ use Filament\Forms\Components\TextInput;
 use Illuminate\Support\Collection;
 use Spatie\MediaLibrary\HasMedia;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBackgroundColour;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBlockStyle;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BackgroundColourField;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockStyleField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\GridColumnsField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\OverviewItemField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Type\OverviewType;
@@ -20,6 +22,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasOverviewAttribute
 class OverviewBlock extends AbstractFilamentFlexibleContentBlock
 {
     use HasBackgroundColour;
+    use HasBlockStyle;
 
     public ?string $title;
 
@@ -35,6 +38,7 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
         $this->items = $blockData['items'] ?? null;
         $this->backgroundColourType = $blockData['background_colour'] ?? null;
         $this->gridColumns = $blockData['grid_columns'] ?? null;
+        $this->setBlockStyle($blockData);
     }
 
         public static function getIcon(): string
@@ -45,18 +49,19 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
     protected static function makeFilamentSchema(): array|Closure
     {
         $overviewItemField = OverviewItemField::make('overview_item')
-            ->types(collect(FilamentFlexibleBlocksConfig::getOverviewModels(self::class))->map(fn ($item) => new OverviewType($item))->toArray());
+            ->types(collect(FilamentFlexibleBlocksConfig::getOverviewModels(static::class))->map(fn ($item) => new OverviewType($item))->toArray());
 
         return [
             TextInput::make('title')
-                ->label(self::getFieldLabel('title'))
+                ->label(static::getFieldLabel('title'))
                 ->maxLength(255),
-            Grid::make(2)->schema([
-                BackgroundColourField::create(self::class),
-                GridColumnsField::create(self::class, true),
+            Grid::make(static::hasBlockStyles() ? 3 : 2)->schema([
+                BackgroundColourField::create(static::class),
+                GridColumnsField::create(static::class, true),
+                BlockStyleField::create(static::class),
             ]),
             Repeater::make('items')
-                ->label(self::getFieldLabel('items'))
+                ->label(static::getFieldLabel('items'))
                 ->schema([
                     $overviewItemField,
                 ])
@@ -82,7 +87,7 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
      */
     public function getOverviewItems(): Collection
     {
-        $models = FilamentFlexibleBlocksConfig::getOverviewModels(self::class);
+        $models = FilamentFlexibleBlocksConfig::getOverviewModels(static::class);
         $modelIds = collect($this->items)->mapToGroups(function ($item, $key) {
             return [$item['overview_model'] => $item['overview_id']];
         });

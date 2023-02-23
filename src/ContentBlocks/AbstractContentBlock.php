@@ -6,6 +6,7 @@ use Closure;
 use Filament\Forms\Components\Builder\Block;
 use Illuminate\View\Component;
 use Spatie\MediaLibrary\HasMedia;
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
 
@@ -91,5 +92,15 @@ abstract class AbstractContentBlock extends Component
     public static function visible(): bool|Closure
     {
         return true;
+    }
+
+    /**
+     * Sets the visibility of block styles on the block form. Call this to hide or show the block styles field in the block form.
+     *
+     * @return bool|Closure $condition
+     */
+    public static function hasBlockStyles(): bool|Closure
+    {
+        return FilamentFlexibleBlocksConfig::isBlockStyleEnabled(static::class);
     }
 }

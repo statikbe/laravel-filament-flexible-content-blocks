@@ -53,7 +53,7 @@ trait HasOverviewAttributesTrait
                     ->withResponsiveImages()
                     ->fit(Manipulations::FIT_CROP, 600, 600)
                     ->format(Manipulations::FORMAT_WEBP);
-                FilamentFlexibleBlocksConfig::mergeConfiguredModelImageConversion(self::class, $this->getOverviewImageCollection(), $this->getOverviewImageConversionName(), $conversion);
+                FilamentFlexibleBlocksConfig::mergeConfiguredModelImageConversion(static::class, $this->getOverviewImageCollection(), $this->getOverviewImageConversionName(), $conversion);
 
                 //for filament upload field
                 $this->addFilamentThumbnailMediaConversion();

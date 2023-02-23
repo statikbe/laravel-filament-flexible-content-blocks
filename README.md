@@ -8,7 +8,7 @@
 The Laravel Filament Flexible Content Blocks package helps you with easily creating content in Filament for any 
 model, with predefined blocks, and foreach block an extendable Blade view component. 
 
-You can use this package to create a basic CMS, by setting up your own model and implementing the predefined traits to 
+You can use this opinionated package to create a basic CMS, by setting up your own model and implementing the predefined traits to 
 select the functionality you need, and quickly setup a Filament resource by implementing the ready-made fields. Or you can 
 add flexible content to a model for your specific business case, for instance to allow the flexible creation of a 
 product description.
@@ -45,7 +45,6 @@ php artisan vendor:publish --tag="filament-flexible-content-blocks-migrations"
 php artisan migrate
 ```
 
-
 ## Usage
 
 ```php
@@ -71,6 +70,7 @@ Below is a list of ideas and missing features. PR's are welcome!
 - Allow custom, undefined image conversions in configuration
 - Store links to models in rich editor
 - Redirects
+- Reusable blocks. Name: global block?
 
 ## Changelog
 

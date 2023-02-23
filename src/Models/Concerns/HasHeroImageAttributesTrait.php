@@ -31,7 +31,7 @@ trait HasHeroImageAttributesTrait
                     ->withResponsiveImages()
                     ->fit(Manipulations::FIT_CROP, 1200, 630)
                     ->format(Manipulations::FORMAT_WEBP);
-                FilamentFlexibleBlocksConfig::mergeConfiguredModelImageConversion(self::class, $this->getHeroImageCollection(), $this->getHeroImageConversionName(), $conversion);
+                FilamentFlexibleBlocksConfig::mergeConfiguredModelImageConversion(static::class, $this->getHeroImageCollection(), $this->getHeroImageConversionName(), $conversion);
 
                 //for filament upload field
                 $this->addFilamentThumbnailMediaConversion();

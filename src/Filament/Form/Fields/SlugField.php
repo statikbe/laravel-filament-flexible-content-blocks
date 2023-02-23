@@ -16,19 +16,19 @@ class SlugField extends TextInput
 
     public static function create(bool $disabled = true): static
     {
-        return self::make(self::FIELD)
+        return static::make(static::FIELD)
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.slug_lbl'))
             ->disabled($disabled)
             ->helperText(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.slug_desc'))
             ->prefix(function (Page $livewire) {
-                $url = self::getUrlWithReplacementSlug($livewire);
+                $url = static::getUrlWithReplacementSlug($livewire);
 
-                return Str::before($url, self::URL_REPLACEMENT_SLUG);
+                return Str::before($url, static::URL_REPLACEMENT_SLUG);
             })
             ->suffix(function (Page $livewire) {
-                $url = self::getUrlWithReplacementSlug($livewire);
+                $url = static::getUrlWithReplacementSlug($livewire);
 
-                return Str::after($url, self::URL_REPLACEMENT_SLUG);
+                return Str::after($url, static::URL_REPLACEMENT_SLUG);
             })
             //make the slug required on edit. on create, the slug is not required so if kept blank a slug is generated.
             ->required(fn (?Model $record): bool => $record && $record->id > 0);
@@ -39,7 +39,7 @@ class SlugField extends TextInput
         $linkModel = $livewire->getResource()::getModel();
         /* @var Linkable $link */
         $link = new $linkModel();
-        $link->slug = self::URL_REPLACEMENT_SLUG;
+        $link->slug = static::URL_REPLACEMENT_SLUG;
 
         return $link->getViewUrl();
     }

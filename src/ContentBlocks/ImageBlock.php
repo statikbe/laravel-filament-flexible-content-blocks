@@ -9,10 +9,12 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBackgroundColour;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBlockStyle;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImage;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImageWidth;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BackgroundColourField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockSpatieMediaLibraryFileUpload;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockStyleField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\ImagePositionField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\ImageWidthField;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
@@ -24,6 +26,7 @@ class ImageBlock extends AbstractFilamentFlexibleContentBlock
     use HasImage;
     use HasImageWidth;
     use HasBackgroundColour;
+    use HasBlockStyle;
 
     const CONVERSION_DEFAULT = 'default';
 
@@ -48,6 +51,7 @@ class ImageBlock extends AbstractFilamentFlexibleContentBlock
         $this->imagePosition = $blockData['image_position'] ?? null;
         $this->imageWidth = $blockData['image_width'] ?? null;
         $this->backgroundColourType = $blockData['background_colour'] ?? null;
+        $this->setBlockStyle($blockData);
     }
 
     public static function getNameSuffix(): string
@@ -69,18 +73,19 @@ class ImageBlock extends AbstractFilamentFlexibleContentBlock
             Grid::make(2)->schema([
                 BlockSpatieMediaLibraryFileUpload::make('image')
                     ->collection(static::getName())
-                    ->label(self::getFieldLabel('image'))
+                    ->label(static::getFieldLabel('image'))
                     ->maxFiles(1),
                 Grid::make(1)->schema([
                     TextInput::make('image_title')
-                        ->label(self::getFieldLabel('image_title'))
+                        ->label(static::getFieldLabel('image_title'))
                         ->maxLength(255),
                     TextInput::make('image_copyright')
-                        ->label(self::getFieldLabel('image_copyright'))
+                        ->label(static::getFieldLabel('image_copyright'))
                         ->maxLength(255),
-                    ImagePositionField::create(self::class),
-                    ImageWidthField::create(self::class),
-                    BackgroundColourField::create(self::class),
+                    ImagePositionField::create(static::class),
+                    ImageWidthField::create(static::class),
+                    BackgroundColourField::create(static::class),
+                    BlockStyleField::create(static::class),
                 ])->columnSpan(1),
             ]),
         ];
@@ -91,13 +96,13 @@ class ImageBlock extends AbstractFilamentFlexibleContentBlock
      */
     public static function addMediaCollectionAndConversion(HasMedia&HasMediaAttributes $record): void
     {
-        $record->addMediaCollection(self::getName())
+        $record->addMediaCollection(static::getName())
             ->registerMediaConversions(function (Media $media) use ($record) {
                 $conversion = $record->addMediaConversion(static::CONVERSION_DEFAULT)
                     ->withResponsiveImages()
                     ->fit(Manipulations::FIT_CROP, 1200, 630)
                     ->format(Manipulations::FORMAT_WEBP);
-                FilamentFlexibleBlocksConfig::mergeConfiguredFlexibleBlockImageConversion(self::class, self::getName(), self::CONVERSION_DEFAULT, $conversion);
+                FilamentFlexibleBlocksConfig::mergeConfiguredFlexibleBlockImageConversion(static::class, static::getName(), static::CONVERSION_DEFAULT, $conversion);
 
                 //for filament upload field
                 $record->addFilamentThumbnailMediaConversion();
@@ -106,7 +111,7 @@ class ImageBlock extends AbstractFilamentFlexibleContentBlock
 
     public function getImageMedia(array $attributes = []): ?HtmlableMedia
     {
-        return $this->getHtmlableMedia($this->imageId, self::CONVERSION_DEFAULT, $this->imageTitle, $attributes);
+        return $this->getHtmlableMedia($this->imageId, static::CONVERSION_DEFAULT, $this->imageTitle, $attributes);
     }
 
     public function getImageUrl(): ?string

@@ -220,6 +220,46 @@ class FilamentFlexibleBlocksConfig
 
     /**
      * @param  class-string<AbstractContentBlock>  $blockClass
+     * @return array{options?: array<string, string>, default?: string, enabled_for_all_blocks?: bool}
+     */
+    public static function getBlockStyleConfig(string $blockClass): array
+    {
+        return self::getConfig($blockClass, 'block_styles');
+    }
+
+    /**
+     * @return array<string, string>
+     */
+    public static function getBlockStyleSelectOptions(string $blockClass): array
+    {
+        return collect(self::getBlockStyleConfig($blockClass)['options'])
+            ->mapWithKeys(fn ($item, $key) => [$key => trans($item)])
+            ->toArray();
+    }
+
+    /**
+     * @return bool
+     */
+    public static function isBlockStyleEnabled(string $blockClass): bool
+    {
+        $blockConfig = self::getBlockStyleConfig($blockClass);
+        if (isset($blockConfig['enabled'])) {
+            return $blockConfig['enabled'];
+        }
+
+        return config('filament-flexible-content-blocks.block_styles.enabled_for_all_blocks', false);
+    }
+
+    /**
+     * @param  class-string<AbstractContentBlock>  $blockClass
+     */
+    public static function getBlockStyleDefault(string $blockClass): ?string
+    {
+        return self::getDefault(self::getBlockStyleConfig($blockClass));
+    }
+
+    /**
+     * @param  class-string<AbstractContentBlock>  $blockClass
      * @return array{options?: array<string, array{label: string, class: string}>, default?: string}
      */
     public static function getImagePositionConfig(string $blockClass): array
@@ -235,14 +275,6 @@ class FilamentFlexibleBlocksConfig
         return collect(self::getImagePositionConfig($blockClass)['options'])
             ->mapWithKeys(fn ($item, $key) => [$key => trans($item)])
             ->toArray();
-    }
-
-    /**
-     * @param  class-string<AbstractContentBlock>  $blockClass
-     */
-    public static function getImagePositionClass(string $blockClass, ?string $positionType): ?string
-    {
-        return self::getCssClass(self::getImagePositionConfig($blockClass), $positionType);
     }
 
     /**

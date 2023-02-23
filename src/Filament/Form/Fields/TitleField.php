@@ -10,7 +10,7 @@ class TitleField extends TextInput
     {
         $field = static::getFieldName();
 
-        return self::make($field)
+        return static::make($field)
             ->label(trans("filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.{$field}_lbl"))
             ->maxLength(255)
             ->required($required);

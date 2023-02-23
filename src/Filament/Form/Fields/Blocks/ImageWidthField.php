@@ -15,7 +15,7 @@ class ImageWidthField extends Select
      */
     public static function create(string $blockClass, bool $required = true): static
     {
-        return static::make(self::FIELD)
+        return static::make(static::FIELD)
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.image_width_lbl'))
             ->options(FilamentFlexibleBlocksConfig::getImageWidthSelectOptions($blockClass))
             ->default(FilamentFlexibleBlocksConfig::getImageWidthDefault($blockClass))

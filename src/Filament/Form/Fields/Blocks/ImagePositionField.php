@@ -15,11 +15,11 @@ class ImagePositionField extends Select
      */
     public static function create(string $blockClass, bool $required = true): static
     {
-        return static::make(self::FIELD)
+        return static::make(static::FIELD)
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.image_position_lbl'))
             ->helperText(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.image_position_help'))
-            ->options(FilamentFlexibleBlocksConfig::getImagePositionSelectOptions(self::class))
-            ->default(FilamentFlexibleBlocksConfig::getImagePositionDefault(self::class))
+            ->options(FilamentFlexibleBlocksConfig::getImagePositionSelectOptions(static::class))
+            ->default(FilamentFlexibleBlocksConfig::getImagePositionDefault(static::class))
             ->disablePlaceholderSelection()
             ->required($required);
     }

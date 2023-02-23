@@ -11,7 +11,7 @@ class CodeField extends TextInput
 
     public static function create(bool $required = false): static
     {
-        return self::make(self::FIELD)
+        return static::make(static::FIELD)
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.code_lbl'))
             ->helperText(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.code_help'))
             ->maxLength(255)

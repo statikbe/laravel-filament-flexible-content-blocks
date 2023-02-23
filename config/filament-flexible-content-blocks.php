@@ -188,6 +188,15 @@ return [
         'default' => 'default',
     ],
 
+    'block_styles' => [
+        'enabled_for_all_blocks' => true,
+        'options' => [
+            'default' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.block_styles.default',
+            'nice' => 'nice',
+        ],
+        'default' => 'default',
+    ],
+
     'grid_columns' => [
         1, 2, 3, 4,
     ],
@@ -211,6 +220,16 @@ return [
                     'right' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_position.right',
                 ],
                 'default' => 'left',
+            ],
+        ],
+        TextBlock::class => [
+            'block_styles' => [
+                'enabled' => true,
+                'options' => [
+                    'default' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.block_styles.default',
+                    'better' => 'better',
+                    'nice' => 'nice',
+                ],
             ],
         ],
     ],
