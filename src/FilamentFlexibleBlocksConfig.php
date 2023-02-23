@@ -237,9 +237,6 @@ class FilamentFlexibleBlocksConfig
             ->toArray();
     }
 
-    /**
-     * @return bool
-     */
     public static function isBlockStyleEnabled(string $blockClass): bool
     {
         $blockConfig = self::getBlockStyleConfig($blockClass);
