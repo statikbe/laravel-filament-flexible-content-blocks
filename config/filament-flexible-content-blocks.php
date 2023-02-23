@@ -192,7 +192,6 @@ return [
         'enabled_for_all_blocks' => true,
         'options' => [
             'default' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.block_styles.default',
-            'nice' => 'nice',
         ],
         'default' => 'default',
     ],
@@ -222,7 +221,7 @@ return [
                 'default' => 'left',
             ],
         ],
-        TextBlock::class => [
+        /*TextBlock::class => [
             'block_styles' => [
                 'enabled' => true,
                 'options' => [
@@ -231,7 +230,7 @@ return [
                     'nice' => 'nice',
                 ],
             ],
-        ],
+        ],*/
     ],
 
 ];
