@@ -21,10 +21,6 @@ class FilamentFlexibleBlocksConfig
 {
     /**
      * @param  class-string<Model>  $modelClass
-     * @param  string  $collectionName
-     * @param  string  $conversionName
-     * @param  Conversion  $conversion
-     * @return Conversion
      *
      * @throws \Spatie\Image\Exceptions\InvalidManipulation
      */
@@ -37,10 +33,6 @@ class FilamentFlexibleBlocksConfig
 
     /**
      * @param  class-string<AbstractContentBlock>  $blockClass
-     * @param  string  $collectionName
-     * @param  string  $conversionName
-     * @param  Conversion  $conversion
-     * @return Conversion
      *
      * @throws \Spatie\Image\Exceptions\InvalidManipulation
      */
@@ -53,10 +45,6 @@ class FilamentFlexibleBlocksConfig
 
     /**
      * @param  array<string, array>  $configuredConversions
-     * @param  string  $collectionName
-     * @param  string  $conversionName
-     * @param  Conversion  $conversion
-     * @return Conversion
      *
      * @throws \Spatie\Image\Exceptions\InvalidManipulation
      */
@@ -91,7 +79,6 @@ class FilamentFlexibleBlocksConfig
 
     /**
      * @param  class-string<Model>  $modelClass
-     * @return array
      */
     public static function getModelImageConversionConfig(string $modelClass): array
     {
@@ -102,7 +89,6 @@ class FilamentFlexibleBlocksConfig
 
     /**
      * @param  class-string<AbstractContentBlock>  $blockClass
-     * @return array
      */
     public static function getFlexibleBlockImageConversionConfig(string $blockClass): array
     {
