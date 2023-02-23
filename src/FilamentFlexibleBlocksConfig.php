@@ -3,7 +3,6 @@
 namespace Statikbe\FilamentFlexibleContentBlocks;
 
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\Conversions\Conversion;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\CallToActionBlock;

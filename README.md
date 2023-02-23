@@ -5,8 +5,13 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/statikbe/laravel-filament-flexible-content-blocks/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/statikbe/laravel-filament-flexible-content-blocks/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/statikbe/laravel-filament-flexible-content-blocks.svg?style=flat-square)](https://packagist.org/packages/statikbe/laravel-filament-flexible-content-blocks)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+The Laravel Filament Flexible Content Blocks package helps you with easily creating content in Filament for any 
+model, with predefined blocks, and foreach block an extendable Blade view component. 
 
+You can use this package to create a basic CMS, by setting up your own model and implementing the predefined traits to 
+select the functionality you need, and quickly setup a Filament resource by implementing the ready-made fields. Or you can 
+add flexible content to a model for your specific business case, for instance to allow the flexible creation of a 
+product description.
 
 ## Installation
 
@@ -16,32 +21,30 @@ You can install the package via composer:
 composer require statikbe/laravel-filament-flexible-content-blocks
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="filament-flexible-content-blocks-migrations"
-php artisan vendor:publish --provider="Spatie\MediaLibrary\MediaLibraryServiceProvider" --tag="migrations"
-php artisan migrate
-```
-
-You can publish the config file with:
+You will most likely need to edit the configuration, so you can publish the config file with:
 
 ```bash
 php artisan vendor:publish --tag="filament-flexible-content-blocks-config"
 ```
 
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
+There are [many configuration options](#configuration).
 
 Optionally, you can publish the views (e.g. if you want to tweak the content blocks) using:
 
 ```bash
 php artisan vendor:publish --tag="filament-flexible-content-blocks-views"
 ```
+
+Since you can apply the flexible content blocks to any view, we do not provide required migrations. 
+However, we provide two example migrations, one for a translatable page and one for a single-language page. 
+You can use these migrations as an example to create your own migrations. (see [ToDo's](#todo))
+You can publish and run the migrations with:
+
+```bash
+php artisan vendor:publish --tag="filament-flexible-content-blocks-migrations"
+php artisan migrate
+```
+
 
 ## Usage
 
@@ -50,11 +53,24 @@ $filamentFlexibleContentBlocks = new Statikbe\FilamentFlexibleContentBlocks();
 echo $filamentFlexibleContentBlocks->echoPhrase('Hello, Statikbe!');
 ```
 
-## Testing
+## Configuration
 
-```bash
-composer test
-```
+
+
+## Blocks
+
+
+## Todo
+
+Below is a list of ideas and missing features. PR's are welcome!
+
+- Command to generate migrations
+- Command to generate models
+- Command to generate Filament resource and pages
+- Integrate existing image asset manager
+- Allow custom, undefined image conversions in configuration
+- Store links to models in rich editor
+- Redirects
 
 ## Changelog
 
@@ -71,7 +87,6 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [Kobe Christiaensen](https://github.com/Kobo-one)
 - [Sten Govaerts](https://github.com/sten)
 - [All Contributors](../../contributors)
 
