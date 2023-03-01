@@ -62,14 +62,15 @@ There is [an example implementation](./example) of all the package features, whi
 - Http controllers
 - views
 
-
+Documentation is WIP.
 
 ## Configuration
 
-
+Documentation is WIP.
 
 ## Blocks
 
+Documentation is WIP.
 
 ## Todo
 
@@ -100,6 +101,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 ## Credits
 
 - [Sten Govaerts](https://github.com/sten)
+- [Stijn Elskens](https://github.com/stijnelskens)
 - [All Contributors](../../contributors)
 
 ## License
