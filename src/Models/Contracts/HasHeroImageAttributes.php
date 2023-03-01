@@ -34,4 +34,11 @@ interface HasHeroImageAttributes
      * Returns the rendered html of the hero image
      */
     public function getHeroImageMedia(array $attributes = []): ?HtmlableMedia;
+
+    /**
+     * Checks if there is a hero image set.
+     *
+     * @return bool
+     */
+    public function hasHeroImage(): bool;
 }

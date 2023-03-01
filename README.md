@@ -11,7 +11,15 @@ model, with predefined blocks, and foreach block an extendable Blade view compon
 You can use this opinionated package to create a basic CMS, by setting up your own model and implementing the predefined traits to 
 select the functionality you need, and quickly setup a Filament resource by implementing the ready-made fields. Or you can 
 add flexible content to a model for your specific business case, for instance to allow the flexible creation of a 
-product description.
+product description. Each project is different and to foster changing requirements, the focus is on the building blocks and 
+there is no default implementation for a CMS-like page.
+
+The key goals of this package are:
+- provide a quick way to add content to a model through reusable fields and content blocks
+- quickly set up the frontend
+- have fully-working, extendable blade view components with basic Tailwind styling 
+- allow the liberty to pick and choose which fields and blocks you need for your requirements
+- provide easy configuration to override the behaviour of the fields, blocks and image conversions
 
 ## Installation
 
@@ -47,10 +55,14 @@ php artisan migrate
 
 ## Usage
 
-```php
-$filamentFlexibleContentBlocks = new Statikbe\FilamentFlexibleContentBlocks();
-echo $filamentFlexibleContentBlocks->echoPhrase('Hello, Statikbe!');
-```
+There is [an example implementation](./example) of all the package features, which includes:
+- migrations
+- data models
+- Filament resources & pages
+- Http controllers
+- views
+
+
 
 ## Configuration
 

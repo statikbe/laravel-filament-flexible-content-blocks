@@ -67,4 +67,9 @@ trait HasHeroImageAttributesTrait
             $this->hero_image_title,
             $attributes);
     }
+
+    public function hasHeroImage(): bool
+    {
+        return $this->hasMedia($this->getHeroImageCollection());
+    }
 }

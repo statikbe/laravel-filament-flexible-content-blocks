@@ -47,6 +47,11 @@ class Hero extends Component
         return null;
     }
 
+    public function hasHeroImage(): bool
+    {
+        return $this->page->hasHeroImage();
+    }
+
     public function render()
     {
         return view('filament-flexible-content-blocks::components.hero');

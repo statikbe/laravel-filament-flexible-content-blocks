@@ -118,4 +118,9 @@ class ImageBlock extends AbstractFilamentFlexibleContentBlock
     {
         return $this->getMediaUrl($this->imageId);
     }
+
+    public function hasImage(): bool
+    {
+        return isset($this->imageId) && ! is_null($this->imageId);
+    }
 }
