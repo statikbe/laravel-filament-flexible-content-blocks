@@ -37,8 +37,6 @@ interface HasHeroImageAttributes
 
     /**
      * Checks if there is a hero image set.
-     *
-     * @return bool
      */
     public function hasHeroImage(): bool;
 }
