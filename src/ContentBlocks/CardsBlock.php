@@ -45,11 +45,11 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
         parent::__construct($record, $blockData);
 
         $this->title = $blockData['title'] ?? null;
-        $this->cards = $this->createCards($blockData['cards']);
         $this->backgroundColourType = $blockData['background_colour'] ?? null;
         $this->gridColumns = $blockData['grid_columns'] ?? null;
         $this->setImageConversionType($blockData);
         $this->setBlockStyle($blockData);
+        $this->cards = $this->createCards($blockData['cards']);
     }
 
     public static function getIcon(): string
@@ -117,18 +117,18 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
             });
     }
 
-    public function getCardImageMedia(?string $imageId, ?string $imageTitle, string $conversion = self::CONVERSION_CROP, array $attributes = []): ?HtmlableMedia
+    public function getCardImageMedia(?string $imageId, ?string $imageTitle, string $conversion = null, array $attributes = []): ?HtmlableMedia
     {
         if (! $imageId) {
             return null;
         }
 
-        return $this->getHtmlableMedia($imageId, $conversion, $imageTitle, $attributes);
+        return $this->getHtmlableMedia($imageId, $this->getImageConversionType($conversion), $imageTitle, $attributes);
     }
 
-    public function getCardImageUrl(string $imageId, string $conversion = self::CONVERSION_CROP): ?string
+    public function getCardImageUrl(string $imageId, string $conversion = null): ?string
     {
-        return $this->getMediaUrl(imageId: $imageId, conversion: $conversion);
+        return $this->getMediaUrl(imageId: $imageId, conversion: $this->getImageConversionType($conversion));
     }
 
     /**
