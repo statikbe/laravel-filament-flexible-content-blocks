@@ -34,7 +34,7 @@ class SlugField extends TextInput
             ->required(fn (?Model $record): bool => $record && $record->id > 0);
     }
 
-    private static function getUrlWithReplacementSlug(Page $livewire): string
+    protected static function getUrlWithReplacementSlug(Page $livewire): string
     {
         $linkModel = $livewire->getResource()::getModel();
         /* @var Linkable $link */

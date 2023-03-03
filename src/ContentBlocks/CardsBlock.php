@@ -7,7 +7,6 @@ use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
-use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -15,6 +14,7 @@ use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBackgroundC
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBlockStyle;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasCallToAction;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImage;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImageConversionType;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BackgroundColourField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockSpatieMediaLibraryFileUpload;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockStyleField;
@@ -22,7 +22,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToAct
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToActionRepeater;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CardData;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\GridColumnsField;
-use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\ImageConversionTypeField;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
 
@@ -32,8 +32,7 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
     use HasCallToAction;
     use HasBackgroundColour;
     use HasBlockStyle;
-
-    const CONVERSION_DEFAULT = 'default';
+    use HasImageConversionType;
 
     public ?string $title;
 
@@ -49,6 +48,7 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
         $this->cards = $this->createCards($blockData['cards']);
         $this->backgroundColourType = $blockData['background_colour'] ?? null;
         $this->gridColumns = $blockData['grid_columns'] ?? null;
+        $this->setImageConversionType($blockData);
         $this->setBlockStyle($blockData);
     }
 
@@ -67,6 +67,7 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
                 GridColumnsField::create(static::class, true),
                 BackgroundColourField::create(static::class),
                 BlockStyleField::create(static::class),
+                ImageConversionTypeField::create(static::class),
             ]),
             Repeater::make('cards')
                 ->label(static::getFieldLabel('cards'))
@@ -108,29 +109,26 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
     {
         $record->addMediaCollection(static::getName())
             ->registerMediaConversions(function (Media $media) use ($record) {
-                $conversion = $record->addMediaConversion(static::CONVERSION_DEFAULT)
-                    ->withResponsiveImages()
-                    ->fit(Manipulations::FIT_CROP, 800, 420)
-                    ->format(Manipulations::FORMAT_WEBP);
-                FilamentFlexibleBlocksConfig::mergeConfiguredFlexibleBlockImageConversion(static::class, static::getName(), static::CONVERSION_DEFAULT, $conversion);
+                static::addCropImageConversion($record, 800, 420);
+                static::addContainImageConversion($record, 800, 420);
 
                 //for filament upload field
                 $record->addFilamentThumbnailMediaConversion();
             });
     }
 
-    public function getCardImageMedia(?string $imageId, ?string $imageTitle, array $attributes = []): ?HtmlableMedia
+    public function getCardImageMedia(?string $imageId, ?string $imageTitle, string $conversion = self::CONVERSION_CROP, array $attributes = []): ?HtmlableMedia
     {
         if (! $imageId) {
             return null;
         }
 
-        return $this->getHtmlableMedia($imageId, static::CONVERSION_DEFAULT, $imageTitle, $attributes);
+        return $this->getHtmlableMedia($imageId, $conversion, $imageTitle, $attributes);
     }
 
-    public function getCardImageUrl(string $imageId): ?string
+    public function getCardImageUrl(string $imageId, string $conversion = self::CONVERSION_CROP): ?string
     {
-        return $this->getMediaUrl($imageId);
+        return $this->getMediaUrl(imageId: $imageId, conversion: $conversion);
     }
 
     /**

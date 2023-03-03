@@ -5,7 +5,7 @@
                       '' => $imagePosition === 'left',
                       'mx-auto' => $imagePosition === 'center',
                       'ml-auto' => $imagePosition === 'right'])>
-            {{$getImageMedia(['alt' => $imageTitle, 'class'=> 'w-full', 'loading' => 'lazy'])}}
+            {{$getImageMedia(attributes: ['alt' => $imageTitle, 'class'=> 'w-full', 'loading' => 'lazy'])}}
             @if($imageCopyright)
                 <small>&copy; {{$imageCopyright}}</small>
             @endif

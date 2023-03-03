@@ -134,5 +134,9 @@
 
         'form_component.grid_columns_lbl' => 'Number of columns',
 
+        'form_component.image_conversion_type_lbl' => 'Image conversion',
+        'form_component.image_conversion_type_crop' => 'Crop',
+        'form_component.image_conversion_type_contain' => 'Contain aspect ratio',
+
         'form_component.content_blocks.templates_options.footer' => 'Footer',
     ];

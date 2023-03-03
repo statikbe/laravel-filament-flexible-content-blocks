@@ -2,9 +2,13 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns;
 
+use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\Conversions\Conversion;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
 
 trait HasImage
 {
@@ -51,10 +55,31 @@ trait HasImage
     /**
      * Returns the image url for the given UUID.
      */
-    protected function getMediaUrl(string $imageId, ?string $collection = null): ?string
+    protected function getMediaUrl(string $imageId, ?string $collection = null, string $conversion = null): ?string
     {
         $media = $this->getMedia($imageId, $collection);
 
         return $media?->getFullUrl();
+    }
+
+    protected static function addCropImageConversion(HasMedia&HasMediaAttributes $record, int $width, int $height): Conversion
+    {
+        return static::addImageConversion($record, self::CONVERSION_CROP, Manipulations::FIT_CROP, $width, $height);
+    }
+
+    protected static function addContainImageConversion(HasMedia&HasMediaAttributes $record, int $width, int $height): Conversion
+    {
+        return static::addImageConversion($record, self::CONVERSION_CONTAIN, Manipulations::FIT_CONTAIN, $width, $height);
+    }
+
+    protected static function addImageConversion(HasMedia&HasMediaAttributes $record, string $conversionName, string $fitType, int $width, int $height): Conversion
+    {
+        $conversion = $record->addMediaConversion($conversionName)
+            ->withResponsiveImages()
+            ->fit($fitType, $width, $height)
+            ->format(Manipulations::FORMAT_WEBP);
+        FilamentFlexibleBlocksConfig::mergeConfiguredFlexibleBlockImageConversion(static::class, static::getName(), $conversionName, $conversion);
+
+        return $conversion;
     }
 }

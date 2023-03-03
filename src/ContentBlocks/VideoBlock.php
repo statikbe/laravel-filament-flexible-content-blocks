@@ -4,21 +4,17 @@ namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Textarea;
-use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImage;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockSpatieMediaLibraryFileUpload;
-use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
 
 class VideoBlock extends AbstractFilamentFlexibleContentBlock
 {
     use HasImage;
-
-    const CONVERSION_DEFAULT = 'default';
 
     public ?string $embedCode;
 
@@ -73,11 +69,7 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
     {
         $record->addMediaCollection(static::getName())
             ->registerMediaConversions(function (Media $media) use ($record) {
-                $conversion = $record->addMediaConversion(static::CONVERSION_DEFAULT)
-                    ->withResponsiveImages()
-                    ->fit(Manipulations::FIT_CROP, 1200, 675)
-                    ->format(Manipulations::FORMAT_WEBP);
-                FilamentFlexibleBlocksConfig::mergeConfiguredFlexibleBlockImageConversion(static::class, static::getName(), static::CONVERSION_DEFAULT, $conversion);
+                static::addCropImageConversion($record, 1200, 675);
 
                 //for filament upload field
                 $record->addFilamentThumbnailMediaConversion();
@@ -86,7 +78,7 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
 
     public function getOverlayImageMedia(array $attributes = []): ?HtmlableMedia
     {
-        return $this->getHtmlableMedia($this->overlayImageId, static::CONVERSION_DEFAULT, null, $attributes);
+        return $this->getHtmlableMedia($this->overlayImageId, static::CONVERSION_CROP, null, $attributes);
     }
 
     public function getOverlayImageUrl(): ?string

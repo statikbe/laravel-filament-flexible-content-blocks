@@ -17,6 +17,11 @@ class CardData
         ) {
     }
 
+    public function hasImage(): bool
+    {
+        return isset($this->imageId) && ! is_null($this->imageId);
+    }
+
     public static function create(array $cardBlockData, ?string $imageUrl, ?string $imageHtml, array $buttonStyleClasses): self
     {
         $callToActions = [];

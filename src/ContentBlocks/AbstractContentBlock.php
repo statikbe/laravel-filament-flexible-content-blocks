@@ -15,6 +15,10 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
  */
 abstract class AbstractContentBlock extends Component
 {
+    public final const CONVERSION_CROP = 'crop';
+
+    public final const CONVERSION_CONTAIN = 'contain';
+
     protected static Block $block;
 
     public HasContentBlocks&HasMedia $record;

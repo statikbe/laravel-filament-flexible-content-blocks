@@ -4,20 +4,20 @@ namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\TextInput;
-use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBackgroundColour;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBlockStyle;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImage;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImageConversionType;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImageWidth;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BackgroundColourField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockSpatieMediaLibraryFileUpload;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockStyleField;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\ImageConversionTypeField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\ImagePositionField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\ImageWidthField;
-use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
 
@@ -27,8 +27,7 @@ class ImageBlock extends AbstractFilamentFlexibleContentBlock
     use HasImageWidth;
     use HasBackgroundColour;
     use HasBlockStyle;
-
-    const CONVERSION_DEFAULT = 'default';
+    use HasImageConversionType;
 
     public ?string $imageId;
 
@@ -51,6 +50,7 @@ class ImageBlock extends AbstractFilamentFlexibleContentBlock
         $this->imagePosition = $blockData['image_position'] ?? null;
         $this->imageWidth = $blockData['image_width'] ?? null;
         $this->backgroundColourType = $blockData['background_colour'] ?? null;
+        $this->setImageConversionType($blockData);
         $this->setBlockStyle($blockData);
     }
 
@@ -82,6 +82,7 @@ class ImageBlock extends AbstractFilamentFlexibleContentBlock
                     TextInput::make('image_copyright')
                         ->label(static::getFieldLabel('image_copyright'))
                         ->maxLength(255),
+                    ImageConversionTypeField::create(static::class),
                     ImagePositionField::create(static::class),
                     ImageWidthField::create(static::class),
                     BackgroundColourField::create(static::class),
@@ -98,25 +99,30 @@ class ImageBlock extends AbstractFilamentFlexibleContentBlock
     {
         $record->addMediaCollection(static::getName())
             ->registerMediaConversions(function (Media $media) use ($record) {
-                $conversion = $record->addMediaConversion(static::CONVERSION_DEFAULT)
-                    ->withResponsiveImages()
-                    ->fit(Manipulations::FIT_CROP, 1200, 630)
-                    ->format(Manipulations::FORMAT_WEBP);
-                FilamentFlexibleBlocksConfig::mergeConfiguredFlexibleBlockImageConversion(static::class, static::getName(), static::CONVERSION_DEFAULT, $conversion);
+                static::addCropImageConversion($record, 1200, 630);
+                static::addContainImageConversion($record, 1200, 630);
 
                 //for filament upload field
                 $record->addFilamentThumbnailMediaConversion();
             });
     }
 
-    public function getImageMedia(array $attributes = []): ?HtmlableMedia
+    public static function getImageConversionTypeDefault(): array
     {
-        return $this->getHtmlableMedia($this->imageId, static::CONVERSION_DEFAULT, $this->imageTitle, $attributes);
+        //change the default image conversion for the image block to show the real aspect ratio.
+        return [
+            static::CONVERSION_CONTAIN,
+        ];
     }
 
-    public function getImageUrl(): ?string
+    public function getImageMedia(string $conversion = self::CONVERSION_CROP, array $attributes = []): ?HtmlableMedia
     {
-        return $this->getMediaUrl($this->imageId);
+        return $this->getHtmlableMedia($this->imageId, $this->getImageConversionType($conversion), $this->imageTitle, $attributes);
+    }
+
+    public function getImageUrl(string $conversion = self::CONVERSION_CROP): ?string
+    {
+        return $this->getMediaUrl(imageId: $this->imageId, conversion: $this->getImageConversionType($conversion));
     }
 
     public function hasImage(): bool

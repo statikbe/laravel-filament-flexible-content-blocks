@@ -6,11 +6,13 @@
     @if(!$slot->isEmpty())
         {{-- Image slot --}}
         {{$slot}}
-    @elseif($card->imageHtml)
-        {!! $card->imageHtml !!}
-    @elseif($card->imageUrl)
-        <img src="{{$card->imageUrl}}"
-             @if($card->title) alt="{{$card->title}}" @endif />
+    @elseif($card->hasImage())
+        @if($card->imageHtml)
+            {!! $card->imageHtml !!}
+        @elseif($card->imageUrl)
+            <img src="{{$card->imageUrl}}"
+                 @if($card->title) alt="{{$card->title}}" @endif />
+        @endif
     @endif
 
     <div class="p-4 prose sm:p-6 max-w-none">

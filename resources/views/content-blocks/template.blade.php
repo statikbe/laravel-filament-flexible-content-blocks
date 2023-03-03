@@ -1,5 +1,5 @@
 @if($template)
     <div>
-        @include($template)
+        @include($template, ['record' => $record])
     </div>
 @endif
