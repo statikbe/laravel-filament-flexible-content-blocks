@@ -26,13 +26,11 @@ trait HasImageConversionType
     }
 
     /**
-     * @return string[]
+     * @return string
      */
-    public static function getImageConversionTypeDefault(): array
+    public static function getImageConversionTypeDefault(): string
     {
-        return [
-            static::CONVERSION_CROP,
-        ];
+        return static::CONVERSION_CROP;
     }
 
     public function getImageConversionType(string $conversion = null): ?string
@@ -42,7 +40,7 @@ trait HasImageConversionType
         } elseif ($this->imageConversion) {
             return $this->imageConversion;
         } else {
-            return collect(static::getImageConversionTypeDefault())->first();
+            return static::getImageConversionTypeDefault();
         }
     }
 }

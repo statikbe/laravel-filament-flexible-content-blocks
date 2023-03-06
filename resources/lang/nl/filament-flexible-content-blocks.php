@@ -140,7 +140,7 @@
 
         'form_component.image_conversion_type_lbl' => 'Omzetting van de afbeelding',
         'form_component.image_conversion_type_crop' => 'Bijsnijden',
-        'form_component.image_conversion_type_contain' => 'Aspect ration behouden',
+        'form_component.image_conversion_type_contain' => 'Aspect ratio behouden',
 
         'form_component.content_blocks.templates_options.footer' => 'Voettekst',
     ];

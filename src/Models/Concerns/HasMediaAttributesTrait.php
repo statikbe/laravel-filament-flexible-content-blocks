@@ -23,7 +23,7 @@ trait HasMediaAttributesTrait
     public function addFilamentThumbnailMediaConversion(): void
     {
         $this->addMediaConversion('thumbnail')
-            ->fit(Manipulations::FIT_CROP, 400, 400);
+            ->fit(Manipulations::FIT_CONTAIN, 400, 400);
     }
 
     /**

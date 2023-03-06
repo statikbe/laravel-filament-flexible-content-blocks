@@ -107,12 +107,10 @@ class ImageBlock extends AbstractFilamentFlexibleContentBlock
             });
     }
 
-    public static function getImageConversionTypeDefault(): array
+    public static function getImageConversionTypeDefault(): string
     {
         //change the default image conversion for the image block to show the real aspect ratio.
-        return [
-            static::CONVERSION_CONTAIN,
-        ];
+        return static::CONVERSION_CONTAIN;
     }
 
     public function getImageMedia(string $conversion = null, array $attributes = []): ?HtmlableMedia

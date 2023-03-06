@@ -84,6 +84,7 @@ Below is a list of ideas and missing features. PR's are welcome!
 - Store links to models in rich editor
 - Redirects
 - Reusable blocks. Name: global block?
+- Focal point for image resizing
 
 ## Changelog
 
