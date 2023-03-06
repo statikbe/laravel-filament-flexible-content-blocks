@@ -25,9 +25,6 @@ trait HasImageConversionType
         ];
     }
 
-    /**
-     * @return string
-     */
     public static function getImageConversionTypeDefault(): string
     {
         return static::CONVERSION_CROP;
