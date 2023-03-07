@@ -27,6 +27,7 @@ return new class extends Migration
             //SEO:
             $table->json('seo_title')->nullable();
             $table->json('seo_description')->nullable();
+            $table->json('seo_keywords')->nullable();
 
             //Overview:
             $table->json('overview_title')->nullable();

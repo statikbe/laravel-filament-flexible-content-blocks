@@ -29,6 +29,7 @@
         'form_component.seo_title_lbl' => 'SEO title',
         'form_component.seo_description_lbl' => 'SEO description',
         'form_component.seo_image_lbl' => 'SEO image',
+        'form_component.seo_keywords_lbl' => 'SEO keywords',
         'form_component.overview_title_lbl' => 'Overview title',
         'form_component.overview_description_lbl' => 'Overview description',
         'form_component.overview_image_lbl' => 'Overview image',

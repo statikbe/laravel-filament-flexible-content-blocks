@@ -10,6 +10,7 @@ use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 /**
  * @property string|null $seo_title
  * @property string|null $seo_description
+ * @property array|null $seo_keywords
  */
 trait HasSEOAttributesTrait
 {
@@ -18,7 +19,10 @@ trait HasSEOAttributesTrait
 
     public function initializeHasSEOAttributesTrait(): void
     {
-        $this->mergeFillable(['seo_title', 'seo_description']);
+        $this->mergeFillable(['seo_title', 'seo_description', 'seo_keywords']);
+        $this->mergeCasts([
+            'seo_keywords' => 'array',
+        ]);
 
         $this->registerSEOImageMediaCollectionAndConversion();
     }

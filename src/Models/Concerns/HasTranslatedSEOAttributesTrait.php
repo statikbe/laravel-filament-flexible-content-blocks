@@ -9,6 +9,6 @@ trait HasTranslatedSEOAttributesTrait
 
     public function initializeHasTranslatedSEOAttributesTrait(): void
     {
-        $this->mergeTranslatable(['seo_title', 'seo_description']);
+        $this->mergeTranslatable(['seo_title', 'seo_description', 'seo_keywords']);
     }
 }

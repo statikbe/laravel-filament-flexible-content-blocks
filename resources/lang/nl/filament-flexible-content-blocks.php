@@ -29,6 +29,7 @@
         'form_component.seo_title_lbl' => 'SEO-titel',
         'form_component.seo_description_lbl' => 'SEO-beschrijving',
         'form_component.seo_image_lbl' => 'SEO-afbeelding',
+        'form_component.seo_keywords_lbl' => 'SEO-trefwoorden',
         'form_component.overview_title_lbl' => 'Overzichtstitel',
         'form_component.overview_description_lbl' => 'Overzichtsbeschrijving',
         'form_component.overview_image_lbl' => 'Overzichtsafbeelding',

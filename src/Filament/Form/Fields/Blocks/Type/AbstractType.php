@@ -8,6 +8,7 @@ use Filament\Forms\Components\Select;
 use Illuminate\Database\Connection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 abstract class AbstractType
@@ -62,9 +63,10 @@ abstract class AbstractType
             $query->where(function (Builder $query) use ($isFirst, $searchOperator, $search): Builder {
                 foreach ($this->getSearchColumns() as $searchColumnName) {
                     $whereClause = $isFirst ? 'where' : 'orWhere';
+                    $search = Str::lower($search);
 
                     $query->{$whereClause}(
-                        $searchColumnName,
+                        DB::raw("lower(`$searchColumnName`)"),
                         $searchOperator,
                         "%{$search}%",
                     );
