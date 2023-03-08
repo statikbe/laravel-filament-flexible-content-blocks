@@ -32,7 +32,7 @@ class SEOKeywordsField extends TagsInput
                 }
 
                 return $keywords->map(fn ($item) => json_decode($item))
-                    ->reduce(fn ($carry, $item) => $carry ? array_unique(array_merge($carry, $item->seo_keywords)) : $item->seo_keywords);
+                    ->reduce(fn ($carry, $item) => $carry ? array_unique(array_merge($carry, $item->seo_keywords)) : $item->seo_keywords) ?? [];
             });
     }
 }
