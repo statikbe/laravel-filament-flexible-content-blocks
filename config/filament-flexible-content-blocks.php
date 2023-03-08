@@ -12,7 +12,7 @@ use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TemplateBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextImageBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\VideoBlock;
-use Statikbe\FilamentFlexibleContentBlocks\Models\Page;
+
 
 return [
     /*
@@ -64,7 +64,7 @@ return [
                 ],
             ],
             'specific' => [
-                Page::class => [
+                /*Page::class => [
                     'overview_image' => [
                         'thumb' => [
                             'fit' => Manipulations::FIT_CROP,
@@ -73,7 +73,7 @@ return [
                             'responsive' => true,
                         ],
                     ],
-                ],
+                ],*/
             ],
         ],
         'flexible_blocks' => [

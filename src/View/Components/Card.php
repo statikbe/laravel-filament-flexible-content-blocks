@@ -23,11 +23,20 @@ class Card extends Component
             ?array $callToActions = [],
             ?string $image = null,
             ?string $imageUrl = null,
+            ?string $blockStyle = null
         ) {
         if ($data) {
             $this->card = $data;
         } else {
-            $this->card = new CardData($title, $text, $callToActions, null, $imageUrl, $image);
+            $this->card = new CardData(
+                title: $title,
+                text: $text,
+                callToActions: $callToActions,
+                imageId: null,
+                imageUrl: $imageUrl,
+                imageHtml: $image,
+                blockStyle: $blockStyle
+            );
         }
 
         $this->titleUrl = $titleUrl;
@@ -49,6 +58,12 @@ class Card extends Component
 
     public function render()
     {
-        return view('filament-flexible-content-blocks::components.card');
+        //get another template if the block style is set:
+        $templateSuffix = '';
+        if ($this->card->blockStyle && ! empty(trim($this->card->blockStyle))) {
+            $templateSuffix = '-'.$this->card->blockStyle;
+        }
+
+        return view('filament-flexible-content-blocks::components.card'.$templateSuffix);
     }
 }

@@ -14,6 +14,7 @@ class CardData
             public ?string $imageId,
             public ?string $imageUrl = null,
             public ?string $imageHtml = null,
+            public ?string $blockStyle = null,
         ) {
     }
 
@@ -22,7 +23,7 @@ class CardData
         return isset($this->imageId) && ! is_null($this->imageId);
     }
 
-    public static function create(array $cardBlockData, ?string $imageUrl, ?string $imageHtml, array $buttonStyleClasses): self
+    public static function create(array $cardBlockData, ?string $imageUrl, ?string $imageHtml, ?string $blockStyle, array $buttonStyleClasses): self
     {
         $callToActions = [];
         if (! empty($cardBlockData['card_call_to_action'])) {
@@ -32,12 +33,13 @@ class CardData
         }
 
         return new self(
-            $cardBlockData['title'] ?? null,
-            $cardBlockData['text'] ?? null,
-            $callToActions,
-            $cardBlockData['image'] ?? null,
-            $imageUrl,
-            $imageHtml
+            title: $cardBlockData['title'] ?? null,
+            text: $cardBlockData['text'] ?? null,
+            callToActions: $callToActions,
+            imageId: $cardBlockData['image'] ?? null,
+            imageUrl: $imageUrl,
+            imageHtml: $imageHtml,
+            blockStyle: $blockStyle
         );
     }
 }
