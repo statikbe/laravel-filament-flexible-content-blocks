@@ -15,8 +15,12 @@ class SEOKeywordsField extends TagsInput
         return static::make(self::FIELD)
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.seo_keywords_lbl'))
             ->required($required)
-            ->suggestions(function (Model $record, Livewire $livewire) {
+            ->suggestions(function (?Model $record, Livewire $livewire) {
                 $locale = null;
+                if(!$record){
+                    return [];
+                }
+
                 if (method_exists($livewire, 'getActiveFormLocale')) {
                     $locale = $livewire->getActiveFormLocale();
                 }
