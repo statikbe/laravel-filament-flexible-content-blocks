@@ -17,7 +17,7 @@ class SEOKeywordsField extends TagsInput
             ->required($required)
             ->suggestions(function (?Model $record, Livewire $livewire) {
                 $locale = null;
-                if(!$record){
+                if (! $record) {
                     return [];
                 }
 
