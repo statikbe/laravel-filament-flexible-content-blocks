@@ -35,7 +35,7 @@ class CallToActionData
         }
 
         $buttonStyle = $callToActionBlockData['button_style'] ?? null;
-        if ($buttonStyleClasses[$buttonStyle]) {
+        if (isset($buttonStyleClasses[$buttonStyle])) {
             $buttonStyle = $buttonStyleClasses[$buttonStyle];
         }
 
