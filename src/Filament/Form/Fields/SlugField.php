@@ -31,7 +31,9 @@ class SlugField extends TextInput
                 return Str::after($url, static::URL_REPLACEMENT_SLUG);
             })
             //make the slug required on edit. on create, the slug is not required so if kept blank a slug is generated.
-            ->required(fn (?Model $record): bool => $record && $record->id > 0);
+            ->required(fn (?Model $record): bool => $record && $record->id > 0)
+            //hide slug field on creation, because the spatie sluggable will overwrite it anyways:
+            ->hidden(fn (?Model $record): bool => is_null($record));
     }
 
     protected static function getUrlWithReplacementSlug(Page $livewire): string

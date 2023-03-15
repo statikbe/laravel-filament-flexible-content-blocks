@@ -42,6 +42,11 @@ return new class extends Migration
             //Unique code:
             $table->string('code')->nullable()->unique();
 
+            //Author:
+            $table->unsignedBigInteger('author_id')->nullable();
+            $table->foreign('author_id')
+                ->references('id')->on('users')->onDelete('set null');
+
             $table->timestamps();
         });
     }
