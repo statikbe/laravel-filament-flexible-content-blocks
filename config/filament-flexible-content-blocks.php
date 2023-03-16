@@ -131,35 +131,35 @@ return [
         'options' => [
             'primary' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.primary',
-                'class' => 'btn-primary',
+                'class' => 'btn btn--primary',
             ],
             'primary_chevron' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.primary_chevron',
-                'class' => 'btn-primary btn-chevron',
+                'class' => 'btn btn--primary btn--ext',
             ],
             'secondary' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.secondary',
-                'class' => 'btn-secondary',
+                'class' => 'btn btn--secondary',
             ],
             'secondary_chevron' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.secondary_chevron',
-                'class' => 'btn-secondary btn-chevron',
+                'class' => 'btn btn--secondary btn--ext',
             ],
             'ghost' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.ghost',
-                'class' => 'btn-ghost',
+                'class' => 'btn btn--ghost',
             ],
             'ghost_chevron' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.ghost_chevron',
-                'class' => 'btn-ghost btn-chevron',
+                'class' => 'btn btn--ghost btn--ext',
             ],
             'link' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.link',
-                'class' => 'btn-link',
+                'class' => 'link',
             ],
             'link_chevron' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.link_chevron',
-                'class' => 'btn-link btn-chevron',
+                'class' => 'link link--ext',
             ],
         ],
         'default' => 'full',
