@@ -13,6 +13,7 @@ use Filament\Forms\Components\Concerns\HasName;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Str;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
@@ -134,9 +135,9 @@ class CallToActionField extends Component
                     TextInput::make(static::FIELD_BUTTON_LABEL)
                         ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_button_label'))
                         ->columnSpan(3),
-                    Checkbox::make(static::FIELD_BUTTON_OPEN_NEW_WINDOW)
+                    Toggle::make(static::FIELD_BUTTON_OPEN_NEW_WINDOW)
                         ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_button_open_in_new_window'))
-                        ->columnSpan(1),
+                        ->columnSpan(1)->inline(false),
                 ]),
         ];
     }
