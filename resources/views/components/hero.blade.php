@@ -1,26 +1,28 @@
-<div class="" x-data="{imageUrl: $refs.heroImage.currentSrc || $refs.heroImage.src}">
-    <div class="container px-4 mx-auto">
-        <div :class="imageUrl ? 'w-full h-48 bg-center bg-cover sm:h-96' : ''" :style="`background-image: url(${imageUrl})`"></div>
-        @if($getHeroImageMedia)
-            <div :class="imageUrl ? 'sr-only' : 'relative'">
-                {{$getHeroImageMedia(['class' => 'w-full', 'loading' => 'lazy', 'x-ref' => 'heroImage', 'x-on:load' => 'imageUrl = $refs.heroImage.currentSrc || $refs.heroImage.src'])}}
-                @if($heroImageCopyright)
-                    <span class="absolute bottom-0 left-0 px-2 py-1 text-sm text-white bg-black/30">&copy; {{$heroImageCopyright}}</span>
-                @endif
-            </div>
-        @endif
-        <div class="p-6 bg-gray-200">
+<div class="relative overflow-hidden w-full min-h-[192px] bg-center bg-cover py-10 sm:h-[380px] before:bg-black/40 before:z-10 before:absolute before:inset-0 hero">
+    <div class="container h-full px-4 mx-auto">
+        <div class="relative z-10 flex flex-col justify-center h-full grow">
             @if($title)
-                <h1 class="mb-4 text-3xl font-bold tracking-tight md:text-4xl">
+                <h1 class="text-3xl font-bold tracking-tight hero__title @if($hasHeroImage())text-white drop-shadow @endif md:text-4xl @if($intro) mb-4 @endif">
                     {{ $title }}
                 </h1>
             @endif
 
             @if($intro)
-                <div class="font-light">
+                <div class="max-w-4xl font-light text-white drop-shadow hero__intro [&_a]:underline hover:[&_a]:no-underline">
                     {!! $intro !!}
                 </div>
             @endif
         </div>
     </div>
+    @if($hasHeroImage())
+        <div class="absolute inset-0 w-full h-full">
+            {{$getHeroImageMedia([
+                'class' => 'absolute inse-0 w-full h-full object-cover hero__image',
+                'loading' => 'lazy',
+            ])}}
+            @if($heroImageCopyright)
+                <span class="absolute bottom-0 right-0 px-2 py-1 text-sm text-white bg-black/30 hero__copyright">&copy; {{$heroImageCopyright}}</span>
+            @endif
+        </div>
+    @endif
 </div>
