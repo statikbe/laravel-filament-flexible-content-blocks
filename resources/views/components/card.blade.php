@@ -2,7 +2,7 @@
     /* @var \Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CardData $card */
 @endphp
 
-<div class="relative transition-all duration-300 ease-out bg-white group @if($isFullyClickable()) hover:shadow-md @endif">
+<div class="relative transition-all duration-300 ease-out bg-white group card @if($isFullyClickable()) hover:shadow-md @endif">
     @if(!$slot->isEmpty())
         {{-- Image slot --}}
         {{$slot}}
@@ -11,13 +11,13 @@
             {!! $card->imageHtml !!}
         @elseif($card->imageUrl)
             <img src="{{$card->imageUrl}}"
-                 @if($card->title) alt="{{$card->title}}" @endif />
+                 @if($card->title) alt="{{$card->title}}" @endif class="card__image" />
         @endif
     @endif
 
     <div class="p-4 prose sm:p-6 max-w-none">
         @if($card->title)
-            <h3>
+            <h3 class="card__title">
                 @if($getTitleUrl())<a href="{{$getTitleUrl()}}">@endif
                     {{$card->title}}
                 @if($getTitleUrl())</a>@endif
@@ -25,7 +25,7 @@
         @endif
 
         @if($card->text)
-            <div>{!! $card->text !!}</div>
+            <div class="card__description">{!! $card->text !!}</div>
         @endif
 
         @if($card->callToActions)

@@ -1,15 +1,15 @@
-<div class="relative transition-all duration-300 ease-out bg-white group hover:shadow-md">
+<div class="relative transition-all duration-300 ease-out bg-white group card card--overview hover:shadow-md">
     @if($image)
         {!! $image !!}
     @endif
     <div class="p-4 prose max-w-none sm:p-6">
         @if($title)
             <a href="{{$url}}" class="before:absolute before:inset-0">
-                <h3 @if(!$image)class="mt-0"@endif>{{$title}}</h3>
+                <h3 class="card__title @if(!$image) mt-0 @endif">{{$title}}</h3>
             </a>
         @endif
         @if($description)
-            <div>{!! $description !!}</div>
+            <div class="card__description">{!! $description !!}</div>
         @endif
         @if($url)
             <div class="flex justify-end">
