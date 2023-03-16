@@ -3,7 +3,6 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks;
 
 use Closure;
-use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Component;
 use Filament\Forms\Components\Concerns\CanAllowHtml;
 use Filament\Forms\Components\Concerns\CanBePreloaded;
