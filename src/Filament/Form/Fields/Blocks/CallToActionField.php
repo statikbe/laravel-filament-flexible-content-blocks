@@ -136,7 +136,8 @@ class CallToActionField extends Component
                         ->columnSpan(3),
                     Toggle::make(static::FIELD_BUTTON_OPEN_NEW_WINDOW)
                         ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_button_open_in_new_window'))
-                        ->columnSpan(1)->inline(false),
+                        ->columnSpan(1)
+                        ->inline(false),
                 ]),
         ];
     }
