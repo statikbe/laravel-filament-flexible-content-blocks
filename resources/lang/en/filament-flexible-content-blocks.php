@@ -18,6 +18,7 @@
         'table_action.publish.unpublish_lbl' => 'Unpublish',
         'table_action.view_page_lbl' => 'View',
 
+        'form_component.translatable_hint' => 'You can translate this field.',
         'form_component.title_lbl' => 'Title',
         'form_component.slug_lbl' => 'Slug',
         'form_component.slug_desc' => '<strong>Attention:</strong> When you change the slug of a published page, the URL will change.',

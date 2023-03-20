@@ -79,6 +79,7 @@ trait HasImage
             ->fit($fitType, $width, $height)
             ->format(Manipulations::FORMAT_WEBP);
         FilamentFlexibleBlocksConfig::mergeConfiguredFlexibleBlockImageConversion(static::class, static::getName(), $conversionName, $conversion);
+        FilamentFlexibleBlocksConfig::addExtraFlexibleBlockImageConversions(static::class, static::getName(), $record);
 
         return $conversion;
     }
