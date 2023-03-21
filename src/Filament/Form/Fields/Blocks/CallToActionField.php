@@ -106,7 +106,7 @@ class CallToActionField extends Component
                         ->options($selectedType?->getOptionsUsing)
                         ->getSearchResultsUsing($selectedType?->getSearchResultsUsing)
                         ->getOptionLabelUsing($selectedType?->getOptionLabelUsing)
-                        ->required($isRequired)
+                        ->required(!$selectedTypeIsUrl && $selectedType)
                         ->hidden(! $selectedType || $selectedTypeIsUrl)
                         ->searchable($this->isSearchable())
                         ->searchDebounce($this->getSearchDebounce())
@@ -122,6 +122,7 @@ class CallToActionField extends Component
                         ->columnSpan(4)
                         ->placeholder('https://')
                         ->url()
+                        ->required($selectedType && $selectedTypeIsUrl)
                         ->hidden(! $selectedType || ! $selectedTypeIsUrl),
                 ]),
             Grid::make(6)
