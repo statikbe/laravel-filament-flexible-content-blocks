@@ -33,6 +33,8 @@ class CallToActionField extends Component
 
     const FIELD_URL = 'url';
 
+    const FIELD_ROUTE = 'route';
+
     const FIELD_BUTTON_STYLE = 'button_style';
 
     const FIELD_BUTTON_LABEL = 'button_label';
@@ -84,6 +86,7 @@ class CallToActionField extends Component
             return $get('cta_model');
         })] ?? null;
         $selectedTypeIsUrl = $selectedType?->isUrlType() ?? false;
+        $selectedTypeIsRoute = $selectedType?->isRouteType() ?? false;
 
         return [
             Grid::make(6)
@@ -98,7 +101,7 @@ class CallToActionField extends Component
                         ->required()
                         ->reactive()
                         ->afterStateUpdated(function (Closure $set) {
-                            $set('entry_id', null);
+                            $set(static::FIELD_ENTRY_ID, null);
                         }),
                     Select::make(static::FIELD_ENTRY_ID)
                         ->columnSpan(4)
@@ -106,8 +109,8 @@ class CallToActionField extends Component
                         ->options($selectedType?->getOptionsUsing)
                         ->getSearchResultsUsing($selectedType?->getSearchResultsUsing)
                         ->getOptionLabelUsing($selectedType?->getOptionLabelUsing)
-                        ->required(! $selectedTypeIsUrl && $selectedType)
-                        ->hidden(! $selectedType || $selectedTypeIsUrl)
+                        ->required(! $selectedTypeIsUrl && ! $selectedTypeIsRoute && $selectedType)
+                        ->hidden(! $selectedType || $selectedTypeIsUrl || $selectedTypeIsRoute)
                         ->searchable($this->isSearchable())
                         ->searchDebounce($this->getSearchDebounce())
                         ->searchPrompt($this->getSearchPrompt())
@@ -124,6 +127,15 @@ class CallToActionField extends Component
                         ->url()
                         ->required($selectedType && $selectedTypeIsUrl)
                         ->hidden(! $selectedType || ! $selectedTypeIsUrl),
+                    Select::make(static::FIELD_ROUTE)
+                        ->columnSpan(4)
+                        ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_route'))
+                        ->options(FilamentFlexibleBlocksConfig::getLinkRoutes())
+                        ->required($selectedTypeIsRoute && $selectedType)
+                        ->hidden(! $selectedType || !$selectedTypeIsRoute)
+                        ->loadingMessage($this->getLoadingMessage())
+                        ->optionsLimit($this->getOptionsLimit())
+                        ->preload($this->isPreloaded()),
                 ]),
             Grid::make(6)
                 ->schema([

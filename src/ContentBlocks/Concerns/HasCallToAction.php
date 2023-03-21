@@ -18,9 +18,13 @@ trait HasCallToAction
         $urlType->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_model_type_url'))
             ->setAsUrlType();
 
+        $routeType = new CallToActionType('Route');
+        $routeType->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_model_type_route'))
+            ->setAsRouteType();
+
         $types = collect(FilamentFlexibleBlocksConfig::getCallToActionModels(static::class))->map(fn ($item) => new CallToActionType($item))->toArray();
 
-        return array_merge(['url' => $urlType], $types);
+        return array_merge(['url' => $urlType, 'route' => $routeType], $types);
     }
 
     /**

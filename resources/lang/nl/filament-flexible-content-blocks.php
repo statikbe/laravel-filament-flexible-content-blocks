@@ -125,12 +125,14 @@
 
         'form_component.content_blocks.call_to_action_lbl' => 'Call to action',
         'form_component.content_blocks.add_call_to_action' => 'Voeg call to action toe',
+        'form_component.content_blocks.call_to_action_model_type_route' => 'Route',
         'form_component.content_blocks.call_to_action_model_type_url' => 'URL',
         'form_component.content_blocks.call_to_action_cta_model' => 'Type',
         'form_component.content_blocks.call_to_action_entry_id' => 'Pagina',
         'form_component.content_blocks.call_to_action_button_style' => 'Stijl van de knop',
         'form_component.content_blocks.call_to_action_button_label' => 'Label op de knop',
         'form_component.content_blocks.call_to_action_button_open_in_new_window' => 'Open in nieuw venster?',
+        'form_component.content_blocks.call_to_action_route' => 'Route',
 
         'form_component.content_blocks.background_colour.default' => 'Standaard',
         'form_component.content_blocks.background_colour.primary' => 'Primair',

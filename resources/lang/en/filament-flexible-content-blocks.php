@@ -122,11 +122,13 @@
         'form_component.content_blocks.call_to_action_lbl' => 'Call to action',
         'form_component.content_blocks.add_call_to_action' => 'Add call to action',
         'form_component.content_blocks.call_to_action_model_type_url' => 'URL',
+        'form_component.content_blocks.call_to_action_model_type_route' => 'Route',
         'form_component.content_blocks.call_to_action_cta_model' => 'Type',
         'form_component.content_blocks.call_to_action_entry_id' => 'Page',
         'form_component.content_blocks.call_to_action_button_style' => 'Button style',
         'form_component.content_blocks.call_to_action_button_label' => 'Button label',
         'form_component.content_blocks.call_to_action_button_open_in_new_window' => 'Open in new window?',
+        'form_component.content_blocks.call_to_action_route' => 'Route',
 
         'form_component.content_blocks.background_colour.default' => 'Default',
         'form_component.content_blocks.background_colour.primary' => 'Primary',

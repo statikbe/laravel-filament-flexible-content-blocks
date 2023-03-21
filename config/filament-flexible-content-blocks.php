@@ -108,6 +108,39 @@ return [
         'App\Models\TranslatableFlexiblePage',
     ],
 
+    'link_routes' => [
+        'allowed' => [
+            '*'
+        ],
+        'denied' => [
+            'debugbar*',
+            'filament.*',
+            'livewire.*',
+            'ignition.*',
+            'api*',
+            'login_authorize',
+            'login_create',
+            'mailing_list_index',
+            'registration_previous',
+            'registration_step_error',
+            'registration_step1',
+            'registration_step2',
+            'registration_step3',
+            'registration_step4',
+            'registration_step5',
+            'automatic_renewal_success',
+            'automatic_renewal_failed',
+            'profile_renew_success',
+            'plastic_card_order_success_index',
+            'automatic_renewal_payment',
+            'automatic_renewal_cancel',
+            'order_card_flow_finish_index',
+            'find_uitid_found_index',
+            'post_survey_inquiry_index',
+            'post_survey_inquiry_redirect',
+        ],
+    ],
+
     'image_position' => [
         'options' => [
             'left' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_position.left',

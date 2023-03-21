@@ -3,6 +3,10 @@
 namespace Statikbe\FilamentFlexibleContentBlocks;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Routing\Route;
+use Illuminate\Routing\RouteCollection;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 use Spatie\MediaLibrary\Conversions\Conversion;
 use Spatie\MediaLibrary\HasMedia;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
@@ -20,6 +24,59 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasOverviewAttribute
 
 class FilamentFlexibleBlocksConfig
 {
+    /**
+     * @return array<string, string>
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    public static function getLinkRoutes(): array {
+        return Cache::rememberForever('filament-flexible-content-blocks::link_routes', function() {
+            /* @var RouteCollection $routeCollection */
+            $routeCollection = app()->get('router')->getRoutes()->getRoutes();
+            //Default remove all routes with parameters and no GET requests:
+            $filteredRoutes = collect($routeCollection)->filter(function (Route $route) {
+                return collect($route->methods())->contains('GET') && empty($route->parameterNames());
+            });
+
+            //keep routes that match the allowed route parameters:
+            $allowedRoutePatterns = config('filament-flexible-content-blocks.link_routes.allowed');
+            if(!empty($allowedRoutePatterns)) {
+                $filteredRoutes = $filteredRoutes->filter(function (Route $route) use ($allowedRoutePatterns) {
+                    return self::matchRouteToPatterns($route, $allowedRoutePatterns);
+                });
+            }
+
+            //remove routes that match the allowed route parameters:
+            $disallowedRoutePatterns = config('filament-flexible-content-blocks.link_routes.denied');
+            if(!empty($disallowedRoutePatterns)) {
+                $filteredRoutes = $filteredRoutes->filter(function (Route $route) use ($disallowedRoutePatterns) {
+                    return !self::matchRouteToPatterns($route, $disallowedRoutePatterns);
+                });
+            }
+
+            return $filteredRoutes->mapWithKeys(function ($route) {
+                if($route->getName()) {
+                    return [$route->getName() => $route->uri()];
+                }
+                return [];
+            })->all();
+        });
+    }
+
+    private static function matchRouteToPatterns(Route $route, array $patterns): bool {
+        if($route->getName()) {
+            return $route->named($patterns);
+        }
+        else {
+            foreach ($patterns as $pattern) {
+                if (Str::is($pattern, $route->uri())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     /**
      * @param  class-string<Model>  $modelClass
      *

@@ -4,6 +4,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Dat
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToActionField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Type\CallToActionType;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\Linkable;
 
@@ -22,28 +23,31 @@ class CallToActionData
      */
     public static function create(array $callToActionBlockData, array $buttonStyleClasses): self
     {
-        if ($callToActionBlockData['cta_model'] === CallToActionType::TYPE_URL) {
-            $url = $callToActionBlockData['url'];
+        if ($callToActionBlockData[CallToActionField::FIELD_CTA_MODEL] === CallToActionType::TYPE_URL) {
+            $url = $callToActionBlockData[CallToActionField::FIELD_URL];
+        }
+        else if ($callToActionBlockData[CallToActionField::FIELD_CTA_MODEL] === CallToActionType::TYPE_ROUTE) {
+            $url = route($callToActionBlockData[CallToActionField::FIELD_ROUTE]);
         } else {
-            $linkableType = $callToActionBlockData['cta_model'];
+            $linkableType = $callToActionBlockData[CallToActionField::FIELD_CTA_MODEL];
             /** @var class-string<Linkable&Model> $linkableModel */
             $linkableModel = Relation::getMorphedModel($linkableType);
 
             /** @var Linkable&Model $page */
-            $page = $linkableModel::findOrFail($callToActionBlockData['entry_id']);
+            $page = $linkableModel::findOrFail($callToActionBlockData[CallToActionField::FIELD_ENTRY_ID]);
             $url = $page->getViewUrl();
         }
 
-        $buttonStyle = $callToActionBlockData['button_style'] ?? null;
+        $buttonStyle = $callToActionBlockData[CallToActionField::FIELD_BUTTON_STYLE] ?? null;
         if (isset($buttonStyleClasses[$buttonStyle])) {
             $buttonStyle = $buttonStyleClasses[$buttonStyle];
         }
 
         return new self(
             $url,
-            $callToActionBlockData['button_label'] ?? null,
+            $callToActionBlockData[CallToActionField::FIELD_BUTTON_LABEL] ?? null,
             $buttonStyle,
-            $callToActionBlockData['button_open_new_window'] ?? false,
+            $callToActionBlockData[CallToActionField::FIELD_BUTTON_OPEN_NEW_WINDOW] ?? false,
         );
     }
 }
