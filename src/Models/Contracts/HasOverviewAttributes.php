@@ -39,5 +39,5 @@ interface HasOverviewAttributes
     /**
      * Get the html view of the overview image
      */
-    public function getOverviewImageMedia(array $attributes = []): ?HtmlableMedia;
+    public function getOverviewImageMedia(string $conversion = null, array $attributes = []): ?HtmlableMedia;
 }

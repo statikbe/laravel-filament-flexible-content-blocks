@@ -48,12 +48,13 @@ trait HasOverviewAttributesTrait
     protected function registerOverviewImageMediaCollectionAndConversion()
     {
         $this->addMediaCollection($this->getOverviewImageCollection())
-            ->registerMediaConversions(function (Media $media) {
+            ->registerMediaConversions(function (?Media $media) {
                 $conversion = $this->addMediaConversion($this->getOverviewImageConversionName())
                     ->withResponsiveImages()
                     ->fit(Manipulations::FIT_CROP, 600, 600)
                     ->format(Manipulations::FORMAT_WEBP);
                 FilamentFlexibleBlocksConfig::mergeConfiguredModelImageConversion(static::class, $this->getOverviewImageCollection(), $this->getOverviewImageConversionName(), $conversion);
+                FilamentFlexibleBlocksConfig::addExtraModelImageConversions(static::class, $this->getOverviewImageCollection(), $this);
 
                 //for filament upload field
                 $this->addFilamentThumbnailMediaConversion();
@@ -81,7 +82,7 @@ trait HasOverviewAttributesTrait
         return $this->getFirstMediaUrl($this->getOverviewImageCollection(), $conversion ?? $this->getOverviewImageConversionName());
     }
 
-    public function getOverviewImageMedia(array $attributes = []): ?HtmlableMedia
+    public function getOverviewImageMedia(string $conversion = null, array $attributes = []): ?HtmlableMedia
     {
         return $this->getImageHtml(
             $this->getImageMedia($this->getOverviewImageCollection()),

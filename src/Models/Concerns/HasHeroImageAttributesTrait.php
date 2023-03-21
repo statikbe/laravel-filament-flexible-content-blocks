@@ -26,12 +26,13 @@ trait HasHeroImageAttributesTrait
     protected function registerHeroImageMediaCollectionAndConversion()
     {
         $this->addMediaCollection($this->getHeroImageCollection())
-            ->registerMediaConversions(function (Media $media) {
+            ->registerMediaConversions(function (?Media $media) {
                 $conversion = $this->addMediaConversion($this->getHeroImageConversionName())
                     ->withResponsiveImages()
                     ->fit(Manipulations::FIT_CROP, 1200, 630)
                     ->format(Manipulations::FORMAT_WEBP);
                 FilamentFlexibleBlocksConfig::mergeConfiguredModelImageConversion(static::class, $this->getHeroImageCollection(), $this->getHeroImageConversionName(), $conversion);
+                FilamentFlexibleBlocksConfig::addExtraModelImageConversions(static::class, $this->getHeroImageCollection(), $this);
 
                 //for filament upload field
                 $this->addFilamentThumbnailMediaConversion();
@@ -59,11 +60,11 @@ trait HasHeroImageAttributesTrait
         return $this->getFirstMediaUrl($this->getHeroImageCollection(), $conversion ?? $this->getHeroImageConversionName());
     }
 
-    public function getHeroImageMedia(array $attributes = []): ?HtmlableMedia
+    public function getHeroImageMedia(string $conversion = null, array $attributes = []): ?HtmlableMedia
     {
         return $this->getImageHtml(
             $this->getImageMedia($this->getHeroImageCollection()),
-            $this->getHeroImageConversionName(),
+            $conversion ?? $this->getHeroImageConversionName(),
             $this->hero_image_title,
             $attributes);
     }

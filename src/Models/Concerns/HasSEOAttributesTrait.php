@@ -48,10 +48,12 @@ trait HasSEOAttributesTrait
     protected function registerSEOImageMediaCollectionAndConversion()
     {
         $this->addMediaCollection($this->getSEOImageCollection())
-            ->registerMediaConversions(function (Media $media) {
+            ->registerMediaConversions(function (?Media $media) {
                 $conversion = $this->addMediaConversion($this->getSEOImageConversionName())
                     ->fit(Manipulations::FIT_CROP, 1200, 630);
                 FilamentFlexibleBlocksConfig::mergeConfiguredModelImageConversion(static::class, $this->getSEOImageCollection(), $this->getSEOImageConversionName(), $conversion);
+                FilamentFlexibleBlocksConfig::addExtraModelImageConversions(static::class, $this->getSEOImageCollection(), $this);
+
                 //for filament upload field
                 $this->addFilamentThumbnailMediaConversion();
             });

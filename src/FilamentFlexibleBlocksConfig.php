@@ -4,6 +4,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks;
 
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\Conversions\Conversion;
+use Spatie\MediaLibrary\HasMedia;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\CallToActionBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\CardsBlock;
@@ -52,29 +53,78 @@ class FilamentFlexibleBlocksConfig
     {
         if (isset($configuredConversions[$collectionName][$conversionName])) {
             $configuredConversion = $configuredConversions[$collectionName][$conversionName];
-            $alreadyDoneConversions = [];
-            //specific cases for specific method calls on the conversion object:
-            if (isset($configuredConversion['fit']) && isset($configuredConversion['width']) && isset($configuredConversion['height'])) {
-                $conversion->fit($configuredConversion['fit'], $configuredConversion['width'], $configuredConversion['height']);
-                $alreadyDoneConversions = ['fit', 'width', 'height'];
-            }
-            if (isset($configuredConversion['responsive']) && $configuredConversion['responsive']) {
-                $conversion->withResponsiveImages();
-                $alreadyDoneConversions[] = 'responsive';
-            }
-            if (isset($configuredConversion['queued']) && $configuredConversion['queued']) {
-                $conversion->queued();
-                $alreadyDoneConversions[] = 'queued';
-            }
-            //do the manipulations that are left:
-            foreach ($configuredConversion as $operation => $value) {
-                if (! in_array($operation, $alreadyDoneConversions)) {
-                    $conversion->{$operation}($value);
-                }
+            self::mergeConfiguredImageConversion($configuredConversion, $conversion);
+        }
+
+        return $conversion;
+    }
+
+    private static function mergeConfiguredImageConversion(array $configuredConversion, Conversion &$conversion): Conversion
+    {
+        $alreadyDoneConversions = [];
+        //specific cases for specific method calls on the conversion object:
+        if (isset($configuredConversion['fit']) && isset($configuredConversion['width']) && isset($configuredConversion['height'])) {
+            $conversion->fit($configuredConversion['fit'], $configuredConversion['width'], $configuredConversion['height']);
+            $alreadyDoneConversions = ['fit', 'width', 'height'];
+        }
+        if (isset($configuredConversion['responsive']) && $configuredConversion['responsive']) {
+            $conversion->withResponsiveImages();
+            $alreadyDoneConversions[] = 'responsive';
+        }
+        if (isset($configuredConversion['queued']) && $configuredConversion['queued']) {
+            $conversion->queued();
+            $alreadyDoneConversions[] = 'queued';
+        }
+        //do the manipulations that are left:
+        foreach ($configuredConversion as $operation => $value) {
+            if (! in_array($operation, $alreadyDoneConversions)) {
+                $conversion->{$operation}($value);
             }
         }
 
         return $conversion;
+    }
+
+    /**
+     * @param  class-string<AbstractContentBlock>  $blockClass
+     * @param  string  $collectionName
+     * @param  Model&HasMedia  $record
+     * @return void
+     */
+    public static function addExtraFlexibleBlockImageConversions(string $blockClass, string $collectionName, Model&HasMedia $record): void
+    {
+        $configuredConversionData = self::getFlexibleBlockImageConversionConfig($blockClass);
+        self::addExtraImageConversions($configuredConversionData, $collectionName, $record);
+    }
+
+    /**
+     * @param  class-string<Model>  $modelClass
+     * @param  string  $collectionName
+     * @param  Model&HasMedia  $record
+     * @return void
+     */
+    public static function addExtraModelImageConversions(string $modelClass, string $collectionName, Model&HasMedia $record): void
+    {
+        $configuredConversionData = self::getModelImageConversionConfig($modelClass);
+        self::addExtraImageConversions($configuredConversionData, $collectionName, $record);
+    }
+
+    /**
+     * @param  array<string, array>  $configuredConversions
+     * @param  string  $collectionName
+     * @param  Model&HasMedia  $record
+     * @return void
+     *
+     * @throws \Spatie\Image\Exceptions\InvalidManipulation
+     */
+    private static function addExtraImageConversions(array $configuredConversions, string $collectionName, Model&HasMedia $record): void
+    {
+        if (isset($configuredConversions[$collectionName]['extra_conversions'])) {
+            foreach ($configuredConversions[$collectionName]['extra_conversions'] as $extraConversionName => $extraConversionData) {
+                $conversion = $record->addMediaConversion($extraConversionName);
+                self::mergeConfiguredImageConversion($configuredConversions[$collectionName]['extra_conversions'][$extraConversionName], $conversion);
+            }
+        }
     }
 
     /**
