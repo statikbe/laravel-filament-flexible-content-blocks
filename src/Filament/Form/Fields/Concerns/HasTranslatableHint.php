@@ -2,32 +2,32 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Concerns;
 
-    use Filament\Forms\Components\Field;
-    use Illuminate\Database\Eloquent\Model;
+use Filament\Forms\Components\Field;
+use Illuminate\Database\Eloquent\Model;
 
-    /**
-     * Checks if the field is translatable and adds a default translatable hint, if no other hint is provided.
-     */
-    trait HasTranslatableHint
+/**
+ * Checks if the field is translatable and adds a default translatable hint, if no other hint is provided.
+ */
+trait HasTranslatableHint
+{
+    public function addsTranslatableHint(): static
     {
-        public function addsTranslatableHint(): static
-        {
-            $this->hint = function (?Model $record, Field $component) {
-                if ($record && isset($record->translatable) && in_array($component->getName(), $record->translatable)) {
-                    return trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.translatable_hint');
-                }
+        $this->hint = function (?Model $record, Field $component) {
+            if ($record && isset($record->translatable) && in_array($component->getName(), $record->translatable)) {
+                return trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.translatable_hint');
+            }
 
-                return null;
-            };
+            return null;
+        };
 
-            $this->hintIcon = function (?Model $record, Field $component) {
-                if ($record && isset($record->translatable) && in_array($component->getName(), $record->translatable)) {
-                    return 'heroicon-s-translate';
-                }
+        $this->hintIcon = function (?Model $record, Field $component) {
+            if ($record && isset($record->translatable) && in_array($component->getName(), $record->translatable)) {
+                return 'heroicon-s-translate';
+            }
 
-                return null;
-            };
+            return null;
+        };
 
-            return $this;
-        }
+        return $this;
     }
+}

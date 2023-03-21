@@ -106,7 +106,7 @@ class CallToActionField extends Component
                         ->options($selectedType?->getOptionsUsing)
                         ->getSearchResultsUsing($selectedType?->getSearchResultsUsing)
                         ->getOptionLabelUsing($selectedType?->getOptionLabelUsing)
-                        ->required(!$selectedTypeIsUrl && $selectedType)
+                        ->required(! $selectedTypeIsUrl && $selectedType)
                         ->hidden(! $selectedType || $selectedTypeIsUrl)
                         ->searchable($this->isSearchable())
                         ->searchDebounce($this->getSearchDebounce())
