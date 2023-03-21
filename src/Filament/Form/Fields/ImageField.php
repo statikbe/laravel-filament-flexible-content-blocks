@@ -9,11 +9,11 @@ abstract class ImageField
     protected static function createImageField(string $field, bool $translatable = false): SpatieMediaLibraryFileUpload
     {
         if ($translatable) {
-            $fileUploadClass = TranslatableSpatieMediaLibraryFileUpload::class;
+            return TranslatableSpatieMediaLibraryFileUpload::make($field)
+                ->hint(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.translatable_image_hint'))
+                ->hintIcon('heroicon-s-translate');
         } else {
-            $fileUploadClass = SpatieMediaLibraryFileUpload::class;
+            return SpatieMediaLibraryFileUpload::make($field);
         }
-
-        return $fileUploadClass::make($field);
     }
 }

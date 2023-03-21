@@ -19,6 +19,7 @@
         'table_action.view_page_lbl' => 'Bekijk',
 
         'form_component.translatable_hint' => 'Je kan dit veld vertalen.',
+        'form_component.translatable_image_hint' => 'Je kan deze afbeelding vertalen.',
         'form_component.title_lbl' => 'Titel',
         'form_component.slug_lbl' => 'Slug',
         'form_component.slug_desc' => '<strong>Let op:</strong> Wanneer je de slug aanpast van een gepubliceerde pagina, verandert de URL van de pagina.',
