@@ -87,9 +87,6 @@ class FilamentFlexibleBlocksConfig
 
     /**
      * @param  class-string<AbstractContentBlock>  $blockClass
-     * @param  string  $collectionName
-     * @param  Model&HasMedia  $record
-     * @return void
      */
     public static function addExtraFlexibleBlockImageConversions(string $blockClass, string $collectionName, Model&HasMedia $record): void
     {
@@ -99,9 +96,6 @@ class FilamentFlexibleBlocksConfig
 
     /**
      * @param  class-string<Model>  $modelClass
-     * @param  string  $collectionName
-     * @param  Model&HasMedia  $record
-     * @return void
      */
     public static function addExtraModelImageConversions(string $modelClass, string $collectionName, Model&HasMedia $record): void
     {
@@ -111,9 +105,6 @@ class FilamentFlexibleBlocksConfig
 
     /**
      * @param  array<string, array>  $configuredConversions
-     * @param  string  $collectionName
-     * @param  Model&HasMedia  $record
-     * @return void
      *
      * @throws \Spatie\Image\Exceptions\InvalidManipulation
      */
