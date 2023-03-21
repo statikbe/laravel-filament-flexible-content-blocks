@@ -58,7 +58,7 @@
         'form_component.copy_content_blocks_to_other_locales.modal_subheading' => 'Dit kopieert alle inhoudsblokken van deze taal naar alle andere talen. Bestaande vertaalde inhoudsblokken zullen verwijderd en overschreven worden! Ben je zeker?',
         'form_component.copy_content_blocks_to_other_locales.modal_button' => 'Kopieer inhoudsblokken',
 
-        'form_component.content_blocks.text.title' => 'Tekst',
+        'form_component.content_blocks.text.title' => 'Titel',
         'form_component.content_blocks.text.label' => 'Tekst',
         'form_component.content_blocks.text.content' => 'Tekst',
         'form_component.content_blocks.text-image.label' => 'Tekst (+ afbeelding)',

@@ -70,7 +70,7 @@
         'form_component.content_blocks.text-image.image_title' => 'Image title',
         'form_component.content_blocks.text-image.image_copyright' => 'Image copyright',
         'form_component.content_blocks.text-image.call_to_action' => 'Call to action',
-        'form_component.content_blocks.text.title' => 'Text',
+        'form_component.content_blocks.text.title' => 'Title',
         'form_component.content_blocks.text.label' => 'Text',
         'form_component.content_blocks.video.label' => 'Video',
         'form_component.content_blocks.video.embed_code' => 'Video embed code',
