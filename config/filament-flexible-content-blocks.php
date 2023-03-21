@@ -110,7 +110,7 @@ return [
 
     'link_routes' => [
         'allowed' => [
-            '*'
+            '*',
         ],
         'denied' => [
             'debugbar*',

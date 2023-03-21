@@ -132,7 +132,7 @@ class CallToActionField extends Component
                         ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_route'))
                         ->options(FilamentFlexibleBlocksConfig::getLinkRoutes())
                         ->required($selectedTypeIsRoute && $selectedType)
-                        ->hidden(! $selectedType || !$selectedTypeIsRoute)
+                        ->hidden(! $selectedType || ! $selectedTypeIsRoute)
                         ->loadingMessage($this->getLoadingMessage())
                         ->optionsLimit($this->getOptionsLimit())
                         ->preload($this->isPreloaded()),

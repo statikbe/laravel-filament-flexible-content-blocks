@@ -7,9 +7,11 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\Linkable;
 class CallToActionType extends AbstractType
 {
     const TYPE_URL = 'url';
+
     const TYPE_ROUTE = 'route';
 
     private bool $isUrlType = false;
+
     private bool $isRouteType = false;
 
     /**
@@ -60,7 +62,7 @@ class CallToActionType extends AbstractType
             return static::TYPE_URL;
         }
 
-        if($this->isRouteType){
+        if ($this->isRouteType) {
             return static::TYPE_ROUTE;
         }
 
