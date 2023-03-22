@@ -26,11 +26,13 @@ class FilamentFlexibleBlocksConfig
 {
     /**
      * @return array<string, string>
+     *
      * @throws \Psr\Container\ContainerExceptionInterface
      * @throws \Psr\Container\NotFoundExceptionInterface
      */
-    public static function getLinkRoutes(): array {
-        return Cache::rememberForever('filament-flexible-content-blocks::link_routes', function() {
+    public static function getLinkRoutes(): array
+    {
+        return Cache::rememberForever('filament-flexible-content-blocks::link_routes', function () {
             /* @var RouteCollection $routeCollection */
             $routeCollection = app()->get('router')->getRoutes()->getRoutes();
             //Default remove all routes with parameters and no GET requests:
@@ -40,7 +42,7 @@ class FilamentFlexibleBlocksConfig
 
             //keep routes that match the allowed route parameters:
             $allowedRoutePatterns = config('filament-flexible-content-blocks.link_routes.allowed');
-            if(!empty($allowedRoutePatterns)) {
+            if (! empty($allowedRoutePatterns)) {
                 $filteredRoutes = $filteredRoutes->filter(function (Route $route) use ($allowedRoutePatterns) {
                     return self::matchRouteToPatterns($route, $allowedRoutePatterns);
                 });
@@ -48,32 +50,34 @@ class FilamentFlexibleBlocksConfig
 
             //remove routes that match the allowed route parameters:
             $disallowedRoutePatterns = config('filament-flexible-content-blocks.link_routes.denied');
-            if(!empty($disallowedRoutePatterns)) {
+            if (! empty($disallowedRoutePatterns)) {
                 $filteredRoutes = $filteredRoutes->filter(function (Route $route) use ($disallowedRoutePatterns) {
-                    return !self::matchRouteToPatterns($route, $disallowedRoutePatterns);
+                    return ! self::matchRouteToPatterns($route, $disallowedRoutePatterns);
                 });
             }
 
             return $filteredRoutes->mapWithKeys(function ($route) {
-                if($route->getName()) {
+                if ($route->getName()) {
                     return [$route->getName() => $route->uri()];
                 }
+
                 return [];
             })->all();
         });
     }
 
-    private static function matchRouteToPatterns(Route $route, array $patterns): bool {
-        if($route->getName()) {
+    private static function matchRouteToPatterns(Route $route, array $patterns): bool
+    {
+        if ($route->getName()) {
             return $route->named($patterns);
-        }
-        else {
+        } else {
             foreach ($patterns as $pattern) {
                 if (Str::is($pattern, $route->uri())) {
                     return true;
                 }
             }
         }
+
         return false;
     }
 

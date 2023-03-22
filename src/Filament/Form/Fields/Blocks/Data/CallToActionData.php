@@ -25,8 +25,7 @@ class CallToActionData
     {
         if ($callToActionBlockData[CallToActionField::FIELD_CTA_MODEL] === CallToActionType::TYPE_URL) {
             $url = $callToActionBlockData[CallToActionField::FIELD_URL];
-        }
-        else if ($callToActionBlockData[CallToActionField::FIELD_CTA_MODEL] === CallToActionType::TYPE_ROUTE) {
+        } elseif ($callToActionBlockData[CallToActionField::FIELD_CTA_MODEL] === CallToActionType::TYPE_ROUTE) {
             $url = route($callToActionBlockData[CallToActionField::FIELD_ROUTE]);
         } else {
             $linkableType = $callToActionBlockData[CallToActionField::FIELD_CTA_MODEL];
