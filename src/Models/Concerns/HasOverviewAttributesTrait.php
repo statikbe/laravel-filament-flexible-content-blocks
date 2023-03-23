@@ -93,7 +93,7 @@ trait HasOverviewAttributesTrait
     public function getOverviewImageMedia(string $conversion = null, array $attributes = []): ?HtmlableMedia
     {
         return $this->getImageHtml(
-            $this->getFallbackImageMedia($this->overviewImage, $this->getOverviewImageCollection()),
+            $this->getFallbackImageMedia($this->overviewImage->first(), $this->getOverviewImageCollection()),
             $this->getOverviewImageConversionName(),
             $this->getOverviewTitle(),
             $attributes);
