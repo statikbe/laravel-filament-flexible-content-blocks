@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
@@ -21,6 +22,11 @@ trait HasHeroImageAttributesTrait
     {
         $this->registerHeroImageMediaCollectionAndConversion();
         $this->mergeFillable(['hero_image_title', 'hero_image_copyright']);
+    }
+
+    public function heroImage(): MorphMany
+    {
+        return $this->media()->where('collection_name', $this->getHeroImageCollection());
     }
 
     protected function registerHeroImageMediaCollectionAndConversion()
@@ -57,13 +63,15 @@ trait HasHeroImageAttributesTrait
 
     public function getHeroImageUrl(string $conversion = null): ?string
     {
-        return $this->getFirstMediaUrl($this->getHeroImageCollection(), $conversion ?? $this->getHeroImageConversionName());
+        $media = $this->getFallbackImageMedia($this->heroImage, $this->getHeroImageCollection());
+
+        return $media?->getUrl($conversion ?? $this->getHeroImageConversionName());
     }
 
     public function getHeroImageMedia(string $conversion = null, array $attributes = []): ?HtmlableMedia
     {
         return $this->getImageHtml(
-            $this->getImageMedia($this->getHeroImageCollection()),
+            $this->getFallbackImageMedia($this->heroImage->first(), $this->getHeroImageCollection()),
             $conversion ?? $this->getHeroImageConversionName(),
             $this->hero_image_title,
             $attributes);

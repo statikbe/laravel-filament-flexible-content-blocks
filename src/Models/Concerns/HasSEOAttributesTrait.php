@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -25,6 +26,11 @@ trait HasSEOAttributesTrait
         ]);
 
         $this->registerSEOImageMediaCollectionAndConversion();
+    }
+
+    public function SEOImage(): MorphMany
+    {
+        return $this->media()->where('collection_name', $this->getSEOImageCollection());
     }
 
     public function getSEOTitle(): ?string
@@ -77,7 +83,7 @@ trait HasSEOAttributesTrait
 
     public function getSEOImageUrl(string $conversion = null): ?string
     {
-        $media = $this->getImageMedia($this->getSEOImageCollection());
+        $media = $this->getFallbackImageMedia($this->SEOImage, $this->getSEOImageCollection());
 
         return $media?->getUrl($conversion ?? $this->getSEOImageConversionName());
     }
