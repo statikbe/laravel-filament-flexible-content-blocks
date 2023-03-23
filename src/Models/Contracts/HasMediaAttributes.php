@@ -19,10 +19,6 @@ interface HasMediaAttributes
     /**
      * Checks if the given media from the morph media relationship exists and if not fetches the first media element of the collection, disregarding the locales.
      * Locales should be queried in the morph media relationship.
-     *
-     * @param  Media|null  $morphedMedia
-     * @param  string  $collection
-     * @return Media|null
      */
     public function getFallbackImageMedia(?Media $morphedMedia, string $collection): ?Media;
 
