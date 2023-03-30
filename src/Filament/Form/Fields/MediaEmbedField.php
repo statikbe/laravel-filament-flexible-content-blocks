@@ -2,14 +2,12 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
 
+use Closure;
 use Filament\Forms\Components\TextInput;
-
-use \Closure;
 use Statikbe\FilamentFlexibleContentBlocks\Rules\MediaEmbedRule;
 
 class MediaEmbedField extends TextInput
 {
-
     protected bool|Closure $isUrl = true;
 
     protected static function getFieldName(): string
@@ -27,7 +25,6 @@ class MediaEmbedField extends TextInput
                      ->media()
                      ->required($required);
     }
-
 
     public function media(bool|Closure $condition = true): static
     {
@@ -49,7 +46,6 @@ class MediaEmbedField extends TextInput
 
     public function isUrl(): bool
     {
-        return (bool)$this->evaluate($this->isUrl);
+        return (bool) $this->evaluate($this->isUrl);
     }
 }
-
