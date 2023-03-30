@@ -1,6 +1,6 @@
 <?php
 
-    namespace App\Http\Controllers;
+namespace App\Http\Controllers;
 
     use App\Models\TranslatableFlexiblePage;
     use Artesaos\SEOTools\Facades\SEOMeta;
@@ -9,8 +9,9 @@
 
     class TranslatablePageController extends Controller
     {
-        public function __invoke(TranslatableFlexiblePage $page){
-            if(!$page->isPublished()){
+        public function __invoke(TranslatableFlexiblePage $page)
+        {
+            if (! $page->isPublished()) {
                 return abort(Response::HTTP_NOT_FOUND);
             }
 
