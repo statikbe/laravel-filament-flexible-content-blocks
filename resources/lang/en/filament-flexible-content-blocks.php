@@ -141,4 +141,7 @@
         'form_component.image_conversion_type_contain' => 'Contain aspect ratio',
 
         'form_component.content_blocks.templates_options.footer' => 'Footer',
+
+        'form_component.media_embed.validation' => 'Included url is not a valid media url.'
+
     ];
