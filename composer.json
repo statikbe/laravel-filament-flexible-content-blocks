@@ -1,6 +1,6 @@
 {
     "name": "statikbe/laravel-filament-flexible-content-blocks",
-    "description": "This is my package laravel-filament-flexible-content-blocks",
+    "description": "The Laravel Filament Flexible Content Blocks package helps you to easily create content in Filament for any model, with predefined blocks, and foreach block an extendable Blade view component.",
     "keywords": [
         "statikbe",
         "laravel",
@@ -12,13 +12,23 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Kobe Christiaensen",
-            "email": "kobe@statik.be",
+            "name": "Sten Govaerts",
+            "email": "sten@statik.be",
             "role": "Developer"
         },
         {
-            "name": "Sten Govaerts",
-            "email": "sten@statik.be",
+            "name": "Stijn Elskens",
+            "email": "stijn@statik.be",
+            "role": "Developer",
+        },
+        {
+            "name": "Kristof Serré",
+            "email": "kristof@statik.be",
+            "role": "Developer"
+        },
+        {
+            "name": "Kobe Christiaensen",
+            "email": "kobe@statik.be",
             "role": "Developer"
         }
     ],
