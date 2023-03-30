@@ -146,5 +146,5 @@
 
         'form_component.content_blocks.templates_options.footer' => 'Voettekst',
 
-        'form_component.media_embed.validation' => 'De toegevoegde url is niet correct.'
+        'form_component.media_embed.validation' => 'De toegevoegde url is niet correct.',
     ];

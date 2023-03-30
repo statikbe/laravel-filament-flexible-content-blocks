@@ -7,20 +7,15 @@ use MediaEmbed\MediaEmbed;
 
 class MediaEmbedRule implements Rule
 {
-    /**
-     * @var \MediaEmbed\MediaEmbed
-     */
     private MediaEmbed $mediaEmbed;
 
     public function __construct()
     {
         $this->mediaEmbed = new MediaEmbed();
-
     }
 
     public function passes($attribute, $value): bool
     {
-
         if ($value) {
             $parsedUrl = $this->mediaEmbed->parseUrl($value);
             if ($parsedUrl) {
@@ -29,7 +24,6 @@ class MediaEmbedRule implements Rule
         }
 
         return false;
-
     }
 
     public function message(): string
