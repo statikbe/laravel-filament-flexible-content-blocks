@@ -226,7 +226,8 @@ class FilamentFlexibleBlocksConfig
     public static function getViewThemePrefix(): string
     {
         $theme = FilamentFlexibleBlocksConfig::getTheme();
-        return $theme ? $theme.'.': '';
+
+        return $theme ? $theme.'.' : '';
     }
 
     public static function getAuthorModel(): string
