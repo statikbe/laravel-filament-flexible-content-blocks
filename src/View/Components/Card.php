@@ -5,6 +5,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\View\Components;
 use Illuminate\View\Component;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CallToActionData;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CardData;
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 
 class Card extends Component
 {
@@ -58,12 +59,14 @@ class Card extends Component
 
     public function render()
     {
+        $themePrefix = FilamentFlexibleBlocksConfig::getViewThemePrefix();
+
         //get another template if the block style is set:
         $templateSuffix = '';
         if ($this->card->blockStyle && ! empty(trim($this->card->blockStyle))) {
             $templateSuffix = '-'.$this->card->blockStyle;
         }
 
-        return view('filament-flexible-content-blocks::components.card'.$templateSuffix);
+        return view("filament-flexible-content-blocks::components.{$themePrefix}card{$templateSuffix}");
     }
 }
