@@ -4,6 +4,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\View\Components;
 
 use Illuminate\View\Component;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 
 class ContentBlocks extends Component
@@ -41,6 +42,8 @@ class ContentBlocks extends Component
 
     public function render()
     {
-        return view('filament-flexible-content-blocks::components.content-blocks');
+        $themePrefix = FilamentFlexibleBlocksConfig::getViewThemePrefix();
+
+        return view("filament-flexible-content-blocks::components.{$themePrefix}content-blocks");
     }
 }

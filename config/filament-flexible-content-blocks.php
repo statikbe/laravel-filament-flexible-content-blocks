@@ -42,6 +42,8 @@ return [
         TemplateBlock::class,
     ],
 
+    'theme' => 'tailwind',
+
     'image_conversions' => [
         'models' => [
             'default' => [

@@ -44,7 +44,7 @@ class PublishAction extends Action
                         ->body(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.table_action.publish.unpublish_notification_success_msg'))
                         ->send();
                 }
-            } catch(\Exception $ex) {
+            } catch (\Exception $ex) {
                 Log::error($ex);
                 Notification::make()
                     ->danger()

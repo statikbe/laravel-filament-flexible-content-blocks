@@ -4,6 +4,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\View\Components;
 
 use Illuminate\View\Component;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasHeroImageAttributes;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasIntroAttribute;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasPageAttributes;
@@ -54,6 +55,8 @@ class Hero extends Component
 
     public function render()
     {
-        return view('filament-flexible-content-blocks::components.hero');
+        $themePrefix = FilamentFlexibleBlocksConfig::getViewThemePrefix();
+
+        return view("filament-flexible-content-blocks::components.{$themePrefix}hero");
     }
 }

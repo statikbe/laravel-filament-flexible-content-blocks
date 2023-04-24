@@ -218,6 +218,18 @@ class FilamentFlexibleBlocksConfig
         ]);
     }
 
+    public static function getTheme(): ?string
+    {
+        return config('filament-flexible-content-blocks.theme', 'tailwind');
+    }
+
+    public static function getViewThemePrefix(): string
+    {
+        $theme = FilamentFlexibleBlocksConfig::getTheme();
+
+        return $theme ? $theme.'.' : '';
+    }
+
     public static function getAuthorModel(): string
     {
         return config('filament-flexible-content-blocks.author_model', 'Illuminate\Foundation\Auth\User');
