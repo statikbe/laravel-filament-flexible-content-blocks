@@ -1,3 +1,5 @@
+<p align="center"><img src="documentation/img/banner-laravel-filament-flexible-content-blocks.png" alt="Laravel Filament Flexible cContent Blocks"></p>
+
 # Laravel Filament Flexible Content Blocks
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/statikbe/laravel-filament-flexible-content-blocks.svg?style=flat-square)](https://packagist.org/packages/statikbe/laravel-filament-flexible-content-blocks)

@@ -1,6 +1,6 @@
 <?php
 
-    namespace App\Http\Controllers;
+namespace App\Http\Controllers;
 
     use App\Models\FlexiblePage;
     use Artesaos\SEOTools\Facades\SEOTools;
@@ -8,8 +8,9 @@
 
     class PageController extends Controller
     {
-        public function __invoke(FlexiblePage $page){
-            if(!$page->isPublished()){
+        public function __invoke(FlexiblePage $page)
+        {
+            if (! $page->isPublished()) {
                 return abort(Response::HTTP_NOT_FOUND);
             }
 
