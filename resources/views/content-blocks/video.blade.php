@@ -1,6 +1,6 @@
 <div class="py-12 section section--default">
     <div class="container px-4 mx-auto">
-        @if($overlayImageId)
+        @if($hasOverlayImage())
             <div x-data="{isPlaying: false, embedUrl: '{{ $getEmbedSrc() }}'}" class="cursor-pointer group">
                 <div class="relative flex items-center justify-center" x-show="!isPlaying" x-transition x-transition.delay.300ms>
                     {{$getOverlayImageMedia(attributes:['alt' => '', 'class' => 'w-full', 'loading' => 'lazy'])}}
