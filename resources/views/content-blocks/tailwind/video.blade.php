@@ -1,9 +1,9 @@
 <div class="py-12 section section--default">
     <div class="container px-4 mx-auto">
         @if($hasOverlayImage())
-            <div x-data="{isPlaying: false, embedUrl: '{{ $embedCode }}'}" class="cursor-pointer group">
+            <div x-data="{isPlaying: false, embedUrl: '{{ $getEmbedSrc() }}'}" class="cursor-pointer group">
                 <div class="relative flex items-center justify-center" x-show="!isPlaying" x-transition x-transition.delay.300ms>
-                    {{$getOverlayImageMedia(attributes: ['alt' => '', 'class' => 'w-full', 'loading' => 'lazy'])}}
+                    {{$getOverlayImageMedia(attributes:['alt' => '', 'class' => 'w-full', 'loading' => 'lazy'])}}
                     <div class="absolute inset-0">
                         <div class="flex items-center justify-center h-full">
                             <button class="flex items-center justify-center before:transition-all before:duration-300 before:ease-in-out group-hover:before:bg-black/30 before:absolute before:bg-black/0 before:inset-0" @click="
@@ -26,7 +26,7 @@
         @else
             <div class="flex items-center justify-center">
                 <div class="w-full">
-                    <iframe title="youtube embed" src="{{ $embedCode }}" class="w-full aspect-video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    {!! $getEmbedCode(['class' => 'w-full h-full aspect-video', 'allow' => 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture', 'allowfullscreen' => true ]) !!}
                 </div>
             </div>
         @endif

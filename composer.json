@@ -40,7 +40,8 @@
         "spatie/laravel-medialibrary": "^10.0.0",
         "spatie/laravel-package-tools": "^1.13.0",
         "spatie/laravel-sluggable": "^3.4",
-        "spatie/laravel-translatable": "^6.3"
+        "spatie/laravel-translatable": "^6.3",
+        "dereuromark/media-embed": "^0.6"
     },
     "require-dev": {
         "laravel/pint": "^1.0",
