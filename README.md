@@ -105,10 +105,15 @@ Adds a code variable to be able to select a specific content model in your sourc
 varying id or slug. For instance, this is useful to look up a home page. Implement this with the trait [HasCodeTrait](src%2FModels%2FConcerns%2FHasCodeTrait.php).
 
 #### __[HasHeroImageAttributes](src%2FModels%2FContracts%2FHasHeroImageAttributes.php)__:
-
+Adds a hero image as well as a title (e.g. for accessibility in `alt` tags) and copyright variable to the model. This can 
+be implemented with [HasHeroImageAttributesTrait](src%2FModels%2FConcerns%2FHasHeroImageAttributesTrait.php) and 
+[HasTranslatedHeroImageAttributesTrait](src%2FModels%2FConcerns%2FHasTranslatedHeroImageAttributesTrait.php). 
 
 #### __[HasContentBlocks](src%2FModels%2FContracts%2FHasContentBlocks.php)__:
-
+Adds a JSON column to your model to store the data of the flexible content blocks. 
+This is required if you want to use the flexible content blocks. Implement it with 
+[HasContentBlocksTrait](src%2FModels%2FConcerns%2FHasContentBlocksTrait.php) or 
+[HasTranslatedContentBlocksTrait](src%2FModels%2FConcerns%2FHasTranslatedContentBlocksTrait.php).
 
 #### __[HasMediaAttributes](src%2FModels%2FContracts%2FHasMediaAttributes.php)__:
 Always include this interface if you use any image functionality. It provides some helper functions. 
@@ -116,7 +121,8 @@ You do not need to add traits, since the trait will be included by other traits 
 
 #### __[HasOverviewAttributes](src%2FModels%2FContracts%2FHasOverviewAttributes.php)__:
 Overview fields can be used to display the content models as brief snippets in lists, for instance a list of news articles.
-Implement 
+Implement this with [HasOverviewAttributesTrait](src%2FModels%2FConcerns%2FHasOverviewAttributesTrait.php) or 
+[HasTranslatedOverviewAttributesTrait](src%2FModels%2FConcerns%2FHasTranslatedOverviewAttributesTrait.php).
 
 #### __[HasSEOAttributes](src%2FModels%2FContracts%2FHasSEOAttributes.php)__:
 This adds a new title, description, image and keywords for SEO. It provides fallbacks to the regular title, intro 
@@ -125,19 +131,137 @@ and hero image if no SEO fields are completed. Implement the
 [HasTranslatedSEOAttributesTrait](src%2FModels%2FConcerns%2FHasTranslatedSEOAttributesTrait.php) for translatable content.   
 
 #### __[Linkable](src%2FModels%2FContracts%2FLinkable.php)__:
-
+Add this interface if you want to use the model to link in call-to-actions to create dynamic URL's, or if you want to
+use the view action in the Filament table. The interface asks you to implement two functions one to get the url where the 
+content can be publicly viewed and another to view the unpublished content. 
+There is no default implementation trait, because this package is unaware of the used routes and controllers.
 
 ### 3. Setup the Filament resource
 
+Create a filament resource and its page with the filament command.
+
+#### Setup the table
+
+There are few column fields provided by the package. Below is an overview of all available columns in a code sample: 
+
+```php
+public static function table(Table $table): Table {
+    return $table->columns([
+            TitleColumn::create(),
+            PublishedColumn::create(),
+        ])
+        ->actions([
+            Tables\Actions\EditAction::make(),
+            PublishAction::make(),
+        ])
+        ->bulkActions([
+            Tables\Actions\DeleteBulkAction::make(),
+        ]);
+}
+```
+
+And then you can implement the `form()` function with Filament fields provided by the package. Below is an example with tabs.
+Note that we sometimes make use of `create()` static functions, because we want to set the 
+names to the fixed variables used in the models. Some fields in the example are bundled in groupings 
+(e.g. [SEOFields](src%2FFilament%2FForm%2FFields%2FGroups%2FSEOFields.php)), you can also use the single fields if you 
+want make a custom layout.
+
+```php
+public static function form(Form $form): Form {
+    return $form
+        ->schema([
+            Tabs::make('Heading')
+                ->columnSpan(2)
+                ->tabs([
+                    Tab::make('General')
+                        ->schema([
+                            TitleField::create(true),
+                            SlugField::create(),
+                            PublicationSection::create(),
+                            AuthorField::create(),
+                            HeroImageSection::create(),
+                            IntroField::create(),
+                        ]),
+                    Tab::make('Content')
+                        ->schema([
+                            ContentBlocksField::create(),
+                        ]),
+                    Tab::make('Overview')
+                        ->schema([
+                            OverviewFields::make(1),
+                        ]),
+                    Tab::make('SEO')
+                        ->schema([
+                            SEOFields::make(1),
+                        ]),
+                ]),    
+        ]);
+}
+```
+
+If you have translatable content, you need to include the traits and language switch field of the [`filament/spatie-laravel-translatable-plugin`](https://filamentphp.com/docs/2.x/spatie-laravel-translatable-plugin/installation) to 
+[the resource](https://filamentphp.com/docs/2.x/spatie-laravel-translatable-plugin/getting-started#preparing-your-resource-class) 
+and its [pages](https://filamentphp.com/docs/2.x/spatie-laravel-translatable-plugin/getting-started#making-resource-pages-translatable).  
+
 ### 4. Setup the controller and Blade view
+
+Now you need to create a controller and `GET` route that returns a Blade view to display your content. See the example code for [controller examples](example%2Fapp%2FHttp).
+
+We provide Blade components for all fields (except SEO & overview fields). Below is an example of a simple Blade template, 
+where the model is passed to this view as `$page` variable. The `<x-flexible-hero>` component renders a default hero with 
+title and full screen image, and the `<x-flexible-content-blocks>` component renders all the content of each block.
+
+__Note:__ The `x-flexible-hero` component requires [Alpine.js](https://alpinejs.dev/).  
+
+```html
+<x-layouts.flexible title="{{ $page->title }}" wide="true">
+    <x-flexible-hero :page="$page" />
+    <div>
+        <x-flexible-content-blocks :page="$page">
+        </x-flexible-content-blocks>
+    </div>
+</x-layouts.flexible>
+```
+
+If you want to customise these component views, you can [publish the views](#installation).
+
+## Blocks
+
+To build your content, the package provides the default blocks listed below. 
+
+### Text block
+
+
+
+### Text with image block
+
+### Image block
+
+### Video block
+
+### Quote block
+
+### HTML block
+
+### Call-to-action block
+
+### Overview block
+
+### Cards block
+
+### Template block
+
+### Create your own custom block
+
+You can easily create your own content block by extending [AbstractContentBlock](src%2FContentBlocks%2FAbstractContentBlock.php).
+
+__Note:__ Do NOT use [AbstractFilamentFlexibleContentBlock.php](src%2FContentBlocks%2FAbstractFilamentFlexibleContentBlock.php)
+to extend from, because this super class contains logic to add the package's own namespace to the custom block.
 
 ## Configuration
 
 Documentation is WIP.
 
-## Blocks
-
-Documentation is WIP.
 
 ## Roadmap
 
