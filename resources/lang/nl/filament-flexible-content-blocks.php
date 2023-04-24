@@ -70,7 +70,7 @@
         'form_component.content_blocks.text-image.call_to_action' => 'Call to action',
         'form_component.content_blocks.video.label' => 'Video',
         'form_component.content_blocks.video.embed_code' => 'Media url',
-        'form_component.content_blocks.video.help' => 'Voeg de media url  van YouTube of Vimeo toe.',
+        'form_component.content_blocks.video.help' => 'Voeg de url toe, van bv. een YouTube of Vimeo video.',
         'form_component.content_blocks.video.overlay_image' => 'Preview afbeelding',
         'form_component.content_blocks.html.title' => 'HTML',
         'form_component.content_blocks.html.label' => 'HTML',
