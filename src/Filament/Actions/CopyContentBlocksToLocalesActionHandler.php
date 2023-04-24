@@ -53,7 +53,7 @@ class CopyContentBlocksToLocalesActionHandler
                     ->title(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.copy_content_blocks_to_other_locales.success'))
                     ->success()
                     ->send();
-            } catch(\Exception $exception) {
+            } catch (\Exception $exception) {
                 Log::error($exception);
 
                 Notification::make()
