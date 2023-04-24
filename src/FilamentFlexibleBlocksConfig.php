@@ -3,7 +3,12 @@
 namespace Statikbe\FilamentFlexibleContentBlocks;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Routing\Route;
+use Illuminate\Routing\RouteCollection;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 use Spatie\MediaLibrary\Conversions\Conversion;
+use Spatie\MediaLibrary\HasMedia;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\CallToActionBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\CardsBlock;
@@ -19,6 +24,63 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasOverviewAttribute
 
 class FilamentFlexibleBlocksConfig
 {
+    /**
+     * @return array<string, string>
+     *
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
+     */
+    public static function getLinkRoutes(): array
+    {
+        return Cache::rememberForever('filament-flexible-content-blocks::link_routes', function () {
+            /* @var RouteCollection $routeCollection */
+            $routeCollection = app()->get('router')->getRoutes()->getRoutes();
+            //Default remove all routes with parameters and no GET requests:
+            $filteredRoutes = collect($routeCollection)->filter(function (Route $route) {
+                return collect($route->methods())->contains('GET') && empty($route->parameterNames());
+            });
+
+            //keep routes that match the allowed route parameters:
+            $allowedRoutePatterns = config('filament-flexible-content-blocks.link_routes.allowed');
+            if (! empty($allowedRoutePatterns)) {
+                $filteredRoutes = $filteredRoutes->filter(function (Route $route) use ($allowedRoutePatterns) {
+                    return self::matchRouteToPatterns($route, $allowedRoutePatterns);
+                });
+            }
+
+            //remove routes that match the allowed route parameters:
+            $disallowedRoutePatterns = config('filament-flexible-content-blocks.link_routes.denied');
+            if (! empty($disallowedRoutePatterns)) {
+                $filteredRoutes = $filteredRoutes->filter(function (Route $route) use ($disallowedRoutePatterns) {
+                    return ! self::matchRouteToPatterns($route, $disallowedRoutePatterns);
+                });
+            }
+
+            return $filteredRoutes->mapWithKeys(function ($route) {
+                if ($route->getName()) {
+                    return [$route->getName() => $route->uri()];
+                }
+
+                return [];
+            })->all();
+        });
+    }
+
+    private static function matchRouteToPatterns(Route $route, array $patterns): bool
+    {
+        if ($route->getName()) {
+            return $route->named($patterns);
+        } else {
+            foreach ($patterns as $pattern) {
+                if (Str::is($pattern, $route->uri())) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     /**
      * @param  class-string<Model>  $modelClass
      *
@@ -52,29 +114,69 @@ class FilamentFlexibleBlocksConfig
     {
         if (isset($configuredConversions[$collectionName][$conversionName])) {
             $configuredConversion = $configuredConversions[$collectionName][$conversionName];
-            $alreadyDoneConversions = [];
-            //specific cases for specific method calls on the conversion object:
-            if (isset($configuredConversion['fit']) && isset($configuredConversion['width']) && isset($configuredConversion['height'])) {
-                $conversion->fit($configuredConversion['fit'], $configuredConversion['width'], $configuredConversion['height']);
-                $alreadyDoneConversions = ['fit', 'width', 'height'];
-            }
-            if (isset($configuredConversion['responsive']) && $configuredConversion['responsive']) {
-                $conversion->withResponsiveImages();
-                $alreadyDoneConversions[] = 'responsive';
-            }
-            if (isset($configuredConversion['queued']) && $configuredConversion['queued']) {
-                $conversion->queued();
-                $alreadyDoneConversions[] = 'queued';
-            }
-            //do the manipulations that are left:
-            foreach ($configuredConversion as $operation => $value) {
-                if (! in_array($operation, $alreadyDoneConversions)) {
-                    $conversion->{$operation}($value);
-                }
+            self::mergeConfiguredImageConversion($configuredConversion, $conversion);
+        }
+
+        return $conversion;
+    }
+
+    private static function mergeConfiguredImageConversion(array $configuredConversion, Conversion &$conversion): Conversion
+    {
+        $alreadyDoneConversions = [];
+        //specific cases for specific method calls on the conversion object:
+        if (isset($configuredConversion['fit']) && isset($configuredConversion['width']) && isset($configuredConversion['height'])) {
+            $conversion->fit($configuredConversion['fit'], $configuredConversion['width'], $configuredConversion['height']);
+            $alreadyDoneConversions = ['fit', 'width', 'height'];
+        }
+        if (isset($configuredConversion['responsive']) && $configuredConversion['responsive']) {
+            $conversion->withResponsiveImages();
+            $alreadyDoneConversions[] = 'responsive';
+        }
+        if (isset($configuredConversion['queued']) && $configuredConversion['queued']) {
+            $conversion->queued();
+            $alreadyDoneConversions[] = 'queued';
+        }
+        //do the manipulations that are left:
+        foreach ($configuredConversion as $operation => $value) {
+            if (! in_array($operation, $alreadyDoneConversions)) {
+                $conversion->{$operation}($value);
             }
         }
 
         return $conversion;
+    }
+
+    /**
+     * @param  class-string<AbstractContentBlock>  $blockClass
+     */
+    public static function addExtraFlexibleBlockImageConversions(string $blockClass, string $collectionName, Model&HasMedia $record): void
+    {
+        $configuredConversionData = self::getFlexibleBlockImageConversionConfig($blockClass);
+        self::addExtraImageConversions($configuredConversionData, $collectionName, $record);
+    }
+
+    /**
+     * @param  class-string<Model>  $modelClass
+     */
+    public static function addExtraModelImageConversions(string $modelClass, string $collectionName, Model&HasMedia $record): void
+    {
+        $configuredConversionData = self::getModelImageConversionConfig($modelClass);
+        self::addExtraImageConversions($configuredConversionData, $collectionName, $record);
+    }
+
+    /**
+     * @param  array<string, array>  $configuredConversions
+     *
+     * @throws \Spatie\Image\Exceptions\InvalidManipulation
+     */
+    private static function addExtraImageConversions(array $configuredConversions, string $collectionName, Model&HasMedia $record): void
+    {
+        if (isset($configuredConversions[$collectionName]['extra_conversions'])) {
+            foreach ($configuredConversions[$collectionName]['extra_conversions'] as $extraConversionName => $extraConversionData) {
+                $conversion = $record->addMediaConversion($extraConversionName);
+                self::mergeConfiguredImageConversion($configuredConversions[$collectionName]['extra_conversions'][$extraConversionName], $conversion);
+            }
+        }
     }
 
     /**
@@ -114,6 +216,18 @@ class FilamentFlexibleBlocksConfig
             CardsBlock::class,
             TemplateBlock::class,
         ]);
+    }
+
+    public static function getTheme(): ?string
+    {
+        return config('filament-flexible-content-blocks.theme', 'tailwind');
+    }
+
+    public static function getViewThemePrefix(): string
+    {
+        $theme = FilamentFlexibleBlocksConfig::getTheme();
+
+        return $theme ? $theme.'.' : '';
     }
 
     public static function getAuthorModel(): string

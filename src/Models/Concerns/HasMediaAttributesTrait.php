@@ -27,16 +27,16 @@ trait HasMediaAttributesTrait
     }
 
     /**
-     * Returns the first media for the given collection. First, we check if there is a locale specific version.
+     * Checks if the given media from the morph media relationship exists and if not fetches the first media element of the collection, disregarding the locales.
+     * Locales should be queried in the morph media relationship.
      */
-    public function getImageMedia(string $collection): ?Media
+    public function getFallbackImageMedia(?Media $morphedMedia, string $collection): ?Media
     {
-        $media = $this->getFirstMedia($collection, ['locale' => app()->getLocale()]);
-        if (! $media) {
-            $media = $this->getFirstMedia($collection);
+        if ($morphedMedia) {
+            return $morphedMedia;
         }
 
-        return $media;
+        return $this->getFirstMedia($collection);
     }
 
     /**

@@ -16,7 +16,7 @@
     </div>
     @if($hasHeroImage())
         <div class="absolute inset-0 w-full h-full">
-            {{$getHeroImageMedia([
+            {{$getHeroImageMedia(null, [
                 'class' => 'absolute inse-0 w-full h-full object-cover hero__image',
                 'loading' => 'lazy',
             ])}}

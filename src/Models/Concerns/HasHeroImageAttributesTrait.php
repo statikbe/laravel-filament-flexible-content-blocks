@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
@@ -23,15 +24,21 @@ trait HasHeroImageAttributesTrait
         $this->mergeFillable(['hero_image_title', 'hero_image_copyright']);
     }
 
+    public function heroImage(): MorphMany
+    {
+        return $this->media()->where('collection_name', $this->getHeroImageCollection());
+    }
+
     protected function registerHeroImageMediaCollectionAndConversion()
     {
         $this->addMediaCollection($this->getHeroImageCollection())
-            ->registerMediaConversions(function (Media $media) {
+            ->registerMediaConversions(function (?Media $media) {
                 $conversion = $this->addMediaConversion($this->getHeroImageConversionName())
                     ->withResponsiveImages()
                     ->fit(Manipulations::FIT_CROP, 1200, 630)
                     ->format(Manipulations::FORMAT_WEBP);
                 FilamentFlexibleBlocksConfig::mergeConfiguredModelImageConversion(static::class, $this->getHeroImageCollection(), $this->getHeroImageConversionName(), $conversion);
+                FilamentFlexibleBlocksConfig::addExtraModelImageConversions(static::class, $this->getHeroImageCollection(), $this);
 
                 //for filament upload field
                 $this->addFilamentThumbnailMediaConversion();
@@ -56,14 +63,16 @@ trait HasHeroImageAttributesTrait
 
     public function getHeroImageUrl(string $conversion = null): ?string
     {
-        return $this->getFirstMediaUrl($this->getHeroImageCollection(), $conversion ?? $this->getHeroImageConversionName());
+        $media = $this->getFallbackImageMedia($this->heroImage, $this->getHeroImageCollection());
+
+        return $media?->getUrl($conversion ?? $this->getHeroImageConversionName());
     }
 
-    public function getHeroImageMedia(array $attributes = []): ?HtmlableMedia
+    public function getHeroImageMedia(string $conversion = null, array $attributes = []): ?HtmlableMedia
     {
         return $this->getImageHtml(
-            $this->getImageMedia($this->getHeroImageCollection()),
-            $this->getHeroImageConversionName(),
+            $this->getFallbackImageMedia($this->heroImage->first(), $this->getHeroImageCollection()),
+            $conversion ?? $this->getHeroImageConversionName(),
             $this->hero_image_title,
             $attributes);
     }

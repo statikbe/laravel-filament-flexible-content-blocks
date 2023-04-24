@@ -3,6 +3,7 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\View\Components;
 
 use Illuminate\View\Component;
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 
 class OverviewCard extends Component
 {
@@ -16,6 +17,8 @@ class OverviewCard extends Component
 
     public function render()
     {
-        return view('filament-flexible-content-blocks::components.overview-card');
+        $themePrefix = FilamentFlexibleBlocksConfig::getViewThemePrefix();
+
+        return view("filament-flexible-content-blocks::components.{$themePrefix}overview-card");
     }
 }

@@ -4,6 +4,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\View\Components;
 
 use Illuminate\View\Component;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CallToActionData;
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 
 class CallToAction extends Component
 {
@@ -34,6 +35,8 @@ class CallToAction extends Component
 
     public function render()
     {
-        return view('filament-flexible-content-blocks::components.call-to-action');
+        $themePrefix = FilamentFlexibleBlocksConfig::getViewThemePrefix();
+
+        return view("filament-flexible-content-blocks::components.{$themePrefix}call-to-action");
     }
 }

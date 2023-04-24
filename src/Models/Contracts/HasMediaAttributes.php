@@ -17,6 +17,12 @@ interface HasMediaAttributes
     public function addFilamentThumbnailMediaConversion(): void;
 
     /**
+     * Checks if the given media from the morph media relationship exists and if not fetches the first media element of the collection, disregarding the locales.
+     * Locales should be queried in the morph media relationship.
+     */
+    public function getFallbackImageMedia(?Media $morphedMedia, string $collection): ?Media;
+
+    /**
      * Returns the image HTML for a given media object.
      */
     public function getImageHtml(?Media $media, string $conversion, string $title = null, array $attributes = []): ?HtmlableMedia;

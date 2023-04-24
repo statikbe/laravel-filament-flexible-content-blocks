@@ -33,7 +33,7 @@ interface HasHeroImageAttributes
     /**
      * Returns the rendered html of the hero image
      */
-    public function getHeroImageMedia(array $attributes = []): ?HtmlableMedia;
+    public function getHeroImageMedia(string $conversion = null, array $attributes = []): ?HtmlableMedia;
 
     /**
      * Checks if there is a hero image set.

@@ -23,10 +23,13 @@ return new class extends Migration
             //Publishing:
             $table->timestamp('publishing_begins_at')->nullable();
             $table->timestamp('publishing_ends_at')->nullable();
+            $table->index('publishing_begins_at');
+            $table->index('publishing_ends_at');
 
             //SEO:
             $table->string('seo_title')->nullable();
             $table->text('seo_description')->nullable();
+            $table->json('seo_keywords')->nullable();
 
             //Overview:
             $table->string('overview_title')->nullable();

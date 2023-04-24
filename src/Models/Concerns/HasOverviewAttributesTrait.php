@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
@@ -22,6 +23,11 @@ trait HasOverviewAttributesTrait
         $this->mergeFillable(['overview_title', 'overview_description']);
 
         $this->registerOverviewImageMediaCollectionAndConversion();
+    }
+
+    public function overviewImage(): MorphMany
+    {
+        return $this->media()->where('collection_name', $this->getOverviewImageCollection());
     }
 
     public function getOverviewTitle(): ?string
@@ -48,12 +54,13 @@ trait HasOverviewAttributesTrait
     protected function registerOverviewImageMediaCollectionAndConversion()
     {
         $this->addMediaCollection($this->getOverviewImageCollection())
-            ->registerMediaConversions(function (Media $media) {
+            ->registerMediaConversions(function (?Media $media) {
                 $conversion = $this->addMediaConversion($this->getOverviewImageConversionName())
                     ->withResponsiveImages()
                     ->fit(Manipulations::FIT_CROP, 600, 600)
                     ->format(Manipulations::FORMAT_WEBP);
                 FilamentFlexibleBlocksConfig::mergeConfiguredModelImageConversion(static::class, $this->getOverviewImageCollection(), $this->getOverviewImageConversionName(), $conversion);
+                FilamentFlexibleBlocksConfig::addExtraModelImageConversions(static::class, $this->getOverviewImageCollection(), $this);
 
                 //for filament upload field
                 $this->addFilamentThumbnailMediaConversion();
@@ -78,13 +85,15 @@ trait HasOverviewAttributesTrait
 
     public function getOverviewImageUrl(string $conversion = null): ?string
     {
-        return $this->getFirstMediaUrl($this->getOverviewImageCollection(), $conversion ?? $this->getOverviewImageConversionName());
+        $media = $this->getFallbackImageMedia($this->overviewImage, $this->getOverviewImageCollection());
+
+        return $media?->getUrl($conversion ?? $this->getOverviewImageConversionName());
     }
 
-    public function getOverviewImageMedia(array $attributes = []): ?HtmlableMedia
+    public function getOverviewImageMedia(string $conversion = null, array $attributes = []): ?HtmlableMedia
     {
         return $this->getImageHtml(
-            $this->getImageMedia($this->getOverviewImageCollection()),
+            $this->getFallbackImageMedia($this->overviewImage->first(), $this->getOverviewImageCollection()),
             $this->getOverviewImageConversionName(),
             $this->getOverviewTitle(),
             $attributes);

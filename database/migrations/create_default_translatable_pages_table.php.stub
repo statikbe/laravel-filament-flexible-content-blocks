@@ -23,10 +23,13 @@ return new class extends Migration
             //Publishing:
             $table->timestamp('publishing_begins_at')->nullable();
             $table->timestamp('publishing_ends_at')->nullable();
+            $table->index('publishing_begins_at');
+            $table->index('publishing_ends_at');
 
             //SEO:
             $table->json('seo_title')->nullable();
             $table->json('seo_description')->nullable();
+            $table->json('seo_keywords')->nullable();
 
             //Overview:
             $table->json('overview_title')->nullable();
@@ -40,6 +43,11 @@ return new class extends Migration
 
             //Unique code:
             $table->string('code')->nullable()->unique();
+
+            //Author:
+            $table->unsignedBigInteger('author_id')->nullable();
+            $table->foreign('author_id')
+                ->references('id')->on('users')->onDelete('set null');
 
             $table->timestamps();
         });

@@ -19,6 +19,7 @@
         'table_action.view_page_lbl' => 'Bekijk',
 
         'form_component.translatable_hint' => 'Je kan dit veld vertalen.',
+        'form_component.translatable_image_hint' => 'Je kan deze afbeelding vertalen.',
         'form_component.title_lbl' => 'Titel',
         'form_component.slug_lbl' => 'Slug',
         'form_component.slug_desc' => '<strong>Let op:</strong> Wanneer je de slug aanpast van een gepubliceerde pagina, verandert de URL van de pagina.',
@@ -57,7 +58,7 @@
         'form_component.copy_content_blocks_to_other_locales.modal_subheading' => 'Dit kopieert alle inhoudsblokken van deze taal naar alle andere talen. Bestaande vertaalde inhoudsblokken zullen verwijderd en overschreven worden! Ben je zeker?',
         'form_component.copy_content_blocks_to_other_locales.modal_button' => 'Kopieer inhoudsblokken',
 
-        'form_component.content_blocks.text.title' => 'Tekst',
+        'form_component.content_blocks.text.title' => 'Titel',
         'form_component.content_blocks.text.label' => 'Tekst',
         'form_component.content_blocks.text.content' => 'Tekst',
         'form_component.content_blocks.text-image.label' => 'Tekst (+ afbeelding)',
@@ -124,12 +125,14 @@
 
         'form_component.content_blocks.call_to_action_lbl' => 'Call to action',
         'form_component.content_blocks.add_call_to_action' => 'Voeg call to action toe',
+        'form_component.content_blocks.call_to_action_model_type_route' => 'Route',
         'form_component.content_blocks.call_to_action_model_type_url' => 'URL',
         'form_component.content_blocks.call_to_action_cta_model' => 'Type',
         'form_component.content_blocks.call_to_action_entry_id' => 'Pagina',
         'form_component.content_blocks.call_to_action_button_style' => 'Stijl van de knop',
         'form_component.content_blocks.call_to_action_button_label' => 'Label op de knop',
         'form_component.content_blocks.call_to_action_button_open_in_new_window' => 'Open in nieuw venster?',
+        'form_component.content_blocks.call_to_action_route' => 'Route',
 
         'form_component.content_blocks.background_colour.default' => 'Standaard',
         'form_component.content_blocks.background_colour.primary' => 'Primair',
