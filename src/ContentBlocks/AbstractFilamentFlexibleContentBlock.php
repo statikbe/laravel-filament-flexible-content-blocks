@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocksServiceProvider;
 
 /**
@@ -41,6 +42,8 @@ abstract class AbstractFilamentFlexibleContentBlock extends AbstractContentBlock
 
     public function render()
     {
+        $themePrefix = FilamentFlexibleBlocksConfig::getViewThemePrefix();
+
         $templateSuffix = static::getNameSuffix();
         if (method_exists($this, 'getBlockStyleTemplateSuffix')) {
             $blockStyle = $this->getBlockStyleTemplateSuffix();
@@ -49,6 +52,6 @@ abstract class AbstractFilamentFlexibleContentBlock extends AbstractContentBlock
             }
         }
 
-        return view('filament-flexible-content-blocks::content-blocks.'.$templateSuffix);
+        return view("filament-flexible-content-blocks::content-blocks.{$themePrefix}{$templateSuffix}");
     }
 }
