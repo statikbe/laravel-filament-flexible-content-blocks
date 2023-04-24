@@ -20,10 +20,10 @@ class MediaEmbedField extends TextInput
         $field = static::getFieldName();
 
         return static::make($field)
-                     ->label(trans("filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.{$field}_lbl"))
-                     ->maxLength(255)
-                     ->media()
-                     ->required($required);
+            ->label(trans("filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.{$field}_lbl"))
+            ->maxLength(255)
+            ->media()
+            ->required($required);
     }
 
     public function media(bool|Closure $condition = true): static
