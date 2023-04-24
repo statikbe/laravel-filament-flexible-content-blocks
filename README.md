@@ -67,6 +67,7 @@ Here is a brief overview of the choices made:
 - `spatie/laravel-medialibrary` & `filament/spatie-laravel-media-library-plugin`: all image handling is done with `spatie/medialibrary` 
 - `spatie/laravel-sluggable`: for slugs
 - `spatie/laravel-translatable`: for translations as this works together with the first party filament translatable package. 
+- `dereuromark/media-embed`: to support video embeds of [various media services](https://github.com/dereuromark/media-embed/blob/master/docs/supported.md).
 
 ## Usage
 
@@ -240,6 +241,8 @@ To build your content, the package provides the default blocks listed below.
 ### Image block
 
 ### Video block
+
+https://github.com/dereuromark/media-embed/blob/master/docs/supported.md
 
 ### Quote block
 
