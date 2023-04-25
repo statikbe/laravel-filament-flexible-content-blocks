@@ -4,11 +4,13 @@ namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Textarea;
+use MediaEmbed\MediaEmbed;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImage;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockSpatieMediaLibraryFileUpload;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\MediaEmbedField;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
 
@@ -16,7 +18,7 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
 {
     use HasImage;
 
-    public ?string $embedCode;
+    public ?string $embedUrl;
 
     public ?string $overlayImageId;
 
@@ -27,7 +29,7 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
     {
         parent::__construct($record, $blockData);
 
-        $this->embedCode = $blockData['embed_code'] ?? null;
+        $this->embedUrl = $blockData['embed_url'] ?? null;
         $this->overlayImageId = $blockData['overlay_image'] ?? null;
     }
 
@@ -48,11 +50,11 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
     {
         return [
             Grid::make(2)->schema([
-                Textarea::make('embed_code')
-                    ->label(static::getFieldLabel('embed_code'))
+                MediaEmbedField::make('embed_url')
+                    ->media()
+                    ->label(static::getFieldLabel('embed_url'))
                     ->hint(static::getFieldLabel('help'))
                     ->hintIcon('heroicon-s-question-mark-circle')
-                    ->rows(7)
                     ->required(),
                 BlockSpatieMediaLibraryFileUpload::make('overlay_image')
                     ->collection(static::getName())
@@ -60,6 +62,37 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
                     ->maxFiles(1),
             ]),
         ];
+    }
+
+    /**
+     * @param array $attributes
+     * @return string|null
+     */
+    public function getEmbedCode(array $attributes = []) : ?string
+    {
+        $mediaObject = (new MediaEmbed())->parseUrl($this->embedUrl);
+        if (!$mediaObject) {
+            return '';
+        }
+        $mediaObject->setAttribute($attributes);
+
+        return $mediaObject->getEmbedCode();
+    }
+
+    /**
+     * @param array $attributes
+     * @return string|null
+     */
+    public function getEmbedSrc(array $attributes = []): ?string
+    {
+        $mediaObject = (new MediaEmbed())->parseUrl($this->embedUrl);
+        if (!$mediaObject) {
+            return '';
+        }
+
+        $mediaObject->setAttribute($attributes);
+
+        return $mediaObject->getEmbedSrc();
     }
 
     /**

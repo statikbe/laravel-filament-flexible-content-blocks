@@ -6,6 +6,7 @@ use Closure;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Field;
 use Illuminate\Support\Arr;
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 
 /**
  * Based on awcodes drop-in-action component
@@ -19,11 +20,13 @@ class FormAction extends Field
 
     private array $evaluatedActions = [];
 
-    protected string $view = 'filament-flexible-content-blocks::components.form-action';
-
     protected function setUp(): void
     {
         $this->dehydrated(false);
+
+        $themePrefix = FilamentFlexibleBlocksConfig::getViewThemePrefix();
+
+        $this->view("filament-flexible-content-blocks::components.{$themePrefix}form-action");
     }
 
     public function execute(array|Action|Closure|null $actions): static

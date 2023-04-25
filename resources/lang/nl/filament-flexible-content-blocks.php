@@ -72,6 +72,7 @@
         'form_component.content_blocks.video.embed_code' => 'Media url',
         'form_component.content_blocks.video.help' => 'Voeg de url toe, van bv. een YouTube of Vimeo video.',
         'form_component.content_blocks.video.overlay_image' => 'Preview afbeelding',
+        'form_component.content_blocks.video.sr_msg' => 'Speel video af',
         'form_component.content_blocks.html.title' => 'HTML',
         'form_component.content_blocks.html.label' => 'HTML',
         'form_component.content_blocks.html.help' => 'Let op dat de ingevoerde HTML geen kwaadaardige scripts of styles bevat die de pagina kunnen stuk maken.',
