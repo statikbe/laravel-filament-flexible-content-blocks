@@ -234,27 +234,70 @@ To build your content, the package provides the default blocks listed below.
 
 ### Text block
 
+A basic block with title and text.
 
+![text.png](documentation%2Fimg%2Fblocks%2Ftext.png)
 
 ### Text with image block
 
+Additionally to the text block, you can add an image with its title and copyright. The image can be positioned left or 
+right of the text and an image conversion and background colour of the block can be set. One can also add a call-to-action
+button with configured button styles. You can link to URL's, but also dynamically to other models or routes.
+
+![text-image.png](documentation%2Fimg%2Fblocks%2Ftext-image.png)
+
 ### Image block
+
+This displays an image with copyright message and you can set image conversions, the position and the width the image 
+should use on the page.
+
+![image.png](documentation%2Fimg%2Fblocks%2Fimage.png)
 
 ### Video block
 
-https://github.com/dereuromark/media-embed/blob/master/docs/supported.md
+You can embed videos from [numerous media services](https://github.com/dereuromark/media-embed/blob/master/docs/supported.md) 
+and set an overlay image that will cause the video embed to be lazy loaded after clicking the image.
+
+![video.png](documentation%2Fimg%2Fblocks%2Fvideo.png)
 
 ### Quote block
 
+A block to show a quote and it's author.
+
+![quote.png](documentation%2Fimg%2Fblocks%2Fquote.png)
+
 ### HTML block
+
+A block to insert custom HTML.
+
+![html.png](documentation%2Fimg%2Fblocks%2Fhtml.png)
 
 ### Call-to-action block
 
+This block focuses on adding call-to-actions with image and text.
+
+![call-to-action.png](documentation%2Fimg%2Fblocks%2Fcall-to-action.png)
+
 ### Overview block
+
+This block can be used to display the overview fields and image of other model records, e.g. for displaying related blog posts. 
+One can configure the grid columns and background colour.
+
+![overview-list.png](documentation%2Fimg%2Fblocks%2Foverview-list.png)
 
 ### Cards block
 
+This block is comparable to the overview block, however you can add the title, description, image and CTA for each card.
+The image conversion, background colour and grid columns can be configured.
+
+![cards.png](documentation%2Fimg%2Fblocks%2Fcards.png)
+
 ### Template block
+
+You can select Blade templates that you want to include. This can be handy to add small forms or interactive components, 
+e.g. a newsletter signup form or a map.
+
+![template.png](documentation%2Fimg%2Fblocks%2Ftemplate.png)
 
 ### Create your own custom block
 
@@ -265,7 +308,8 @@ to extend from, because this super class contains logic to add the package's own
 
 ## Configuration
 
-Documentation is WIP.
+A lot of the customisation of content blocks and their behaviour can be done through the configuration file. 
+Please, consult [the configuration documentation](documentation%2Fconfiguration.md).
 
 
 ## Roadmap
