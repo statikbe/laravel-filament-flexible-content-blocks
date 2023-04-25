@@ -8,11 +8,11 @@ use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 class OverviewCard extends Component
 {
     public function __construct(
-            public ?string $title = null,
-            public ?string $description = null,
-            public ?string $image = null,
-            public ?string $url = null,
-        ) {
+        public ?string $title = null,
+        public ?string $description = null,
+        public ?string $image = null,
+        public ?string $url = null,
+    ) {
     }
 
     public function render()

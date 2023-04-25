@@ -11,11 +11,11 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\Linkable;
 class CallToActionData
 {
     public function __construct(
-            public string $url,
-            public ?string $label = null,
-            public ?string $buttonStyle = null,
-            public bool $openNewWindow = false,
-        ) {
+        public string $url,
+        public ?string $label = null,
+        public ?string $buttonStyle = null,
+        public bool $openNewWindow = false,
+    ) {
     }
 
     /**
