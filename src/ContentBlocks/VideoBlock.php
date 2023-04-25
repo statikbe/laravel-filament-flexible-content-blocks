@@ -3,7 +3,6 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
 use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Textarea;
 use MediaEmbed\MediaEmbed;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
@@ -64,14 +63,10 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
         ];
     }
 
-    /**
-     * @param array $attributes
-     * @return string|null
-     */
-    public function getEmbedCode(array $attributes = []) : ?string
+    public function getEmbedCode(array $attributes = []): ?string
     {
         $mediaObject = (new MediaEmbed())->parseUrl($this->embedUrl);
-        if (!$mediaObject) {
+        if (! $mediaObject) {
             return '';
         }
         $mediaObject->setAttribute($attributes);
@@ -79,14 +74,10 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
         return $mediaObject->getEmbedCode();
     }
 
-    /**
-     * @param array $attributes
-     * @return string|null
-     */
     public function getEmbedSrc(array $attributes = []): ?string
     {
         $mediaObject = (new MediaEmbed())->parseUrl($this->embedUrl);
-        if (!$mediaObject) {
+        if (! $mediaObject) {
             return '';
         }
 
