@@ -13,13 +13,13 @@ class CallToAction extends Component
     public bool $isFullyClickable = false;
 
     public function __construct(
-            ?CallToActionData $data = null,
-            string $url = null,
-            ?string $label = null,
-            ?string $buttonStyle = null,
-            bool $openNewWindow = false,
-            bool $isFullyClickable = false,
-        ) {
+        ?CallToActionData $data = null,
+        string $url = null,
+        ?string $label = null,
+        ?string $buttonStyle = null,
+        bool $openNewWindow = false,
+        bool $isFullyClickable = false,
+    ) {
         if ($data) {
             $this->callToAction = $data;
         } else {

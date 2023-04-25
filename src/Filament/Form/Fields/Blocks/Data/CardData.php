@@ -8,14 +8,14 @@ class CardData
      * @param  array<CallToActionData>|null  $callToActions
      */
     public function __construct(
-            public ?string $title,
-            public ?string $text,
-            public ?array $callToActions,
-            public ?string $imageId,
-            public ?string $imageUrl = null,
-            public ?string $imageHtml = null,
-            public ?string $blockStyle = null,
-        ) {
+        public ?string $title,
+        public ?string $text,
+        public ?array $callToActions,
+        public ?string $imageId,
+        public ?string $imageUrl = null,
+        public ?string $imageHtml = null,
+        public ?string $blockStyle = null,
+    ) {
     }
 
     public function hasImage(): bool
