@@ -2,6 +2,11 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v0.1.1 - 2023-04-26
+
+- Fix bug in published scope
+- Add documentation
+
 ## v0.1.0 - 2023-04-25
 
 Initial release
