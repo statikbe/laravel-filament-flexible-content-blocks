@@ -49,11 +49,13 @@ class ContentBlocks extends Component
 
     /**
      * Return an array of strings with searchable content of all blocks.
+     *
      * @return array<string>
      */
-    public function getSearchableContent(): array {
+    public function getSearchableContent(): array
+    {
         $searchable = [];
-        foreach($this->contentBlocks as $contentBlock){
+        foreach ($this->contentBlocks as $contentBlock) {
             /* @var AbstractContentBlock $contentBlock */
             $searchable = array_merge($searchable, $contentBlock->getSearchableContent());
         }
