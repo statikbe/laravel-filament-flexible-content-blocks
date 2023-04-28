@@ -49,7 +49,7 @@ trait HasContentBlocksTrait
                 return strip_tags($item);
             });
 
-            return $searchableContent->implode(' /n ');
+            return $searchableContent->implode(" \n ");
         } else {
             return $searchableContent->implode(' <br> ');
         }
