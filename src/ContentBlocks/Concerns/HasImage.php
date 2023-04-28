@@ -15,8 +15,12 @@ trait HasImage
     /**
      * Returns the media with UUID $imageId
      */
-    protected function getMedia(string $imageId, ?string $collection = null): ?Media
+    protected function getMedia(?string $imageId, ?string $collection = null): ?Media
     {
+        if(!$imageId){
+            return null;
+        }
+
         /* @var HasMedia $recordWithMedia */
         $recordWithMedia = $this->record;
 
@@ -28,9 +32,14 @@ trait HasImage
     /**
      * Returns an HTML view of the first image
      *
-     * @param  string  $imageId,
+     * @param string|null $imageId
+     * @param string $conversion
+     * @param string|null $imageTitle
+     * @param array $attributes
+     * @param string|null $collection
+     * @return HtmlableMedia|null
      */
-    protected function getHtmlableMedia(string $imageId, string $conversion, ?string $imageTitle, array $attributes = [], ?string $collection = null): ?HtmlableMedia
+    protected function getHtmlableMedia(?string $imageId, string $conversion, ?string $imageTitle, array $attributes = [], ?string $collection = null): ?HtmlableMedia
     {
         $media = $this->getMedia($imageId);
         $html = null;
