@@ -3,6 +3,7 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
+use Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks;
 
 /**
  * @mixin HasContentBlocks
@@ -38,9 +39,21 @@ trait HasContentBlocksTrait
         return static::$filamentContentBlocks;
     }
 
-    public function getSearchableContent(): string
+    public function getSearchableBlockContent(bool $stripHtml=true): string
     {
-        return '';
+        $contentBlocksComponent = new ContentBlocks($this);
+        $searchableContent = collect($contentBlocksComponent->getSearchableContent());
+
+        if($stripHtml){
+            $searchableContent = $searchableContent->map(function($item){
+                return strip_tags($item);
+            });
+
+            return $searchableContent->implode(" /n ");
+        }
+        else {
+            return $searchableContent->implode(" <br> ");
+        }
     }
 
     protected function registerContentBlocksCollectionsAndConversions()

@@ -107,4 +107,23 @@ abstract class AbstractContentBlock extends Component
     {
         return FilamentFlexibleBlocksConfig::isBlockStyleEnabled(static::class);
     }
+
+    /**
+     * Return an array of strings with searchable content of the block fields.
+     * @return array<string>
+     */
+    abstract public function getSearchableContent(): array;
+
+    /**
+     * @param array<string> $searchableContent
+     * @param string $textContent
+     * @return array<string>
+     */
+    protected function addSearchableContent(array &$searchableContent, string $textContent): array {
+        if($textContent && !empty(trim($textContent))){
+            $searchableContent[] = $textContent;
+        }
+
+        return $searchableContent;
+    }
 }

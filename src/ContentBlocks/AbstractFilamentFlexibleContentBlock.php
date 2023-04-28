@@ -54,4 +54,8 @@ abstract class AbstractFilamentFlexibleContentBlock extends AbstractContentBlock
 
         return view("filament-flexible-content-blocks::content-blocks.{$themePrefix}{$templateSuffix}");
     }
+
+    public function getSearchableContent(): array {
+        return [];
+    }
 }

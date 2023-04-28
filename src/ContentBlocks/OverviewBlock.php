@@ -104,4 +104,12 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
             return $overviewItems[$item['overview_model']]->get($item['overview_id']);
         });
     }
+
+    public function getSearchableContent(): array {
+        $searchable = [];
+
+        $this->addSearchableContent($searchable, $this->title);
+
+        return $searchable;
+    }
 }

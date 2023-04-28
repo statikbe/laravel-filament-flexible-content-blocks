@@ -64,4 +64,13 @@ class TextBlock extends AbstractFilamentFlexibleContentBlock
             ]),
         ];
     }
+
+    public function getSearchableContent(): array {
+        $searchable = [];
+
+        $this->addSearchableContent($searchable, $this->title);
+        $this->addSearchableContent($searchable, $this->content);
+
+        return $searchable;
+    }
 }

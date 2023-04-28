@@ -46,4 +46,18 @@ class ContentBlocks extends Component
 
         return view("filament-flexible-content-blocks::components.{$themePrefix}content-blocks");
     }
+
+    /**
+     * Return an array of strings with searchable content of all blocks.
+     * @return array<string>
+     */
+    public function getSearchableContent(): array {
+        $searchable = [];
+        foreach($this->contentBlocks as $contentBlock){
+            /* @var AbstractContentBlock $contentBlock */
+            $searchable = array_merge($searchable, $contentBlock->getSearchableContent());
+        }
+
+        return $searchable;
+    }
 }

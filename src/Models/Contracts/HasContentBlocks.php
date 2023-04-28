@@ -29,5 +29,5 @@ interface HasContentBlocks
     /**
      * Extract all searchable text from the content blocks, to enable simple searching in content blocks.
      */
-    public function getSearchableContent(): ?string;
+    public function getSearchableContent(bool $stripHtml=true): ?string;
 }

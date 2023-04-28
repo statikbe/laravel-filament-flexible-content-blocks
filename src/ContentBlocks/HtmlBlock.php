@@ -43,4 +43,12 @@ class HtmlBlock extends AbstractFilamentFlexibleContentBlock
                 ->required(),
         ];
     }
+
+    public function getSearchableContent(): array {
+        $searchable = [];
+
+        $this->addSearchableContent($searchable, $this->content);
+
+        return $searchable;
+    }
 }
