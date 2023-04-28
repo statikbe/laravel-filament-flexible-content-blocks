@@ -61,7 +61,8 @@ class QuoteBlock extends AbstractFilamentFlexibleContentBlock
         ];
     }
 
-    public function getSearchableContent(): array {
+    public function getSearchableContent(): array
+    {
         $searchable = [];
 
         $this->addSearchableContent($searchable, $this->quote);

@@ -39,20 +39,19 @@ trait HasContentBlocksTrait
         return static::$filamentContentBlocks;
     }
 
-    public function getSearchableBlockContent(bool $stripHtml=true): string
+    public function getSearchableBlockContent(bool $stripHtml = true): string
     {
         $contentBlocksComponent = new ContentBlocks($this);
         $searchableContent = collect($contentBlocksComponent->getSearchableContent());
 
-        if($stripHtml){
-            $searchableContent = $searchableContent->map(function($item){
+        if ($stripHtml) {
+            $searchableContent = $searchableContent->map(function ($item) {
                 return strip_tags($item);
             });
 
-            return $searchableContent->implode(" /n ");
-        }
-        else {
-            return $searchableContent->implode(" <br> ");
+            return $searchableContent->implode(' /n ');
+        } else {
+            return $searchableContent->implode(' <br> ');
         }
     }
 

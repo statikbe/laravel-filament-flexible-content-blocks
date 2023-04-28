@@ -128,7 +128,8 @@ class ImageBlock extends AbstractFilamentFlexibleContentBlock
         return isset($this->imageId) && ! is_null($this->imageId);
     }
 
-    public function getSearchableContent(): array {
+    public function getSearchableContent(): array
+    {
         $searchable = [];
 
         $this->addSearchableContent($searchable, $this->imageCopyright);

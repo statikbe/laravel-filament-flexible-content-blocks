@@ -110,17 +110,18 @@ abstract class AbstractContentBlock extends Component
 
     /**
      * Return an array of strings with searchable content of the block fields.
+     *
      * @return array<string>
      */
     abstract public function getSearchableContent(): array;
 
     /**
-     * @param array<string> $searchableContent
-     * @param string $textContent
+     * @param  array<string>  $searchableContent
      * @return array<string>
      */
-    protected function addSearchableContent(array &$searchableContent, string $textContent): array {
-        if($textContent && !empty(trim($textContent))){
+    protected function addSearchableContent(array &$searchableContent, string $textContent): array
+    {
+        if ($textContent && ! empty(trim($textContent))) {
             $searchableContent[] = $textContent;
         }
 

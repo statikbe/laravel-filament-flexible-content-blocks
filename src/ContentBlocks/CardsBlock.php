@@ -150,11 +150,12 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
         return $cardData;
     }
 
-    public function getSearchableContent(): array {
+    public function getSearchableContent(): array
+    {
         $searchable = [];
 
         $this->addSearchableContent($searchable, $this->title);
-        foreach($this->cards as $card){
+        foreach ($this->cards as $card) {
             /* @var CardData $card */
             $this->addSearchableContent($searchable, $card->title);
             $this->addSearchableContent($searchable, $card->text);
