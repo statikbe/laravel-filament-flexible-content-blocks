@@ -17,7 +17,7 @@ trait HasImage
      */
     protected function getMedia(?string $imageId, ?string $collection = null): ?Media
     {
-        if(!$imageId){
+        if (! $imageId) {
             return null;
         }
 
@@ -31,13 +31,6 @@ trait HasImage
 
     /**
      * Returns an HTML view of the first image
-     *
-     * @param string|null $imageId
-     * @param string $conversion
-     * @param string|null $imageTitle
-     * @param array $attributes
-     * @param string|null $collection
-     * @return HtmlableMedia|null
      */
     protected function getHtmlableMedia(?string $imageId, string $conversion, ?string $imageTitle, array $attributes = [], ?string $collection = null): ?HtmlableMedia
     {
