@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v0.1.4 - 2023-05-04
+
+make searchable text content from content blocks cleaner when HTML is stripped, HTML entities en special chars are removed
+
 ## v0.1.3 - 2023-05-04
 
 adds support to extract searchable text content from content blocks to be able to easily index this data in a seach index or database column for text search
