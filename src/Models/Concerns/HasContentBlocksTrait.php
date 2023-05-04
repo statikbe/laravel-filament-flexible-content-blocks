@@ -46,7 +46,7 @@ trait HasContentBlocksTrait
 
         if ($stripHtml) {
             $searchableContent = $searchableContent->map(function ($item) {
-                return htmlspecialchars_decode(strip_tags($item));
+                return html_entity_decode(htmlspecialchars_decode(strip_tags($item)));
             });
 
             return $searchableContent->implode(" \n ");
