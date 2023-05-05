@@ -4,9 +4,9 @@
             <div class="w-full md:w-3/4">
                 <div class="prose max-w-none">
                     @if($title)
-                        <h2>{{$title}}</h2>
+                        <h2>{{$replaceParameters($title)}}</h2>
                     @endif
-                    {!! $content !!}
+                    {!! $replaceParameters($content) !!}
                 </div>
             </div>
         </div>

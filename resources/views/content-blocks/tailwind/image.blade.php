@@ -7,7 +7,7 @@
                       'ml-auto' => $imagePosition === 'right'])>
             {{$getImageMedia(attributes: ['alt' => $imageTitle, 'class'=> 'w-full image', 'loading' => 'lazy'])}}
             @if($imageCopyright)
-                <small class="image__copyright">&copy; {{$imageCopyright}}</small>
+                <small class="image__copyright">&copy; {{$replaceParameters($imageCopyright)}}</small>
             @endif
         </div>
     </div>

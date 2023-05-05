@@ -4,11 +4,15 @@ namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
 use Closure;
 use Filament\Forms\Components\Builder\Block;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Str;
 use Illuminate\View\Component;
 use Spatie\MediaLibrary\HasMedia;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
+use Statikbe\FilamentFlexibleContentBlocks\Replacer\TextParameterReplacer;
 
 /**
  * This is the base class from which all flexible content blocks should inherit.
@@ -27,6 +31,8 @@ abstract class AbstractContentBlock extends Component
 
     /**
      * Create a new component instance.
+     * @param HasMedia&HasContentBlocks $record
+     * @param array|null $blockData
      */
     public function __construct(HasContentBlocks&HasMedia $record, ?array $blockData)
     {
@@ -126,5 +132,10 @@ abstract class AbstractContentBlock extends Component
         }
 
         return $searchableContent;
+    }
+
+    public function replaceParameters(?string $content): ?string
+    {
+        return FilamentFlexibleContentBlocks::replaceParameters($content);
     }
 }

@@ -21,9 +21,17 @@ use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextImageBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\VideoBlock;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasOverviewAttributes;
+use Statikbe\FilamentFlexibleContentBlocks\Replacer\TextParameterReplacer;
 
 class FilamentFlexibleBlocksConfig
 {
+    /**
+     * @return class-string<TextParameterReplacer>|null
+     */
+    public static function getTextParameterReplacer(): ?string {
+        return config('filament-flexible-content-blocks.text_parameter_replacer', null);
+    }
+
     /**
      * @return array<string, string>
      *

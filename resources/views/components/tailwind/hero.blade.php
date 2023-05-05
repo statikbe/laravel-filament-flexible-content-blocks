@@ -3,13 +3,13 @@
         <div class="relative z-10 flex flex-col justify-center h-full grow">
             @if($title)
                 <h1 class="text-3xl font-bold tracking-tight hero__title @if($hasHeroImage())text-white drop-shadow @endif md:text-4xl @if($intro) mb-4 @endif">
-                    {{ $title }}
+                    {{ Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks::replaceParameters($title) }}
                 </h1>
             @endif
 
             @if($intro)
                 <div class="max-w-4xl font-light text-white drop-shadow hero__intro [&_a]:underline hover:[&_a]:no-underline">
-                    {!! $intro !!}
+                    {!! Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks::replaceParameters($intro) !!}
                 </div>
             @endif
         </div>
@@ -21,7 +21,7 @@
                 'loading' => 'lazy',
             ])}}
             @if($heroImageCopyright)
-                <span class="absolute bottom-0 right-0 px-2 py-1 text-sm text-white bg-black/30 hero__copyright">&copy; {{$heroImageCopyright}}</span>
+                <span class="absolute bottom-0 right-0 px-2 py-1 text-sm text-white bg-black/30 hero__copyright">&copy; {{ Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks::replaceParameters($heroImageCopyright) }}</span>
             @endif
         </div>
     @endif

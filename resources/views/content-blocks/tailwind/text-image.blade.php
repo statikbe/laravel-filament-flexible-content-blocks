@@ -6,18 +6,18 @@
                     {{$getImageMedia(attributes: ['class'=> 'w-full', 'loading' => 'lazy'])}}
 
                     @if($imageCopyright)
-                        <small>&copy; {{$imageCopyright}}</small>
+                        <small>&copy; {{$replaceParameters($imageCopyright)}}</small>
                     @endif
                 </div>
             @endif
             <div class="w-full px-4 @if($hasImage())md:w-1/2 @else md:w-3/4 @endif">
                 <div class="prose max-w-none">
                     @if($title)
-                        <h2>{{$title}}</h2>
+                        <h2>{{$replaceParameters($title)}}</h2>
                     @endif
                     @if($text)
                         <div>
-                            {!! $text !!}
+                            {!! $replaceParameters($text) !!}
                         </div>
                     @endif
                     @if($callToActions)

@@ -11,7 +11,7 @@
             {!! $card->imageHtml !!}
         @elseif($card->imageUrl)
             <img src="{{$card->imageUrl}}"
-                 @if($card->title) alt="{{$card->title}}" @endif class="card__image" />
+                 @if($card->title) alt="{{Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks::replaceParameters($card->title)}}" @endif class="card__image" />
         @endif
     @endif
 
@@ -25,7 +25,7 @@
         @endif
 
         @if($card->text)
-            <div class="card__description">{!! $card->text !!}</div>
+            <div class="card__description">{!! Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks::replaceParameters($card->text) !!}</div>
         @endif
 
         @if($card->callToActions)

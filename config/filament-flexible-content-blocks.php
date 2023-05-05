@@ -283,4 +283,17 @@ return [
         ],*/
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Text parameter replacer
+    |--------------------------------------------------------------------------
+    |
+    | Within the text fields of content blocks, you can replace parameters prefixed by a colon (e.g. :name), identical
+    | to the way parameters work in translations. The replacer class implements the
+    | Statikbe\FilamentFlexibleContentBlocks\Replacer\TextParameterReplacer interface that returns an array
+    | of parameters with their value that will be replaced in the text fields of the content blocks.
+    |
+    | The value of `text_parameter_replacer` should be class name or null. If null is set, parameter replacement is disabled.
+     */
+    'text_parameter_replacer' => 'App\\Filament\\Replacer\\LeudisTextParameterReplacer',
 ];
