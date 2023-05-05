@@ -28,7 +28,8 @@ class FilamentFlexibleBlocksConfig
     /**
      * @return class-string<TextParameterReplacer>|null
      */
-    public static function getTextParameterReplacer(): ?string {
+    public static function getTextParameterReplacer(): ?string
+    {
         return config('filament-flexible-content-blocks.text_parameter_replacer', null);
     }
 
