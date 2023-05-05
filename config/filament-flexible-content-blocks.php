@@ -295,5 +295,5 @@ return [
     |
     | The value of `text_parameter_replacer` should be class name or null. If null is set, parameter replacement is disabled.
      */
-    'text_parameter_replacer' => 'App\\Filament\\Replacer\\LeudisTextParameterReplacer',
+    'text_parameter_replacer' => null,
 ];
