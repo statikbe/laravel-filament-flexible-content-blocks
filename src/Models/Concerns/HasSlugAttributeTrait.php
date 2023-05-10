@@ -25,7 +25,7 @@ trait HasSlugAttributeTrait
             $newSlug = $record->slug;
             $existingSlug = $record->getOriginal('slug');
             $changedSlugs = [];
-            if($newSlug !== $existingSlug){
+            if ($newSlug !== $existingSlug) {
                 $changedSlugs[] = [
                     'locale' => app()->getLocale(),
                     'oldSlug' => $existingSlug,
@@ -33,9 +33,9 @@ trait HasSlugAttributeTrait
                 ];
             }
 
-            if(!empty($changedSlugs)){
+            if (! empty($changedSlugs)) {
                 $published = true;
-                if(method_exists($this, 'isPublishedForDates')){
+                if (method_exists($this, 'isPublishedForDates')) {
                     $published = $this->isPublishedForDates($this->getOriginal('publishing_begins_at'), $this->getOriginal('publishing_ends_at'));
                 }
 
