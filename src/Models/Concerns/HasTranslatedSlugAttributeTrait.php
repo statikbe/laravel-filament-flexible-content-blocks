@@ -44,7 +44,7 @@ trait HasTranslatedSlugAttributeTrait
 
             if (! empty($changedSlugs)) {
                 $published = true;
-                if(method_exists($record, 'isPublishedForDates')){
+                if (method_exists($record, 'isPublishedForDates')) {
                     $published = $record->isPublishedForDates($record->getOriginal('publishing_begins_at'), $record->getOriginal('publishing_ends_at'));
                 }
 
