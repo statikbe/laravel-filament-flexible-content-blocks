@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Spatie\Sluggable\HasTranslatableSlug;
 use Spatie\Sluggable\SlugOptions;
+use Statikbe\FilamentFlexibleContentBlocks\Events\SlugChanged;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks;
 
 trait HasTranslatedSlugAttributeTrait
@@ -16,6 +17,34 @@ trait HasTranslatedSlugAttributeTrait
     public function initializeHasTranslatedSlugAttributeTrait(): void
     {
         $this->mergeTranslatable(['slug']);
+    }
+
+    protected static function bootHasTranslatedSlugAttributeTrait(): void
+    {
+        //dispatch event when slug changes for published models:
+        static::updating(function (self $record) {
+            $newSlugs = $record->getTranslations('slug');
+            $existingSlugs = $record->getOriginal('slug');
+            $changed = false;
+            foreach($existingSlugs as $locale => $existingSlug){
+                if(!isset($newSlugs[$locale])){
+                    $changed = true;
+                }
+                else if($newSlugs[$locale] !== $existingSlugs[$locale]){
+                    $changed = true;
+                }
+            }
+
+            if($changed){
+                $published = true;
+                if(method_exists($this, 'isPublishedForDates')){
+                    $published = $this->isPublishedForDates($this->getOriginal('publishing_begins_at'), $this->getOriginal('publishing_ends_at'));
+                }
+
+                //dispatch event:
+                SlugChanged::dispatch($this, $published);
+            }
+        });
     }
 
     /**

@@ -19,6 +19,11 @@ interface HasPageAttributes
     public function isPublished(): bool;
 
     /**
+     * Returns whether for the given timestamps the page is published or visible.
+     */
+    public function isPublishedForDates(?Carbon $publishingBeginsAt, ?Carbon $publishingEndsAt): bool;
+
+    /**
      * Returns whether the page will be published, based on the begin publishing date.
      */
     public function willBecomePublished(): bool;

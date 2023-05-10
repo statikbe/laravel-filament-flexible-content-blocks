@@ -4,6 +4,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Statikbe\FilamentFlexibleContentBlocks\Events\SlugChanged;
 
 /**
  * @property string $slug
@@ -15,6 +16,26 @@ trait HasSlugAttributeTrait
     public function initializeHasSlugAttributeTrait(): void
     {
         $this->mergeFillable(['slug']);
+    }
+
+    protected static function bootHasSlugAttributeTrait(): void
+    {
+        //dispatch event when slug changes for published models:
+        static::updating(function (self $record) {
+            $newSlug = $record->slug;
+            $existingSlug = $record->getOriginal('slug');
+            $changed = ($newSlug !== $existingSlug);
+
+            if($changed){
+                $published = true;
+                if(method_exists($this, 'isPublishedForDates')){
+                    $published = $this->isPublishedForDates($this->getOriginal('publishing_begins_at'), $this->getOriginal('publishing_ends_at'));
+                }
+
+                //dispatch event:
+                SlugChanged::dispatch($this, $published);
+            }
+        });
     }
 
     /**
