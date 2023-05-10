@@ -26,15 +26,14 @@ trait HasTranslatedSlugAttributeTrait
             $newSlugs = $record->getTranslations('slug');
             $existingSlugs = $record->getOriginal('slug');
             $changedSlugs = [];
-            foreach($existingSlugs as $locale => $existingSlug){
-                if(!isset($newSlugs[$locale])){
+            foreach ($existingSlugs as $locale => $existingSlug) {
+                if (! isset($newSlugs[$locale])) {
                     $changedSlugs[] = [
                         'locale' => $locale,
                         'oldSlug' => $existingSlug,
                         'newSlug' => null,
                     ];
-                }
-                else if($newSlugs[$locale] !== $existingSlug){
+                } elseif ($newSlugs[$locale] !== $existingSlug) {
                     $changedSlugs[] = [
                         'locale' => $locale,
                         'oldSlug' => $existingSlug,
@@ -43,7 +42,7 @@ trait HasTranslatedSlugAttributeTrait
                 }
             }
 
-            if(!empty($changedSlugs)){
+            if (! empty($changedSlugs)) {
                 $published = true;
                 if(method_exists($record, 'isPublishedForDates')){
                     $published = $record->isPublishedForDates($record->getOriginal('publishing_begins_at'), $record->getOriginal('publishing_ends_at'));

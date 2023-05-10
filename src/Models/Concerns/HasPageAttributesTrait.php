@@ -41,7 +41,8 @@ trait HasPageAttributesTrait
         }
     }
 
-    public function isPublishedForDates(?Carbon $publishingBeginsAt, ?Carbon $publishingEndsAt): bool {
+    public function isPublishedForDates(?Carbon $publishingBeginsAt, ?Carbon $publishingEndsAt): bool
+    {
         $now = Carbon::now();
         if ($publishingBeginsAt && $publishingEndsAt) {
             return $now->between($publishingBeginsAt, $publishingEndsAt);

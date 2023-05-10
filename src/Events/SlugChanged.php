@@ -3,7 +3,6 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Events;
 
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -19,11 +18,9 @@ class SlugChanged
     /**
      * Create a new event instance.
      *
-     * @param Model $record
-     * @param array{ locale: string, oldSlug: ?string, newSlug: ?string } $changedSlugs
-     * @param bool $recordWasPublished
+     * @param  array{ locale: string, oldSlug: ?string, newSlug: ?string }  $changedSlugs
      */
-    public function __construct(public Model $record, public array $changedSlugs, public bool $recordWasPublished=false)
+    public function __construct(public Model $record, public array $changedSlugs, public bool $recordWasPublished = false)
     {
         //
     }
