@@ -24,16 +24,23 @@ trait HasSlugAttributeTrait
         static::updating(function (self $record) {
             $newSlug = $record->slug;
             $existingSlug = $record->getOriginal('slug');
-            $changed = ($newSlug !== $existingSlug);
+            $changedSlugs = [];
+            if($newSlug !== $existingSlug){
+                $changedSlugs[] = [
+                    'locale' => app()->getLocale(),
+                    'oldSlug' => $existingSlug,
+                    'newSlug' => $newSlug,
+                ];
+            }
 
-            if($changed){
+            if(!empty($changedSlugs)){
                 $published = true;
                 if(method_exists($this, 'isPublishedForDates')){
                     $published = $this->isPublishedForDates($this->getOriginal('publishing_begins_at'), $this->getOriginal('publishing_ends_at'));
                 }
 
                 //dispatch event:
-                SlugChanged::dispatch($this, $published);
+                SlugChanged::dispatch($this, $changedSlugs, $published);
             }
         });
     }

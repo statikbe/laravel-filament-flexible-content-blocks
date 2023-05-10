@@ -20,9 +20,10 @@ class SlugChanged
      * Create a new event instance.
      *
      * @param Model $record
+     * @param array{ locale: string, oldSlug: ?string, newSlug: ?string } $changedSlugs
      * @param bool $wasPublished
      */
-    public function __construct(public Model $record, public bool $wasPublished=false)
+    public function __construct(public Model $record, array $changedSlugs, public bool $wasPublished=false)
     {
         //
     }

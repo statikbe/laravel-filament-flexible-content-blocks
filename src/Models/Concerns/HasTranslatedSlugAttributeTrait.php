@@ -25,24 +25,32 @@ trait HasTranslatedSlugAttributeTrait
         static::updating(function (self $record) {
             $newSlugs = $record->getTranslations('slug');
             $existingSlugs = $record->getOriginal('slug');
-            $changed = false;
+            $changedSlugs = [];
             foreach($existingSlugs as $locale => $existingSlug){
                 if(!isset($newSlugs[$locale])){
-                    $changed = true;
+                    $changedSlugs[] = [
+                        'locale' => $locale,
+                        'oldSlug' => $existingSlug,
+                        'newSlug' => null,
+                    ];
                 }
-                else if($newSlugs[$locale] !== $existingSlugs[$locale]){
-                    $changed = true;
+                else if($newSlugs[$locale] !== $existingSlug){
+                    $changedSlugs[] = [
+                        'locale' => $locale,
+                        'oldSlug' => $existingSlug,
+                        'newSlug' => $newSlugs[$locale],
+                    ];
                 }
             }
 
-            if($changed){
+            if(!empty($changedSlugs)){
                 $published = true;
                 if(method_exists($this, 'isPublishedForDates')){
                     $published = $this->isPublishedForDates($this->getOriginal('publishing_begins_at'), $this->getOriginal('publishing_ends_at'));
                 }
 
                 //dispatch event:
-                SlugChanged::dispatch($this, $published);
+                SlugChanged::dispatch($this, $changedSlugs, $published);
             }
         });
     }
