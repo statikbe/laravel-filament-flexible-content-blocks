@@ -45,12 +45,12 @@ trait HasTranslatedSlugAttributeTrait
 
             if(!empty($changedSlugs)){
                 $published = true;
-                if(method_exists($this, 'isPublishedForDates')){
-                    $published = $this->isPublishedForDates($this->getOriginal('publishing_begins_at'), $this->getOriginal('publishing_ends_at'));
+                if(method_exists($record, 'isPublishedForDates')){
+                    $published = $record->isPublishedForDates($record->getOriginal('publishing_begins_at'), $record->getOriginal('publishing_ends_at'));
                 }
 
                 //dispatch event:
-                SlugChanged::dispatch($this, $changedSlugs, $published);
+                SlugChanged::dispatch($record, $changedSlugs, $published);
             }
         });
     }
