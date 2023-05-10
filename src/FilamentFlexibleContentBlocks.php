@@ -36,12 +36,10 @@ class FilamentFlexibleContentBlocks
     /**
      * Replaces parameters in text content. Parameters can be configured by implementing a Statikbe\FilamentFlexibleContentBlocks\Replacer\TextParameterReplacer
      * and configuring it as `text_parameter_replacer` in the config file.
-     * @param string|null $content
-     * @return string|null
      */
     public static function replaceParameters(?string $content): ?string
     {
-        if(!$content || empty(trim($content)) || empty(static::getReplacerParameters())){
+        if (! $content || empty(trim($content)) || empty(static::getReplacerParameters())) {
             return $content;
         }
 
@@ -57,20 +55,20 @@ class FilamentFlexibleContentBlocks
         return strtr($content, $shouldReplace);
     }
 
-    protected static function getReplacerParameters(): array {
-        if(isset(static::$replacerParameters) && static::$replacerParameters){
+    protected static function getReplacerParameters(): array
+    {
+        if (isset(static::$replacerParameters) && static::$replacerParameters) {
             return static::$replacerParameters;
         }
 
         $replacerClass = FilamentFlexibleBlocksConfig::getTextParameterReplacer();
-        if(!$replacerClass){
+        if (! $replacerClass) {
             return [];
         }
 
         /* @var TextParameterReplacer $replacer */
         $replacer = App::make($replacerClass);
         static::$replacerParameters = $replacer->getParameters();
-
 
         return static::$replacerParameters;
     }

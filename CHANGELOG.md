@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v0.1.5 - 2023-05-05
+
+Support for text replacement parameters: you can add :param sentinels in the text fields of content blocks and they will be replaced by data.
+
 ## v0.1.4 - 2023-05-04
 
 make searchable text content from content blocks cleaner when HTML is stripped, HTML entities en special chars are removed
