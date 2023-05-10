@@ -23,7 +23,7 @@ class SlugChanged
      * @param array{ locale: string, oldSlug: ?string, newSlug: ?string } $changedSlugs
      * @param bool $recordWasPublished
      */
-    public function __construct(public Model $record, array $changedSlugs, public bool $recordWasPublished=false)
+    public function __construct(public Model $record, public array $changedSlugs, public bool $recordWasPublished=false)
     {
         //
     }
