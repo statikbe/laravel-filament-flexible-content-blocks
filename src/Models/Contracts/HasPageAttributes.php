@@ -45,9 +45,6 @@ interface HasPageAttributes
 
     /**
      * Find the unpublished pages based on the publishing dates.
-     *
-     * @param Builder $query
-     * @return Builder
      */
     public function scopeUnpublished(Builder $query): Builder;
 
