@@ -101,7 +101,8 @@ trait HasPageAttributesTrait
         });
     }
 
-    private function createPublishedSubquery(Builder &$publishedQuery): Builder {
+    private function createPublishedSubquery(Builder &$publishedQuery): Builder
+    {
         $publishedQuery->orWhere(function (Builder $option1) {
             $option1->whereNull('publishing_begins_at')
                 ->whereNotNull('publishing_ends_at')
