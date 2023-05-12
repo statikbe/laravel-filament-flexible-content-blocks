@@ -44,6 +44,14 @@ interface HasPageAttributes
     public function scopePublished(Builder $query): Builder;
 
     /**
+     * Find the unpublished pages based on the publishing dates.
+     *
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeUnpublished(Builder $query): Builder;
+
+    /**
      * Returns the formatted timestamp of the beginning of the publication.
      *
      * @return \Illuminate\Database\Eloquent\Casts\Attribute<string, never>

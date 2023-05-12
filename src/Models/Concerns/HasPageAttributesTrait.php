@@ -86,23 +86,40 @@ trait HasPageAttributesTrait
     {
         //we need to cover each situation where publishing_begins_at and publishing_ends_at are null:
         return $query->where(function (Builder $publishedQuery) {
-            $publishedQuery->orWhere(function (Builder $option1) {
-                $option1->whereNull('publishing_begins_at')
-                    ->whereNotNull('publishing_ends_at')
-                    ->where('publishing_ends_at', '>', 'now()');
-            })->orWhere(function (Builder $option2) {
-                $option2->whereNotNull('publishing_begins_at')
-                    ->whereNotNull('publishing_ends_at')
-                    ->whereRaw('now() between `publishing_begins_at` and `publishing_ends_at`');
-            })->orWhere(function (Builder $option3) {
-                $option3->whereNotNull('publishing_begins_at')
-                    ->whereNull('publishing_ends_at')
-                    ->whereRaw('publishing_begins_at < now()');
-            })->orWhere(function (Builder $option4) {
-                $option4->whereNull('publishing_begins_at')
-                    ->whereNull('publishing_ends_at');
-            });
+            $this->createPublishedSubquery($publishedQuery);
         });
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function scopeUnpublished(Builder $query): Builder
+    {
+        //we need to cover each situation where publishing_begins_at and publishing_ends_at are null:
+        return $query->whereNot(function (Builder $publishedQuery) {
+            $this->createPublishedSubquery($publishedQuery);
+        });
+    }
+
+    private function createPublishedSubquery(Builder &$publishedQuery): Builder {
+        $publishedQuery->orWhere(function (Builder $option1) {
+            $option1->whereNull('publishing_begins_at')
+                ->whereNotNull('publishing_ends_at')
+                ->where('publishing_ends_at', '>', 'now()');
+        })->orWhere(function (Builder $option2) {
+            $option2->whereNotNull('publishing_begins_at')
+                ->whereNotNull('publishing_ends_at')
+                ->whereRaw('now() between `publishing_begins_at` and `publishing_ends_at`');
+        })->orWhere(function (Builder $option3) {
+            $option3->whereNotNull('publishing_begins_at')
+                ->whereNull('publishing_ends_at')
+                ->whereRaw('publishing_begins_at < now()');
+        })->orWhere(function (Builder $option4) {
+            $option4->whereNull('publishing_begins_at')
+                ->whereNull('publishing_ends_at');
+        });
+
+        return $publishedQuery;
     }
 
     /**

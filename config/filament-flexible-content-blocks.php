@@ -42,6 +42,15 @@ return [
         TemplateBlock::class,
     ],
 
+    /*
+     |--------------------------------------------------------------------------
+     | Theme
+     |--------------------------------------------------------------------------
+     |
+     | It is possible to create different themes for the views of the blocks and their components.
+     | Creating a new theme is done by publishing the views (see README.md) and then renaming the `tailwind` directory
+     | to your theme name, e.g. `bootstrap`. You should then specify in the var below the name of your new theme.
+     */
     'theme' => 'tailwind',
 
     'image_conversions' => [

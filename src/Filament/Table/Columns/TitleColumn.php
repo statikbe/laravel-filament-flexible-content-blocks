@@ -20,6 +20,7 @@ class TitleColumn extends \Filament\Tables\Columns\TextColumn
 
                 // Only render the tooltip if the column contents exceeds the length limit.
                 return $state;
-            });
+            })
+            ->sortable();
     }
 }
