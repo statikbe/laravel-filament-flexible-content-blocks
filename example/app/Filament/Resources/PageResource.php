@@ -22,6 +22,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\TitleField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Actions\PublishAction;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Columns\PublishedColumn;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Columns\TitleColumn;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Filters\PublishedFilter;
 
 class PageResource extends Resource
 {
@@ -75,7 +76,7 @@ class PageResource extends Resource
                 PublishedColumn::create(),
             ])
             ->filters([
-                //
+                PublishedFilter::create(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

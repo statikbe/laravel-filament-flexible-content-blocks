@@ -8,6 +8,10 @@ return [
     'columns.is_published_state_published_future_info' => 'wordt gepubliceerd op :date',
     'columns.is_published_state_unpublished_future_info' => 'wordt onbeschikbaar op :date',
 
+    'filter.is_published.label' => 'Toon gepubliceerden:',
+    'filter.is_published.published_label' => 'Gepubliceerd',
+    'filter.is_published.unpublished_label' => 'Niet gepubliceerd',
+
     'table_action.publish.publish_notification_success_title' => 'Gepubliceerd!',
     'table_action.publish.publish_notification_success_msg' => 'De pagina is nu gepubliceerd.',
     'table_action.publish.publish_notification_error_title' => 'Error',

@@ -8,6 +8,10 @@ return [
     'columns.is_published_state_published_future_info' => 'will be published on :date',
     'columns.is_published_state_unpublished_future_info' => 'will be unavailable on :date',
 
+    'filter.is_published.label' => 'Show published:',
+    'filter.is_published.published_label' => 'Published',
+    'filter.is_published.unpublished_label' => 'Unpublished',
+
     'table_action.publish.publish_notification_success_title' => 'Published!',
     'table_action.publish.publish_notification_success_msg' => 'The page is now published.',
     'table_action.publish.publish_notification_error_title' => 'Error',

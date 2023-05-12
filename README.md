@@ -145,13 +145,17 @@ Create a filament resource and its page with the filament command.
 
 #### Setup the table
 
-There are few column fields provided by the package. Below is an overview of all available columns in a code sample: 
+There are few column fields provided by the package and a filter to select published/unpublished models. 
+Below is an overview of all available columns in a code sample: 
 
 ```php
 public static function table(Table $table): Table {
     return $table->columns([
             TitleColumn::create(),
             PublishedColumn::create(),
+        ])
+        ->filters([
+            PublishedFilter::create(),
         ])
         ->actions([
             Tables\Actions\EditAction::make(),
