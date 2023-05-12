@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 class PublishedFilter extends TernaryFilter
 {
-    public static function create(): static {
+    public static function create(): static
+    {
         return static::make('is_published')
             ->nullable()
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.filter.is_published.label'))
