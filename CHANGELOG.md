@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v0.1.8 - 2023-05-15
+
+Fix bug in translatable spatie medialibrary image upload field, that would delete all translated media.
+
 ## v0.1.7 - 2023-05-12
 
 - Table filter to filter published/unpublished models: Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Filters\PublishedFilter
