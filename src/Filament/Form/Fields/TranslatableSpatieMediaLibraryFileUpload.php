@@ -53,4 +53,22 @@ class TranslatableSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpl
 
         return array_merge($customProperties, $localeProperties);
     }
+
+    public function deleteAbandonedFiles(): void
+    {
+        //this needs to be overwritten to avoid deleting the translated images.
+        //we only select images with the active form locale to be abandoned:
+
+        /** @var Model&HasMedia $record */
+        $record = $this->getRecord();
+
+        $filters = [];
+        if (method_exists($this->getLivewire(), 'getActiveFormLocale')) {
+            $filters['locale'] = $this->getLivewire()->getActiveFormLocale();
+        }
+
+        $record->getMedia($this->getCollection(), $filters)
+            ->whereNotIn('uuid', array_keys($this->getState() ?? []))
+            ->each(fn (Media $media) => $media->delete());
+    }
 }
