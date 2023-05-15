@@ -1,7 +1,11 @@
 <div>
     @if(is_array($contentBlocks))
         @foreach($contentBlocks ?? [] as $block)
-            {{$block->render()->with($block->data())}}
+            {{
+                $block->withAttributes($attributes->getAttributes())
+                    ->render()
+                    ->with($block->data())
+            }}
         @endforeach
     @endif
 </div>
