@@ -85,7 +85,7 @@ trait HasOverviewAttributesTrait
 
     public function getOverviewImageUrl(string $conversion = null): ?string
     {
-        $media = $this->getFallbackImageMedia($this->overviewImage, $this->getOverviewImageCollection());
+        $media = $this->getFallbackImageMedia($this->overviewImage->first(), $this->getOverviewImageCollection());
 
         return $media?->getUrl($conversion ?? $this->getOverviewImageConversionName());
     }
