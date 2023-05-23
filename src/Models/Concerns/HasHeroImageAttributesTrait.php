@@ -63,7 +63,7 @@ trait HasHeroImageAttributesTrait
 
     public function getHeroImageUrl(string $conversion = null): ?string
     {
-        $media = $this->getFallbackImageMedia($this->heroImage, $this->getHeroImageCollection());
+        $media = $this->getFallbackImageMedia($this->heroImage->first(), $this->getHeroImageCollection());
 
         return $media?->getUrl($conversion ?? $this->getHeroImageConversionName());
     }
