@@ -139,6 +139,12 @@ use the view action in the Filament table. The interface asks you to implement t
 content can be publicly viewed and another to view the unpublished content. 
 There is no default implementation trait, because this package is unaware of the used routes and controllers.
 
+#### Slugs:
+
+For slug support you can include the [HasSlugAttributeTrait](src%2FModels%2FConcerns%2FHasSlugAttributeTrait.php) or the 
+[HasTranslatedSlugAttributeTrait](src%2FModels%2FConcerns%2FHasTranslatedSlugAttributeTrait.php) for translatable slugs.
+If you use translatable slugs, please change [the page routing the Filament Resource](#resource-with-translated-slugs).
+
 ### 3. Setup the Filament resource
 
 Create a filament resource and its page with the filament command.
@@ -209,6 +215,27 @@ public static function form(Form $form): Form {
 If you have translatable content, you need to include the traits and language switch field of the [`filament/spatie-laravel-translatable-plugin`](https://filamentphp.com/docs/2.x/spatie-laravel-translatable-plugin/installation) to 
 [the resource](https://filamentphp.com/docs/2.x/spatie-laravel-translatable-plugin/getting-started#preparing-your-resource-class) 
 and its [pages](https://filamentphp.com/docs/2.x/spatie-laravel-translatable-plugin/getting-started#making-resource-pages-translatable).  
+
+#### <a name="resource-with-translated-slugs"></a> Note on translated slugs
+
+If you are using translated slugs on your model, it is possible that you create a new model instance without a translated slug.
+When you then switch to the language without a translated slug, Filament uses the slug as the route binding key as 
+defined in the model class. This will result in an error since the slug translation does not yet exist. To solve this it is
+easiest to use the ID as route binding key in Filament instead of the slug. You can do this by changing the page urls in 
+the Filament resource class, so that they do not try to resolve the object with `/{record}/edit`, but use the ID attribute
+`/{record:id}/edit`. 
+
+```php
+public static function getPages(): array
+{
+    //note: replace the page classes!
+    return [
+        'index' => Pages\ListArticles::route('/'),
+        'create' => Pages\CreateArticle::route('/create'),
+        'edit' => Pages\EditArticle::route('/{record:id}/edit'),
+    ];
+}
+```
 
 ### 4. Setup the controller and Blade view
 
