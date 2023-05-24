@@ -94,7 +94,7 @@ trait HasOverviewAttributesTrait
     {
         return $this->getImageHtml(
             $this->getFallbackImageMedia($this->overviewImage->first(), $this->getOverviewImageCollection()),
-            $this->getOverviewImageConversionName(),
+            $conversion ?? $this->getOverviewImageConversionName(),
             $this->getOverviewTitle(),
             $attributes);
     }
