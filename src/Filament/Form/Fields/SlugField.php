@@ -46,7 +46,7 @@ class SlugField extends TextInput
         /* @var Linkable $link */
         $link = new $linkModel();
 
-        if(method_exists($livewire, 'getActiveFormLocale')){
+        if (method_exists($livewire, 'getActiveFormLocale')) {
             $locale = $livewire->getActiveFormLocale();
             $link->setTranslation('slug', $locale, static::URL_REPLACEMENT_SLUG);
         }
