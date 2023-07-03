@@ -242,7 +242,6 @@ return [
         'default' => 'default',
     ],
 
-    
     'grid_columns' => [
         1, 2, 3, 4,
     ],

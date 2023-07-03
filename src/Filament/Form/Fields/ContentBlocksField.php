@@ -3,9 +3,7 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
 
 use Filament\Forms\Components\Builder;
-use Filament\Forms\Components\Builder\Block;
 use Filament\Resources\Pages\Page;
-use Filament\Resources\Resource;
 use Livewire\Component as Livewire;
 
 class ContentBlocksField extends Builder
