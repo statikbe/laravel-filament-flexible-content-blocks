@@ -81,8 +81,7 @@ class CallToActionBlock extends AbstractFilamentFlexibleContentBlock
                 ->label(static::getFieldLabel('text'))
                 ->disableToolbarButtons([
                     'attachFiles',
-                ])
-                ->required(),
+                ]),
             Grid::make(2)->schema([
                 BlockSpatieMediaLibraryFileUpload::make('image')
                     ->collection(static::getName())

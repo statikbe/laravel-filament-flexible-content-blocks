@@ -29,6 +29,14 @@ return [
         'en',
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Default flexible blocks
+    |--------------------------------------------------------------------------
+    |
+    | The list of default blocks that are available in all models with the HasContentBlocksTrait.
+    |
+    */
     'default_flexible_blocks' => [
         TextBlock::class,
         VideoBlock::class,
@@ -44,7 +52,7 @@ return [
 
     /*
      |--------------------------------------------------------------------------
-     | Theme
+     | Frontend theme
      |--------------------------------------------------------------------------
      |
      | It is possible to create different themes for the views of the blocks and their components.
@@ -234,22 +242,54 @@ return [
         'default' => 'default',
     ],
 
+    
     'grid_columns' => [
         1, 2, 3, 4,
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Templates for template block
+    |--------------------------------------------------------------------------
+    |
+    | You need to list the Blade templates that are available in the dropdown in the template block.
+    | The list consists of the name of the Blade template as key and the translation key that will be shown in the dropdown.
+    */
     'templates' => [
         'partials.footer-nav' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.templates_options.footer',
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | String formatting
+    |--------------------------------------------------------------------------
+    |
+    | You can set the date formatting of the publishing dates. Formatting parameters are compatible with Carbon, https://carbon.nesbot.com/docs/#api-formatting
+    */
     'formatting' => [
         'publishing_dates' => 'd/m/Y G:i',
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Author model
+    |--------------------------------------------------------------------------
+    |
+    | In case you have overwritten the default User model, you need to add the new class here to create the author relationship.
+    */
     'author_model' => 'App\Models\User',
-    //TODO configurable author search fields
 
+    /*
+    |--------------------------------------------------------------------------
+    | Block specific configuration
+    |--------------------------------------------------------------------------
+    |
+    | All configuration parameters related to blocks can be customised per block class. You can use all configuration
+    | parameters used above to customise a block class.
+    */
     'block_specific' => [
+        /*
+        //Examples:
         TextImageBlock::class => [
             'image_position' => [
                 'options' => [
@@ -259,7 +299,7 @@ return [
                 'default' => 'left',
             ],
         ],
-        /*TextBlock::class => [
+        TextBlock::class => [
             'block_styles' => [
                 'enabled' => true,
                 'options' => [
