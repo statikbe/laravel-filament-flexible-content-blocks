@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v0.1.10 - 2023-07-03
+
+- add docs
+- make required text field in CTA block not required
+- fix bugs in hero & overview image url getter
+- fix slug
+- fix styling
+
 ## v0.1.9 - 2023-05-15
 
 Cascade attributes bag of content blocks component to the blocks
