@@ -42,6 +42,22 @@ trait HasHeroImageAttributesTrait
 
                 //for filament upload field
                 $this->addFilamentThumbnailMediaConversion();
+
+                //add extra conversion for overview image format, when the hero is used as fallback for the overview image:
+                if(method_exists($this, 'overviewImage')) {
+                    $overviewConversion = $this->addMediaConversion($this->getOverviewImageConversionName())
+                        ->withResponsiveImages()
+                        ->fit(Manipulations::FIT_CROP, 600, 600)
+                        ->format(Manipulations::FORMAT_WEBP);
+                    FilamentFlexibleBlocksConfig::mergeConfiguredModelImageConversion(static::class, $this->getHeroImageCollection(), $this->getOverviewImageConversionName(), $overviewConversion);
+                }
+
+                //add extra conversion for SEO image format, when the hero is used as fallback for the SEO image:
+                if(method_exists($this, 'heroImage')){
+                    $seoConversion = $this->addMediaConversion($this->getSEOImageConversionName())
+                        ->fit(Manipulations::FIT_CROP, 1200, 630);
+                    FilamentFlexibleBlocksConfig::mergeConfiguredModelImageConversion(static::class, $this->getHeroImageCollection(), $this->getSEOImageConversionName(), $seoConversion);
+                }
             });
     }
 
@@ -71,7 +87,7 @@ trait HasHeroImageAttributesTrait
     public function getHeroImageMedia(string $conversion = null, array $attributes = []): ?HtmlableMedia
     {
         return $this->getImageHtml(
-            $this->getFallbackImageMedia($this->heroImage->first(), $this->getHeroImageCollection()),
+            $this->getFallbackImageMedia($this->heroImage()->first(), $this->getHeroImageCollection()),
             $conversion ?? $this->getHeroImageConversionName(),
             $this->hero_image_title,
             $attributes);
