@@ -61,6 +61,20 @@ return [
      */
     'theme' => 'tailwind',
 
+    /*
+     |--------------------------------------------------------------------------
+     | Image conversions
+     |--------------------------------------------------------------------------
+     |
+     | The default image conversions can be overwritten and new conversions can be added to the hero, overview and SEO
+     | images, as well as to the images of flexible blocks.
+     | Image conversions are set under the key 'models` and those of blocks are set under 'flexible_blocks'. You can
+     | overwrite the conversions of all models (key: 'default') or for a specific model by adding the model under key:
+     | 'specific'. First declare the image collection and then the conversion name. You can extend the already defined
+     | conversions by adding a 'extra_conversions' array to the collection name.
+     |
+     | To define the conversions, you can use all the spatie-image options that can be configured as array keys.
+     */
     'image_conversions' => [
         'models' => [
             'default' => [

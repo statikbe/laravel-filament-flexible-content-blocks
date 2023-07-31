@@ -118,3 +118,67 @@ In case you have overwritten the default User model, you need to add the new cla
 
 You can also integrate this feature in the Laravel translations to always have the parameters available in any translation
 string. [Follow this how-to](text-parameter-replacer.md).
+
+## Image conversions
+
+The default image conversions can be overwritten and new conversions can be added to the hero, overview and SEO
+images, as well as to the images of flexible blocks.
+Image conversions are set under the key 'models` and those of blocks are set under `flexible_blocks`. You can
+overwrite the conversions of all models (key: `default`) or for a specific model by adding the model under key:
+`specific`. First declare the image collection and then the conversion name. You can extend the already defined
+conversions by adding a `extra_conversions` array to the collection name.
+
+To define the conversions, you can use all the [spatie-image options](https://spatie.be/docs/image/v1/image-manipulations/overview) 
+that can be configured as array keys. You can use any single argument functions, with the function name as key and
+the argument as value. To resize, use `fit` with a `Spatie\Image\Manipulations::FIT_*` constante and define `width` and `height`.
+You can also queue conversions (key: `queued`) and make responsive images (key: `responsive`) by setting the value to `true`.
+Below is a detailed example:
+
+```php 
+'image_conversions' => [
+    'models' => [
+        'default' => [
+            'seo_image' => [
+                'seo_image' => [
+                    'fit' => Manipulations::FIT_CROP,
+                    'width' => 1200,
+                    'height' => 630,
+                    'responsive' => true,
+                ],
+            ],
+            'hero_image' => [
+                'hero_image' => [
+                    'fit' => Manipulations::FIT_CROP,
+                    'width' => 1200,
+                    'height' => 630,
+                    'responsive' => true,
+                ],
+                'extra_conversions' => [
+                    'hero_image_square' => [
+                        'fit' => Manipulations::FIT_CROP,
+                        'width' => 400,
+                        'height' => 400,
+                        'responsive' => true,
+                    ],
+                ],
+            ],
+        ],
+        'specific' => [
+            /*Page::class => [
+                'overview_image' => [
+                    'thumb' => [
+                        'fit' => Manipulations::FIT_CROP,
+                        'width' => 400,
+                        'height' => 400,
+                        'responsive' => true,
+                    ],
+                ],
+            ],*/
+        ],
+    ],
+    'flexible_blocks' => [
+        'default' => [],
+        'specific' => [],
+    ],
+],
+```

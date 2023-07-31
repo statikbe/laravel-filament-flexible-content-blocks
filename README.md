@@ -241,7 +241,7 @@ public static function getPages(): array
 
 Now you need to create a controller and `GET` route that returns a Blade view to display your content. See the example code for [controller examples](example%2Fapp%2FHttp).
 
-We provide Blade components for all fields (except SEO & overview fields). Below is an example of a simple Blade template, 
+We provide Blade components for all fields (except SEO fields). Below is an example of a simple Blade template, 
 where the model is passed to this view as `$page` variable. The `<x-flexible-hero>` component renders a default hero with 
 title and full screen image, and the `<x-flexible-content-blocks>` component renders all the content of each block.
 
