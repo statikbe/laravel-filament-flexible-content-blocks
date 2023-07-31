@@ -41,10 +41,10 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
         $this->setBlockStyle($blockData);
     }
 
-        public static function getIcon(): string
-        {
-            return 'heroicon-o-collection';
-        }
+    public static function getIcon(): string
+    {
+        return 'heroicon-o-collection';
+    }
 
     protected static function makeFilamentSchema(): array|Closure
     {
@@ -77,10 +77,10 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
         ];
     }
 
-        public static function getNameSuffix(): string
-        {
-            return 'overview';
-        }
+    public static function getNameSuffix(): string
+    {
+        return 'overview';
+    }
 
     /**
      * @return Collection<HasOverviewAttributes>
