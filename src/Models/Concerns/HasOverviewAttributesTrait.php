@@ -92,21 +92,21 @@ trait HasOverviewAttributesTrait
 
     public function getOverviewImageMedia(string $conversion = null, array $attributes = []): ?HtmlableMedia
     {
-        if($overviewMedia = $this->getFallbackImageMedia($this->overviewImage()->first(), $this->getOverviewImageCollection())) {
+        if ($overviewMedia = $this->getFallbackImageMedia($this->overviewImage()->first(), $this->getOverviewImageCollection())) {
             return $this->getImageHtml(
                 $overviewMedia,
                 $conversion ?? $this->getOverviewImageConversionName(),
                 $this->getOverviewTitle(),
                 $attributes);
-        }
-        else if(method_exists($this, 'heroImage')
-            && $heroMedia = $this->getFallbackImageMedia($this->heroImage()->first(), $this->getHeroImageCollection())){
+        } elseif (method_exists($this, 'heroImage')
+            && $heroMedia = $this->getFallbackImageMedia($this->heroImage()->first(), $this->getHeroImageCollection())) {
             return $this->getImageHtml(
                 $heroMedia,
                 $conversion ?? $this->getOverviewImageConversionName(),
                 $this->getOverviewTitle(),
                 $attributes);
+        } else {
+            return null;
         }
-        else return null;
     }
 }

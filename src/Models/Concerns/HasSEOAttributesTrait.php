@@ -83,13 +83,14 @@ trait HasSEOAttributesTrait
 
     public function getSEOImageUrl(string $conversion = null): ?string
     {
-        if($media = $this->getFallbackImageMedia($this->SEOImage()->first(), $this->getSEOImageCollection())) {
+        if ($media = $this->getFallbackImageMedia($this->SEOImage()->first(), $this->getSEOImageCollection())) {
             return $media->getUrl($conversion ?? $this->getSEOImageConversionName());
-        }
-        else if(method_exists($this, 'heroImage')){
+        } elseif (method_exists($this, 'heroImage')) {
             $heroMedia = $this->getFallbackImageMedia($this->heroImage()->first(), $this->getHeroImageCollection());
+
             return $heroMedia->getUrl($conversion ?? $this->getSEOImageConversionName());
+        } else {
+            return null;
         }
-        else return null;
     }
 }
