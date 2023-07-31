@@ -88,7 +88,7 @@ trait HasSEOAttributesTrait
         } elseif (method_exists($this, 'heroImage')) {
             $heroMedia = $this->getFallbackImageMedia($this->heroImage()->first(), $this->getHeroImageCollection());
 
-            return $heroMedia->getUrl($conversion ?? $this->getSEOImageConversionName());
+            return $heroMedia?->getUrl($conversion ?? $this->getSEOImageConversionName());
         } else {
             return null;
         }
