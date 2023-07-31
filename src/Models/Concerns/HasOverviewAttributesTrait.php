@@ -86,13 +86,13 @@ trait HasOverviewAttributesTrait
     public function getOverviewImageUrl(string $conversion = null): ?string
     {
         $media = $this->getFallbackImageMedia($this->overviewImage->first(), $this->getOverviewImageCollection());
-        if($media){
+        if ($media) {
             return $media->getUrl($conversion ?? $this->getOverviewImageConversionName());
-        }
-        elseif (method_exists($this, 'heroImage')){
+        } elseif (method_exists($this, 'heroImage')) {
             return $this->getHeroImageUrl($conversion ?? $this->getOverviewImageConversionName());
+        } else {
+            return null;
         }
-        else return null;
     }
 
     public function getOverviewImageMedia(string $conversion = null, array $attributes = []): ?HtmlableMedia
