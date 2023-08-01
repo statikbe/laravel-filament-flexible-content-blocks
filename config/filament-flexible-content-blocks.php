@@ -130,14 +130,37 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Overview models
+    |--------------------------------------------------------------------------
+    |
+    | List the models that can be used to add items from in the overview block.
+    */
     'overview_models' => [
         //e.g. 'App\Models\FlexiblePage',
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Call-to-action models
+    |--------------------------------------------------------------------------
+    |
+    | List the models that can be used to link to with call-to-action buttons.
+    */
     'call_to_action_models' => [
         //e.g. 'App\Models\FlexiblePage',
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Allowed link routes
+    |--------------------------------------------------------------------------
+    |
+    | Here you can define which routes are shown in the select form component for call-to-action buttons.
+    | By default all routes defined by your Laravel application are displayed.
+    | You can either list the allowed or denied routes. You can use wildcards with `*`.
+    */
     'link_routes' => [
         'allowed' => [
             '*',
@@ -153,6 +176,15 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Image position options
+    |--------------------------------------------------------------------------
+    |
+    | Blocks with images can define where the image is positioned in its container. You can define the options of the select form
+    | component here. Each option has the direction as key and the translation key as value.
+    | In the 'default' key, you can set the default option.
+    */
     'image_position' => [
         'options' => [
             'left' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_position.left',
@@ -162,6 +194,15 @@ return [
         'default' => 'left',
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Image width options
+    |--------------------------------------------------------------------------
+    |
+    | Blocks with images can set the image's width. You can define the options of the select form
+    | component here. Each option has label with the translation key and the corresponding CSS class that will be applied.
+    | In the 'default' key, you can set the default option.
+    */
     'image_width' => [
         'options' => [
             '100%' => [
@@ -185,9 +226,18 @@ return [
                 'class' => 'lg:w-1/4',
             ],
         ],
-        'default' => 'full',
+        'default' => '100%',
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Call-to-action button style options
+    |--------------------------------------------------------------------------
+    |
+    | CTA buttons can have different styles. You can define the options of the select form
+    | component here. Each option has label with the translation key and the corresponding CSS class that will be applied.
+    | In the 'default' key, you can set the default option.
+    */
     'call_to_action_buttons' => [
         'options' => [
             'primary' => [
@@ -223,9 +273,18 @@ return [
                 'class' => 'link link--ext',
             ],
         ],
-        'default' => 'full',
+        'default' => 'primary',
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Background colours options
+    |--------------------------------------------------------------------------
+    |
+    | Some blocks allow to select a background colour to tweak the styling. You can define the options of the select form
+    | component here. Each option has label with the translation key and the corresponding CSS class that will be applied.
+    | In the 'default' key, you can set the default option.
+    */
     'background_colours' => [
         'options' => [
             'default' => [
@@ -248,6 +307,16 @@ return [
         'default' => 'default',
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Block style options
+    |--------------------------------------------------------------------------
+    |
+    | You can create different templates with a different layout or styling for a block. This configuration allows to
+    | define the styles, either for all blocks by setting 'enabled_for_all_blocks' to true and defining the options here.
+    | The key is the suffix that will be applied to the block's blade template name. If you want to define styles for a
+    | specific block, please do it in the 'block_specific' configuration.
+    */
     'block_styles' => [
         'enabled_for_all_blocks' => true,
         'options' => [
@@ -256,6 +325,14 @@ return [
         'default' => 'default',
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Grid columns
+    |--------------------------------------------------------------------------
+    |
+    | The allowed choices the user has to create columns in a grid. For instance, to list overview items in columns.
+    | Maximum is 12 columns.
+    */
     'grid_columns' => [
         1, 2, 3, 4,
     ],
