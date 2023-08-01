@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v0.2.0 - 2023-08-01
+
+Completed configuration documentation
+
 ## v0.1.13 - 2023-07-31
 
 - Fix bug with SEO image fallback to hero image
