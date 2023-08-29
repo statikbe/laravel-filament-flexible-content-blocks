@@ -58,7 +58,7 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
 
         $uuids = $this->getState() ?? [];
         $contentBlocksComponent = new ContentBlocks($record);
-        foreach ($contentBlocksComponent->contentBlocks as $block){
+        foreach ($contentBlocksComponent->contentBlocks as $block) {
             /* @var AbstractContentBlock&HasImage $block */
             if ($block::getName() === $this->getCollection()) {
                 $imageUuids = $block->getImageUuids();
