@@ -29,6 +29,7 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
                 $state = [$state];
             }
 
+            $files = [];
             if (is_array($state)) {
                 $files = $record->load('media')->getMedia($component->getCollection())
                     ->whereIn('uuid', $state)
