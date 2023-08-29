@@ -10,6 +10,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImage;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
+use Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks;
 
 /**
  * An extension to the spatie media-library field of Filament to also allow to save the UUID to a block.
@@ -56,7 +57,8 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
         $record = $this->getRecord();
 
         $uuids = $this->getState() ?? [];
-        foreach ($record->getFilamentContentBlocks() as $block){
+        $contentBlocksComponent = new ContentBlocks($record);
+        foreach ($contentBlocksComponent->contentBlocks as $block){
             /* @var AbstractContentBlock&HasImage $block */
             if($block::getName() === $this->getCollection()){
                 $imageUuids = $block->getImageUuids();
