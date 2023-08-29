@@ -88,7 +88,8 @@ trait HasImage
 
     /**
      * Return all image UUIDs of this block.
+     *
      * @return array<string>
      */
-    public abstract function getImageUuids(): array;
+    abstract public function getImageUuids(): array;
 }
