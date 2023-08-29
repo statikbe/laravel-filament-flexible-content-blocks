@@ -148,4 +148,9 @@ class CallToActionBlock extends AbstractFilamentFlexibleContentBlock
 
         return $searchable;
     }
+
+    public function getImageUuids(): array
+    {
+        return $this->imageId ? [$this->imageId] : [];
+    }
 }

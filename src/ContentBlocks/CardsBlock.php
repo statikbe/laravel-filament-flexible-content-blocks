@@ -163,4 +163,18 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
 
         return $searchable;
     }
+
+    public function getImageUuids(): array
+    {
+        $uuids = [];
+        if($this->blockData['cards']) {
+            foreach ($this->blockData['cards'] as $card) {
+                if ($card['image']) {
+                    $uuids[] = $card['image'];
+                }
+            }
+        }
+
+        return $uuids;
+    }
 }

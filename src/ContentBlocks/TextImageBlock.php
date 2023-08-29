@@ -156,4 +156,9 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
 
         return $searchable;
     }
+
+    public function getImageUuids(): array
+    {
+        return $this->imageId ? [$this->imageId] : [];
+    }
 }

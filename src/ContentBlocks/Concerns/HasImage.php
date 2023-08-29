@@ -85,4 +85,10 @@ trait HasImage
 
         return $conversion;
     }
+
+    /**
+     * Return all image UUIDs of this block.
+     * @return array<string>
+     */
+    public abstract function getImageUuids(): array;
 }

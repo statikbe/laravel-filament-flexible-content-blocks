@@ -114,4 +114,9 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
     {
         return isset($this->overlayImageId) && ! is_null($this->overlayImageId);
     }
+
+    public function getImageUuids(): array
+    {
+        return $this->overlayImageId ? [$this->overlayImageId] : [];
+    }
 }

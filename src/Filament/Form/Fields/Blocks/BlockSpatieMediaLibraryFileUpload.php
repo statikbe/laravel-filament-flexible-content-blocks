@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImage;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 
 /**
  * An extension to the spatie media-library field of Filament to also allow to save the UUID to a block.
@@ -58,5 +61,27 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
 
         //Make sure the uuid of the image is added to the form data
         $this->dehydrated(true);
+    }
+
+    public function deleteAbandonedFiles(): void
+    {
+        /** @var Model&HasMedia&HasContentBlocks $record */
+        $record = $this->getRecord();
+
+        $uuids = $this->getState() ?? [];
+        foreach ($record->getFilamentContentBlocks() as $block){
+            /* @var AbstractContentBlock&HasImage $block */
+            if($block::getName() === $this->getCollection()){
+                $imageUuids = $block->getImageUuids();
+                foreach($imageUuids as $imageUuid){
+                    $uuids[$imageUuid] = $imageUuid;
+                }
+            }
+        }
+
+        $record
+            ->getMedia($this->getCollection())
+            ->whereNotIn('uuid', array_keys($uuids))
+            ->each(fn (Media $media) => $media->delete());
     }
 }
