@@ -41,19 +41,6 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
                         return [$uuid => $uuid];
                     })
                     ->toArray();
-            } else {
-                /** @var Model&HasMedia $record */
-                $files = $record->load('media')->getMedia($component->getCollection())
-                    ->when(
-                        ! $component->isMultiple(),
-                        fn (Collection $files): Collection => $files->take(1),
-                    )
-                    ->mapWithKeys(function (Media $file): array {
-                        $uuid = $file->getAttributeValue('uuid');
-
-                        return [$uuid => $uuid];
-                    })
-                    ->toArray();
             }
 
             $component->state($files);
