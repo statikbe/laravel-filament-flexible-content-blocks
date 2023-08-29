@@ -167,7 +167,7 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
     public function getImageUuids(): array
     {
         $uuids = [];
-        if($this->blockData['cards']) {
+        if ($this->blockData['cards']) {
             foreach ($this->blockData['cards'] as $card) {
                 if ($card['image']) {
                     $uuids[] = $card['image'];
