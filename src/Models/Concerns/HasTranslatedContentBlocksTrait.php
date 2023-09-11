@@ -4,8 +4,8 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 
 trait HasTranslatedContentBlocksTrait
 {
-    use HasTranslatedAttributesTrait;
     use HasContentBlocksTrait;
+    use HasTranslatedAttributesTrait;
 
     public function initializeHasTranslatedContentBlocksTrait(): void
     {

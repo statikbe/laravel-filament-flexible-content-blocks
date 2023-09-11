@@ -25,10 +25,10 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
 
 class CallToActionBlock extends AbstractFilamentFlexibleContentBlock
 {
-    use HasImage;
-    use HasCallToAction;
     use HasBackgroundColour;
     use HasBlockStyle;
+    use HasCallToAction;
+    use HasImage;
 
     const CONVERSION_DEFAULT = 'default';
 

@@ -23,11 +23,11 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
 
 class ImageBlock extends AbstractFilamentFlexibleContentBlock
 {
-    use HasImage;
-    use HasImageWidth;
     use HasBackgroundColour;
     use HasBlockStyle;
+    use HasImage;
     use HasImageConversionType;
+    use HasImageWidth;
 
     public ?string $imageId;
 
