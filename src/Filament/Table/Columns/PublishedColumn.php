@@ -2,11 +2,11 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Columns;
 
-use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Model;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasPageAttributes;
 
-class PublishedColumn extends BadgeColumn
+class PublishedColumn extends TextColumn
 {
     const STATE_PUBLISHED = 'published';
 
@@ -29,8 +29,7 @@ class PublishedColumn extends BadgeColumn
                     return static::STATE_UNPUBLISHED;
                 }
             })
-            ->enum($options)
-            ->formatStateUsing(function (BadgeColumn $column, string $state) use ($options): string {
+            ->formatStateUsing(function (TextColumn $column, string $state) use ($options): string {
                 /** @var HasPageAttributes $record */
                 $record = $column->getRecord();
                 $formattedState = $options[$state];
@@ -52,6 +51,6 @@ class PublishedColumn extends BadgeColumn
             ->colors([
                 'success' => static::STATE_PUBLISHED,
                 'danger' => static::STATE_UNPUBLISHED,
-            ]);
+            ])->badge();
     }
 }

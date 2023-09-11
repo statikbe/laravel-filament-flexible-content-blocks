@@ -25,10 +25,10 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
 
 class TextImageBlock extends AbstractFilamentFlexibleContentBlock
 {
-    use HasImage;
-    use HasCallToAction;
     use HasBackgroundColour;
     use HasBlockStyle;
+    use HasCallToAction;
+    use HasImage;
     use HasImageConversionType;
 
     public ?string $title;

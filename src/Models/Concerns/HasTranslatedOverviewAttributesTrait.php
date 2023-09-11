@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait HasTranslatedOverviewAttributesTrait
 {
-    use HasTranslatedAttributesTrait;
     use HasOverviewAttributesTrait;
+    use HasTranslatedAttributesTrait;
 
     public function initializeHasTranslatedOverviewAttributesTrait(): void
     {
