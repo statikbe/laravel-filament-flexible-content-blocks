@@ -68,7 +68,7 @@ class PublishAction extends Action
             /** @var Model|HasPageAttributes $page */
             $page = $this->getRecord();
             if (method_exists($page, 'isPublished') && $page->isPublished()) {
-                return 'heroicon-o-eye-off';
+                return 'heroicon-o-eye-slash';
             } else {
                 return 'heroicon-o-eye';
             }
