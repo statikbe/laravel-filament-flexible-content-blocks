@@ -15,8 +15,8 @@ use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
  */
 trait HasOverviewAttributesTrait
 {
-    use InteractsWithMedia;
     use HasMediaAttributesTrait;
+    use InteractsWithMedia;
 
     public function initializeHasOverviewAttributesTrait(): void
     {

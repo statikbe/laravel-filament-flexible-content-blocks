@@ -28,10 +28,10 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
 
 class CardsBlock extends AbstractFilamentFlexibleContentBlock
 {
-    use HasImage;
-    use HasCallToAction;
     use HasBackgroundColour;
     use HasBlockStyle;
+    use HasCallToAction;
+    use HasImage;
     use HasImageConversionType;
 
     public ?string $title;

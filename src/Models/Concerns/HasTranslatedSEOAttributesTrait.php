@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait HasTranslatedSEOAttributesTrait
 {
-    use HasTranslatedAttributesTrait;
     use HasSEOAttributesTrait;
+    use HasTranslatedAttributesTrait;
 
     public function initializeHasTranslatedSEOAttributesTrait(): void
     {
