@@ -15,8 +15,8 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasHeroImageAttribut
  */
 trait HasHeroImageAttributesTrait
 {
-    use InteractsWithMedia;
     use HasMediaAttributesTrait;
+    use InteractsWithMedia;
 
     public function initializeHasHeroImageAttributesTrait(): void
     {

@@ -4,8 +4,8 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 
 trait HasTranslatedPageAttributesTrait
 {
-    use HasTranslatedAttributesTrait;
     use HasPageAttributesTrait;
+    use HasTranslatedAttributesTrait;
 
     public function initializeHasTranslatedPageAttributesTrait(): void
     {

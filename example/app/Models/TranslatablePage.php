@@ -23,18 +23,18 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasPageAttributes;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasSEOAttributes;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\Linkable;
 
-class TranslatablePage extends Model implements HasMedia, HasMediaAttributes, HasPageAttributes, HasHeroImageAttributes, HasContentBlocks, HasIntroAttribute, HasSEOAttributes, HasOverviewAttributes, Linkable
+class TranslatablePage extends Model implements HasContentBlocks, HasHeroImageAttributes, HasIntroAttribute, HasMedia, HasMediaAttributes, HasOverviewAttributes, HasPageAttributes, HasSEOAttributes, Linkable
 {
-    use HasFactory;
-    use HasTranslatedPageAttributesTrait;
-    use HasTranslatedIntroAttributeTrait;
     use HasAuthorAttributeTrait;
-    use HasHeroImageAttributesTrait;
-    use HasTranslatedSlugAttributeTrait;
-    use HasTranslatedSEOAttributesTrait;
-    use HasTranslatedContentBlocksTrait;
     use HasDefaultContentBlocksTrait;
+    use HasFactory;
+    use HasHeroImageAttributesTrait;
+    use HasTranslatedContentBlocksTrait;
+    use HasTranslatedIntroAttributeTrait;
     use HasTranslatedOverviewAttributesTrait;
+    use HasTranslatedPageAttributesTrait;
+    use HasTranslatedSEOAttributesTrait;
+    use HasTranslatedSlugAttributeTrait;
 
     public function getViewUrl(string $locale = null): string
     {

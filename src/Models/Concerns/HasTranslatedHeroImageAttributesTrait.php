@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait HasTranslatedHeroImageAttributesTrait
 {
-    use HasTranslatedAttributesTrait;
     use HasHeroImageAttributesTrait;
+    use HasTranslatedAttributesTrait;
 
     public function initializeHasTranslatedHeroImageAttributesTrait(): void
     {

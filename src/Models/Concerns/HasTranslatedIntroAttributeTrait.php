@@ -4,8 +4,8 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 
 trait HasTranslatedIntroAttributeTrait
 {
-    use HasTranslatedAttributesTrait;
     use HasIntroAttributeTrait;
+    use HasTranslatedAttributesTrait;
 
     public function initializeHasTranslatedIntroAttributeTrait(): void
     {

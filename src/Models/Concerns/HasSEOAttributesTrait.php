@@ -15,8 +15,8 @@ use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
  */
 trait HasSEOAttributesTrait
 {
-    use InteractsWithMedia;
     use HasMediaAttributesTrait;
+    use InteractsWithMedia;
 
     public function initializeHasSEOAttributesTrait(): void
     {
