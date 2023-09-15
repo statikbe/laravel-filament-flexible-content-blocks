@@ -46,7 +46,7 @@ class PublishedColumn extends TextColumn
             })
             ->icons([
                 'heroicon-o-eye' => static::STATE_PUBLISHED,
-                'heroicon-o-eye-off' => static::STATE_UNPUBLISHED,
+                'heroicon-o-eye-slash' => static::STATE_UNPUBLISHED,
             ])
             ->colors([
                 'success' => static::STATE_PUBLISHED,
