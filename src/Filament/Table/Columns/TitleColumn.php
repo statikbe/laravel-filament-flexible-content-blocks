@@ -4,6 +4,9 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Columns;
 
 use Filament\Tables\Columns\TextColumn;
 
+/**
+ * Text column with a limit of 50 and a tooltip that shows the whole title if it is too long.
+ */
 class TitleColumn extends \Filament\Tables\Columns\TextColumn
 {
     public static function create(): static
@@ -14,7 +17,7 @@ class TitleColumn extends \Filament\Tables\Columns\TextColumn
             ->tooltip(function (TextColumn $column): ?string {
                 $state = $column->getState();
 
-                if (strlen($state) <= $column->getLimit()) {
+                if (strlen($state) <= $column->getCharacterLimit()) {
                     return null;
                 }
 
