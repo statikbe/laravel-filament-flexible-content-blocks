@@ -11,7 +11,7 @@ abstract class ImageField
         if ($translatable) {
             return TranslatableSpatieMediaLibraryFileUpload::make($field)
                 ->hint(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.translatable_image_hint'))
-                ->hintIcon('heroicon-s-translate');
+                ->hintIcon('heroicon-s-language');
         } else {
             return SpatieMediaLibraryFileUpload::make($field);
         }

@@ -22,7 +22,7 @@ trait HasTranslatableHint
 
         $this->hintIcon = function (?Model $record, Field $component) {
             if ($record && isset($record->translatable) && in_array($component->getName(), $record->translatable)) {
-                return 'heroicon-s-translate';
+                return 'heroicon-o-language';
             }
 
             return null;
