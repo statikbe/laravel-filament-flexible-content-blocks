@@ -41,7 +41,7 @@ class TextBlock extends AbstractFilamentFlexibleContentBlock
 
     public static function getIcon(): string
     {
-        return 'heroicon-o-view-list';
+        return 'heroicon-o-bars-3-bottom-left';
     }
 
     /**
