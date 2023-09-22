@@ -11,8 +11,6 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 
 class CopyContentBlocksToLocalesAction extends Action
 {
-    use CanCustomizeProcess;
-
     public static function getDefaultName(): ?string
     {
         return 'copy_content_blocks_to_other_locales_page_action';
