@@ -3,14 +3,14 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Actions;
 
 use Closure;
-use Filament\Forms\Components\Actions\Action;
+use Filament\Actions\Action;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component as Livewire;
 use Spatie\Translatable\HasTranslations;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Actions\CopyContentBlocksToLocalesActionHandler;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\ContentBlocksField;
 
-class CopyContentBlocksToLocalesAction extends FormAction
+class CopyContentBlocksToLocalesAction extends Action
 {
     protected function setUp(): void
     {
@@ -26,7 +26,7 @@ class CopyContentBlocksToLocalesAction extends FormAction
                 ->modalSubheading(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.copy_content_blocks_to_other_locales.modal_subheading'))
                 ->modalButton(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.copy_content_blocks_to_other_locales.modal_button'))
                 ->modalWidth('md')
-                ->icon('heroicon-o-translate')
+                ->icon('heroicon-o-language')
                 ->action(function () use ($get, $record, $livewire) {
                     $handler = new CopyContentBlocksToLocalesActionHandler();
                     $handler->handle($record, $livewire, $get(ContentBlocksField::FIELD));

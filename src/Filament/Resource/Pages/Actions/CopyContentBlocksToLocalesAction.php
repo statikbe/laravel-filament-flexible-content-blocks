@@ -30,7 +30,7 @@ class CopyContentBlocksToLocalesAction extends Action
 
         $this->button();
 
-        $this->icon('heroicon-o-translate');
+        $this->icon('heroicon-o-language');
 
         $this->action(function () {
             /** @var EditRecord $page * */
