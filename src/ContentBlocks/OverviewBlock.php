@@ -43,7 +43,7 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
 
     public static function getIcon(): string
     {
-        return 'heroicon-o-collection';
+        return 'heroicon-o-rectangle-stack';
     }
 
     protected static function makeFilamentSchema(): array|Closure

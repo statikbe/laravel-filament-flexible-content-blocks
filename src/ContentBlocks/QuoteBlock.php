@@ -39,7 +39,7 @@ class QuoteBlock extends AbstractFilamentFlexibleContentBlock
 
     public static function getIcon(): string
     {
-        return 'heroicon-o-annotation';
+        return 'heroicon-o-chat-bubble-bottom-center-text';
     }
 
     protected static function makeFilamentSchema(): array|Closure

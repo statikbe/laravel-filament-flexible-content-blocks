@@ -61,7 +61,7 @@ class CallToActionBlock extends AbstractFilamentFlexibleContentBlock
 
     public static function getIcon(): string
     {
-        return 'heroicon-o-cursor-click';
+        return 'heroicon-o-cursor-arrow-rays';
     }
 
     public static function getNameSuffix(): string

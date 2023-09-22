@@ -23,7 +23,7 @@ class TemplateBlock extends AbstractFilamentFlexibleContentBlock
 
     public static function getIcon(): string
     {
-        return 'heroicon-o-template';
+        return 'heroicon-o-rectangle-group';
     }
 
     protected static function makeFilamentSchema(): array|Closure

@@ -72,7 +72,7 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
 
     public static function getIcon(): string
     {
-        return 'heroicon-o-photograph';
+        return 'heroicon-o-photo';
     }
 
     /**

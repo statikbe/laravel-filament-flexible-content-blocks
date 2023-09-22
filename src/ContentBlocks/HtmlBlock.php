@@ -26,7 +26,7 @@ class HtmlBlock extends AbstractFilamentFlexibleContentBlock
 
     public static function getIcon(): string
     {
-        return 'heroicon-o-code';
+        return 'heroicon-o-code-bracket';
     }
 
     /**

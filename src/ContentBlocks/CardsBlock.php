@@ -54,7 +54,7 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
 
     public static function getIcon(): string
     {
-        return 'heroicon-o-view-grid';
+        return 'heroicon-o-squares-plus';
     }
 
     protected static function makeFilamentSchema(): array|Closure
