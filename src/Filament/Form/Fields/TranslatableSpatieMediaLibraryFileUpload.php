@@ -17,8 +17,8 @@ class TranslatableSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpl
 
         $this->loadStateFromRelationshipsUsing(static function (SpatieMediaLibraryFileUpload $component, HasMedia $record, Livewire $livewire): void {
             $mediaFilters = [];
-            if (method_exists($livewire, 'getActiveFormLocale')) {
-                $mediaFilters['locale'] = $livewire->getActiveFormLocale();
+            if (method_exists($livewire, 'getActiveFormsLocale')) {
+                $mediaFilters['locale'] = $livewire->getActiveFormsLocale();
             }
 
             /** @var Model&HasMedia $record */
@@ -43,8 +43,8 @@ class TranslatableSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpl
         //we get the locale properties and combine them with the custom properties set by customisation:
         $localeProperties = $this->evaluate(function (Livewire $livewire) {
             $properties = [];
-            if (method_exists($livewire, 'getActiveFormLocale')) {
-                $properties['locale'] = $livewire->getActiveFormLocale();
+            if (method_exists($livewire, 'getActiveFormsLocale')) {
+                $properties['locale'] = $livewire->getActiveFormsLocale();
             }
 
             return $properties;
@@ -63,8 +63,8 @@ class TranslatableSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpl
         $record = $this->getRecord();
 
         $filters = [];
-        if (method_exists($this->getLivewire(), 'getActiveFormLocale')) {
-            $filters['locale'] = $this->getLivewire()->getActiveFormLocale();
+        if (method_exists($this->getLivewire(), 'getActiveFormsLocale')) {
+            $filters['locale'] = $this->getLivewire()->getActiveFormsLocale();
         }
 
         $record->getMedia($this->getCollection(), $filters)
