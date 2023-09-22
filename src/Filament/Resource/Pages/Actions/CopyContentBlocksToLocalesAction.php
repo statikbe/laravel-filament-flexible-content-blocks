@@ -4,7 +4,6 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Resource\Pages\Actions
 
 use Filament\Pages\Actions\Action;
 use Filament\Resources\Pages\EditRecord;
-use Filament\Support\Actions\Concerns\CanCustomizeProcess;
 use Illuminate\Database\Eloquent\Model;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Actions\CopyContentBlocksToLocalesActionHandler;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
