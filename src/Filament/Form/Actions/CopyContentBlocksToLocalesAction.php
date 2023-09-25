@@ -8,6 +8,7 @@ use Filament\Forms\Get;
 use Illuminate\Database\Eloquent\Model;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Actions\CopyContentBlocksToLocalesActionHandler;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\ContentBlocksField;
+use Livewire\Component as Livewire;
 
 class CopyContentBlocksToLocalesAction extends Actions
 {
@@ -21,7 +22,7 @@ class CopyContentBlocksToLocalesAction extends Actions
                 ->modalSubmitActionLabel(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.copy_content_blocks_to_other_locales.modal_button'))
                 ->modalWidth('md')
                 ->icon('heroicon-o-language')
-                ->action(function (Get $get, $record, $livewire) {
+                ->action(function (Get $get, Model $record, Livewire $livewire) {
                     $handler = new CopyContentBlocksToLocalesActionHandler();
                     $handler->handle($record, $livewire, $get(ContentBlocksField::FIELD));
                 }),

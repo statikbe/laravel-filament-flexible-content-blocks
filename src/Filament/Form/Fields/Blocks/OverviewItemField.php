@@ -24,7 +24,7 @@ class OverviewItemField extends Component
     use HasLoadingMessage;
     use HasName;
 
-    protected string $view = 'forms::components.grid';
+    protected string $view = 'filament-forms::components.grid';
 
     public bool|Closure $isRequired = false;
 

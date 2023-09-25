@@ -34,7 +34,7 @@ class CallToActionRepeater extends Repeater
             CallToActionField::make('call_to_action', $this->blockClass)
                 ->types(fn () => $this->getCallToActionTypes())
                 ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_lbl'))
-                ->view('forms::components.grid'),
+                ->view('filament-forms::components.grid'),
         ]);
         $this->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_lbl'));
         $this->itemLabel(function (array $state): ?string {
