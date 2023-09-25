@@ -2,14 +2,13 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Actions;
 
-use Closure;
 use Filament\Actions\Action;
+use Filament\Forms\Get;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component as Livewire;
 use Spatie\Translatable\HasTranslations;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Actions\CopyContentBlocksToLocalesActionHandler;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\ContentBlocksField;
-use Filament\Forms\Get;
 
 class CopyContentBlocksToLocalesAction extends Action
 {
