@@ -2,16 +2,16 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Actions;
 
-use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Actions;
+use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Get;
-use Illuminate\Database\Eloquent\Model;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Actions\CopyContentBlocksToLocalesActionHandler;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\ContentBlocksField;
 
 class CopyContentBlocksToLocalesAction extends Actions
 {
-    public static function create(): static {
+    public static function create(): static
+    {
         return static::make([
             Action::make('copy_content_blocks_to_other_locales')
                 ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.copy_content_blocks_to_other_locales_lbl'))
