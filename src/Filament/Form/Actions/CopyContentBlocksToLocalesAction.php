@@ -8,6 +8,7 @@ use Filament\Forms\Get;
 use Livewire\Component as Livewire;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Actions\CopyContentBlocksToLocalesActionHandler;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\ContentBlocksField;
+use Illuminate\Database\Eloquent\Model;
 
 class CopyContentBlocksToLocalesAction extends Actions
 {
