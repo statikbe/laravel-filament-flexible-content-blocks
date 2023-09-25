@@ -5,9 +5,9 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Actions;
 use Filament\Forms\Components\Actions;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Get;
+use Livewire\Component as Livewire;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Actions\CopyContentBlocksToLocalesActionHandler;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\ContentBlocksField;
-use Livewire\Component as Livewire;
 
 class CopyContentBlocksToLocalesAction extends Actions
 {
