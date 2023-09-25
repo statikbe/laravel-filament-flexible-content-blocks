@@ -18,7 +18,7 @@ class ImageConversionTypeField extends Select
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.image_conversion_type_lbl'))
             ->options($blockClass::getImageConversionTypeOptions())
             ->default($blockClass::getImageConversionTypeDefault())
-            ->disablePlaceholderSelection()
+            ->selectablePlaceholder(false)
             ->required($required);
     }
 }

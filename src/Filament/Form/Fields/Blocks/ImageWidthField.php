@@ -19,7 +19,7 @@ class ImageWidthField extends Select
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.image_width_lbl'))
             ->options(FilamentFlexibleBlocksConfig::getImageWidthSelectOptions($blockClass))
             ->default(FilamentFlexibleBlocksConfig::getImageWidthDefault($blockClass))
-            ->disablePlaceholderSelection()
+            ->selectablePlaceholder(false)
             ->required($required);
     }
 }

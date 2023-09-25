@@ -20,7 +20,7 @@ class ImagePositionField extends Select
             ->helperText(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.image_position_help'))
             ->options(FilamentFlexibleBlocksConfig::getImagePositionSelectOptions(static::class))
             ->default(FilamentFlexibleBlocksConfig::getImagePositionDefault(static::class))
-            ->disablePlaceholderSelection()
+            ->selectablePlaceholder(false)
             ->required($required);
     }
 }

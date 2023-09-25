@@ -18,6 +18,8 @@ use Illuminate\Support\Str;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Type\CallToActionType;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 
 class CallToActionField extends Component
 {
@@ -82,7 +84,7 @@ class CallToActionField extends Component
         $isRequired = $this->isRequired();
 
         /** @var ?CallToActionType $selectedType */
-        $selectedType = $types[$this->evaluate(function (Closure $get): ?string {
+        $selectedType = $types[$this->evaluate(function (Get $get): ?string {
             return $get('cta_model');
         })] ?? null;
         $selectedTypeIsUrl = $selectedType?->isUrlType() ?? false;
@@ -100,7 +102,7 @@ class CallToActionField extends Component
                         ))
                         ->required()
                         ->reactive()
-                        ->afterStateUpdated(function (Closure $set) {
+                        ->afterStateUpdated(function (Set $set) {
                             $set(static::FIELD_ENTRY_ID, null);
                         }),
                     Select::make(static::FIELD_ENTRY_ID)

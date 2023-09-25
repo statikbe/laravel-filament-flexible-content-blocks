@@ -40,7 +40,7 @@ class CallToActionRepeater extends Repeater
         $this->itemLabel(function (array $state): ?string {
             return $state[CallToActionField::FIELD_BUTTON_LABEL] ?? null;
         });
-        $this->createItemButtonLabel(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.add_call_to_action'));
+        $this->addActionLabel(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.add_call_to_action'));
     }
 
     public function callToActionTypes(array|Closure|null $types): static

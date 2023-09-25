@@ -13,7 +13,7 @@ class PublishingBeginsAtField extends DateTimePicker
     {
         return static::make(static::FIELD)
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.publishing_begins_at_lbl'))
-            ->withoutSeconds()
+            ->seconds(false)
             ->displayFormat(FilamentFlexibleBlocksConfig::getPublishingDateFormatting());
     }
 }

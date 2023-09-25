@@ -13,7 +13,7 @@ class PublishingEndsAtField extends DateTimePicker
     {
         return static::make('publishing_ends_at')
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.publishing_ends_at_lbl'))
-            ->withoutSeconds()
+            ->seconds(false)
             ->displayFormat(FilamentFlexibleBlocksConfig::getPublishingDateFormatting());
     }
 }

@@ -22,7 +22,7 @@ class BlockStyleField extends Select
             ->default(FilamentFlexibleBlocksConfig::getBlockStyleDefault($blockClass))
             //only show when enabled and when there are styles configured:
             ->visible($blockClass::hasBlockStyles() && count(FilamentFlexibleBlocksConfig::getBlockStyleSelectOptions($blockClass)) > 1)
-            ->disablePlaceholderSelection()
+            ->selectablePlaceholder(false)
             ->required($required);
     }
 }

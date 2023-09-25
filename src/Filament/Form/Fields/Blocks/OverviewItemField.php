@@ -13,6 +13,8 @@ use Filament\Forms\Components\Select;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Str;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Type\OverviewType;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
 
 class OverviewItemField extends Component
 {
@@ -51,7 +53,7 @@ class OverviewItemField extends Component
         $isRequired = $this->isRequired();
 
         /** @var ?OverviewType $selectedType */
-        $selectedType = $types[$this->evaluate(function (Closure $get): ?string {
+        $selectedType = $types[$this->evaluate(function (Get $get): ?string {
             return $get('overview_model');
         })] ?? null;
 
@@ -66,7 +68,7 @@ class OverviewItemField extends Component
                 ))
                 ->required($isRequired)
                 ->reactive()
-                ->afterStateUpdated(function (Closure $set) {
+                ->afterStateUpdated(function (Set $set) {
                     $set('overview_id', null);
                 }),
             Select::make('overview_id')

@@ -23,7 +23,7 @@ class ViewAction extends Action
 
         $this->icon('heroicon-s-eye');
 
-        $this->disableForm();
+        $this->disabledForm();
 
         $this->url(function (Linkable $record, Page $livewire): string {
             $locale = app()->getLocale();

@@ -19,7 +19,7 @@ class BackgroundColourField extends Select
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.background_colour_lbl'))
             ->options(FilamentFlexibleBlocksConfig::getBackgroundColoursSelectOptions($blockClass))
             ->default(FilamentFlexibleBlocksConfig::getBackgroundColourDefault($blockClass))
-            ->disablePlaceholderSelection()
+            ->selectablePlaceholder(false)
             ->required($required);
     }
 }

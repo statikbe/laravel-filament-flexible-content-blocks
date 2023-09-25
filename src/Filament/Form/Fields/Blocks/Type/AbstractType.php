@@ -58,9 +58,9 @@ abstract class AbstractType
                 default => 'like',
             };
 
-            $isFirst = true;
+            $query->where(function (Builder $query) use ($searchOperator, $search): Builder {
+                $isFirst = true;
 
-            $query->where(function (Builder $query) use ($isFirst, $searchOperator, $search): Builder {
                 foreach ($this->getSearchColumns() as $searchColumnName) {
                     $whereClause = $isFirst ? 'where' : 'orWhere';
                     $search = Str::lower($search);
