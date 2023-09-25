@@ -5,6 +5,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Pages\Page;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Concerns\HasTranslatableHint;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\Linkable;
@@ -22,7 +23,7 @@ class SlugField extends TextInput
         return static::make(static::FIELD)
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.slug_lbl'))
             ->disabled($disabled)
-            ->helperText(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.slug_desc'))
+            ->helperText(new HtmlString(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.slug_desc')))
             ->prefix(function (Page $livewire) {
                 $url = static::getUrlWithReplacementSlug($livewire);
 
