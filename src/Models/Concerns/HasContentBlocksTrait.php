@@ -12,9 +12,6 @@ use Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks;
  */
 trait HasContentBlocksTrait
 {
-    //cache of instantiated blocks:
-    protected static array $filamentContentBlocks = [];
-
     public function initializeHasContentBlocksTrait(): void
     {
         //set casts of attributes:
@@ -28,15 +25,11 @@ trait HasContentBlocksTrait
 
     public static function getFilamentContentBlocks(): array
     {
-        if (empty(static::$filamentContentBlocks)) {
-            $filamentBlocks = [];
-            foreach (static::registerContentBlocks() as $blockClass) {
-                $filamentBlocks[$blockClass::getName()] = $blockClass::make();
-            }
-            static::$filamentContentBlocks = $filamentBlocks;
+        $filamentBlocks = [];
+        foreach (static::registerContentBlocks() as $blockClass) {
+            $filamentBlocks[$blockClass::getName()] = $blockClass::make();
         }
-
-        return static::$filamentContentBlocks;
+        return $filamentBlocks;
     }
 
     public function getSearchableBlockContent(bool $stripHtml = true): string

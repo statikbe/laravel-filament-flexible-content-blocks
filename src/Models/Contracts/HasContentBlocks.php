@@ -14,7 +14,7 @@ interface HasContentBlocks
      * Returns an array of the Filament blocks of all allowed content blocks for this resource.
      * The order will be the order in which they are presented to the user.
      *
-     * @return array<Block>
+     * @return array<string, Block>
      */
     public static function getFilamentContentBlocks(): array;
 

@@ -12,20 +12,28 @@ class ContentBlocksField extends Builder
 {
     const FIELD = 'content_blocks';
 
+    //cache of instantiated blocks:
+    protected array|null $contentBlocks;
+
     public static function create(): static
     {
         return static::make(static::FIELD)
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_lbl'))
             ->addActionLabel(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_add_lbl'))
             ->addBetweenActionLabel(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_add_lbl'))
-            ->childComponents(function (Livewire $livewire) {
-                /** @var Page $livewire */
-                //to set the blocks, filament uses the childComponents.
-                //set the blocks based on the list of block classes configured on the resource.
-                /** @var resource $resource */
-                $resource = $livewire::getResource();
+            ->blocks(function (Livewire $livewire, ContentBlocksField $component) {
+                //this function is called very often, therefore we cache the results here.
+                //caching on model level causes weird behaviour with livewire entangle because the block components are not refreshed each time the builder is recreated.
+                if(!isset($component->contentBlocks)){
+                    /** @var Page $livewire */
+                    //to set the blocks, filament uses the childComponents.
+                    //set the blocks based on the list of block classes configured on the resource.
+                    $resource = $livewire::getResource();
 
-                return $resource::getModel()::getFilamentContentBlocks();
+                    $component->contentBlocks = array_values($resource::getModel()::getFilamentContentBlocks());
+                }
+
+                return $component->contentBlocks;
             });
     }
 
