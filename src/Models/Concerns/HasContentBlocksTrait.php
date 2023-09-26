@@ -29,6 +29,7 @@ trait HasContentBlocksTrait
         foreach (static::registerContentBlocks() as $blockClass) {
             $filamentBlocks[$blockClass::getName()] = $blockClass::make();
         }
+
         return $filamentBlocks;
     }
 

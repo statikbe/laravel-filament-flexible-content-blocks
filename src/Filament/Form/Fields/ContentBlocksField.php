@@ -13,7 +13,7 @@ class ContentBlocksField extends Builder
     const FIELD = 'content_blocks';
 
     //cache of instantiated blocks:
-    protected array|null $contentBlocks;
+    protected ?array $contentBlocks;
 
     public static function create(): static
     {
@@ -24,7 +24,7 @@ class ContentBlocksField extends Builder
             ->blocks(function (Livewire $livewire, ContentBlocksField $component) {
                 //this function is called very often, therefore we cache the results here.
                 //caching on model level causes weird behaviour with livewire entangle because the block components are not refreshed each time the builder is recreated.
-                if(!isset($component->contentBlocks)){
+                if (! isset($component->contentBlocks)) {
                     /** @var Page $livewire */
                     //to set the blocks, filament uses the childComponents.
                     //set the blocks based on the list of block classes configured on the resource.
