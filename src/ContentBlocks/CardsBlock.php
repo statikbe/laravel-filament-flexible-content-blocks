@@ -147,8 +147,7 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
                     blockStyle: $this->hasDefaultBlockStyle() ? null : $this->blockStyle,
                     buttonStyleClasses: CallToActionField::getButtonStyleClasses(static::class)
                 );
-            }
-            catch(LinkableModelNotFoundException $ex){
+            } catch (LinkableModelNotFoundException $ex) {
                 $ex->setRecord($this->record);
                 throw $ex;
             }

@@ -30,7 +30,8 @@ trait HasCallToAction
     }
 
     /**
-     * @param array{call_to_action: array} $blockData
+     * @param  array{call_to_action: array}  $blockData
+     *
      * @throws LinkableModelNotFoundException
      */
     public function createSingleCallToAction(array $blockData): ?CallToActionData
@@ -38,11 +39,9 @@ trait HasCallToAction
         if (! empty($blockData['call_to_action'])) {
             try {
                 return CallToActionData::create($blockData['call_to_action'][0], CallToActionField::getButtonStyleClasses(static::class));
-            }
-            catch(CallToActionNotDefinedException $ex){
+            } catch (CallToActionNotDefinedException $ex) {
                 return null;
-            }
-            catch(LinkableModelNotFoundException $ex){
+            } catch (LinkableModelNotFoundException $ex) {
                 $ex->setRecord($this->record);
                 throw $ex;
             }
@@ -52,8 +51,9 @@ trait HasCallToAction
     }
 
     /**
-     * @param array{call_to_action: array} $blockData
+     * @param  array{call_to_action: array}  $blockData
      * @return CallToActionData[]
+     *
      * @throws LinkableModelNotFoundException
      */
     public function createMultipleCallToActions(array $blockData): array
@@ -63,11 +63,9 @@ trait HasCallToAction
             foreach ($blockData['call_to_action'] as $callToAction) {
                 try {
                     $data[] = CallToActionData::create($callToAction, CallToActionField::getButtonStyleClasses(static::class));
-                }
-                catch(CallToActionNotDefinedException $ex){
+                } catch (CallToActionNotDefinedException $ex) {
                     //do not include the data if nothing is specified.
-                }
-                catch(LinkableModelNotFoundException $ex){
+                } catch (LinkableModelNotFoundException $ex) {
                     $ex->setRecord($this->record);
                     throw $ex;
                 }

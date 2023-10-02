@@ -36,8 +36,7 @@ class CardData
             foreach ($cardBlockData['card_call_to_action'] as $callToAction) {
                 try {
                     $callToActions[] = CallToActionData::create($callToAction, $buttonStyleClasses);
-                }
-                catch(CallToActionNotDefinedException $ex){
+                } catch (CallToActionNotDefinedException $ex) {
                     //if the data is not available, we do not create a call to action.
                 }
             }

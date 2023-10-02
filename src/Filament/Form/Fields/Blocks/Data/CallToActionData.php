@@ -21,16 +21,16 @@ class CallToActionData
     }
 
     /**
-     * @param array{cta_model: string, entry_id: ?string, url: ?string, button_style: ?string, button_label: ?string, button_open_new_window: ?boolean} $callToActionBlockData
+     * @param  array{cta_model: string, entry_id: ?string, url: ?string, button_style: ?string, button_label: ?string, button_open_new_window: ?boolean}  $callToActionBlockData
      *
      * @throws LinkableModelNotFoundException
      * @throws CallToActionNotDefinedException
      */
     public static function create(array $callToActionBlockData, array $buttonStyleClasses): self
     {
-        if(!$callToActionBlockData[CallToActionField::FIELD_URL] ||
-            !$callToActionBlockData[CallToActionField::FIELD_ROUTE] ||
-            !$callToActionBlockData[CallToActionField::FIELD_CTA_MODEL]){
+        if (! $callToActionBlockData[CallToActionField::FIELD_URL] ||
+            ! $callToActionBlockData[CallToActionField::FIELD_ROUTE] ||
+            ! $callToActionBlockData[CallToActionField::FIELD_CTA_MODEL]) {
             throw CallToActionNotDefinedException::create('The call to action data does not specify a route, url or model.');
         }
 
@@ -43,7 +43,7 @@ class CallToActionData
             /** @var class-string<Linkable&Model> $linkableModel */
             $linkableModel = Relation::getMorphedModel($linkableType);
 
-            if (!$linkableModel) {
+            if (! $linkableModel) {
                 throw new LinkableModelNotFoundException("No linkable model could be found for '{$linkableType}'");
             }
 
