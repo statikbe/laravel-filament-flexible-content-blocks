@@ -2,6 +2,8 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data;
 
+use Statikbe\FilamentFlexibleContentBlocks\Exceptions\LinkableModelNotFoundException;
+
 class CardData
 {
     /**
@@ -23,6 +25,9 @@ class CardData
         return isset($this->imageId) && ! is_null($this->imageId);
     }
 
+    /**
+     * @throws LinkableModelNotFoundException
+     */
     public static function create(array $cardBlockData, ?string $imageUrl, ?string $imageHtml, ?string $blockStyle, array $buttonStyleClasses): self
     {
         $callToActions = [];

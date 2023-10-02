@@ -15,6 +15,7 @@ use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBlockStyle;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasCallToAction;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImage;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImageConversionType;
+use Statikbe\FilamentFlexibleContentBlocks\Exceptions\LinkableModelNotFoundException;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BackgroundColourField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockSpatieMediaLibraryFileUpload;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockStyleField;
@@ -138,13 +139,19 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
     {
         $cardData = [];
         foreach ($cardsBlockData as $card) {
-            $cardData[] = CardData::create(
-                cardBlockData: $card,
-                imageUrl: $card['image'] ? $this->getCardImageUrl($card['image']) : null,
-                imageHtml: $card['image'] ? $this->getCardImageMedia($card['image'], $card['title']) : null,
-                blockStyle: $this->hasDefaultBlockStyle() ? null : $this->blockStyle,
-                buttonStyleClasses: CallToActionField::getButtonStyleClasses(static::class)
-            );
+            try {
+                $cardData[] = CardData::create(
+                    cardBlockData: $card,
+                    imageUrl: $card['image'] ? $this->getCardImageUrl($card['image']) : null,
+                    imageHtml: $card['image'] ? $this->getCardImageMedia($card['image'], $card['title']) : null,
+                    blockStyle: $this->hasDefaultBlockStyle() ? null : $this->blockStyle,
+                    buttonStyleClasses: CallToActionField::getButtonStyleClasses(static::class)
+                );
+            }
+            catch(LinkableModelNotFoundException $ex){
+                $ex->setRecord($this->record);
+                throw $ex;
+            }
         }
 
         return $cardData;
