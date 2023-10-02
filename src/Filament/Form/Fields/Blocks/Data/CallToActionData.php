@@ -4,6 +4,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Dat
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Statikbe\FilamentFlexibleContentBlocks\Exceptions\CallToActionNotDefinedException;
 use Statikbe\FilamentFlexibleContentBlocks\Exceptions\LinkableModelNotFoundException;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToActionField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Type\CallToActionType;
@@ -20,12 +21,19 @@ class CallToActionData
     }
 
     /**
-     * @param  array{cta_model: string, entry_id: ?string, url: ?string, button_style: ?string, button_label: ?string, button_open_new_window: ?boolean}  $callToActionBlockData
+     * @param array{cta_model: string, entry_id: ?string, url: ?string, button_style: ?string, button_label: ?string, button_open_new_window: ?boolean} $callToActionBlockData
      *
      * @throws LinkableModelNotFoundException
+     * @throws CallToActionNotDefinedException
      */
     public static function create(array $callToActionBlockData, array $buttonStyleClasses): self
     {
+        if(!$callToActionBlockData[CallToActionField::FIELD_URL] ||
+            !$callToActionBlockData[CallToActionField::FIELD_ROUTE] ||
+            !$callToActionBlockData[CallToActionField::FIELD_CTA_MODEL]){
+            throw CallToActionNotDefinedException::create('The call to action data does not specify a route, url or model.');
+        }
+
         if ($callToActionBlockData[CallToActionField::FIELD_CTA_MODEL] === CallToActionType::TYPE_URL) {
             $url = $callToActionBlockData[CallToActionField::FIELD_URL];
         } elseif ($callToActionBlockData[CallToActionField::FIELD_CTA_MODEL] === CallToActionType::TYPE_ROUTE) {

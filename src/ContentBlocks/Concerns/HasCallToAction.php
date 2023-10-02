@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns;
 
+use Statikbe\FilamentFlexibleContentBlocks\Exceptions\CallToActionNotDefinedException;
 use Statikbe\FilamentFlexibleContentBlocks\Exceptions\LinkableModelNotFoundException;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToActionField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CallToActionData;
@@ -38,6 +39,9 @@ trait HasCallToAction
             try {
                 return CallToActionData::create($blockData['call_to_action'][0], CallToActionField::getButtonStyleClasses(static::class));
             }
+            catch(CallToActionNotDefinedException $ex){
+                return null;
+            }
             catch(LinkableModelNotFoundException $ex){
                 $ex->setRecord($this->record);
                 throw $ex;
@@ -59,6 +63,9 @@ trait HasCallToAction
             foreach ($blockData['call_to_action'] as $callToAction) {
                 try {
                     $data[] = CallToActionData::create($callToAction, CallToActionField::getButtonStyleClasses(static::class));
+                }
+                catch(CallToActionNotDefinedException $ex){
+                    //do not include the data if nothing is specified.
                 }
                 catch(LinkableModelNotFoundException $ex){
                     $ex->setRecord($this->record);

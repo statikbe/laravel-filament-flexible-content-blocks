@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data;
 
+use Statikbe\FilamentFlexibleContentBlocks\Exceptions\CallToActionNotDefinedException;
 use Statikbe\FilamentFlexibleContentBlocks\Exceptions\LinkableModelNotFoundException;
 
 class CardData
@@ -33,7 +34,12 @@ class CardData
         $callToActions = [];
         if (! empty($cardBlockData['card_call_to_action'])) {
             foreach ($cardBlockData['card_call_to_action'] as $callToAction) {
-                $callToActions[] = CallToActionData::create($callToAction, $buttonStyleClasses);
+                try {
+                    $callToActions[] = CallToActionData::create($callToAction, $buttonStyleClasses);
+                }
+                catch(CallToActionNotDefinedException $ex){
+                    //if the data is not available, we do not create a call to action.
+                }
             }
         }
 

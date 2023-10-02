@@ -16,6 +16,6 @@ class LinkableModelNotFoundException extends \Exception
     public function setRecord(Model $record){
         $this->record = $record;
 
-        $this->message = $this->message . " of record {$record::class} {$record->id}";
+        $this->message = $this->message . " of record {$record->id}";
     }
 }
