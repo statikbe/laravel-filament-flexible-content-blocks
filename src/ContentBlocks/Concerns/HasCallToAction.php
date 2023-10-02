@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns;
 
+use Statikbe\FilamentFlexibleContentBlocks\Exceptions\LinkableModelNotFoundException;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToActionField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CallToActionData;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Type\CallToActionType;
@@ -28,27 +29,41 @@ trait HasCallToAction
     }
 
     /**
-     * @param  array{call_to_action: array}  $blockData
+     * @param array{call_to_action: array} $blockData
+     * @throws LinkableModelNotFoundException
      */
     public function createSingleCallToAction(array $blockData): ?CallToActionData
     {
         if (! empty($blockData['call_to_action'])) {
-            return CallToActionData::create($blockData['call_to_action'][0], CallToActionField::getButtonStyleClasses(static::class));
+            try {
+                return CallToActionData::create($blockData['call_to_action'][0], CallToActionField::getButtonStyleClasses(static::class));
+            }
+            catch(LinkableModelNotFoundException $ex){
+                $ex->setRecord($this->record);
+                throw $ex;
+            }
         } else {
             return null;
         }
     }
 
     /**
-     * @param  array{call_to_action: array}  $blockData
+     * @param array{call_to_action: array} $blockData
      * @return CallToActionData[]
+     * @throws LinkableModelNotFoundException
      */
     public function createMultipleCallToActions(array $blockData): array
     {
         if (! empty($blockData['call_to_action'])) {
             $data = [];
             foreach ($blockData['call_to_action'] as $callToAction) {
-                $data[] = CallToActionData::create($callToAction, CallToActionField::getButtonStyleClasses(static::class));
+                try {
+                    $data[] = CallToActionData::create($callToAction, CallToActionField::getButtonStyleClasses(static::class));
+                }
+                catch(LinkableModelNotFoundException $ex){
+                    $ex->setRecord($this->record);
+                    throw $ex;
+                }
             }
 
             return $data;
