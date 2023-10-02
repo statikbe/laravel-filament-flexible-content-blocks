@@ -35,7 +35,7 @@ class CallToActionData
             /** @var class-string<Linkable&Model> $linkableModel */
             $linkableModel = Relation::getMorphedModel($linkableType);
 
-            if(!$linkableModel){
+            if (!$linkableModel) {
                 throw new LinkableModelNotFoundException("No linkable model could be found for '{$linkableType}'");
             }
 
