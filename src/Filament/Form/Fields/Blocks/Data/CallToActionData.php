@@ -4,6 +4,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Dat
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Statikbe\FilamentFlexibleContentBlocks\Exceptions\LinkableModelNotFoundException;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToActionField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Type\CallToActionType;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\Linkable;
@@ -19,7 +20,8 @@ class CallToActionData
     }
 
     /**
-     * @param  array{cta_model: string, entry_id: ?string, url: ?string, button_style: ?string, button_label: ?string, button_open_new_window: ?boolean}  $callToActionBlockData
+     * @param array{cta_model: string, entry_id: ?string, url: ?string, button_style: ?string, button_label: ?string, button_open_new_window: ?boolean} $callToActionBlockData
+     * @throws LinkableModelNotFoundException
      */
     public static function create(array $callToActionBlockData, array $buttonStyleClasses): self
     {
@@ -31,6 +33,10 @@ class CallToActionData
             $linkableType = $callToActionBlockData[CallToActionField::FIELD_CTA_MODEL];
             /** @var class-string<Linkable&Model> $linkableModel */
             $linkableModel = Relation::getMorphedModel($linkableType);
+
+            if(!$linkableModel){
+                throw new LinkableModelNotFoundException("No linkable model could be found.");
+            }
 
             /** @var Linkable&Model $page */
             $page = $linkableModel::findOrFail($callToActionBlockData[CallToActionField::FIELD_ENTRY_ID]);
