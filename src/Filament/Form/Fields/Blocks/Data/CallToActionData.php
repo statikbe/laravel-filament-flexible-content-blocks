@@ -20,7 +20,8 @@ class CallToActionData
     }
 
     /**
-     * @param array{cta_model: string, entry_id: ?string, url: ?string, button_style: ?string, button_label: ?string, button_open_new_window: ?boolean} $callToActionBlockData
+     * @param  array{cta_model: string, entry_id: ?string, url: ?string, button_style: ?string, button_label: ?string, button_open_new_window: ?boolean}  $callToActionBlockData
+     *
      * @throws LinkableModelNotFoundException
      */
     public static function create(array $callToActionBlockData, array $buttonStyleClasses): self
@@ -34,8 +35,8 @@ class CallToActionData
             /** @var class-string<Linkable&Model> $linkableModel */
             $linkableModel = Relation::getMorphedModel($linkableType);
 
-            if(!$linkableModel){
-                throw new LinkableModelNotFoundException("No linkable model could be found.");
+            if (! $linkableModel) {
+                throw new LinkableModelNotFoundException('No linkable model could be found.');
             }
 
             /** @var Linkable&Model $page */
