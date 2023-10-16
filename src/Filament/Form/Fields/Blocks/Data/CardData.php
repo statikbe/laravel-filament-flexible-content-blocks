@@ -46,7 +46,7 @@ class CardData
             title: $cardBlockData['title'] ?? null,
             text: $cardBlockData['text'] ?? null,
             callToActions: $callToActions,
-            imageId: !empty($cardBlockData['image']) ? $cardBlockData['image'] : null,
+            imageId: ! empty($cardBlockData['image']) ? $cardBlockData['image'] : null,
             imageUrl: $imageUrl,
             imageHtml: $imageHtml,
             blockStyle: $blockStyle
