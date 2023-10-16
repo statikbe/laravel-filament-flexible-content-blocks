@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v0.2.2 - 2023-10-16
+
+- fix CTA block creation bug
+
 ## v0.2.1 - 2023-08-29
 
 Fix bug in block image upload field which caused images to be duplicated and deleted.
