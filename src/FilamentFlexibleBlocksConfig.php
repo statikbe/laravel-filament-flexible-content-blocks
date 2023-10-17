@@ -193,7 +193,7 @@ class FilamentFlexibleBlocksConfig
      */
     public static function getModelImageConversionConfig(string $modelClass): array
     {
-        return array_merge(
+        return array_merge_recursive(
             config('filament-flexible-content-blocks.image_conversions.models.default', []),
             config('filament-flexible-content-blocks.image_conversions.models.specific.'.$modelClass, [])
         );
