@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v0.2.3 - 2023-10-17
+
+Fix bug with extra newly defined image conversions.
+
 ## v0.2.2 - 2023-10-16
 
 - fix CTA block creation bug
