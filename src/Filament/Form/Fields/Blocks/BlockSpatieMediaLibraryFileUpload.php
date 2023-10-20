@@ -52,12 +52,19 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
         $this->dehydrated(true);
     }
 
+    public function saveUploadedFiles(): void {
+        parent::saveUploadedFiles();
+
+        $this->storeSavedBlockImages();
+    }
+
     public function deleteAbandonedFiles(): void
     {
         /** @var Model&HasMedia&HasContentBlocks $record */
         $record = $this->getRecord();
 
         $uuids = $this->getState() ?? [];
+        //add the images that already existed, to avoid deleting images that are still needed from a previous iteration
         $contentBlocksComponent = new ContentBlocks($record);
         foreach ($contentBlocksComponent->contentBlocks as $block) {
             /* @var AbstractContentBlock&HasImage $block */
@@ -69,9 +76,26 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
             }
         }
 
+        $this->storeSavedBlockImages($uuids);
+
         $record
             ->getMedia($this->getCollection())
-            ->whereNotIn('uuid', array_keys($uuids))
-            ->each(fn (Media $media) => $media->delete());
+            ->whereNotIn('uuid', ContentBlocks::$savedImages)
+            ->each(function(Media $media) {
+                $media->delete();
+            });
+    }
+
+    /**
+     * Keeps track of all images that have been saved in the content blocks to avoid deleting images that are still needed.
+     * @param array|null $uuids
+     * @return void
+     */
+    private function storeSavedBlockImages(?array $uuids=null): void {
+        if(!$uuids || empty($uuids)){
+            $uuids = $this->getState() ?? [];
+        }
+
+        ContentBlocks::$savedImages = array_unique(array_merge(array_merge(ContentBlocks::$savedImages, array_keys($uuids)), array_values($uuids)));
     }
 }

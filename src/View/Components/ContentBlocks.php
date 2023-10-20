@@ -4,6 +4,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\View\Components;
 
 use Illuminate\View\Component;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockSpatieMediaLibraryFileUpload;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 
@@ -13,6 +14,14 @@ class ContentBlocks extends Component
      * @var array|AbstractContentBlock[]
      */
     public array $contentBlocks = [];
+
+    /**
+     * Used to keep track of the image uuids that were saved or already existed while saving the form with content blocks,
+     * to avoid deleting the wrong spatie medialibrary media records.
+     * @see BlockSpatieMediaLibraryFileUpload
+     * @var string[]
+     */
+    public static array $savedImages = [];
 
     public function __construct(HasContentBlocks $page)
     {
