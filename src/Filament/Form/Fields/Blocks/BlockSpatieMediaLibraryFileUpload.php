@@ -52,7 +52,8 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
         $this->dehydrated(true);
     }
 
-    public function saveUploadedFiles(): void {
+    public function saveUploadedFiles(): void
+    {
         parent::saveUploadedFiles();
 
         $this->storeSavedBlockImages();
@@ -81,18 +82,17 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
         $record
             ->getMedia($this->getCollection())
             ->whereNotIn('uuid', ContentBlocks::$savedImages)
-            ->each(function(Media $media) {
+            ->each(function (Media $media) {
                 $media->delete();
             });
     }
 
     /**
      * Keeps track of all images that have been saved in the content blocks to avoid deleting images that are still needed.
-     * @param array|null $uuids
-     * @return void
      */
-    private function storeSavedBlockImages(?array $uuids=null): void {
-        if(!$uuids || empty($uuids)){
+    private function storeSavedBlockImages(array $uuids = null): void
+    {
+        if (! $uuids || empty($uuids)) {
             $uuids = $this->getState() ?? [];
         }
 
