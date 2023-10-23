@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v0.2.4 - 2023-10-20
+
+- fix bug with spatie image fields in content blocks, where a newly uploaded image gets deleted immediately after a new image is uploaded.
+
 ## v0.2.3 - 2023-10-17
 
 Fix bug with extra newly defined image conversions.

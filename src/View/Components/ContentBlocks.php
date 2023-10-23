@@ -18,7 +18,9 @@ class ContentBlocks extends Component
     /**
      * Used to keep track of the image uuids that were saved or already existed while saving the form with content blocks,
      * to avoid deleting the wrong spatie medialibrary media records.
+     *
      * @see BlockSpatieMediaLibraryFileUpload
+     *
      * @var string[]
      */
     public static array $savedImages = [];
