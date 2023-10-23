@@ -60,6 +60,9 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
 
     public function deleteAbandonedFiles(): void
     {
+        //NOTE: to solve the issue of deleting media that is still needed, it might be necessary to make the media collection
+        //unique per block. We could add another explicit block variable with a UUID and append this UUID to the media
+        //collection name, so we can create a unique media collection per block.
         /** @var Model&HasMedia&HasContentBlocks $record */
         $record = $this->getRecord();
 
