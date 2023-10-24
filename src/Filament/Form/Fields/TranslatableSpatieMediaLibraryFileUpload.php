@@ -68,13 +68,14 @@ class TranslatableSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpl
         }
 
         //First, check if it is a newly uploaded file, or an empty media (maybe the media has been removed).
-        $uploadedFileState = collect($this->getState())->filter(function($value, $key) {
+        $uploadedFileState = collect($this->getState())->filter(function ($value, $key) {
             //if it is a newly uploaded file, the value is a temporary file object:
             return is_object($value);
         })->isNotEmpty();
 
-        if(empty($this->getState()) || $uploadedFileState){
+        if (empty($this->getState()) || $uploadedFileState) {
             $this->tryToDeletedAbandonedFiles($record, $filters);
+
             return;
         }
 
@@ -84,12 +85,13 @@ class TranslatableSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpl
             ->whereIn('uuid', array_keys($this->getState() ?? []))
             ->isNotEmpty();
 
-        if($mediaExistsInFormLocale) {
+        if ($mediaExistsInFormLocale) {
             $this->tryToDeletedAbandonedFiles($record, $filters);
         }
     }
 
-    private function tryToDeletedAbandonedFiles(Model&HasMedia $record, array $mediaFilters): void {
+    private function tryToDeletedAbandonedFiles(Model&HasMedia $record, array $mediaFilters): void
+    {
         $record->getMedia($this->getCollection(), $mediaFilters)
             ->whereNotIn('uuid', array_keys($this->getState() ?? []))
             ->each(function (Media $media) {

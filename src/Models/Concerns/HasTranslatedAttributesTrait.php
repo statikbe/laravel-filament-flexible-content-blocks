@@ -40,7 +40,8 @@ trait HasTranslatedAttributesTrait
     /**
      * @return string[]
      */
-    public function getTranslatableMediaCollections(): array {
+    public function getTranslatableMediaCollections(): array
+    {
         return $this->translatableMediaCollections;
     }
 }
