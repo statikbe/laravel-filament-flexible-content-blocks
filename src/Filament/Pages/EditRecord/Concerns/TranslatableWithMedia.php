@@ -7,7 +7,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Validation\ValidationException;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasTranslatableMedia;
 
-class TranslatableWithMedia
+trait TranslatableWithMedia
 {
     use Translatable;
 
