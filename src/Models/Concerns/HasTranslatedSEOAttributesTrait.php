@@ -12,6 +12,7 @@ trait HasTranslatedSEOAttributesTrait
     public function initializeHasTranslatedSEOAttributesTrait(): void
     {
         $this->mergeTranslatable(['seo_title', 'seo_description', 'seo_keywords']);
+        $this->mergeTranslatableMediaCollection([$this->getSEOImageCollection()]);
     }
 
     public function seoImage(): MorphMany

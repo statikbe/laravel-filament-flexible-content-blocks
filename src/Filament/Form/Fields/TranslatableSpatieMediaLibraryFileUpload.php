@@ -67,8 +67,33 @@ class TranslatableSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpl
             $filters['locale'] = $this->getLivewire()->getActiveFormsLocale();
         }
 
-        $record->getMedia($this->getCollection(), $filters)
+        //First, check if it is a newly uploaded file, or an empty media (maybe the media has been removed).
+        $uploadedFileState = collect($this->getState())->filter(function($value, $key) {
+            //if it is a newly uploaded file, the value is a temporary file object:
+            return is_object($value);
+        })->isNotEmpty();
+
+        if(empty($this->getState()) || $uploadedFileState){
+            $this->tryToDeletedAbandonedFiles($record, $filters);
+            return;
+        }
+
+        //Second, check if the image uuids in the state exist in the form locale. If they are from another locale, do not
+        //delete abandoned files because we should not deleted media from other locales:
+        $mediaExistsInFormLocale = $record->getMedia($this->getCollection(), $filters)
+            ->whereIn('uuid', array_keys($this->getState() ?? []))
+            ->isNotEmpty();
+
+        if($mediaExistsInFormLocale) {
+            $this->tryToDeletedAbandonedFiles($record, $filters);
+        }
+    }
+
+    private function tryToDeletedAbandonedFiles(Model&HasMedia $record, array $mediaFilters): void {
+        $record->getMedia($this->getCollection(), $mediaFilters)
             ->whereNotIn('uuid', array_keys($this->getState() ?? []))
-            ->each(fn (Media $media) => $media->delete());
+            ->each(function (Media $media) {
+                $media->delete();
+            });
     }
 }

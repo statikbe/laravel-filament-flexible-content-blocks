@@ -12,6 +12,7 @@ trait HasTranslatedOverviewAttributesTrait
     public function initializeHasTranslatedOverviewAttributesTrait(): void
     {
         $this->mergeTranslatable(['overview_title', 'overview_description']);
+        $this->mergeTranslatableMediaCollection([$this->getOverviewImageCollection()]);
     }
 
     public function overviewImage(): MorphMany

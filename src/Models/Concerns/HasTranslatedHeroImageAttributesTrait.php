@@ -12,6 +12,7 @@ trait HasTranslatedHeroImageAttributesTrait
     public function initializeHasTranslatedHeroImageAttributesTrait(): void
     {
         $this->mergeTranslatable(['hero_image_title', 'hero_image_copyright']);
+        $this->mergeTranslatableMediaCollection([$this->getHeroImageCollection()]);
     }
 
     public function heroImage(): MorphMany

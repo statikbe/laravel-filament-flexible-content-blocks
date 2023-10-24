@@ -122,6 +122,12 @@ This is required if you want to use the flexible content blocks. Implement it wi
 Always include this interface if you use any image functionality. It provides some helper functions. 
 You do not need to add traits, since the trait will be included by other traits that handle images.
 
+#### __[HasTranslatableMedia](src%2FModels%2FContracts%2FHasTranslatableMedia.php)__:
+If you want to support translatable media (e.g. a different image for each locale), include this interface.
+The implementation is done by the trait [HasTranslatedAttributesTrait.php](src%2FModels%2FConcerns%2FHasTranslatedAttributesTrait.php).
+The traits that implement translatable images, will make use of this implementation to keep track of the media that needs
+translation.
+
 #### __[HasOverviewAttributes](src%2FModels%2FContracts%2FHasOverviewAttributes.php)__:
 Overview fields can be used to display the content models as brief snippets in lists, for instance a list of news articles.
 Implement this with [HasOverviewAttributesTrait](src%2FModels%2FConcerns%2FHasOverviewAttributesTrait.php) or 
