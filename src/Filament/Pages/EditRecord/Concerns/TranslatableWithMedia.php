@@ -15,6 +15,7 @@ trait TranslatableWithMedia
      * This function is overridden to be able to update the state of translatable media when the form locale switches.
      * It makes use of the getTranslatableMediaCollections() function to include these media collections as translatable
      * and thus change the state when the locale switches.
+     *
      * @see HasTranslatableMedia
      */
     public function updatedActiveLocale(string $newActiveLocale): void
@@ -40,7 +41,7 @@ trait TranslatableWithMedia
         }
 
         $translatableAttributes = app(static::getModel())->getTranslatableAttributes();
-        if(method_exists($this->getRecord(), 'getTranslatableMediaCollections')){
+        if (method_exists($this->getRecord(), 'getTranslatableMediaCollections')) {
             $translatableAttributes = array_merge($translatableAttributes, $this->getRecord()->getTranslatableMediaCollections());
         }
 
