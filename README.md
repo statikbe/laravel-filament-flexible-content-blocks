@@ -221,6 +221,7 @@ public static function form(Form $form): Form {
 If you have translatable content, you need to include the traits and language switch field of the [`filament/spatie-laravel-translatable-plugin`](https://filamentphp.com/docs/2.x/spatie-laravel-translatable-plugin/installation) to 
 [the resource](https://filamentphp.com/docs/2.x/spatie-laravel-translatable-plugin/getting-started#preparing-your-resource-class) 
 and its [pages](https://filamentphp.com/docs/2.x/spatie-laravel-translatable-plugin/getting-started#making-resource-pages-translatable).  
+**Important:** On the edit page, you need to use the [TranslatableWithMedia](src%2FFilament%2FPages%2FEditRecord%2FConcerns%2FTranslatableWithMedia.php) trait if you use translatable images.
 
 #### <a name="resource-with-translated-slugs"></a> Note on translated slugs
 
