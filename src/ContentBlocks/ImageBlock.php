@@ -44,7 +44,7 @@ class ImageBlock extends AbstractFilamentFlexibleContentBlock
     {
         parent::__construct($record, $blockData);
 
-        $this->imageId = $blockData['image'] ?? null;
+        $this->imageId = $this->getMediaUuid($blockData['image']) ?? null;
         $this->imageTitle = $blockData['image_title'] ?? null;
         $this->imageCopyright = $blockData['image_copyright'] ?? null;
         $this->imagePosition = $blockData['image_position'] ?? null;

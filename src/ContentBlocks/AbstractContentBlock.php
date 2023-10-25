@@ -133,4 +133,26 @@ abstract class AbstractContentBlock extends Component
     {
         return FilamentFlexibleContentBlocks::replaceParameters($content);
     }
+
+    /**
+     * Sometimes the media UUID is saved as an array instead of a string. This converts array uuids to a string.
+     * @param string|array|null $uuid
+     * @return string|null
+     */
+    protected function getMediaUuid(string|array|null $uuid): string|null {
+        if(!$uuid){
+            return null;
+        }
+
+        if(is_array($uuid)){
+            if(empty($uuid)){
+                return null;
+            }
+
+            //take the first value:
+            return array_values($uuid)[0];
+        }
+
+        return $uuid;
+    }
 }

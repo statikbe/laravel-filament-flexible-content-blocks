@@ -51,7 +51,7 @@ class CallToActionBlock extends AbstractFilamentFlexibleContentBlock
 
         $this->title = $blockData['title'] ?? null;
         $this->text = $blockData['text'] ?? null;
-        $this->imageId = $blockData['image'] ?? null;
+        $this->imageId = $this->getMediaUuid($blockData['image']) ?? null;
         $this->imageTitle = $blockData['image_title'] ?? null;
         $this->imageCopyright = $blockData['image_copyright'] ?? null;
         $this->callToActions = $this->createMultipleCallToActions($blockData);

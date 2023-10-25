@@ -142,8 +142,8 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
             try {
                 $cardData[] = CardData::create(
                     cardBlockData: $card,
-                    imageUrl: $card['image'] ? $this->getCardImageUrl($card['image']) : null,
-                    imageHtml: $card['image'] ? $this->getCardImageMedia($card['image'], $card['title']) : null,
+                    imageUrl: $card['image'] ? $this->getCardImageUrl($this->getMediaUuid($card['image'])) : null,
+                    imageHtml: $card['image'] ? $this->getCardImageMedia($this->getMediaUuid($card['image']), $card['title']) : null,
                     blockStyle: $this->hasDefaultBlockStyle() ? null : $this->blockStyle,
                     buttonStyleClasses: CallToActionField::getButtonStyleClasses(static::class)
                 );

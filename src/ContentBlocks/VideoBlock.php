@@ -29,7 +29,7 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
         parent::__construct($record, $blockData);
 
         $this->embedUrl = $blockData['embed_url'] ?? null;
-        $this->overlayImageId = $blockData['overlay_image'] ?? null;
+        $this->overlayImageId = $this->getMediaUuid($blockData['overlay_image']) ?? null;
     }
 
     public static function getNameSuffix(): string
