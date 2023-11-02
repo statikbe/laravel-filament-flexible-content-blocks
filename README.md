@@ -179,6 +179,24 @@ public static function table(Table $table): Table {
 }
 ```
 
+#### (optional) Adding a ViewAction to your table
+
+If your model uses the [`Linkable`](src%2FModels%2FContracts%2FLinkable.php) interface, you can also use the
+provided `ViewAction` in your table.
+This action will simply open the url returned by the `getViewUrl()` method on your model.
+
+```php
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Actions\ViewAction;
+
+->actions([
+    Tables\Actions\EditAction::make(),
+    PublishAction::make(),
+    ViewAction::make(), // <-- Add this
+])
+```
+
+#### Setup the form
+
 And then you can implement the `form()` function with Filament fields provided by the package. Below is an example with tabs.
 Note that we sometimes make use of `create()` static functions, because we want to set the 
 names to the fixed variables used in the models. Some fields in the example are bundled in groupings 
