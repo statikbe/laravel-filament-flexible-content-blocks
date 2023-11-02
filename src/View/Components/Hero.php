@@ -17,9 +17,9 @@ class Hero extends Component
 
     public ?string $intro = null;
 
-    public ?string $heroImageTitle;
+    public ?string $heroImageTitle = null;
 
-    public ?string $heroImageCopyright;
+    public ?string $heroImageCopyright = null;
 
     public function __construct(HasPageAttributes|HasHeroImageAttributes|HasIntroAttribute $page)
     {
