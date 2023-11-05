@@ -2,6 +2,20 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v0.2.5 - 2023-11-05
+
+### What's Changed
+
+- Fix: HasSlugAttributeTrait referenced `$this` when in a static context by @HelgeSverre in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/22
+- Fix: Initialize properties to null in Hero component class by @HelgeSverre in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/23
+- Mention the Table action "ViewAction" in the README. by @HelgeSverre in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/24
+
+### New Contributors
+
+- @HelgeSverre made their first contribution in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/22
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v0.2.4...v0.2.5
+
 ## v0.2.4 - 2023-10-20
 
 - fix bug with spatie image fields in content blocks, where a newly uploaded image gets deleted immediately after a new image is uploaded.
