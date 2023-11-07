@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v0.2.6 - 2023-11-07
+
+- Support for parent - child relationships between content models. This is useful to for example create nested pages or nested slugs for URLs.
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v0.2.5...v0.2.6
+
 ## v0.2.5 - 2023-11-05
 
 ### What's Changed
