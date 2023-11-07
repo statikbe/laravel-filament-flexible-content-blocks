@@ -136,16 +136,15 @@ abstract class AbstractContentBlock extends Component
 
     /**
      * Sometimes the media UUID is saved as an array instead of a string. This converts array uuids to a string.
-     * @param string|array|null $uuid
-     * @return string|null
      */
-    protected function getMediaUuid(string|array|null $uuid): string|null {
-        if(!$uuid){
+    protected function getMediaUuid(string|array|null $uuid): ?string
+    {
+        if (! $uuid) {
             return null;
         }
 
-        if(is_array($uuid)){
-            if(empty($uuid)){
+        if (is_array($uuid)) {
+            if (empty($uuid)) {
                 return null;
             }
 
