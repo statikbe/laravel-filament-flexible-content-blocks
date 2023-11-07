@@ -28,7 +28,7 @@ trait HasParentTrait
         return ! is_null($this->parent_id);
     }
 
-    public function isParentOf(self $child): bool
+    public function isParentOf(HasParent $child): bool
     {
         return $this->id === $child->parent_id;
     }
