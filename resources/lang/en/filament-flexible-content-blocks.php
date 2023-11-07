@@ -152,4 +152,6 @@ return [
 
     'form_component.media_embed.validation' => 'Included url is not a valid media url.',
 
+    'form_component.parent_lbl' => 'Parent content',
+    'form_component.parent_help' => 'Choose the content that this content should appear under. The slug of the parent content will be displayed in front of this content\'s slug in the URL.',
 ];

@@ -155,4 +155,7 @@ return [
     'form_component.content_blocks.templates_options.footer' => 'Voettekst',
 
     'form_component.media_embed.validation' => 'De toegevoegde url is niet correct.',
+
+    'form_component.parent_lbl' => 'Ouderpagina',
+    'form_component.parent_help' => 'Voeg een pagina toe waaronder deze pagina zou moeten verschijnen. De slug van de ouderpagina wordt voor de slug van deze pagina geplaatst in de URL.',
 ];
