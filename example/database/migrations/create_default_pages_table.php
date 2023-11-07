@@ -46,6 +46,10 @@ return new class extends Migration
             $table->foreign('author_id')
                 ->references('id')->on('users')->onDelete('set null');
 
+            //Parent-child:
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->foreign('parent_id')->references('id')->on('pages');
+
             $table->timestamps();
         });
     }

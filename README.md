@@ -1,4 +1,4 @@
-<p align="center"><img src="documentation/img/banner-laravel-filament-flexible-content-blocks.png" alt="Laravel Filament Flexible cContent Blocks"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/statikbe/laravel-filament-flexible-content-blocks/main/documentation/img/banner-laravel-filament-flexible-content-blocks.png" alt="Laravel Filament Flexible cContent Blocks"></p>
 
 # Laravel Filament Flexible Content Blocks
 
@@ -96,7 +96,7 @@ implementation via traits. Below is an overview of the provided interfaces and t
 #### __[HasPageAttributes](src%2FModels%2FContracts%2FHasPageAttributes.php)__:
 This adds a title and publishing begin and end date variables, together with functions and scopes to help with
 finding published models. Implement this interface with the trait [HasPageAttributesTrait](src%2FModels%2FConcerns%2FHasPageAttributesTrait.php) 
-or [HasTranslatedPageAttributesTrait](src%2FModels%2FConcerns%2FHasTranslatedPageAttributesTrait.php). 
+or [HasTranslatedPageAttributesTrait](src%2FModels%2FConcerns%2FHasTranslatedPageAttributesTrait.php) 
 for translated content.
 
 #### __[HasIntroAttribute](src%2FModels%2FContracts%2FHasIntroAttribute.php)__:
@@ -151,6 +151,13 @@ For slug support you can include the [HasSlugAttributeTrait](src%2FModels%2FConc
 [HasTranslatedSlugAttributeTrait](src%2FModels%2FConcerns%2FHasTranslatedSlugAttributeTrait.php) for translatable slugs.
 If you use translatable slugs, please change [the page routing the Filament Resource](#resource-with-translated-slugs).
 
+#### Parent-child content aka subpages:
+
+To support hierarchical content you can include the [HasParent](src%2FModels%2FContracts%2FHasParent.php) interface and
+the implementation is done by [HasParentTrait](src%2FModels%2FConcerns%2FHasParentTrait.php).
+
+If you want to implement a nested URL structure, check [this documentation](documentation%2Fparent-child.md).
+
 ### 3. Setup the Filament resource
 
 Create a filament resource and its page with the filament command.
@@ -200,6 +207,7 @@ public static function form(Form $form): Form {
                             AuthorField::create(),
                             HeroImageSection::create(),
                             IntroField::create(),
+                            ParentField::create(),
                         ]),
                     Tab::make('Content')
                         ->schema([
@@ -275,7 +283,7 @@ To build your content, the package provides the default blocks listed below.
 
 A basic block with title and text.
 
-![text.png](documentation%2Fimg%2Fblocks%2Ftext.png)
+![text.png](https://raw.githubusercontent.com/statikbe/laravel-filament-flexible-content-blocks/main/documentation/img/blocks/text.png)
 
 ### Text with image block
 
@@ -283,60 +291,60 @@ Additionally to the text block, you can add an image with its title and copyrigh
 right of the text and an image conversion and background colour of the block can be set. One can also add a call-to-action
 button with configured button styles. You can link to URL's, but also dynamically to other models or routes.
 
-![text-image.png](documentation%2Fimg%2Fblocks%2Ftext-image.png)
+![text-image.png](https://raw.githubusercontent.com/statikbe/laravel-filament-flexible-content-blocks/main/documentation/img/blocks/text-image.png)
 
 ### Image block
 
 This displays an image with copyright message and you can set image conversions, the position and the width the image 
 should use on the page.
 
-![image.png](documentation%2Fimg%2Fblocks%2Fimage.png)
+![image.png](https://raw.githubusercontent.com/statikbe/laravel-filament-flexible-content-blocks/main/documentation/img/blocks/image.png)
 
 ### Video block
 
 You can embed videos from [numerous media services](https://github.com/dereuromark/media-embed/blob/master/docs/supported.md) 
 and set an overlay image that will cause the video embed to be lazy loaded after clicking the image.
 
-![video.png](documentation%2Fimg%2Fblocks%2Fvideo.png)
+![video.png](https://raw.githubusercontent.com/statikbe/laravel-filament-flexible-content-blocks/main/documentation/img/blocks/video.png)
 
 ### Quote block
 
 A block to show a quote and it's author.
 
-![quote.png](documentation%2Fimg%2Fblocks%2Fquote.png)
+![quote.png](https://raw.githubusercontent.com/statikbe/laravel-filament-flexible-content-blocks/main/documentation/img/blocks/quote.png)
 
 ### HTML block
 
 A block to insert custom HTML.
 
-![html.png](documentation%2Fimg%2Fblocks%2Fhtml.png)
+![html.png](https://raw.githubusercontent.com/statikbe/laravel-filament-flexible-content-blocks/main/documentation/img/blocks/html.png)
 
 ### Call-to-action block
 
 This block focuses on adding call-to-actions with image and text.
 
-![call-to-action.png](documentation%2Fimg%2Fblocks%2Fcall-to-action.png)
+![call-to-action.png](https://raw.githubusercontent.com/statikbe/laravel-filament-flexible-content-blocks/main/documentation/img/blocks/call-to-action.png)
 
 ### Overview block
 
 This block can be used to display the overview fields and image of other model records, e.g. for displaying related blog posts. 
 One can configure the grid columns and background colour.
 
-![overview-list.png](documentation%2Fimg%2Fblocks%2Foverview-list.png)
+![overview-list.png](https://raw.githubusercontent.com/statikbe/laravel-filament-flexible-content-blocks/main/documentation/img/blocks/overview-list.png)
 
 ### Cards block
 
 This block is comparable to the overview block, however you can add the title, description, image and CTA for each card.
 The image conversion, background colour and grid columns can be configured.
 
-![cards.png](documentation%2Fimg%2Fblocks%2Fcards.png)
+![cards.png](https://raw.githubusercontent.com/statikbe/laravel-filament-flexible-content-blocks/main/documentation/img/blocks/cards.png)
 
 ### Template block
 
 You can select Blade templates that you want to include. This can be handy to add small forms or interactive components, 
 e.g. a newsletter signup form or a map.
 
-![template.png](documentation%2Fimg%2Fblocks%2Ftemplate.png)
+![template.png](https://raw.githubusercontent.com/statikbe/laravel-filament-flexible-content-blocks/main/documentation/img/blocks/template.png)
 
 ### Create your own custom block
 
