@@ -23,11 +23,13 @@ trait HasParentTrait
         return $this->hasMany(self::class, 'parent_id');
     }
 
-    public function hasParent(): bool {
+    public function hasParent(): bool
+    {
         return ! is_null($this->parent_id);
     }
 
-    public function isParentOf(self $child): bool {
+    public function isParentOf(self $child): bool
+    {
         return $this->id === $child->parent_id;
     }
 }
