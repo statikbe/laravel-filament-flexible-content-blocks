@@ -6,6 +6,7 @@ use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\ContentBlocksField;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks;
 
 /**
@@ -42,7 +43,7 @@ class CopyContentBlocksToLocalesActionHandler
 
                 //copy content blocks
                 foreach ($otherLocales as $otherLocale) {
-                    $record->setTranslation('content_blocks', $otherLocale, $contentBlocks);
+                    $record->setTranslation(ContentBlocksField::FIELD, $otherLocale, $contentBlocks);
                 }
 
                 if ($otherLocales->isNotEmpty()) {
@@ -53,6 +54,9 @@ class CopyContentBlocksToLocalesActionHandler
                     ->title(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.copy_content_blocks_to_other_locales.success'))
                     ->success()
                     ->send();
+
+                //reload page to see the changes:
+                redirect(request()->header('Referer'));
             } catch (\Exception $exception) {
                 Log::error($exception);
 
