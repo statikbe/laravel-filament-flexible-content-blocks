@@ -21,7 +21,7 @@ Then add a function `childIndex` to the `PageController`:
 ```php 
 public function childIndex(Page $parent, Page $page) {
     //check if the page is a child of the parent
-    if($parent->isParentOf($child)){
+    if(!$parent->isParentOf($child)){
         abort(Response::HTTP_NOT_FOUND);
     }
 
