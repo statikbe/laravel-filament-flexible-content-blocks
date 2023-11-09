@@ -16,7 +16,7 @@ abstract class ImageField
                 TranslatableSpatieMediaLibraryFileUpload::make($field)
                     ->hint(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.translatable_image_hint'))
                     ->hintIcon('heroicon-s-language')
-                );
+            );
         } else {
             return self::addImageEditor(SpatieMediaLibraryFileUpload::make($field));
         }
