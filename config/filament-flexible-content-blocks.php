@@ -130,6 +130,22 @@ return [
         ],
     ],
 
+    'image_editor' => [
+        'enabled' => true,
+        'aspect_ratios' => [
+            null,
+            '16:9',
+            '4:3',
+            '1:1',
+        ],
+        'mode' => 0, // see https://github.com/fengyuanchen/cropperjs#viewmode
+        'empty_fill_colour' => null,  // e.g. #000000
+        'viewport' => [
+            'width' => 1920,
+            'height' => 1080,
+        ],
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Overview models

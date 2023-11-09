@@ -9,6 +9,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImage;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Concerns\HasImageEditor;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks;
 
@@ -19,9 +20,13 @@ use Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks;
  */
 class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
 {
+    use HasImageEditor;
+
     protected function setUp(): void
     {
         parent::setUp();
+
+        self::addImageEditor($this);
 
         //Extend the media library load logic to also look at the given state (in our case the uuids of the images)
         $this->loadStateFromRelationshipsUsing(static function (SpatieMediaLibraryFileUpload $component, HasMedia $record, $state): void {

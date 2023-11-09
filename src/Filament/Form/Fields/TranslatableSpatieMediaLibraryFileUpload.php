@@ -8,12 +8,17 @@ use Illuminate\Support\Collection;
 use Livewire\Component as Livewire;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Concerns\HasImageEditor;
 
 class TranslatableSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
 {
+    use HasImageEditor;
+
     protected function setUp(): void
     {
         parent::setUp();
+
+        self::addImageEditor($this);
 
         $this->loadStateFromRelationshipsUsing(static function (SpatieMediaLibraryFileUpload $component, HasMedia $record, Livewire $livewire): void {
             $mediaFilters = [];
