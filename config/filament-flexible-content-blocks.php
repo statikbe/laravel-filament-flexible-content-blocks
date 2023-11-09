@@ -140,7 +140,7 @@ return [
     | see https://filamentphp.com/docs/3.x/forms/fields/file-upload#setting-the-image-editors-mode
     */
     'image_editor' => [
-        'enabled' => true,
+        'enabled' => false,
         'aspect_ratios' => [
             null,
             '16:9',
