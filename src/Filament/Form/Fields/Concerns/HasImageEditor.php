@@ -7,7 +7,8 @@ use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 
 trait HasImageEditor
 {
-    public static function addImageEditor(SpatieMediaLibraryFileUpload $imageField): SpatieMediaLibraryFileUpload {
+    public static function addImageEditor(SpatieMediaLibraryFileUpload $imageField): SpatieMediaLibraryFileUpload
+    {
         return FilamentFlexibleBlocksConfig::getImageEditorConfig($imageField);
     }
 }

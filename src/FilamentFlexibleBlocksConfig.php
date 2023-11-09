@@ -26,29 +26,30 @@ use Statikbe\FilamentFlexibleContentBlocks\Replacer\TextParameterReplacer;
 
 class FilamentFlexibleBlocksConfig
 {
-    public static function getImageEditorConfig(SpatieMediaLibraryFileUpload $fileUpload): SpatieMediaLibraryFileUpload {
+    public static function getImageEditorConfig(SpatieMediaLibraryFileUpload $fileUpload): SpatieMediaLibraryFileUpload
+    {
         $imageEditorConfig = config('filament-flexible-content-blocks.image_editor', null);
 
-        if($imageEditorConfig && isset($imageEditorConfig['enabled']) && $imageEditorConfig['enabled']){
+        if ($imageEditorConfig && isset($imageEditorConfig['enabled']) && $imageEditorConfig['enabled']) {
             $fileUpload->imageEditor();
 
-            if(isset($imageEditorConfig['aspect_ratios']) && !empty($imageEditorConfig['aspect_ratios'])){
+            if (isset($imageEditorConfig['aspect_ratios']) && ! empty($imageEditorConfig['aspect_ratios'])) {
                 $fileUpload->imageEditorAspectRatios($imageEditorConfig['aspect_ratios']);
             }
 
-            if(isset($imageEditorConfig['mode'])){
+            if (isset($imageEditorConfig['mode'])) {
                 $fileUpload->imageEditorMode($imageEditorConfig['mode']);
             }
 
-            if(isset($imageEditorConfig['empty_fill_colour'])){
+            if (isset($imageEditorConfig['empty_fill_colour'])) {
                 $fileUpload->imageEditorEmptyFillColor($imageEditorConfig['empty_fill_colour']);
             }
 
-            if(isset($imageEditorConfig['viewport']) && !empty($imageEditorConfig['viewport'])){
-                if(isset($imageEditorConfig['viewport']['width'])){
+            if (isset($imageEditorConfig['viewport']) && ! empty($imageEditorConfig['viewport'])) {
+                if (isset($imageEditorConfig['viewport']['width'])) {
                     $fileUpload->imageEditorViewportWidth($imageEditorConfig['viewport']['width']);
                 }
-                if(isset($imageEditorConfig['viewport']['height'])){
+                if (isset($imageEditorConfig['viewport']['height'])) {
                     $fileUpload->imageEditorViewportWidth($imageEditorConfig['viewport']['height']);
                 }
             }
