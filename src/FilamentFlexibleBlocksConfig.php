@@ -36,7 +36,7 @@ class FilamentFlexibleBlocksConfig
                 $fileUpload->imageEditorAspectRatios($imageEditorConfig['aspect_ratios']);
             }
 
-            if(isset($imageEditorConfig['mode'])){
+            if(isset($imageEditorConfig['mode']) && $imageEditorConfig['mode'] >= 1 && $imageEditorConfig['mode'] <= 3){
                 $fileUpload->imageEditorMode($imageEditorConfig['mode']);
             }
 
@@ -49,7 +49,7 @@ class FilamentFlexibleBlocksConfig
                     $fileUpload->imageEditorViewportWidth($imageEditorConfig['viewport']['width']);
                 }
                 if(isset($imageEditorConfig['viewport']['height'])){
-                    $fileUpload->imageEditorViewportWidth($imageEditorConfig['viewport']['height']);
+                    $fileUpload->imageEditorViewportHeight($imageEditorConfig['viewport']['height']);
                 }
             }
         }

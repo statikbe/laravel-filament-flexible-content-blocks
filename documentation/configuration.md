@@ -123,7 +123,7 @@ string. [Follow this how-to](text-parameter-replacer.md).
 
 The default image conversions can be overwritten and new conversions can be added to the hero, overview and SEO
 images, as well as to the images of flexible blocks.
-Image conversions are set under the key 'models` and those of blocks are set under `flexible_blocks`. You can
+Image conversions are set under the key `models` and those of blocks are set under `flexible_blocks`. You can
 overwrite the conversions of all models (key: `default`) or for a specific model by adding the model under key:
 `specific`. First declare the image collection and then the conversion name. You can extend the already defined
 conversions by adding a `extra_conversions` array to the collection name.
@@ -179,6 +179,33 @@ Below is a detailed example:
     'flexible_blocks' => [
         'default' => [],
         'specific' => [],
+    ],
+],
+```
+
+## Image editor
+
+Filament has an [image editor](https://filamentphp.com/docs/3.x/forms/fields/file-upload#setting-the-image-editors-mode) 
+to crop and edit images. This can be enabled in the config file by setting `enabled` to `true` in `image_editor`.
+
+You can configure preset crop aspect ratios in `aspect_ratios`. By adding `null`, you can enable a free cropping option.
+Or you can set the default viewport width and height with `viewport`.
+The mode of the Cropper.js library can be set by setting the `mode` 1, 2 or 3. 
+
+```php
+'image_editor' => [
+    'enabled' => true,
+    'aspect_ratios' => [
+        null,
+        '16:9',
+        '4:3',
+        '1:1',
+    ],
+    'mode' => 1, // see https://github.com/fengyuanchen/cropperjs#viewmode
+    'empty_fill_colour' => null,  // e.g. #000000
+    'viewport' => [
+        'width' => 1920,
+        'height' => 1080,
     ],
 ],
 ```

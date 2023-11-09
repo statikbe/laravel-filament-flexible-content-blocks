@@ -130,6 +130,15 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Image editor
+    |--------------------------------------------------------------------------
+    |
+    | Enables the image editor. You can set preset aspect ratios, the editor mode of Cropper.js, and the default
+    | viewport size.
+    | see https://filamentphp.com/docs/3.x/forms/fields/file-upload#setting-the-image-editors-mode
+    */
     'image_editor' => [
         'enabled' => true,
         'aspect_ratios' => [
@@ -138,7 +147,7 @@ return [
             '4:3',
             '1:1',
         ],
-        'mode' => 0, // see https://github.com/fengyuanchen/cropperjs#viewmode
+        'mode' => 1, // see https://github.com/fengyuanchen/cropperjs#viewmode
         'empty_fill_colour' => null,  // e.g. #000000
         'viewport' => [
             'width' => 1920,
