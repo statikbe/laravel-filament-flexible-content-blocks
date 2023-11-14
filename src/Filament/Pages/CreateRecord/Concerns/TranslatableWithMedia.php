@@ -29,6 +29,9 @@ trait TranslatableWithMedia
         if (method_exists($record, 'getTranslatableMediaCollections')) {
             $translatableAttributes = array_merge($translatableAttributes, $record->getTranslatableMediaCollections());
         }
+        else {
+            throw new \BadMethodCallException('The model does not implement the HasTranslatableMedia interface. If this is not implemented translated images will not change when the language switch changes.');
+        }
 
         $this->data[$newActiveLocale] = array_merge(
             $this->data[$newActiveLocale] ?? [],
