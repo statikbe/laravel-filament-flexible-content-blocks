@@ -257,9 +257,11 @@ When you then switch to the language without a translated slug, Filament uses th
 defined in the model class. This will result in an error since the slug translation does not yet exist. To solve this it is
 easiest to use the ID as route binding key in Filament instead of the slug. You can do this by changing the page urls in 
 the Filament resource class, so that they do not try to resolve the object with `/{record}/edit`, but use the ID attribute
-`/{record:id}/edit`. 
+`/{record:id}/edit`. Then set the `$recordRouteKeyName` of the Filament resource to `id`.
 
 ```php
+protected static ?string $recordRouteKeyName = 'id';
+
 public static function getPages(): array
 {
     //note: replace the page classes!
