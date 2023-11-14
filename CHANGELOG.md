@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v0.2.7 - 2023-11-09
+
+Added support for the image editor of Filament. Fully configurable via config file.
+
 ## v0.2.6 - 2023-11-07
 
 - Support for parent - child relationships between content models. This is useful to for example create nested pages or nested slugs for URLs.
