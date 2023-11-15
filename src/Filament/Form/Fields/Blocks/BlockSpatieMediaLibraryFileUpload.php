@@ -8,11 +8,8 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
-use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImage;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Concerns\HasImageEditor;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
-use Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks;
 
 /**
  * An extension to the spatie media-library field of Filament to also allow to save the UUID to a block.
@@ -71,7 +68,7 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
         //media collection will filter those out anyway.
         //By using the livewire form data, we have the latest status and include all languages.
         $formData = $this->getLivewire()->data;
-        $allUuids = collect($formData)->dot()->filter(function ($value, $key){
+        $allUuids = collect($formData)->dot()->filter(function ($value, $key) {
             return Str::isUuid($value);
         })->values();
 
