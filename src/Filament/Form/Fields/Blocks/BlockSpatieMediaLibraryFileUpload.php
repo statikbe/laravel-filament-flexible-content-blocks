@@ -5,6 +5,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
@@ -57,13 +58,6 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
         $this->dehydrated(true);
     }
 
-    public function saveUploadedFiles(): void
-    {
-        parent::saveUploadedFiles();
-
-        $this->storeSavedBlockImages();
-    }
-
     public function deleteAbandonedFiles(): void
     {
         //NOTE: to solve the issue of deleting media that is still needed, it might be necessary to make the media collection
@@ -72,38 +66,20 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
         /** @var Model&HasMedia&HasContentBlocks $record */
         $record = $this->getRecord();
 
-        $uuids = $this->getState() ?? [];
-        //add the images that already existed, to avoid deleting images that are still needed from a previous iteration
-        $contentBlocksComponent = new ContentBlocks($record);
-        foreach ($contentBlocksComponent->contentBlocks as $block) {
-            /* @var AbstractContentBlock&HasImage $block */
-            if ($block::getName() === $this->getCollection()) {
-                $imageUuids = $block->getImageUuids();
-                foreach ($imageUuids as $imageUuid) {
-                    $uuids[$imageUuid] = $imageUuid;
-                }
-            }
-        }
-
-        $this->storeSavedBlockImages($uuids);
+        //we get all the UUIDs that are in the form. This is a superset of the actual image UUIDs used by the block,
+        //but since UUIDs should be unique, it does not matter that we filter out UUIDs of other blocks, since the
+        //media collection will filter those out anyway.
+        //By using the livewire form data, we have the latest status and include all languages.
+        $formData = $this->getLivewire()->data;
+        $allUuids = collect($formData)->dot()->filter(function ($value, $key){
+            return Str::isUuid($value);
+        })->values();
 
         $record
             ->getMedia($this->getCollection())
-            ->whereNotIn('uuid', ContentBlocks::$savedImages)
+            ->whereNotIn('uuid', $allUuids)
             ->each(function (Media $media) {
                 $media->delete();
             });
-    }
-
-    /**
-     * Keeps track of all images that have been saved in the content blocks to avoid deleting images that are still needed.
-     */
-    private function storeSavedBlockImages(array $uuids = null): void
-    {
-        if (! $uuids || empty($uuids)) {
-            $uuids = $this->getState() ?? [];
-        }
-
-        ContentBlocks::$savedImages = array_unique(array_merge(array_merge(ContentBlocks::$savedImages, array_keys($uuids)), array_values($uuids)));
     }
 }
