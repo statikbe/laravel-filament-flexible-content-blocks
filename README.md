@@ -68,6 +68,7 @@ Here is a brief overview of the choices made:
 - `spatie/laravel-sluggable`: for slugs
 - `spatie/laravel-translatable`: for translations as this works together with the first party filament translatable package. 
 - `dereuromark/media-embed`: to support video embeds of [various media services](https://github.com/dereuromark/media-embed/blob/master/docs/supported.md).
+- `artesaos/seotools`: this is a soft dependency, you can use a different package to handle the SEO fields output if you like.
 
 ## Usage
 
