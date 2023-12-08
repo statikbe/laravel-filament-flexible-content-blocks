@@ -83,7 +83,7 @@ trait HasOverviewAttributesTrait
         return 'overview_image';
     }
 
-    public function getOverviewImageUrl(string $conversion = null): ?string
+    public function getOverviewImageUrl(?string $conversion = null): ?string
     {
         $media = $this->getFallbackImageMedia($this->overviewImage->first(), $this->getOverviewImageCollection());
         if ($media) {
@@ -95,7 +95,7 @@ trait HasOverviewAttributesTrait
         }
     }
 
-    public function getOverviewImageMedia(string $conversion = null, array $attributes = []): ?HtmlableMedia
+    public function getOverviewImageMedia(?string $conversion = null, array $attributes = []): ?HtmlableMedia
     {
         if ($overviewMedia = $this->getFallbackImageMedia($this->overviewImage()->first(), $this->getOverviewImageCollection())) {
             return $this->getImageHtml(

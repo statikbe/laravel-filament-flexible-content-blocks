@@ -34,13 +34,13 @@ class Page extends Model implements HasContentBlocks, HasHeroImageAttributes, Ha
     use HasSEOAttributesTrait;
     use HasSlugAttributeTrait;
 
-    public function getViewUrl(string $locale = null): string
+    public function getViewUrl(?string $locale = null): string
     {
         //todo implement controller and add route:
         return config('app.url');
     }
 
-    public function getPreviewUrl(string $locale = null): string
+    public function getPreviewUrl(?string $locale = null): string
     {
         return $this->getViewUrl($locale);
     }

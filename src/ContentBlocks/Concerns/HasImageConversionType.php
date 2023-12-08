@@ -30,7 +30,7 @@ trait HasImageConversionType
         return static::CONVERSION_CROP;
     }
 
-    public function getImageConversionType(string $conversion = null): ?string
+    public function getImageConversionType(?string $conversion = null): ?string
     {
         if ($conversion) {
             return $conversion;

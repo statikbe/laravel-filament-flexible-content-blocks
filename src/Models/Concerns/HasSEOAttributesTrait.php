@@ -81,7 +81,7 @@ trait HasSEOAttributesTrait
         return 'seo_image';
     }
 
-    public function getSEOImageUrl(string $conversion = null): ?string
+    public function getSEOImageUrl(?string $conversion = null): ?string
     {
         if ($media = $this->getFallbackImageMedia($this->SEOImage()->first(), $this->getSEOImageCollection())) {
             return $media->getUrl($conversion ?? $this->getSEOImageConversionName());

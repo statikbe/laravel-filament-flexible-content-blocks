@@ -25,7 +25,7 @@ interface HasMediaAttributes
     /**
      * Returns the image HTML for a given media object.
      */
-    public function getImageHtml(?Media $media, string $conversion, string $title = null, array $attributes = []): ?HtmlableMedia;
+    public function getImageHtml(?Media $media, string $conversion, ?string $title = null, array $attributes = []): ?HtmlableMedia;
 
     /**
      * This function is provided by the spatie/laravel-media-library trait, InteractsWithMedia, but is not defined in an interface.

@@ -131,12 +131,12 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
             });
     }
 
-    public function getImageMedia(string $conversion = null, array $attributes = []): ?HtmlableMedia
+    public function getImageMedia(?string $conversion = null, array $attributes = []): ?HtmlableMedia
     {
         return $this->getHtmlableMedia($this->imageId, $this->getImageConversionType($conversion), $this->imageTitle, $attributes);
     }
 
-    public function getImageUrl(string $conversion = null): ?string
+    public function getImageUrl(?string $conversion = null): ?string
     {
         return $this->getMediaUrl(imageId: $this->imageId, conversion: $this->getImageConversionType($conversion));
     }

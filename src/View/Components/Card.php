@@ -17,14 +17,14 @@ class Card extends Component
      * @param  CallToActionData[]|null  $callToActions
      */
     public function __construct(
-        CardData $data = null,
-        string $title = null,
-        string $titleUrl = null,
-        string $text = null,
+        ?CardData $data = null,
+        ?string $title = null,
+        ?string $titleUrl = null,
+        ?string $text = null,
         ?array $callToActions = [],
-        string $image = null,
-        string $imageUrl = null,
-        string $blockStyle = null
+        ?string $image = null,
+        ?string $imageUrl = null,
+        ?string $blockStyle = null
     ) {
         if ($data) {
             $this->card = $data;

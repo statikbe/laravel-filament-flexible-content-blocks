@@ -118,7 +118,7 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
             });
     }
 
-    public function getCardImageMedia(?string $imageId, ?string $imageTitle, string $conversion = null, array $attributes = []): ?HtmlableMedia
+    public function getCardImageMedia(?string $imageId, ?string $imageTitle, ?string $conversion = null, array $attributes = []): ?HtmlableMedia
     {
         if (! $imageId) {
             return null;
@@ -127,7 +127,7 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
         return $this->getHtmlableMedia($imageId, $this->getImageConversionType($conversion), $imageTitle, $attributes);
     }
 
-    public function getCardImageUrl(string $imageId, string $conversion = null): ?string
+    public function getCardImageUrl(string $imageId, ?string $conversion = null): ?string
     {
         return $this->getMediaUrl(imageId: $imageId, conversion: $this->getImageConversionType($conversion));
     }

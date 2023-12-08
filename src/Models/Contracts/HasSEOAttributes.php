@@ -32,5 +32,5 @@ interface HasSEOAttributes
     /**
      * Get URL of SEO image
      */
-    public function getSEOImageUrl(string $conversion = null): ?string;
+    public function getSEOImageUrl(?string $conversion = null): ?string;
 }

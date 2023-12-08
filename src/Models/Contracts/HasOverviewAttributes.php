@@ -34,10 +34,10 @@ interface HasOverviewAttributes
     /**
      * Returns the overview image url
      */
-    public function getOverviewImageUrl(string $conversion = null): ?string;
+    public function getOverviewImageUrl(?string $conversion = null): ?string;
 
     /**
      * Get the html view of the overview image
      */
-    public function getOverviewImageMedia(string $conversion = null, array $attributes = []): ?HtmlableMedia;
+    public function getOverviewImageMedia(?string $conversion = null, array $attributes = []): ?HtmlableMedia;
 }

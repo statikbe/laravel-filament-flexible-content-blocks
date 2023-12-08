@@ -77,14 +77,14 @@ trait HasHeroImageAttributesTrait
         return 'hero_image';
     }
 
-    public function getHeroImageUrl(string $conversion = null): ?string
+    public function getHeroImageUrl(?string $conversion = null): ?string
     {
         $media = $this->getFallbackImageMedia($this->heroImage->first(), $this->getHeroImageCollection());
 
         return $media?->getUrl($conversion ?? $this->getHeroImageConversionName());
     }
 
-    public function getHeroImageMedia(string $conversion = null, array $attributes = []): ?HtmlableMedia
+    public function getHeroImageMedia(?string $conversion = null, array $attributes = []): ?HtmlableMedia
     {
         return $this->getImageHtml(
             $this->getFallbackImageMedia($this->heroImage()->first(), $this->getHeroImageCollection()),

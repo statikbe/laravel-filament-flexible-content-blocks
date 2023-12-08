@@ -39,7 +39,7 @@ class Hero extends Component
         }
     }
 
-    public function getHeroImageMedia(string $conversion = null, array $attributes = []): ?HtmlableMedia
+    public function getHeroImageMedia(?string $conversion = null, array $attributes = []): ?HtmlableMedia
     {
         if (method_exists($this->page, 'getHeroImageMedia')) {
             return $this->page->getHeroImageMedia($conversion, $attributes);
