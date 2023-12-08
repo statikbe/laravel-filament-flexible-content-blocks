@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v0.2.8 - 2023-11-17
+
+- Fix in block image field to avoid deletion of images in other blocks of the same type.
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v0.2.7...v0.2.8
+
 ## v0.2.7 - 2023-11-09
 
 Added support for the image editor of Filament. Fully configurable via config file.
