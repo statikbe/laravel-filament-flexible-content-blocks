@@ -28,12 +28,12 @@ interface HasHeroImageAttributes
     /**
      * Returns the url of the hero image
      */
-    public function getHeroImageUrl(string $conversion = null): ?string;
+    public function getHeroImageUrl(?string $conversion = null): ?string;
 
     /**
      * Returns the rendered html of the hero image
      */
-    public function getHeroImageMedia(string $conversion = null, array $attributes = []): ?HtmlableMedia;
+    public function getHeroImageMedia(?string $conversion = null, array $attributes = []): ?HtmlableMedia;
 
     /**
      * Checks if there is a hero image set.

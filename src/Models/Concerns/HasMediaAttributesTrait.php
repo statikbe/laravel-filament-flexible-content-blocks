@@ -42,7 +42,7 @@ trait HasMediaAttributesTrait
     /**
      * Returns the image HTML for a given media object.
      */
-    public function getImageHtml(?Media $media, string $conversion, string $title = null, array $attributes = []): ?HtmlableMedia
+    public function getImageHtml(?Media $media, string $conversion, ?string $title = null, array $attributes = []): ?HtmlableMedia
     {
         $html = null;
 

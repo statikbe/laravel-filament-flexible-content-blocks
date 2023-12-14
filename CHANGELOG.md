@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v0.2.9 - 2023-12-08
+
+- fixes bug in slug field with non translatable models
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v0.2.8...v0.2.9
+
 ## v0.2.8 - 2023-11-17
 
 - Fix in block image field to avoid deletion of images in other blocks of the same type.
