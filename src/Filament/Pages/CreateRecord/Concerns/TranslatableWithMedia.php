@@ -113,7 +113,8 @@ trait TranslatableWithMedia
         );
     }
 
-    private function getTranslatedAttributesWithTranslatableMedia(): array {
+    private function getTranslatedAttributesWithTranslatableMedia(): array
+    {
         $record = app(static::getModel());
         $translatableAttributes = $record->getTranslatableAttributes();
         if (method_exists($record, 'getTranslatableMediaCollections')) {

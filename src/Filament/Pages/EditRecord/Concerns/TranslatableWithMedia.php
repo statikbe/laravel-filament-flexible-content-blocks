@@ -95,7 +95,8 @@ trait TranslatableWithMedia
         );
     }
 
-    private function getTranslatedAttributesWithTranslatableMedia(): array {
+    private function getTranslatedAttributesWithTranslatableMedia(): array
+    {
         $translatableAttributes = app(static::getModel())->getTranslatableAttributes();
         if (method_exists($this->getRecord(), 'getTranslatableMediaCollections')) {
             $translatableAttributes = array_merge($translatableAttributes, $this->getRecord()->getTranslatableMediaCollections());
