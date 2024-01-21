@@ -3,7 +3,7 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Pages\CreateRecord\Concerns;
 
 use Filament\Resources\Pages\CreateRecord\Concerns\Translatable;
-use Filament\Support\Exceptions\Halt;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\ValidationException;
 
@@ -11,75 +11,44 @@ trait TranslatableWithMedia
 {
     use Translatable;
 
-    public function create(bool $another = false): void
+    protected function handleRecordCreation(array $data): Model
     {
-        $this->authorizeAccess();
+        $record = app(static::getModel());
 
-        try {
-            $this->callHook('beforeValidate');
+        $translatableAttributes = $this->getTranslatedAttributesWithTranslatableMedia();
 
-            $data = [
-                $this->activeLocale => $this->form->getState(),
-            ];
+        $record->fill(Arr::except($data, $translatableAttributes));
 
-            $this->callHook('afterValidate');
-
-            $originalActiveLocale = $this->activeLocale;
-
-            $translatableAttributes = $this->getTranslatedAttributesWithTranslatableMedia();
-
-            $nonTranslatableData = Arr::except(
-                $this->data[$originalActiveLocale] ?? [],
-                $translatableAttributes,
-            );
-
-            foreach ($this->getTranslatableLocales() as $locale) {
-                if ($locale === $originalActiveLocale) {
-                    continue;
-                }
-
-                try {
-                    $this->setActiveLocale($locale);
-
-                    $this->data[$locale] = array_merge(
-                        $this->data[$locale] ?? [],
-                        $nonTranslatableData,
-                    );
-
-                    $this->callHook('beforeValidate');
-
-                    $data[$locale] = $this->form->getState();
-
-                    $this->callHook('afterValidate');
-                } catch (ValidationException $exception) {
-                    // If the validation fails for a non-active locale,
-                    // we'll just ignore it and continue, since it's
-                    // likely that the user hasn't filled out the
-                    // required fields for that locale.
-                }
-            }
-
-            $this->setActiveLocale($originalActiveLocale);
-
-            foreach ($data as $locale => $localeData) {
-                if ($locale !== $this->activeLocale) {
-                    $localeData = Arr::only(
-                        $localeData,
-                        $translatableAttributes,
-                    );
-                }
-
-                $data[$locale] = $this->mutateFormDataBeforeCreate($localeData);
-            }
-
-            /** @internal Read the DocBlock above the following method. */
-            $this->createRecordAndCallHooks($data);
-        } catch (Halt $exception) {
-            return;
+        foreach (Arr::only($data, $translatableAttributes) as $key => $value) {
+            $record->setTranslation($key, $this->activeLocale, $value);
         }
 
-        /** @internal Read the DocBlock above the following method. */
-        $this->sendCreatedNotificationAndRedirect(shouldCreateAnotherInsteadOfRedirecting: $another);
+        $originalData = $this->data;
+
+        foreach ($this->otherLocaleData as $locale => $localeData) {
+            $this->data = [
+                ...$this->data,
+                ...$localeData,
+            ];
+
+            try {
+                $this->form->validate();
+            } catch (ValidationException $exception) {
+                continue;
+            }
+
+            $localeData = $this->mutateFormDataBeforeCreate($localeData);
+
+            foreach (Arr::only($localeData, $translatableAttributes) as $key => $value) {
+                $record->setTranslation($key, $locale, $value);
+            }
+        }
+
+        $this->data = $originalData;
+
+        $record->save();
+
+        return $record;
     }
 
     /**
@@ -91,29 +60,26 @@ trait TranslatableWithMedia
      */
     public function updatedActiveLocale(string $newActiveLocale): void
     {
-        $this->setActiveLocale($newActiveLocale);
-
         if (blank($this->oldActiveLocale)) {
             return;
         }
 
+        $this->resetValidation();
+
         $translatableAttributes = $this->getTranslatedAttributesWithTranslatableMedia();
 
-        $this->data[$newActiveLocale] = array_merge(
-            $this->data[$newActiveLocale] ?? [],
-            Arr::except(
-                $this->data[$this->oldActiveLocale] ?? [],
-                $translatableAttributes,
-            ),
-        );
+        $this->otherLocaleData[$this->oldActiveLocale] = Arr::only($this->data, $translatableAttributes);
 
-        $this->data[$this->oldActiveLocale] = Arr::only(
-            $this->data[$this->oldActiveLocale] ?? [],
-            $translatableAttributes,
-        );
+        $this->data = [
+            ...Arr::except($this->data, $translatableAttributes),
+            ...$this->otherLocaleData[$this->activeLocale] ?? [],
+        ];
+
+        unset($this->otherLocaleData[$this->activeLocale]);
     }
 
-    private function getTranslatedAttributesWithTranslatableMedia(): array {
+    private function getTranslatedAttributesWithTranslatableMedia(): array
+    {
         $record = app(static::getModel());
         $translatableAttributes = $record->getTranslatableAttributes();
         if (method_exists($record, 'getTranslatableMediaCollections')) {

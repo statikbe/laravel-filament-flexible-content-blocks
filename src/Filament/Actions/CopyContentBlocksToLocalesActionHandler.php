@@ -44,6 +44,8 @@ class CopyContentBlocksToLocalesActionHandler
                 //copy content blocks
                 foreach ($otherLocales as $otherLocale) {
                     $record->setTranslation(ContentBlocksField::FIELD, $otherLocale, $contentBlocks);
+                    //update form data:
+                    $livewire->otherLocaleData[$otherLocale][ContentBlocksField::FIELD] = $contentBlocks;
                 }
 
                 if ($otherLocales->isNotEmpty()) {
