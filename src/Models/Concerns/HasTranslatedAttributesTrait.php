@@ -48,14 +48,16 @@ trait HasTranslatedAttributesTrait
     /**
      * Retrieves the media UUIDs per media collection. Returns an array with the media collection as key and a list of
      * media UUIDs as values.
+     *
      * @return array<string, array<string>>
      */
-    public function getTranslatableMediaUuidsPerMediaCollection(string $locale=null): array {
-        if(empty($this->getTranslatableMediaCollections())){
+    public function getTranslatableMediaUuidsPerMediaCollection(?string $locale = null): array
+    {
+        if (empty($this->getTranslatableMediaCollections())) {
             return [];
         }
 
-        if(!$locale){
+        if (! $locale) {
             $locale = app()->getLocale();
         }
 
@@ -65,7 +67,7 @@ trait HasTranslatedAttributesTrait
             ->select('collection_name', 'uuid')
             ->get();
 
-        return $translatableMedia->mapToGroups(function($item, int $key){
+        return $translatableMedia->mapToGroups(function ($item, int $key) {
             return [$item->collection_name => $item->uuid];
         })->toArray();
     }

@@ -26,7 +26,7 @@ trait TranslatableWithMedia
         $this->resetValidation();
 
         $translatableAttributes = $this->getTranslatedAttributesWithTranslatableMedia();
-        $emptyTranslatableMedia = Arr::mapWithKeys($this->getRecord()->getTranslatableMediaCollections(), function(string $item, int $key){
+        $emptyTranslatableMedia = Arr::mapWithKeys($this->getRecord()->getTranslatableMediaCollections(), function (string $item, int $key) {
             return [$item => []];
         });
         $translatableMedia = array_merge($emptyTranslatableMedia, $this->getRecord()->getTranslatableMediaUuidsPerMediaCollection($this->activeLocale));
