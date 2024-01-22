@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\FlexiblePageResource\Pages;
+use App\Filament\Resources\PageResource\Pages;
 use App\Models\Page;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
@@ -30,16 +30,11 @@ class PageResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    protected static function getNavigationGroup(): string
-    {
-        return trans('merchants.content.group');
-    }
-
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Tabs::make('Heading')
+                Tabs::make()
                     ->columnSpan(2)
                     ->tabs([
                         Tab::make('General')
@@ -57,11 +52,11 @@ class PageResource extends Resource
                             ]),
                         Tab::make('Overview')
                             ->schema([
-                                OverviewFields::make(1),
+                                OverviewFields::create(),
                             ]),
                         Tab::make('SEO')
                             ->schema([
-                                SEOFields::make(1),
+                                SEOFields::create(),
                             ]),
                     ]),
 

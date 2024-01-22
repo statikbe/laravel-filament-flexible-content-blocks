@@ -295,6 +295,8 @@ __Note:__ The `x-flexible-hero` component requires [Alpine.js](https://alpinejs.
 
 If you want to customise these component views, you can [publish the views](#installation).
 
+You can use the SEO library of your preference to render the SEO tags on the page, e.g. with [`artesaos/seotools`](https://github.com/artesaos/seotools).
+
 ## Blocks
 
 To build your content, the package provides the default blocks listed below. 

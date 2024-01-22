@@ -1,5 +1,5 @@
 @php
-    /* @var \App\Models\FlexiblePage $page */
+    /* @var \App\Models\TranslatablePage $page */
 @endphp
 
 <x-layouts.flexible title="{{ $page->title }}" wide="true">

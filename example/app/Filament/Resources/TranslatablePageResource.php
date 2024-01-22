@@ -36,11 +36,6 @@ class TranslatablePageResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-cube-transparent';
 
-    protected static function getNavigationGroup(): string
-    {
-        return trans('merchants.content.group');
-    }
-
     public static function form(Form $form): Form
     {
         return $form

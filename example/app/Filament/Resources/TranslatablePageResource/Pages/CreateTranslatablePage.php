@@ -4,11 +4,11 @@ namespace App\Filament\Resources\TranslatableFlexiblePageResource\Pages;
 
 use App\Filament\Resources\TranslatablePageResource;
 use Filament\Resources\Pages\CreateRecord;
-use Filament\Resources\Pages\CreateRecord\Concerns\Translatable;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Pages\CreateRecord\Concerns\TranslatableWithMedia;
 
 class CreateTranslatablePage extends CreateRecord
 {
-    use Translatable;
+    use TranslatableWithMedia;
 
     protected static string $resource = TranslatablePageResource::class;
 }

@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\TranslatableFlexiblePage;
+use App\Models\TranslatablePage;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Response;
 
 class TranslatablePageController extends Controller
 {
-    public function __invoke(TranslatableFlexiblePage $page)
+    public function __invoke(TranslatablePage $page)
     {
         if (! $page->isPublished()) {
             return abort(Response::HTTP_NOT_FOUND);
@@ -21,7 +21,7 @@ class TranslatablePageController extends Controller
         SEOTools::opengraph()->addImage($page->getSEOImageUrl());
         SEOMeta::setKeywords($page->seo_keywords);
 
-        return view('flexible-pages.index', [
+        return view('translatable-pages.index', [
             'page' => $page,
             'title' => $page->title,
         ]);
