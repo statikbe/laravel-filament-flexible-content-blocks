@@ -2,6 +2,11 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v0.2.11 - 2024-01-21
+
+- fix bug with translatable image field due to update in filament lib
+- fix content blocks copy action to update form data after copy
+
 ## v0.2.10 - 2023-12-14
 
 Fix bug in saving models with translatable media.
