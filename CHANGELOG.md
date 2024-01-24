@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v0.2.12 - 2024-01-24
+
+- fixes bug in block image field.
+
 ## v0.2.11 - 2024-01-21
 
 - fix bug with translatable image field due to update in filament lib
