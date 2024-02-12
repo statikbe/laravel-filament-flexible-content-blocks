@@ -45,6 +45,7 @@
         "spatie/laravel-package-tools": "^1.13.0",
         "spatie/laravel-sluggable": "^3.4",
         "spatie/laravel-translatable": "^6.3",
+        "filament/spatie-laravel-translatable-plugin": "^3.0",
         "dereuromark/media-embed": "^0.6"
     },
     "require-dev": {

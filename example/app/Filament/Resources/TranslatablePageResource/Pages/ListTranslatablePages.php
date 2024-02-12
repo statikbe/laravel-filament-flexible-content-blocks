@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\TranslatableFlexiblePageResource\Pages;
+namespace App\Filament\Resources\TranslatablePageResource\Pages;
 
 use App\Filament\Resources\TranslatablePageResource;
 use Filament\Pages\Actions;

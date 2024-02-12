@@ -119,7 +119,7 @@ This is required if you want to use the flexible content blocks. Implement it wi
 [HasTranslatedContentBlocksTrait](src%2FModels%2FConcerns%2FHasTranslatedContentBlocksTrait.php).
 
 #### __[HasMediaAttributes](src%2FModels%2FContracts%2FHasMediaAttributes.php)__:
-Always include this interface if you use any image functionality. It provides some helper functions. 
+This provides some helper functions for handling media. 
 You do not need to add traits, since the trait will be included by other traits that handle images.
 
 #### __[HasTranslatableMedia](src%2FModels%2FContracts%2FHasTranslatableMedia.php)__:

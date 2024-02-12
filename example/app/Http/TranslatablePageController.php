@@ -12,7 +12,7 @@ class TranslatablePageController extends Controller
     public function __invoke(TranslatablePage $page)
     {
         if (! $page->isPublished()) {
-            return abort(Response::HTTP_NOT_FOUND);
+            abort(Response::HTTP_NOT_FOUND);
         }
 
         SEOTools::setTitle($page->getSEOTitle());

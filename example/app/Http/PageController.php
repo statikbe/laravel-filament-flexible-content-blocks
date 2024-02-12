@@ -11,7 +11,7 @@ class PageController extends Controller
     public function __invoke(Page $page)
     {
         if (! $page->isPublished()) {
-            return abort(Response::HTTP_NOT_FOUND);
+            abort(Response::HTTP_NOT_FOUND);
         }
 
         SEOTools::setTitle($page->getSEOTitle());

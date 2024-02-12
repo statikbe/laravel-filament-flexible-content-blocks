@@ -10,6 +10,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 
 class CopyContentBlocksToLocalesAction extends Action
 {
+    //TODO refactor to create function to support filament v3 see CopyContentBlocksToLocalesAction for resources.
     public static function getDefaultName(): ?string
     {
         return 'copy_content_blocks_to_other_locales_page_action';
