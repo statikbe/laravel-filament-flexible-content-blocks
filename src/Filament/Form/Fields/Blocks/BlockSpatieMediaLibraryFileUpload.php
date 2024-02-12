@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks;
 
+use Closure;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -12,7 +13,6 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Concerns\HasImageEditor;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
-use Closure;
 
 /**
  * An extension to the spatie media-library field of Filament to also allow to save the UUID to a block.
@@ -32,14 +32,12 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
         //Extend the media library load logic to also look at the given state (in our case the uuids of the images)
         $this->loadStateFromRelationshipsUsing(static function (SpatieMediaLibraryFileUpload $component, HasMedia $record, $state): void {
             $stateUuids = [];
-            if(is_string($state)){
+            if (is_string($state)) {
                 $stateUuids = [$state];
-            }
-            else if(is_array($state) && !empty($state)) {
-                if(Str::isUuid(array_keys($state)[0])) {
+            } elseif (is_array($state) && ! empty($state)) {
+                if (Str::isUuid(array_keys($state)[0])) {
                     $stateUuids = array_keys($state);
-                }
-                else {
+                } else {
                     $stateUuids = array_values($state);
                 }
             }
@@ -73,9 +71,10 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
     {
         $state = parent::getState();
         //transform strings to arrays since the upload field expects an array of UUIDs:
-        if($state && !is_array($state)){
+        if ($state && ! is_array($state)) {
             $state = array_filter([$state]);
         }
+
         return $state;
     }
 
@@ -98,11 +97,11 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
         }
 
         $rules[] = function (string $attribute, array|string $value, Closure $fail): void {
-            if(is_string($value)){
+            if (is_string($value)) {
                 $value = [$value];
             }
 
-            $files = array_filter($value, fn (TemporaryUploadedFile | string $file): bool => $file instanceof TemporaryUploadedFile);
+            $files = array_filter($value, fn (TemporaryUploadedFile|string $file): bool => $file instanceof TemporaryUploadedFile);
 
             $name = $this->getName();
 
