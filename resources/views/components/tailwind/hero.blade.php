@@ -8,7 +8,7 @@
             @endif
 
             @if($intro)
-                <div class="max-w-4xl font-light text-white drop-shadow hero__intro [&_a]:underline hover:[&_a]:no-underline">
+                <div class="max-w-4xl font-light @if($hasHeroImage()) text-white @endif drop-shadow hero__intro [&_a]:underline hover:[&_a]:no-underline">
                     {!! Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks::replaceParameters($intro) !!}
                 </div>
             @endif
