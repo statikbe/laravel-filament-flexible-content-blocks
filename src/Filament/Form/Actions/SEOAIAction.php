@@ -24,8 +24,8 @@ class SEOAIAction extends Actions
                     'role' => 'user',
                     'content' => view('filament-flexible-content-blocks::ai.user-prompt', [
                         'title' => $title,
-                        'html' => $html
-                    ])->render()
+                        'html' => $html,
+                    ])->render(),
                 ],
             ],
         ];
@@ -70,15 +70,16 @@ class SEOAIAction extends Actions
             Action::make('AIseo')
                 ->icon('heroicon-o-sparkles')
                 ->disabled(function ($record) {
-                    return !$record || !config('openai.api_key');
+                    return ! $record || ! config('openai.api_key');
                 })
                 ->label(function ($record) {
-                    if (!$record) {
+                    if (! $record) {
                         return 'AI-ify (only on edit)';
                     }
+
                     return 'AI-ify';
                 })
-                ->action(fn(Set $set, TranslatablePage $page) => static::invoke($set, $page))
+                ->action(fn (Set $set, TranslatablePage $page) => static::invoke($set, $page)),
         ]);
     }
 }
