@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks;
 
+use Illuminate\Support\Facades\Config;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Statikbe\FilamentFlexibleContentBlocks\Commands\CreateFlexibleContentBlocksModelCommand;
@@ -47,5 +48,8 @@ class FilamentFlexibleContentBlocksServiceProvider extends PackageServiceProvide
         );
 
         FilamentFlexibleContentBlocks::setLocales($supportedLocales);
+
+        // Override default timeout to 120 seconds
+        Config::set('openai.request_timeout', env('OPENAI_REQUEST_TIMEOUT', 120));
     }
 }
