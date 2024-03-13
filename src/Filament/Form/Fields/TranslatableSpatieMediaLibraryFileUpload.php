@@ -20,13 +20,14 @@ class TranslatableSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpl
 
         self::addImageEditor($this);
 
-        $this->customProperties(function (Livewire $livewire){
+        $this->customProperties(function (Livewire $livewire) {
             return $this->getCurrentLocaleFilter($livewire);
         });
 
         $this->filterMediaUsing(function (Collection $media, Livewire $livewire): Collection {
             $filter = $this->getCurrentLocaleFilter($livewire);
-            return $media->filter(function(Media $item) use ($filter) {
+
+            return $media->filter(function (Media $item) use ($filter) {
                 return $item->getCustomProperty('locale') == $filter['locale'];
             });
         });
@@ -54,11 +55,13 @@ class TranslatableSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpl
         });
     }
 
-    private function getCurrentLocaleFilter(Livewire $livewire): array {
+    private function getCurrentLocaleFilter(Livewire $livewire): array
+    {
         $mediaFilters = [];
         if (method_exists($livewire, 'getActiveFormsLocale')) {
             $mediaFilters['locale'] = $livewire->getActiveFormsLocale();
         }
+
         return $mediaFilters;
     }
 }

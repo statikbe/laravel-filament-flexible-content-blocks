@@ -4,6 +4,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
 
 use Filament\Forms\Components\Hidden;
 use Illuminate\Support\Str;
+
 class BlockIdField extends Hidden
 {
     const FIELD = 'block_id';
@@ -11,17 +12,18 @@ class BlockIdField extends Hidden
     public static function create(): static
     {
         return static::make(static::FIELD)
-            ->default(function($state) {
+            ->default(function ($state) {
                 return $state ?? static::generateBlockId();
             })
-            ->afterStateHydrated(function(Hidden $component, $state){
-                if(!$state) {
+            ->afterStateHydrated(function (Hidden $component, $state) {
+                if (! $state) {
                     $component->state(static::generateBlockId());
                 }
             });
     }
 
-    public static function generateBlockId(): string {
+    public static function generateBlockId(): string
+    {
         return Str::random(12);
     }
 }

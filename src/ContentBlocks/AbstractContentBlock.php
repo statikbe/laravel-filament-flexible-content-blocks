@@ -38,7 +38,7 @@ abstract class AbstractContentBlock extends Component
         $this->blockData = $blockData;
 
         //block id:
-        if(!$this->blockData['block_id']){
+        if (! $this->blockData['block_id']) {
             //initialise the ID for a new block, then never change it.
             $this->blockData['block_id'] = BlockIdField::generateBlockId();
         }
@@ -80,14 +80,14 @@ abstract class AbstractContentBlock extends Component
 
     /**
      * Returns the final block schema with a block ID hidden field.
-     * @return Closure
      */
-    protected static function getFilamentBlockSchema(): Closure {
-        return function(\Filament\Forms\Components\Component $component){
+    protected static function getFilamentBlockSchema(): Closure
+    {
+        return function (\Filament\Forms\Components\Component $component) {
             return array_merge([
-                    //keep track of block id:
-                    BlockIdField::create(),
-                ],
+                //keep track of block id:
+                BlockIdField::create(),
+            ],
                 $component->evaluate(static::makeFilamentSchema()));
         };
     }
