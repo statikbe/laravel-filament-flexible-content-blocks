@@ -16,6 +16,7 @@ use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasCallToActio
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImage;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImageConversionType;
 use Statikbe\FilamentFlexibleContentBlocks\Exceptions\LinkableModelNotFoundException;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\BlockIdField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BackgroundColourField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockSpatieMediaLibraryFileUpload;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockStyleField;
@@ -73,6 +74,7 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
             Repeater::make('cards')
                 ->label(static::getFieldLabel('cards'))
                 ->schema([
+                    BlockIdField::create(),
                     TextInput::make('title')
                         ->label(static::getFieldLabel('card_title'))
                         ->maxLength(255),
