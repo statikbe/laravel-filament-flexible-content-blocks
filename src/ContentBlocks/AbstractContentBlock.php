@@ -6,6 +6,7 @@ use Closure;
 use Filament\Forms\Components\Builder\Block;
 use Illuminate\View\Component;
 use Spatie\MediaLibrary\HasMedia;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\BlockIdField;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
@@ -26,6 +27,8 @@ abstract class AbstractContentBlock extends Component
 
     public ?array $blockData;
 
+    private string $blockId;
+
     /**
      * Create a new component instance.
      */
@@ -33,6 +36,14 @@ abstract class AbstractContentBlock extends Component
     {
         $this->record = $record;
         $this->blockData = $blockData;
+
+        //block id:
+        if(!$this->blockData['block_id']){
+            //initialise the ID for a new block, then never change it.
+            $this->blockData['block_id'] = BlockIdField::generateBlockId();
+        }
+
+        $this->blockId = $this->blockData['block_id'];
     }
 
     /**
@@ -63,8 +74,22 @@ abstract class AbstractContentBlock extends Component
         return Block::make(static::getName())
             ->label(static::getLabel())
             ->icon(static::getIcon())
-            ->schema(static::makeFilamentSchema())
+            ->schema(static::getFilamentBlockSchema())
             ->visible(static::visible());
+    }
+
+    /**
+     * Returns the final block schema with a block ID hidden field.
+     * @return Closure
+     */
+    protected static function getFilamentBlockSchema(): Closure {
+        return function(\Filament\Forms\Components\Component $component){
+            return array_merge([
+                    //keep track of block id:
+                    BlockIdField::create(),
+                ],
+                $component->evaluate(static::makeFilamentSchema()));
+        };
     }
 
     /**
@@ -153,5 +178,10 @@ abstract class AbstractContentBlock extends Component
         }
 
         return $uuid;
+    }
+
+    public function getBlockId(): string
+    {
+        return $this->blockId;
     }
 }
