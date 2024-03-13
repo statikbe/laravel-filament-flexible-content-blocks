@@ -26,12 +26,12 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
 
         self::addImageEditor($this);
 
-        $this->customProperties(function (Get $get){
+        $this->customProperties(function (Get $get) {
             return ['block' => $get(BlockIdField::FIELD)];
         });
 
         $this->filterMediaUsing(function (Collection $media, Get $get): Collection {
-            return $media->filter(function(Media $item) use ($get) {
+            return $media->filter(function (Media $item) use ($get) {
                 return $item->getCustomProperty('block') === $get(BlockIdField::FIELD);
             });
         });
