@@ -21,11 +21,10 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Concerns\HasImag
  */
 class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
 {
-    use HasImageEditor;
-
     use Filament\Forms\Components\Concerns\CanBeValidated {
         getValidationRules as getValidationRulesTrait;
     }
+    use HasImageEditor;
 
     protected function setUp(): void
     {
@@ -33,12 +32,12 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
 
         self::addImageEditor($this);
 
-        $this->customProperties(function (Get $get){
+        $this->customProperties(function (Get $get) {
             return ['block' => $get(BlockIdField::FIELD)];
         });
 
         $this->filterMediaUsing(function (Collection $media, Get $get): Collection {
-            return $media->filter(function(Media $item) use ($get) {
+            return $media->filter(function (Media $item) use ($get) {
                 return $item->getCustomProperty('block') === $get(BlockIdField::FIELD);
             });
         });

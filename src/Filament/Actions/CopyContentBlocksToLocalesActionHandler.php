@@ -17,6 +17,7 @@ use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks;
 class CopyContentBlocksToLocalesActionHandler
 {
     private array $imageFields = ['image'];
+
     private array $fileUploadFields = [];
 
     public function handle(Model $record, Component $livewire, ?array $contentBlocks): void
@@ -76,9 +77,10 @@ class CopyContentBlocksToLocalesActionHandler
         }
     }
 
-    private function convertContentBlockIsAndImages(Model $record, array $contentBlocks, string $locale): array {
+    private function convertContentBlockIsAndImages(Model $record, array $contentBlocks, string $locale): array
+    {
         $convertedBlocks = [];
-        foreach($contentBlocks as $block){
+        foreach ($contentBlocks as $block) {
             $block = $this->convertBlockId($block);
 
             $convertedBlocks[] = $this->copyImagesToBlock($record, $block);
@@ -90,36 +92,37 @@ class CopyContentBlocksToLocalesActionHandler
     /**
      * Add extra image fields to convert.
      * Useful if you have custom blocks with images that use other field names than `image`.
-     * @param array<string> $extraImageFields
-     * @return void
+     *
+     * @param  array<string>  $extraImageFields
      */
-    public function addImageFields(array $extraImageFields): void {
+    public function addImageFields(array $extraImageFields): void
+    {
         $this->imageFields = array_merge($this->imageFields, $extraImageFields);
     }
 
     /**
      * Add file upload field names used in the custom blocks to be able to transform the localized form data.
-     * @param array $fileUploadFields
-     * @return void
      */
-    public function addFileUploadField(array $fileUploadFields): void {
+    public function addFileUploadField(array $fileUploadFields): void
+    {
         $this->fileUploadFields = array_merge($this->fileUploadFields, $fileUploadFields);
     }
 
-    private function convertBlockId(array $contentBlock): array {
+    private function convertBlockId(array $contentBlock): array
+    {
         $dataBlock = &$contentBlock;
-        if(isset($dataBlock['data'])){
+        if (isset($dataBlock['data'])) {
             $dataBlock = &$contentBlock['data'];
         }
 
         //generate new block id:
-        if(isset($dataBlock['block_id']) && $dataBlock['block_id']){
+        if (isset($dataBlock['block_id']) && $dataBlock['block_id']) {
             $dataBlock['block_id'] = BlockIdField::generateBlockId();
         }
 
         //handle all block IDs in deeper data structures, e.g. cards.
-        foreach($dataBlock as $var => $data){
-            if(is_array($data)){
+        foreach ($dataBlock as $var => $data) {
+            if (is_array($data)) {
                 $dataBlock[$var] = $this->convertBlockId($data);
             }
         }
@@ -127,21 +130,22 @@ class CopyContentBlocksToLocalesActionHandler
         return $contentBlock;
     }
 
-    private function copyImagesToBlock(Model $record, array $contentBlock): array {
+    private function copyImagesToBlock(Model $record, array $contentBlock): array
+    {
         $dataBlock = &$contentBlock;
-        if(isset($dataBlock['data'])){
+        if (isset($dataBlock['data'])) {
             $dataBlock = &$contentBlock['data'];
         }
 
-        foreach($this->imageFields as $imageField){
-            if(isset($dataBlock[$imageField])){
+        foreach ($this->imageFields as $imageField) {
+            if (isset($dataBlock[$imageField])) {
                 $blockId = $dataBlock[BlockIdField::FIELD] ?? null;
                 $dataBlock[$imageField] = $this->copyImage($record, $dataBlock[$imageField], $blockId);
             }
         }
 
-        foreach($dataBlock as $var => $data){
-            if(is_array($data)){
+        foreach ($dataBlock as $var => $data) {
+            if (is_array($data)) {
                 $blockId = $dataBlock[BlockIdField::FIELD] ?? null;
                 $dataBlock[$var] = $this->copyImagesToBlock($record, $data, $blockId);
             }
@@ -150,13 +154,14 @@ class CopyContentBlocksToLocalesActionHandler
         return $contentBlock;
     }
 
-    private function copyImage(Model $record, string $imageUuid, ?string $blockId): string {
+    private function copyImage(Model $record, string $imageUuid, ?string $blockId): string
+    {
         $image = Media::findByUuid($imageUuid);
 
         $copiedImage = $image->copy($record, $image->collection_name, $image->disk);
 
         //set block ID:
-        if($blockId) {
+        if ($blockId) {
             $copiedImage->setCustomProperty('block', $blockId);
             $copiedImage->save();
         }
@@ -164,31 +169,33 @@ class CopyContentBlocksToLocalesActionHandler
         return $copiedImage->uuid;
     }
 
-    private function transformToFileUploadFormData(array $contentBlocks): array {
-        foreach($contentBlocks as &$block){
+    private function transformToFileUploadFormData(array $contentBlocks): array
+    {
+        foreach ($contentBlocks as &$block) {
             $this->transformBlockToFileUploadFormData($block);
         }
 
         return $contentBlocks;
     }
 
-    private function transformBlockToFileUploadFormData(array &$contentBlock): array {
+    private function transformBlockToFileUploadFormData(array &$contentBlock): array
+    {
         $dataBlock = &$contentBlock;
-        if(isset($dataBlock['data'])){
+        if (isset($dataBlock['data'])) {
             $dataBlock = &$contentBlock['data'];
         }
 
         $fields = array_unique(array_merge($this->imageFields, $this->fileUploadFields));
 
-        foreach($fields as $fileField){
-            if(isset($dataBlock[$fileField]) && !is_array($dataBlock[$fileField])){
+        foreach ($fields as $fileField) {
+            if (isset($dataBlock[$fileField]) && ! is_array($dataBlock[$fileField])) {
                 //put file fields in an array:
                 $dataBlock[$fileField] = [$dataBlock[$fileField] => $dataBlock[$fileField]];
             }
         }
 
-        foreach($dataBlock as $var => $data){
-            if(is_array($data) && !in_array($var, $fields)){
+        foreach ($dataBlock as $var => $data) {
+            if (is_array($data) && ! in_array($var, $fields)) {
                 $dataBlock[$var] = $this->transformBlockToFileUploadFormData($data);
             }
         }
