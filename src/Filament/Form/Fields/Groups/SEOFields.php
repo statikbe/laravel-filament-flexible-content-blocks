@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Groups;
 
+use Filament\Forms\Components\Actions;
 use Filament\Forms\Components\Grid;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Actions\SEOAIAction;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\SEODescriptionField;
@@ -15,7 +16,9 @@ class SEOFields
     {
         return Grid::make($columns)
             ->schema([
-                SEOAIAction::create(),
+                Actions::make([
+                    SEOAIAction::create(),
+                ]),
                 SEOTitleField::create(),
                 SEODescriptionField::create(),
                 SEOKeywordsField::create(),
