@@ -28,7 +28,7 @@ class UpgradeSpatieImageFieldsCommand extends Command implements PromptsForMissi
         $model = $this->argument('model');
 
         $customImage = $this->option('customimage');
-        if($customImage){
+        if ($customImage) {
             $this->imageFields[] = $customImage;
         }
 
