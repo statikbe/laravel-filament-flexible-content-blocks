@@ -49,13 +49,13 @@ class SEOAIAction extends Action
 
             if ($result) {
                 $result = json_decode($result);
-                if($result->title) {
+                if ($result->title) {
                     $set(SEOTitleField::getFieldName(), $result->title);
                 }
-                if($result->description) {
+                if ($result->description) {
                     $set(SEODescriptionField::getFieldName(), $result->description);
                 }
-                if($result->tags) {
+                if ($result->tags) {
                     $set(SEOKeywordsField::FIELD, array_map('trim', explode(',', $result->tags) ?? []));
                 }
 
@@ -89,6 +89,7 @@ class SEOAIAction extends Action
                 if (! $record) {
                     return trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_action.seo_ai_action.name_on_create');
                 }
+
                 return trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_action.seo_ai_action.name');
             })
             ->action(fn (Set $set, Model&HasPageAttributes&HasContentBlocks $record) => static::invoke($set, $record));
