@@ -10,8 +10,8 @@ use Spatie\Translatable\HasTranslations;
  */
 trait HasTranslatedAttributesTrait
 {
-    use HasTranslations;
     use HasTranslatedMediaTrait;
+    use HasTranslations;
 
     /**
      * @var string[]
@@ -30,6 +30,4 @@ trait HasTranslatedAttributesTrait
             $translatableAttributes
         );
     }
-
-
 }
