@@ -3,7 +3,6 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks;
 
 use Closure;
-use Filament\Forms\Components\Concerns\CanBeValidated;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Get;
 use Illuminate\Database\Eloquent\Model;
@@ -24,7 +23,7 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
 {
     use HasImageEditor;
 
-    use CanBeValidated {
+    use Filament\Forms\Components\Concerns\CanBeValidated {
         getValidationRules as getValidationRulesTrait;
     }
 
