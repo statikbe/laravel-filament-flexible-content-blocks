@@ -6,6 +6,7 @@ use Spatie\Translatable\HasTranslations;
 
 /**
  * @property array $translatable
+ * @property array $translatableMediaCollections
  */
 trait HasTranslatedAttributesTrait
 {
