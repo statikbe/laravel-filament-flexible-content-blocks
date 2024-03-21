@@ -13,6 +13,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\BlockIdField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Concerns\HasImageEditor;
+use Filament\Forms\Components\Concerns\CanBeValidated;
 
 /**
  * An extension to the spatie media-library field of Filament to also allow to save the UUID to a block.
@@ -21,7 +22,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Concerns\HasImag
  */
 class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
 {
-    use Filament\Forms\Components\Concerns\CanBeValidated {
+    use CanBeValidated {
         getValidationRules as getValidationRulesTrait;
     }
     use HasImageEditor;
