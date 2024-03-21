@@ -24,6 +24,6 @@ class BlockIdField extends Hidden
 
     public static function generateBlockId(): string
     {
-        return Str::random(12);
+        return Str::uuid();
     }
 }
