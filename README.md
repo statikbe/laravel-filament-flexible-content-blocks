@@ -58,6 +58,11 @@ php artisan vendor:publish --tag="filament-flexible-content-blocks-migrations"
 php artisan migrate
 ```
 
+## Upgrading
+
+If you need to upgrade to v1.0.0 it is **IMPORTANT** to [read the upgrade guide thoroughly](./UPGRADE.md), because the data model of the 
+content blocks has changed and needs to be upgraded via a command.
+
 ## Dependencies
 
 This is an opinionated package with batteries included. So we picked a set of dependencies to build upon. 
@@ -68,17 +73,19 @@ Here is a brief overview of the choices made:
 - `spatie/laravel-sluggable`: for slugs
 - `spatie/laravel-translatable`: for translations as this works together with the first party filament translatable package. 
 - `dereuromark/media-embed`: to support video embeds of [various media services](https://github.com/dereuromark/media-embed/blob/master/docs/supported.md).
+- `openai-php/laravel`: to generate content and add other smart features ;-).
 
 ## Usage
 
-There is [an example implementation](./example) of all the package features, which includes:
+There is [an example project](https://github.com/statikbe/laravel-filament-package-sampler) of all the package features, which includes:
 - migrations
-- data models
+- data models for default & translatable pages
 - Filament resources & pages
 - Http controllers
 - views
+- a data seeder to generate test pages
 
-You can use this as a starting point to see how the package can be used for a simple page (there are two models for both regular and translated content). 
+You can use this as a starting point to see how the package can be used for a CMS pages. 
 Below we briefly discuss how to setup a migration, a model and a Filament resource in four steps. In the future,
 we want to add question-based commands to create these, see [roadmap](#roadmap).
 
@@ -296,6 +303,24 @@ __Note:__ The `x-flexible-hero` component requires [Alpine.js](https://alpinejs.
 If you want to customise these component views, you can [publish the views](#installation).
 
 You can use the SEO library of your preference to render the SEO tags on the page, e.g. with [`artesaos/seotools`](https://github.com/artesaos/seotools).
+
+## AI features
+
+We are dreaming up some exciting new AI-based features to ease content creation and translation. The first has arrived:
+
+### SEO fields generation
+
+There is a form action `SEOAIAction` that generates an SEO title, description and tags based on the model's content.
+
+To enable this, you should complete the configuration of [the OpenAI library](https://github.com/openai-php/laravel).
+Create an OpenAI API key and set this up in the `.env` file of your project:
+
+```shell
+OPENAI_API_KEY=sk-...
+OPENAI_ORGANIZATION=org-...
+```
+
+You will find the SEO AI action already set up in the `SEOFields` group.
 
 ## Blocks
 

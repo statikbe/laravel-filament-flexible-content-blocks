@@ -16,7 +16,8 @@ class UpgradeSpatieImageFieldsCommand extends Command implements PromptsForMissi
     use PromptsForMissingInputTrait;
 
     public $signature = 'filament-flexible-content-blocks:upgrade-images
-                         {model : The model class with namespace (use double backslashes)}';
+                         {model : The model class with namespace (use double backslashes)}
+                         {--customimage= : Custom image field names}';
 
     public $description = 'Upgrade content blocks data field to add block IDs to link the image fields properly to blocks.';
 
@@ -25,6 +26,11 @@ class UpgradeSpatieImageFieldsCommand extends Command implements PromptsForMissi
     public function handle(): int
     {
         $model = $this->argument('model');
+
+        $customImage = $this->option('customimage');
+        if($customImage){
+            $this->imageFields[] = $customImage;
+        }
 
         $model::orderBy('id', 'desc')->limit(2)->chunk(2, function (Collection $models) {
             foreach ($models as $model) {
