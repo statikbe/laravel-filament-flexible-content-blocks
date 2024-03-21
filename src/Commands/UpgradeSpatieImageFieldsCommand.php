@@ -3,13 +3,13 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Console\Concerns\PromptsForMissingInput as PromptsForMissingInputTrait;
+use Illuminate\Contracts\Console\PromptsForMissingInput;
+use Illuminate\Database\Eloquent\Collection;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\BlockIdField;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Illuminate\Contracts\Console\PromptsForMissingInput;
-use Illuminate\Console\Concerns\PromptsForMissingInput as PromptsForMissingInputTrait;
-use Illuminate\Database\Eloquent\Collection;
 
 class UpgradeSpatieImageFieldsCommand extends Command implements PromptsForMissingInput
 {
@@ -26,12 +26,12 @@ class UpgradeSpatieImageFieldsCommand extends Command implements PromptsForMissi
     {
         $model = $this->argument('model');
 
-        $model::orderBy('id', 'desc')->limit(2)->chunk(2, function (Collection $models){
-            foreach($models as $model){
+        $model::orderBy('id', 'desc')->limit(2)->chunk(2, function (Collection $models) {
+            foreach ($models as $model) {
                 /* @var HasContentBlocks $model */
                 //check if the model is translated:
-                if(isset($model->translatable) && in_array('content_blocks', $model->translatable)){
-                    foreach(FilamentFlexibleContentBlocks::getLocales() as $locale){
+                if (isset($model->translatable) && in_array('content_blocks', $model->translatable)) {
+                    foreach (FilamentFlexibleContentBlocks::getLocales() as $locale) {
                         $contentBlocks = $model->getTranslation('content_blocks', $locale);
                         $upgradedContentBlocks = $this->upgradeContentBlocks($contentBlocks);
                         //$this->comment(json_encode($upgradedContentBlocks, JSON_PRETTY_PRINT));
@@ -39,8 +39,7 @@ class UpgradeSpatieImageFieldsCommand extends Command implements PromptsForMissi
                         $model->setTranslation('content_blocks', $locale, $upgradedContentBlocks);
                         $model->save();
                     }
-                }
-                else {
+                } else {
                     $model->content_blocks = $this->upgradeContentBlocks($model->content_blocks);
 
                     //save upgrade
@@ -60,25 +59,25 @@ class UpgradeSpatieImageFieldsCommand extends Command implements PromptsForMissi
     // Generate function
     public function upgradeContentBlocks(array $contentBlocks): array
     {
-        foreach($contentBlocks as &$block){
+        foreach ($contentBlocks as &$block) {
             //add block id to each block:
-            if(!isset($block['data'][BlockIdField::FIELD])){
+            if (! isset($block['data'][BlockIdField::FIELD])) {
                 $block['data'][BlockIdField::FIELD] = BlockIdField::generateBlockId();
             }
 
-            foreach($this->imageFields as $imageField){
-                if(isset($block['data'][$imageField]) && $block['data'][$imageField]) {
+            foreach ($this->imageFields as $imageField) {
+                if (isset($block['data'][$imageField]) && $block['data'][$imageField]) {
                     $this->updateMedia($block['data'][$imageField], $block['data'][BlockIdField::FIELD]);
                 }
             }
 
             //cards:
-            if($block['type'] === 'filament-flexible-content-blocks::cards'){
-                if(isset($block['data']['cards'])){
-                    foreach($block['data']['cards'] as $card){
-                        if (!isset($card[BlockIdField::FIELD])) {
+            if ($block['type'] === 'filament-flexible-content-blocks::cards') {
+                if (isset($block['data']['cards'])) {
+                    foreach ($block['data']['cards'] as $card) {
+                        if (! isset($card[BlockIdField::FIELD])) {
                             $card[BlockIdField::FIELD] = BlockIdField::generateBlockId();
-                            if(isset($card['image']) && $card['image']){
+                            if (isset($card['image']) && $card['image']) {
                                 $this->updateMedia($block['data'][$imageField], $block['data'][BlockIdField::FIELD]);
                             }
                         }
@@ -86,14 +85,16 @@ class UpgradeSpatieImageFieldsCommand extends Command implements PromptsForMissi
                 }
             }
         }
+
         return $contentBlocks;
     }
 
-    private function updateMedia(?string $mediaUuid, string $blockId){
-        if($mediaUuid){
+    private function updateMedia(?string $mediaUuid, string $blockId)
+    {
+        if ($mediaUuid) {
             /* @var Media $media */
             $media = Media::findByUuid($mediaUuid);
-            if($media){
+            if ($media) {
                 //add block id as custom property to media:
                 $media->setCustomProperty('block', $blockId);
                 $media->save();
@@ -101,4 +102,3 @@ class UpgradeSpatieImageFieldsCommand extends Command implements PromptsForMissi
         }
     }
 }
-
