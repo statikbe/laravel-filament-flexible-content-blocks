@@ -154,4 +154,10 @@ return [
 
     'form_component.parent_lbl' => 'Parent content',
     'form_component.parent_help' => 'Choose the content that this content should appear under. The slug of the parent content will be displayed in front of this content\'s slug in the URL.',
+
+    'form_action.seo_ai_action.name' => 'Generate SEO data',
+    'form_action.seo_ai_action,name_on_create' => 'Generate SEO data (only on edit!)',
+    'form_action.seo_ai_action.generated_success' => 'The SEO fields are generated!',
+    'form_action.seo_ai_action.generated_no_response' => 'There was no response from the AI service...',
+    'form_action.seo_ai_action.generated_error' => 'Something went wrong contacting AI service. Try again later.',
 ];

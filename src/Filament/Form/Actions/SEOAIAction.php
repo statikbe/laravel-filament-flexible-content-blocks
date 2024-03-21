@@ -2,15 +2,22 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Actions;
 
-use App\Models\TranslatablePage;
-use Filament\Forms\Components\Actions;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Set;
 use Filament\Notifications\Notification;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 use OpenAI\Laravel\Facades\OpenAI;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\SEODescriptionField;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\SEOKeywordsField;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\SEOTitleField;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasPageAttributes;
 
-class SEOAIAction extends Actions
+class SEOAIAction extends Action
 {
+    const NAME = 'AIseo';
+
     private static function getAIParameters($title, $html): array
     {
         return [
@@ -31,10 +38,10 @@ class SEOAIAction extends Actions
         ];
     }
 
-    private static function invoke(Set $set, TranslatablePage $page): void
+    private static function invoke(Set $set, Model&HasPageAttributes&HasContentBlocks $record): void
     {
-        $title = $page->title;
-        $html = $page->getSearchableBlockContent(false);
+        $title = $record->title;
+        $html = $record->getSearchableBlockContent(false);
 
         try {
             $response = OpenAI::chat()->create(static::getAIParameters($title, $html));
@@ -42,23 +49,30 @@ class SEOAIAction extends Actions
 
             if ($result) {
                 $result = json_decode($result);
-                $set('seo_title', $result->title);
-                $set('seo_description', $result->description);
-                $set('seo_keywords', array_map('trim', explode(',', $result->tags) ?? []));
+                if($result->title) {
+                    $set(SEOTitleField::getFieldName(), $result->title);
+                }
+                if($result->description) {
+                    $set(SEODescriptionField::getFieldName(), $result->description);
+                }
+                if($result->tags) {
+                    $set(SEOKeywordsField::FIELD, array_map('trim', explode(',', $result->tags) ?? []));
+                }
 
                 Notification::make()
-                    ->title('Generated SEO fields using AI!')
+                    ->title(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.generated_success'))
                     ->success()
                     ->send();
             } else {
                 Notification::make()
-                    ->title('No response from AI..')
+                    ->title(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.generated_no_response'))
                     ->danger()
                     ->send();
             }
-        } catch (\Throwable) {
+        } catch (\Throwable $t) {
+            Log::error($t);
             Notification::make()
-                ->title('Something went wrong, sorry :(')
+                ->title(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.generated_error'))
                 ->danger()
                 ->send();
         }
@@ -66,20 +80,17 @@ class SEOAIAction extends Actions
 
     public static function create(): static
     {
-        return static::make([
-            Action::make('AIseo')
-                ->icon('heroicon-o-sparkles')
-                ->disabled(function ($record) {
-                    return ! $record || ! config('openai.api_key');
-                })
-                ->label(function ($record) {
-                    if (! $record) {
-                        return 'AI-ify (only on edit)';
-                    }
-
-                    return 'AI-ify';
-                })
-                ->action(fn (Set $set, TranslatablePage $page) => static::invoke($set, $page)),
-        ]);
+        return static::make(self::NAME)
+            ->icon('heroicon-o-sparkles')
+            ->disabled(function ($record) {
+                return ! $record || ! config('openai.api_key');
+            })
+            ->label(function ($record) {
+                if (! $record) {
+                    return trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_action.seo_ai_action.name_on_create');
+                }
+                return trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_action.seo_ai_action.name');
+            })
+            ->action(fn (Set $set, Model&HasPageAttributes&HasContentBlocks $record) => static::invoke($set, $record));
     }
 }

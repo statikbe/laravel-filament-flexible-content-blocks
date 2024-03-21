@@ -158,4 +158,11 @@ return [
 
     'form_component.parent_lbl' => 'Ouderpagina',
     'form_component.parent_help' => 'Voeg een pagina toe waaronder deze pagina zou moeten verschijnen. De slug van de ouderpagina wordt voor de slug van deze pagina geplaatst in de URL.',
+
+    'form_action.seo_ai_action.name' => 'Genereer SEO-data',
+    'form_action.seo_ai_action,name_on_create' => 'Genereer SEO-data (alleen bij editeren!)',
+    'form_action.seo_ai_action.generated_success' => 'De SEO-velden zijn gegenereerd!',
+    'form_action.seo_ai_action.generated_no_response' => 'Er kwam geen antwoord van de AI-service...',
+    'form_action.seo_ai_action.generated_error' => 'Er liep iets fout bij het contacteren van de AI-service. Probeer het later opnieuw.',
+
 ];

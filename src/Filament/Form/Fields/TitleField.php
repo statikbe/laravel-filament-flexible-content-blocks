@@ -20,7 +20,7 @@ class TitleField extends TextInput
             ->required($required);
     }
 
-    protected static function getFieldName(): string
+    public static function getFieldName(): string
     {
         return 'title';
     }

@@ -19,7 +19,7 @@ class DescriptionField extends RichEditor
             ->addsTranslatableHint();
     }
 
-    protected static function getFieldName(): string
+    public static function getFieldName(): string
     {
         return 'description';
     }
