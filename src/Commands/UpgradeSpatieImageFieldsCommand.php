@@ -77,8 +77,10 @@ class UpgradeSpatieImageFieldsCommand extends Command implements PromptsForMissi
                     foreach ($block['data']['cards'] as $card) {
                         if (! isset($card[BlockIdField::FIELD])) {
                             $card[BlockIdField::FIELD] = BlockIdField::generateBlockId();
-                            if (isset($card['image']) && $card['image']) {
-                                $this->updateMedia($block['data'][$imageField], $block['data'][BlockIdField::FIELD]);
+                            foreach ($this->imageFields as $imageField) {
+                                if (isset($card[$imageField]) && $card[$imageField]) {
+                                    $this->updateMedia($card[$imageField], $card[BlockIdField::FIELD]);
+                                }
                             }
                         }
                     }
