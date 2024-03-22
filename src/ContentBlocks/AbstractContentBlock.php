@@ -38,7 +38,7 @@ abstract class AbstractContentBlock extends Component
         $this->blockData = $blockData;
 
         //block id:
-        if (! $this->blockData['block_id']) {
+        if (! isset($this->blockData['block_id']) || ! $this->blockData['block_id']) {
             //initialise the ID for a new block, then never change it.
             $this->blockData['block_id'] = BlockIdField::generateBlockId();
         }

@@ -313,6 +313,12 @@ We are dreaming up some exciting new AI-based features to ease content creation 
 There is a form action `SEOAIAction` that generates an SEO title, description and tags based on the model's content.
 
 To enable this, you should complete the configuration of [the OpenAI library](https://github.com/openai-php/laravel).
+Do not forget to run the install command: 
+
+```
+php artisan openai:install
+``` 
+
 Create an OpenAI API key and set this up in the `.env` file of your project:
 
 ```shell

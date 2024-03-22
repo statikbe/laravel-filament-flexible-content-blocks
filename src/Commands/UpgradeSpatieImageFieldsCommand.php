@@ -32,7 +32,7 @@ class UpgradeSpatieImageFieldsCommand extends Command implements PromptsForMissi
             $this->imageFields[] = $customImage;
         }
 
-        $model::orderBy('id', 'desc')->limit(2)->chunk(2, function (Collection $models) {
+        $model::orderBy('id', 'desc')->chunk(50, function (Collection $models) {
             foreach ($models as $model) {
                 /* @var HasContentBlocks $model */
                 //check if the model is translated:
@@ -40,7 +40,6 @@ class UpgradeSpatieImageFieldsCommand extends Command implements PromptsForMissi
                     foreach (FilamentFlexibleContentBlocks::getLocales() as $locale) {
                         $contentBlocks = $model->getTranslation('content_blocks', $locale);
                         $upgradedContentBlocks = $this->upgradeContentBlocks($contentBlocks);
-                        //$this->comment(json_encode($upgradedContentBlocks, JSON_PRETTY_PRINT));
 
                         $model->setTranslation('content_blocks', $locale, $upgradedContentBlocks);
                         $model->save();
@@ -53,7 +52,6 @@ class UpgradeSpatieImageFieldsCommand extends Command implements PromptsForMissi
                 }
 
                 $this->comment("Model {$model->id} upgraded.");
-                //$this->comment(json_encode($model->content_blocks , JSON_PRETTY_PRINT));
             }
         });
 
