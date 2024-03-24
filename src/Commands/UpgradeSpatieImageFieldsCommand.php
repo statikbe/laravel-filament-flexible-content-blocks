@@ -118,7 +118,7 @@ class UpgradeSpatieImageFieldsCommand extends Command implements PromptsForMissi
             if ($media) {
                 //Check if there is already a block assigned. If so, this means it is already used by another block.
                 //This is possible because of the old copy content blocks button to other locales, that did not copy media for each locale.
-                if($media->getCustomProperty('block')){
+                if ($media->getCustomProperty('block')) {
                     //make a copy of the media:
                     $media = $media->copy($model, $media->collection_name, $media->disk);
                 }
@@ -129,6 +129,7 @@ class UpgradeSpatieImageFieldsCommand extends Command implements PromptsForMissi
                 return $media->uuid;
             }
         }
+
         return $mediaUuid;
     }
 }
