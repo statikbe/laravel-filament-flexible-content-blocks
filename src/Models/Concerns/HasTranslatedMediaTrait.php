@@ -51,8 +51,8 @@ trait HasTranslatedMediaTrait
             ->get();
 
         return $translatableMedia->mapToGroups(function ($item, int $key) {
-                return [$item->collection_name => $item->uuid];
-            })
+            return [$item->collection_name => $item->uuid];
+        })
             ->mapWithKeys(function ($item, string $key) {
                 //make sure the uuids are also available as key. the keys are used to delete unused media files.
                 return [$key => $item->combine($item)];
