@@ -27,6 +27,11 @@ The key goals of this package are:
 - support content translations
 - provide a start set of content blocks for most general requirements
 
+## Upgrade to v1
+
+If you need to upgrade to v1.0.0 it is **IMPORTANT** to [read the upgrade guide thoroughly](./UPGRADE.md), because the data model of the
+content blocks has changed and needs to be upgraded via a command.
+
 ## Installation
 
 You can install the package via composer:
@@ -57,11 +62,6 @@ php artisan vendor:publish --tag="filament-flexible-content-blocks-migrations"
 #first edit the migrations and then run:
 php artisan migrate
 ```
-
-## Upgrading
-
-If you need to upgrade to v1.0.0 it is **IMPORTANT** to [read the upgrade guide thoroughly](./UPGRADE.md), because the data model of the 
-content blocks has changed and needs to be upgraded via a command.
 
 ## Dependencies
 
