@@ -103,8 +103,8 @@ trait TranslatableWithMedia
     {
         $transformedBlocks = [];
         foreach ($contentBlocks as $key => &$contentBlock) {
-            if(is_array($contentBlock)) {
-                if(is_int($key)){
+            if (is_array($contentBlock)) {
+                if (is_int($key)) {
                     $key = Str::uuid()->toString();
                 }
                 $transformedBlocks[$key] = $this->transformOneContentBlocksImagesToArray($contentBlock);
