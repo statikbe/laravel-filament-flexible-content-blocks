@@ -5,6 +5,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Pages\CreateRecord\Con
 use Filament\Resources\Pages\CreateRecord\Concerns\Translatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\ContentBlocksField;
 
@@ -99,11 +100,17 @@ trait TranslatableWithMedia
 
     //TODO remove double code from other TranslatableWithMedia:
     private function transformContentBlocksImagesToArray(array $contentBlocks): array {
-        foreach($contentBlocks as &$contentBlock){
-            $this->transformOneContentBlocksImagesToArray($contentBlock);
+        $transformedBlocks = [];
+        foreach ($contentBlocks as $key => &$contentBlock) {
+            if(is_array($contentBlock)) {
+                if(is_int($key)){
+                    $key = Str::uuid()->toString();
+                }
+                $transformedBlocks[$key] = $this->transformOneContentBlocksImagesToArray($contentBlock);
+            }
         }
 
-        return $contentBlocks;
+        return $transformedBlocks;
     }
 
     private function transformOneContentBlocksImagesToArray(array &$contentBlock): array {
