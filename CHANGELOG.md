@@ -2,6 +2,18 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v1.0.0 - 2024-03-28
+
+**IMPORTANT:** If you are upgrading from an older version, the content blocks data structure needs to be migrated. Please read the [upgrade guide](https://github.com/statikbe/laravel-filament-flexible-content-blocks/blob/main/UPGRADE.md).
+
+- images in the content blocks are now more thightly linked to the block
+- translatable and block spatie image fields are now making use of the refactored filament base classes
+- fixed bug in translatable spatie image field that deleted other images of other media collections.
+- AI button the generate SEO fields with OpenAI (see docs for setup)
+- several bugs have been handled
+
+No Laravel 11 support yet :-(. The next step is to refactor to the latest spatie-image lib to be able to support Laravel 11.
+
 ## v0.2.12 - 2024-01-24
 
 - fixes bug in block image field.
