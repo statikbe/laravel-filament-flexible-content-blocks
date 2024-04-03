@@ -4,6 +4,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Actions;
 
 use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -140,7 +141,16 @@ class CopyContentBlocksToLocalesActionHandler
         foreach ($this->imageFields as $imageField) {
             if (isset($dataBlock[$imageField])) {
                 $blockId = $dataBlock[BlockIdField::FIELD] ?? null;
-                $dataBlock[$imageField] = $this->copyImage($record, $dataBlock[$imageField], $blockId);
+                $imageId = $dataBlock[$imageField];
+                if(is_array($imageId)){
+                    $imageId = array_keys($imageId);
+                    //for multiple image upload, keep it the array, otherwise only save the single UUID:
+                    if(count($imageId) === 1){
+                        $imageId = Arr::first($imageId);
+                    }
+                    //TODO support fields with multiple images
+                }
+                $dataBlock[$imageField] = $this->copyImage($record, $imageId, $blockId);
             }
         }
 

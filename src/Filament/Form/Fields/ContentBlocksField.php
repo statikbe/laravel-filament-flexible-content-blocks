@@ -46,9 +46,9 @@ class ContentBlocksField extends Builder
     public function getChildComponentContainers(bool $withHidden = false): array
     {
         return collect($this->getState())
-            ->filter(function (array $itemData): bool {
+            ->filter(function ($itemData): bool {
                 //extra condition to make sure $itemData has a type:
-                return array_key_exists('type', $itemData) && $this->hasBlock($itemData['type']);
+                return is_array($itemData) && array_key_exists('type', $itemData) && $this->hasBlock($itemData['type']);
             })
             ->map(
                 fn (array $itemData, $itemIndex): ComponentContainer => $this

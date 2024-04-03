@@ -2,11 +2,15 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data;
 
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Statikbe\FilamentFlexibleContentBlocks\Exceptions\CallToActionNotDefinedException;
 use Statikbe\FilamentFlexibleContentBlocks\Exceptions\LinkableModelNotFoundException;
 
 class CardData
 {
+    public string $imageId;
+
     /**
      * @param  array<CallToActionData>|null  $callToActions
      */
@@ -14,11 +18,20 @@ class CardData
         public ?string $title,
         public ?string $text,
         public ?array $callToActions,
-        public ?string $imageId,
+        string|array|null $imageId,
         public ?string $imageUrl = null,
         public ?string $imageHtml = null,
         public ?string $blockStyle = null,
     ) {
+        //clean up image id if it was saved as an array with keys uuid:
+        if(is_array($imageId)){
+            $this->imageId = Arr::first(array_keys($imageId));
+            //if the id is not a UUID, let's try the values:
+            if(!Str::isUuid($this->imageId)){
+                $this->imageId = Arr::first(array_values($imageId));
+            }
+        }
+        else $this->imageId = $imageId;
     }
 
     public function hasImage(): bool
