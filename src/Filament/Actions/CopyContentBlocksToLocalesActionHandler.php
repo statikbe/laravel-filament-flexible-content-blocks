@@ -142,10 +142,10 @@ class CopyContentBlocksToLocalesActionHandler
             if (isset($dataBlock[$imageField])) {
                 $blockId = $dataBlock[BlockIdField::FIELD] ?? null;
                 $imageId = $dataBlock[$imageField];
-                if(is_array($imageId)){
+                if (is_array($imageId)) {
                     $imageId = array_keys($imageId);
                     //for multiple image upload, keep it the array, otherwise only save the single UUID:
-                    if(count($imageId) === 1){
+                    if (count($imageId) === 1) {
                         $imageId = Arr::first($imageId);
                     }
                     //TODO support fields with multiple images
