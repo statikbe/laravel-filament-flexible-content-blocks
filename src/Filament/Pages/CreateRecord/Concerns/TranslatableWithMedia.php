@@ -78,7 +78,7 @@ trait TranslatableWithMedia
         ];
 
         //handle images in content blocks field:
-        if(isset($this->data[ContentBlocksField::FIELD])){
+        if (isset($this->data[ContentBlocksField::FIELD])) {
             $this->data[ContentBlocksField::FIELD] = $this->transformContentBlocksImagesToArray($this->data[ContentBlocksField::FIELD]);
         }
 
@@ -99,7 +99,8 @@ trait TranslatableWithMedia
     }
 
     //TODO remove double code from other TranslatableWithMedia:
-    private function transformContentBlocksImagesToArray(array $contentBlocks): array {
+    private function transformContentBlocksImagesToArray(array $contentBlocks): array
+    {
         $transformedBlocks = [];
         foreach ($contentBlocks as $key => &$contentBlock) {
             if(is_array($contentBlock)) {
@@ -113,15 +114,16 @@ trait TranslatableWithMedia
         return $transformedBlocks;
     }
 
-    private function transformOneContentBlocksImagesToArray(array &$contentBlock): array {
+    private function transformOneContentBlocksImagesToArray(array &$contentBlock): array
+    {
         $dataBlock = &$contentBlock;
-        if(isset($contentBlock['data'])){
+        if (isset($contentBlock['data'])) {
             $dataBlock = &$contentBlock['data'];
         }
 
         //TODO configure image fields
         $fields = ['image'];
-        foreach($fields as $field){
+        foreach ($fields as $field) {
             if (isset($dataBlock[$field]) && ! is_array($dataBlock[$field])) {
                 //put file fields in an array:
                 $dataBlock[$field] = [$dataBlock[$field] => $dataBlock[$field]];

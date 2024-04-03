@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v1.0.4 - 2024-04-03
+
+- Convert image uuids to arrays in content blocks when switching the locale
+
 ## v1.0.3 - 2024-04-03
 
 - Add block id field to CardData so it is properly persisted.
