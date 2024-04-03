@@ -6,6 +6,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Statikbe\FilamentFlexibleContentBlocks\Exceptions\CallToActionNotDefinedException;
 use Statikbe\FilamentFlexibleContentBlocks\Exceptions\LinkableModelNotFoundException;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\BlockIdField;
 
 class CardData
 {
@@ -15,6 +16,7 @@ class CardData
      * @param  array<CallToActionData>|null  $callToActions
      */
     public function __construct(
+        public string $block_id,
         public ?string $title,
         public ?string $text,
         public ?array $callToActions,
@@ -57,6 +59,7 @@ class CardData
         }
 
         return new self(
+            block_id: $cardBlockData[BlockIdField::FIELD] ?? BlockIdField::generateBlockId(),
             title: $cardBlockData['title'] ?? null,
             text: $cardBlockData['text'] ?? null,
             callToActions: $callToActions,
