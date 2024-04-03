@@ -9,7 +9,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Exceptions\LinkableModelNotFoundExcep
 
 class CardData
 {
-    public string $imageId;
+    public ?string $imageId;
 
     /**
      * @param  array<CallToActionData>|null  $callToActions
