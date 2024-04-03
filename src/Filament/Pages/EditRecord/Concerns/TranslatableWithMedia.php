@@ -4,6 +4,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Pages\EditRecord\Conce
 
 use Filament\Resources\Pages\EditRecord\Concerns\Translatable;
 use Illuminate\Support\Arr;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\ContentBlocksField;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasTranslatableMedia;
 
 trait TranslatableWithMedia
@@ -39,6 +40,11 @@ trait TranslatableWithMedia
             ...$this->otherLocaleData[$this->activeLocale] ?? [],
         ];
 
+        //handle images in content blocks field:
+        if(isset($this->data[ContentBlocksField::FIELD])){
+            $this->data[ContentBlocksField::FIELD] = $this->transformContentBlocksImagesToArray($this->data[ContentBlocksField::FIELD]);
+        }
+
         unset($this->otherLocaleData[$this->activeLocale]);
     }
 
@@ -52,5 +58,38 @@ trait TranslatableWithMedia
         }
 
         return $translatableAttributes;
+    }
+
+    //TODO remove double code from other TranslatableWithMedia:
+    private function transformContentBlocksImagesToArray(array $contentBlocks): array {
+        foreach($contentBlocks as &$contentBlock){
+            $this->transformOneContentBlocksImagesToArray($contentBlock);
+        }
+
+        return $contentBlocks;
+    }
+
+    private function transformOneContentBlocksImagesToArray(array &$contentBlock): array {
+        $dataBlock = &$contentBlock;
+        if(isset($contentBlock['data'])){
+            $dataBlock = &$contentBlock['data'];
+        }
+
+        //TODO configure image fields
+        $fields = ['image'];
+        foreach($fields as $field){
+            if (isset($dataBlock[$field]) && ! is_array($dataBlock[$field])) {
+                //put file fields in an array:
+                $dataBlock[$field] = [$dataBlock[$field] => $dataBlock[$field]];
+            }
+        }
+
+        foreach ($dataBlock as $var => $data) {
+            if (is_array($data) && ! in_array($var, $fields)) {
+                $dataBlock[$var] = $this->transformOneContentBlocksImagesToArray($data);
+            }
+        }
+
+        return $contentBlock;
     }
 }
