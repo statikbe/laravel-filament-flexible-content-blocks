@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v1.0.1 - 2024-04-03
+
+- Handle dirty builder blocks. Sometimes the builder blocks are saved with image id as arrays, instead of a UUID. This fix makes the code typing more resistant to this.
+
 ## v1.0.0 - 2024-03-28
 
 **IMPORTANT:** If you are upgrading from an older version, the content blocks data structure needs to be migrated. Please read the [upgrade guide](https://github.com/statikbe/laravel-filament-flexible-content-blocks/blob/main/UPGRADE.md).
