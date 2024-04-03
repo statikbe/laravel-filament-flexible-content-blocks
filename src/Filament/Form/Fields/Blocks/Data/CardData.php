@@ -24,14 +24,15 @@ class CardData
         public ?string $blockStyle = null,
     ) {
         //clean up image id if it was saved as an array with keys uuid:
-        if(is_array($imageId)){
+        if (is_array($imageId)) {
             $this->imageId = Arr::first(array_keys($imageId));
             //if the id is not a UUID, let's try the values:
-            if(!Str::isUuid($this->imageId)){
+            if (! Str::isUuid($this->imageId)) {
                 $this->imageId = Arr::first(array_values($imageId));
             }
+        } else {
+            $this->imageId = $imageId;
         }
-        else $this->imageId = $imageId;
     }
 
     public function hasImage(): bool
