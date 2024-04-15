@@ -22,7 +22,7 @@ php artisan filament-flexible-content-blocks:upgrade-images \\App\\Models\\Page
 
 The command will add `block_id` fields to each block and card of the cards block. And link the images to the block.
 
-In case you have implemented custom blocks with images that are stored in other form field name then `image` (e.g. photo), 
+In case you have implemented custom blocks with images that are stored in other form field name than `image` (e.g. photo), 
 you can add the command flag `--customimage=photo` and this field will also be migrated.
 
 If you have a custom block with a repeater with images inside the repeater blocks, you need to extend the command a bit, 
