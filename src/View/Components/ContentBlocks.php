@@ -31,7 +31,7 @@ class ContentBlocks extends Component
         $blocks = [];
 
         foreach ($page->content_blocks as $blockData) {
-            if ($blockClassIndex->has($blockData['type'])) {
+            if (isset($blockData['type']) && $blockClassIndex->has($blockData['type'])) {
                 $blockClass = $blockClassIndex->get($blockData['type']);
                 $blocks[] = new $blockClass($page, $blockData['data']);
             }
