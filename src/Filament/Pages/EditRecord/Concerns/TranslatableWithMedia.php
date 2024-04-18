@@ -3,14 +3,77 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Pages\EditRecord\Concerns;
 
 use Filament\Resources\Pages\EditRecord\Concerns\Translatable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\ContentBlocksField;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasTranslatableMedia;
 
 trait TranslatableWithMedia
 {
     use Translatable;
+
+    /**
+     * Temporary overwrite until Filament is fixed.
+     * @inheritDoc
+     */
+    protected function handleRecordUpdate(Model $record, array $data): Model
+    {
+        $translatableAttributes = static::getResource()::getTranslatableAttributes();
+
+        $record->fill(Arr::except($data, $translatableAttributes));
+
+        foreach (Arr::only($data, $translatableAttributes) as $key => $value) {
+            $record->setTranslation($key, $this->activeLocale, $value);
+        }
+
+        $originalData = $this->data;
+
+        $existingLocales = null;
+
+        foreach ($this->otherLocaleData as $locale => $localeData) {
+            $existingLocales ??= collect($translatableAttributes)
+                ->map(fn (string $attribute): array => array_keys($record->getTranslations($attribute)))
+                ->flatten()
+                ->unique()
+                ->all();
+
+            //CHANGE
+            $this->form->fill([
+                ...$this->data,
+                ...$localeData,
+            ]);
+
+            try {
+                $this->form->validate();
+            } catch (ValidationException $exception) {
+                if (! array_key_exists($locale, $existingLocales)) {
+                    continue;
+                }
+
+                $this->setActiveLocale($locale);
+
+                throw $exception;
+            }
+
+            //$dehydratedLocaleData = $this->form->dehydrateState($localeData);
+            //CHANGE:
+            $localeData = Arr::only($this->form->getState(), array_keys($localeData));
+
+            $localeData = $this->mutateFormDataBeforeSave($localeData);
+
+            foreach (Arr::only($localeData, $translatableAttributes) as $key => $value) {
+                $record->setTranslation($key, $locale, $value);
+            }
+        }
+
+        $this->data = $originalData;
+
+        $record->save();
+
+        return $record;
+    }
 
     /**
      * This function is overridden to be able to update the state of translatable media when the form locale switches.
@@ -35,16 +98,16 @@ trait TranslatableWithMedia
 
         $this->otherLocaleData[$this->oldActiveLocale] = Arr::only($this->data, $translatableAttributes);
 
-        $this->data = [
+        $this->form->fill([
             ...$translatableMedia,
             ...Arr::except($this->data, $translatableAttributes),
             ...$this->otherLocaleData[$this->activeLocale] ?? [],
-        ];
+        ]);
 
         //handle images in content blocks field:
-        if (isset($this->data[ContentBlocksField::FIELD])) {
+        /*if (isset($this->data[ContentBlocksField::FIELD])) {
             $this->data[ContentBlocksField::FIELD] = $this->transformContentBlocksImagesToArray($this->data[ContentBlocksField::FIELD]);
-        }
+        }*/
 
         unset($this->otherLocaleData[$this->activeLocale]);
     }

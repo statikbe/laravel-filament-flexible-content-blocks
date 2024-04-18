@@ -28,10 +28,10 @@ trait TranslatableWithMedia
         $originalData = $this->data;
 
         foreach ($this->otherLocaleData as $locale => $localeData) {
-            $this->data = [
+            $this->form->fill([
                 ...$this->data,
                 ...$localeData,
-            ];
+            ]);
 
             try {
                 $this->form->validate();
@@ -39,6 +39,7 @@ trait TranslatableWithMedia
                 continue;
             }
 
+            $localeData = Arr::only($this->form->getState(), array_keys($localeData));
             $localeData = $this->mutateFormDataBeforeCreate($localeData);
 
             foreach (Arr::only($localeData, $translatableAttributes) as $key => $value) {
@@ -72,15 +73,15 @@ trait TranslatableWithMedia
 
         $this->otherLocaleData[$this->oldActiveLocale] = Arr::only($this->data, $translatableAttributes);
 
-        $this->data = [
+        $this->form->fill([
             ...Arr::except($this->data, $translatableAttributes),
             ...$this->otherLocaleData[$this->activeLocale] ?? [],
-        ];
+        ]);
 
         //handle images in content blocks field:
-        if (isset($this->data[ContentBlocksField::FIELD])) {
+        /*if (isset($this->data[ContentBlocksField::FIELD])) {
             $this->data[ContentBlocksField::FIELD] = $this->transformContentBlocksImagesToArray($this->data[ContentBlocksField::FIELD]);
-        }
+        }*/
 
         unset($this->otherLocaleData[$this->activeLocale]);
     }
