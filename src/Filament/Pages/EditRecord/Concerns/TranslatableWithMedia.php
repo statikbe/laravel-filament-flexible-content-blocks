@@ -16,7 +16,7 @@ trait TranslatableWithMedia
 
     /**
      * Temporary overwrite until Filament is fixed.
-     * @inheritDoc
+     * {@inheritDoc}
      */
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
