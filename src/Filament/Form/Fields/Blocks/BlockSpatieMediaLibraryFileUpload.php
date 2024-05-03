@@ -67,6 +67,44 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
 
         //Make sure the uuid of the image is added to the form data
         $this->dehydrated(true);
+
+        //TODO remove after filament release >3.2.72
+        $this->getUploadedFileUsing(static function (SpatieMediaLibraryFileUpload $component, string $file): ?array {
+            if (! $component->getRecord()) {
+                return null;
+            }
+
+            /** @var ?Media $media */
+            $media = $component->getRecord()->getRelationValue('media')->firstWhere('uuid', $file);
+
+            $url = null;
+
+            if ($component->getVisibility() === 'private') {
+                $conversion = $component->getConversion();
+
+                try {
+                    $url = $media?->getTemporaryUrl(
+                        now()->addMinutes(5),
+                        (filled($conversion) && $media->hasGeneratedConversion($conversion)) ? $conversion : '',
+                    );
+                } catch (Throwable $exception) {
+                    // This driver does not support creating temporary URLs.
+                }
+            }
+
+            if ($component->getConversion() && $media?->hasGeneratedConversion($component->getConversion())) {
+                $url ??= $media->getUrl($component->getConversion());
+            }
+
+            $url ??= $media?->getUrl();
+
+            return [
+                'name' => $media?->getAttributeValue('name') ?? $media?->getAttributeValue('file_name'),
+                'size' => $media?->getAttributeValue('size'),
+                'type' => $media?->getAttributeValue('mime_type'),
+                'url' => $url,
+            ];
+        });
     }
 
     public function getState(): mixed

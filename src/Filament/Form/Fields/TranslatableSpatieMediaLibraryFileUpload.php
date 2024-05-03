@@ -9,6 +9,7 @@ use Livewire\Component as Livewire;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Concerns\HasImageEditor;
+use Throwable;
 
 class TranslatableSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
 {
@@ -52,6 +53,44 @@ class TranslatableSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpl
                 ->toArray();
 
             $component->state($media);
+        });
+
+        //TODO remove after filament release >3.2.72
+        $this->getUploadedFileUsing(static function (SpatieMediaLibraryFileUpload $component, string $file): ?array {
+            if (! $component->getRecord()) {
+                return null;
+            }
+
+            /** @var ?Media $media */
+            $media = $component->getRecord()->getRelationValue('media')->firstWhere('uuid', $file);
+
+            $url = null;
+
+            if ($component->getVisibility() === 'private') {
+                $conversion = $component->getConversion();
+
+                try {
+                    $url = $media?->getTemporaryUrl(
+                        now()->addMinutes(5),
+                        (filled($conversion) && $media->hasGeneratedConversion($conversion)) ? $conversion : '',
+                    );
+                } catch (Throwable $exception) {
+                    // This driver does not support creating temporary URLs.
+                }
+            }
+
+            if ($component->getConversion() && $media?->hasGeneratedConversion($component->getConversion())) {
+                $url ??= $media->getUrl($component->getConversion());
+            }
+
+            $url ??= $media?->getUrl();
+
+            return [
+                'name' => $media?->getAttributeValue('name') ?? $media?->getAttributeValue('file_name'),
+                'size' => $media?->getAttributeValue('size'),
+                'type' => $media?->getAttributeValue('mime_type'),
+                'url' => $url,
+            ];
         });
     }
 
