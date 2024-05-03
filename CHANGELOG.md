@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v1.0.7 - 2024-05-03
+
+- Fix urgent bug in SpatieMediaLibraryFileUpload when media is null. This fix should be removed once the PR is released.
+
 ## v1.0.6 - 2024-04-19
 
 - Fix saving of content blocks: the hydrated data was json encoded, which changed the ordering of blocks and cards.
