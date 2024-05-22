@@ -79,12 +79,10 @@ return [
         'models' => [
             'default' => [
                 'seo_image' => [
-                    'seo_image' => [
-                        'fit' => Fit::Crop,
-                        'width' => 1200,
-                        'height' => 630,
-                        'responsive' => true,
-                    ],
+                    'seo_image' => function(\Spatie\MediaLibrary\Conversions\Conversion $conversion) {
+                        return $conversion->fit(Fit::Crop, 1200, 630)
+                            ->withResponsiveImages();
+                    },
                 ],
                 'overview_image' => [
                     'overview_image' => [

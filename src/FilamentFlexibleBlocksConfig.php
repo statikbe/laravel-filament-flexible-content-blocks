@@ -170,8 +170,13 @@ class FilamentFlexibleBlocksConfig
         return $conversion;
     }
 
-    private static function mergeConfiguredImageConversion(array $configuredConversion, Conversion &$conversion): Conversion
+    private static function mergeConfiguredImageConversion(array|callable $configuredConversion, Conversion &$conversion): Conversion
     {
+        if(is_callable($configuredConversion)){
+            return $configuredConversion($conversion);
+        }
+
+        //handle array configuration:
         $alreadyDoneConversions = [];
         //specific cases for specific method calls on the conversion object:
         if (isset($configuredConversion['fit']) && isset($configuredConversion['width']) && isset($configuredConversion['height'])) {
