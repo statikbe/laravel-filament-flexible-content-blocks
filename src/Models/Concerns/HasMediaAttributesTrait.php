@@ -2,7 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 
-use Spatie\Image\Manipulations;
+use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -23,7 +23,7 @@ trait HasMediaAttributesTrait
     public function addFilamentThumbnailMediaConversion(): void
     {
         $this->addMediaConversion('thumbnail')
-            ->fit(Manipulations::FIT_CONTAIN, 400, 400);
+            ->fit(Fit::Contain, 400, 400);
     }
 
     /**

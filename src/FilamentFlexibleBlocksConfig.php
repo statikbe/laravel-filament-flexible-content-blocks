@@ -2,12 +2,15 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks;
 
+use Exception;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Routing\Route;
 use Illuminate\Routing\RouteCollection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
+use Spatie\Image\Enums\CropPosition;
+use Spatie\Image\Exceptions\InvalidManipulation;
 use Spatie\MediaLibrary\Conversions\Conversion;
 use Spatie\MediaLibrary\HasMedia;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
@@ -26,9 +29,14 @@ use Statikbe\FilamentFlexibleContentBlocks\Replacer\TextParameterReplacer;
 
 class FilamentFlexibleBlocksConfig
 {
+    /**
+     * @param SpatieMediaLibraryFileUpload $fileUpload
+     * @return SpatieMediaLibraryFileUpload
+     * @throws Exception
+     */
     public static function getImageEditorConfig(SpatieMediaLibraryFileUpload $fileUpload): SpatieMediaLibraryFileUpload
     {
-        $imageEditorConfig = config('filament-flexible-content-blocks.image_editor', null);
+        $imageEditorConfig = config('filament-flexible-content-blocks.image_editor');
 
         if ($imageEditorConfig && isset($imageEditorConfig['enabled']) && $imageEditorConfig['enabled']) {
             $fileUpload->imageEditor();
@@ -63,7 +71,7 @@ class FilamentFlexibleBlocksConfig
      */
     public static function getTextParameterReplacer(): ?string
     {
-        return config('filament-flexible-content-blocks.text_parameter_replacer', null);
+        return config('filament-flexible-content-blocks.text_parameter_replacer');
     }
 
     /**
@@ -170,6 +178,19 @@ class FilamentFlexibleBlocksConfig
             $conversion->fit($configuredConversion['fit'], $configuredConversion['width'], $configuredConversion['height']);
             $alreadyDoneConversions = ['fit', 'width', 'height'];
         }
+        if (isset($configuredConversion['crop']) && isset($configuredConversion['width']) && isset($configuredConversion['height'])) {
+            $conversion->fit($configuredConversion['fit'], $configuredConversion['width'], $configuredConversion['height'], $configuredConversion['cropPosition'] ?? CropPosition::Center);
+            $alreadyDoneConversions = ['crop', 'width', 'height', 'cropPosition'];
+        }
+        if (isset($configuredConversion['manualCrop']) && isset($configuredConversion['width']) &&
+            isset($configuredConversion['height']) && isset($configuredConversion['x']) && isset($configuredConversion['y'])) {
+            $conversion->manualCrop($configuredConversion['width'], $configuredConversion['height'], $configuredConversion['x'], $configuredConversion['y']);
+            $alreadyDoneConversions = ['manualCrop', 'width', 'height', 'x', 'y'];
+        }
+        if (isset($configuredConversion['focalCrop']) && isset($configuredConversion['width']) && isset($configuredConversion['height'])) {
+            $conversion->focalCrop($configuredConversion['width'], $configuredConversion['height'], $configuredConversion['cropCenterX'] ?? null, $configuredConversion['cropCenterY'] ?? null);
+            $alreadyDoneConversions = ['focalCrop', 'width', 'height', 'cropCenterX', 'cropCenterY'];
+        }
         if (isset($configuredConversion['responsive']) && $configuredConversion['responsive']) {
             $conversion->withResponsiveImages();
             $alreadyDoneConversions[] = 'responsive';
@@ -189,7 +210,8 @@ class FilamentFlexibleBlocksConfig
     }
 
     /**
-     * @param  class-string<AbstractContentBlock>  $blockClass
+     * @param class-string<AbstractContentBlock> $blockClass
+     * @throws InvalidManipulation
      */
     public static function addExtraFlexibleBlockImageConversions(string $blockClass, string $collectionName, Model&HasMedia $record): void
     {
@@ -198,7 +220,8 @@ class FilamentFlexibleBlocksConfig
     }
 
     /**
-     * @param  class-string<Model>  $modelClass
+     * @param class-string<Model> $modelClass
+     * @throws InvalidManipulation
      */
     public static function addExtraModelImageConversions(string $modelClass, string $collectionName, Model&HasMedia $record): void
     {
@@ -209,7 +232,7 @@ class FilamentFlexibleBlocksConfig
     /**
      * @param  array<string, array>  $configuredConversions
      *
-     * @throws \Spatie\Image\Exceptions\InvalidManipulation
+     * @throws InvalidManipulation
      */
     private static function addExtraImageConversions(array $configuredConversions, string $collectionName, Model&HasMedia $record): void
     {

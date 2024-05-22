@@ -3,11 +3,12 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Spatie\Image\Manipulations;
+use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Enums\ImageFormat;
 
 /**
  * @property string|null $overview_title
@@ -57,8 +58,8 @@ trait HasOverviewAttributesTrait
             ->registerMediaConversions(function (?Media $media) {
                 $conversion = $this->addMediaConversion($this->getOverviewImageConversionName())
                     ->withResponsiveImages()
-                    ->fit(Manipulations::FIT_CROP, 600, 600)
-                    ->format(Manipulations::FORMAT_WEBP);
+                    ->fit(Fit::Crop, 600, 600)
+                    ->format(ImageFormat::WEBP->value);
                 FilamentFlexibleBlocksConfig::mergeConfiguredModelImageConversion(static::class, $this->getOverviewImageCollection(), $this->getOverviewImageConversionName(), $conversion);
                 FilamentFlexibleBlocksConfig::addExtraModelImageConversions(static::class, $this->getOverviewImageCollection(), $this);
 

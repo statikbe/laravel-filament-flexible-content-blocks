@@ -2,13 +2,14 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns;
 
-use Spatie\Image\Manipulations;
+use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\Conversions\Conversion;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Enums\ImageFormat;
 
 trait HasImage
 {
@@ -66,20 +67,20 @@ trait HasImage
 
     protected static function addCropImageConversion(HasMedia&HasMediaAttributes $record, int $width, int $height): Conversion
     {
-        return static::addImageConversion($record, self::CONVERSION_CROP, Manipulations::FIT_CROP, $width, $height);
+        return static::addImageConversion($record, self::CONVERSION_CROP, Fit::Crop, $width, $height);
     }
 
     protected static function addContainImageConversion(HasMedia&HasMediaAttributes $record, int $width, int $height): Conversion
     {
-        return static::addImageConversion($record, self::CONVERSION_CONTAIN, Manipulations::FIT_CONTAIN, $width, $height);
+        return static::addImageConversion($record, self::CONVERSION_CONTAIN, Fit::Contain, $width, $height);
     }
 
-    protected static function addImageConversion(HasMedia&HasMediaAttributes $record, string $conversionName, string $fitType, int $width, int $height): Conversion
+    protected static function addImageConversion(HasMedia&HasMediaAttributes $record, string $conversionName, Fit $fitType, int $width, int $height): Conversion
     {
         $conversion = $record->addMediaConversion($conversionName)
             ->withResponsiveImages()
             ->fit($fitType, $width, $height)
-            ->format(Manipulations::FORMAT_WEBP);
+            ->format(ImageFormat::WEBP->value);
         FilamentFlexibleBlocksConfig::mergeConfiguredFlexibleBlockImageConversion(static::class, static::getName(), $conversionName, $conversion);
         FilamentFlexibleBlocksConfig::addExtraFlexibleBlockImageConversions(static::class, static::getName(), $record);
 

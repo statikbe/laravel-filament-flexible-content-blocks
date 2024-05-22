@@ -3,10 +3,11 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Spatie\Image\Manipulations;
+use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Enums\ImageFormat;
 
 /**
  * @property string|null $seo_title
@@ -56,7 +57,8 @@ trait HasSEOAttributesTrait
         $this->addMediaCollection($this->getSEOImageCollection())
             ->registerMediaConversions(function (?Media $media) {
                 $conversion = $this->addMediaConversion($this->getSEOImageConversionName())
-                    ->fit(Manipulations::FIT_CROP, 1200, 630);
+                    ->fit(Fit::Crop, 1200, 630)
+                    ->format(ImageFormat::WEBP->value);
                 FilamentFlexibleBlocksConfig::mergeConfiguredModelImageConversion(static::class, $this->getSEOImageCollection(), $this->getSEOImageConversionName(), $conversion);
                 FilamentFlexibleBlocksConfig::addExtraModelImageConversions(static::class, $this->getSEOImageCollection(), $this);
 

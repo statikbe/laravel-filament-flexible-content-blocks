@@ -1,7 +1,7 @@
 <?php
 
 // config for Statikbe/FilamentFlexibleContentBlocks
-use Spatie\Image\Manipulations;
+use Spatie\Image\Enums\Fit;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\CallToActionBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\CardsBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\HtmlBlock;
@@ -80,7 +80,7 @@ return [
             'default' => [
                 'seo_image' => [
                     'seo_image' => [
-                        'fit' => Manipulations::FIT_CROP,
+                        'fit' => Fit::Crop,
                         'width' => 1200,
                         'height' => 630,
                         'responsive' => true,
@@ -88,7 +88,7 @@ return [
                 ],
                 'overview_image' => [
                     'overview_image' => [
-                        'fit' => Manipulations::FIT_CROP,
+                        'fit' => Fit::Crop,
                         'width' => 500,
                         'height' => 500,
                         'responsive' => true,
@@ -96,14 +96,14 @@ return [
                 ],
                 'hero_image' => [
                     'hero_image' => [
-                        'fit' => Manipulations::FIT_CROP,
+                        'fit' => Fit::Crop,
                         'width' => 1200,
                         'height' => 630,
                         'responsive' => true,
                     ],
                     'extra_conversions' => [
                         'hero_image_square' => [
-                            'fit' => Manipulations::FIT_CROP,
+                            'fit' => Fit::Crop,
                             'width' => 400,
                             'height' => 400,
                             'responsive' => true,
@@ -115,7 +115,7 @@ return [
                 /*Page::class => [
                     'overview_image' => [
                         'thumb' => [
-                            'fit' => Manipulations::FIT_CROP,
+                            'fit' => 'fit_crop',
                             'width' => 400,
                             'height' => 400,
                             'responsive' => true,

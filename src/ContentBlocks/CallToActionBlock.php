@@ -6,7 +6,7 @@ use Closure;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
-use Spatie\Image\Manipulations;
+use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -22,6 +22,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\Call
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Enums\ImageFormat;
 
 class CallToActionBlock extends AbstractFilamentFlexibleContentBlock
 {
@@ -114,8 +115,8 @@ class CallToActionBlock extends AbstractFilamentFlexibleContentBlock
             ->registerMediaConversions(function (Media $media) use ($record) {
                 $conversion = $record->addMediaConversion(static::CONVERSION_DEFAULT)
                     ->withResponsiveImages()
-                    ->fit(Manipulations::FIT_CROP, 1200, 630)
-                    ->format(Manipulations::FORMAT_WEBP);
+                    ->fit(Fit::Crop, 1200, 630)
+                    ->format(ImageFormat::WEBP->value);
                 FilamentFlexibleBlocksConfig::mergeConfiguredFlexibleBlockImageConversion(static::class, static::getName(), static::CONVERSION_DEFAULT, $conversion);
 
                 //for filament upload field
