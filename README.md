@@ -27,7 +27,14 @@ The key goals of this package are:
 - support content translations
 - provide a start set of content blocks for most general requirements
 
-## Upgrade to v1
+## Upgrades
+
+### Upgrade to v2
+
+The image conversions in the configuration file have changed due to a refactor of spatie-medialibrary v11. Check [the 
+upgrade guide](./UPGRADE.md) for details.
+
+### Upgrade to v1
 
 If you need to upgrade to v1.0.0 it is **IMPORTANT** to [read the upgrade guide thoroughly](./UPGRADE.md), because the data model of the
 content blocks has changed and needs to be upgraded via a command.
