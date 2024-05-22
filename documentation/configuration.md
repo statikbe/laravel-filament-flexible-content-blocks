@@ -24,7 +24,7 @@ public function boot()
 
 ## Default flexible blocks
 
-You can configure the default list of flexible content blocks that will be applied to all models with the [HasContentBlocksTrait.php](..%2Fsrc%2FModels%2FConcerns%2FHasContentBlocksTrait.php).
+You can configure the default list of flexible content blocks that will be applied to all models with the [HasContentBlocksTrait.php](../src/Models/Concerns/HasContentBlocksTrait.php).
 
 ```php 
 'default_flexible_blocks' => [
@@ -128,9 +128,13 @@ overwrite the conversions of all models (key: `default`) or for a specific model
 `specific`. First declare the image collection and then the conversion name. You can extend the already defined
 conversions by adding a `extra_conversions` array to the collection name.
 
-To define the conversions, you can use all the [spatie-image options](https://spatie.be/docs/image/v1/image-manipulations/overview) 
-that can be configured as array keys. You can use any single argument functions, with the function name as key and
-the argument as value. To resize, use `fit` with a `Spatie\Image\Manipulations::FIT_*` constante and define `width` and `height`.
+To define the conversions, you can use all the [spatie-image options](https://spatie.be/docs/image/v3/introduction) 
+that can be configured as array keys or you can use a callable function so you can configure the conversion with full 
+typing and can implement extra logic if needed. The function approach is the most future-proof. 
+
+For the array option, you can use any single argument function, with the function name as key and
+the argument as value. To resize, for instance use `fit` with a `Spatie\Image\Enums\Fit` enum and define `width` and `height`.
+Other resize options are `crop`, `manualCrop` & `focalCrop`.
 You can also queue conversions (key: `queued`) and make responsive images (key: `responsive`) by setting the value to `true`.
 Below is a detailed example:
 
@@ -139,23 +143,21 @@ Below is a detailed example:
     'models' => [
         'default' => [
             'seo_image' => [
-                'seo_image' => [
-                    'fit' => Manipulations::FIT_CROP,
-                    'width' => 1200,
-                    'height' => 630,
-                    'responsive' => true,
-                ],
+                'seo_image' => function(\Spatie\MediaLibrary\Conversions\Conversion $conversion) {
+                    return $conversion->fit(Fit::Crop, 1200, 630)
+                        ->withResponsiveImages();
+                },
             ],
             'hero_image' => [
                 'hero_image' => [
-                    'fit' => Manipulations::FIT_CROP,
+                    'fit' => Fit::Crop,
                     'width' => 1200,
                     'height' => 630,
                     'responsive' => true,
                 ],
                 'extra_conversions' => [
                     'hero_image_square' => [
-                        'fit' => Manipulations::FIT_CROP,
+                        'fit' => Fit::Crop,
                         'width' => 400,
                         'height' => 400,
                         'responsive' => true,
@@ -167,7 +169,7 @@ Below is a detailed example:
             /*Page::class => [
                 'overview_image' => [
                     'thumb' => [
-                        'fit' => Manipulations::FIT_CROP,
+                        'fit' => Fit::Crop,
                         'width' => 400,
                         'height' => 400,
                         'responsive' => true,

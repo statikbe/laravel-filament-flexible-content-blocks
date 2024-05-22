@@ -1,5 +1,38 @@
 # Upgrades
 
+## v2.0.0
+
+To upgrade to Laravel 11, we needed to migrate to spatie-medialibrary v11, which required an upgrade to spatie-image v3.
+The spatie-image library v3 is completely refactored, so the classes and functions we used for image conversions changed.
+
+I was able to keep API quite stable. However, if you update, you need to make some small changes to the image conversions 
+in the configuration file:
+- The `Manipulations` class no longer exists, and should be replaced with `Fit`. 
+- The image format constants have also disappeared, so I added a new enum `ImageFormat` to the package to avoid typos, or
+you can also use strings for the file extension, see `ImageFormat` for the supported file types.
+
+Additionally, you can now also use functions to declare image conversions, so you can use the new spatie-image API and
+keep your image conversions fully typed. Below is an example:
+
+```
+'seo_image' => [
+    'seo_image' => function(\Spatie\MediaLibrary\Conversions\Conversion $conversion) {
+        return $conversion->fit(Fit::Crop, 1200, 630)
+            ->format(ImageFormat::WEBP->value)
+            ->withResponsiveImages();
+    },
+],
+'overview_image' => [
+    'overview_image' => [
+        'fit' => Fit::Crop,
+        'width' => 500,
+        'height' => 500,
+        'responsive' => true,
+        'format' => ImageFormat::WEBP->value 
+    ],
+],
+```
+
 ## v1.0.0
 
 The content blocks data model has changed. Therefore an automated migration needs to be done.
