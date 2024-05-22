@@ -79,7 +79,7 @@ return [
         'models' => [
             'default' => [
                 'seo_image' => [
-                    'seo_image' => function(\Spatie\MediaLibrary\Conversions\Conversion $conversion) {
+                    'seo_image' => function (\Spatie\MediaLibrary\Conversions\Conversion $conversion) {
                         return $conversion->fit(Fit::Crop, 1200, 630)
                             ->withResponsiveImages();
                     },

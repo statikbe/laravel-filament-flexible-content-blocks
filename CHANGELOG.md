@@ -2,6 +2,11 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.0.0 - 2024-05-22
+
+- Laravel 11 upgrade.
+- The image conversions in the configuration file have changed, please read the UPGRADE.md file for details. Since this is a breaking change, the major version has increased.
+
 ## v1.0.7 - 2024-05-03
 
 - Fix urgent bug in SpatieMediaLibraryFileUpload when media is null. This fix should be removed once the PR is released.

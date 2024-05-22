@@ -170,7 +170,7 @@ class FilamentFlexibleBlocksConfig
 
     private static function mergeConfiguredImageConversion(array|callable $configuredConversion, Conversion &$conversion): Conversion
     {
-        if(is_callable($configuredConversion)){
+        if (is_callable($configuredConversion)) {
             return $configuredConversion($conversion);
         }
 
