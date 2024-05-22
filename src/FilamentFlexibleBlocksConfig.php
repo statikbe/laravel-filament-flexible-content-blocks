@@ -30,8 +30,6 @@ use Statikbe\FilamentFlexibleContentBlocks\Replacer\TextParameterReplacer;
 class FilamentFlexibleBlocksConfig
 {
     /**
-     * @param SpatieMediaLibraryFileUpload $fileUpload
-     * @return SpatieMediaLibraryFileUpload
      * @throws Exception
      */
     public static function getImageEditorConfig(SpatieMediaLibraryFileUpload $fileUpload): SpatieMediaLibraryFileUpload
@@ -210,7 +208,8 @@ class FilamentFlexibleBlocksConfig
     }
 
     /**
-     * @param class-string<AbstractContentBlock> $blockClass
+     * @param  class-string<AbstractContentBlock>  $blockClass
+     *
      * @throws InvalidManipulation
      */
     public static function addExtraFlexibleBlockImageConversions(string $blockClass, string $collectionName, Model&HasMedia $record): void
@@ -220,7 +219,8 @@ class FilamentFlexibleBlocksConfig
     }
 
     /**
-     * @param class-string<Model> $modelClass
+     * @param  class-string<Model>  $modelClass
+     *
      * @throws InvalidManipulation
      */
     public static function addExtraModelImageConversions(string $modelClass, string $collectionName, Model&HasMedia $record): void
