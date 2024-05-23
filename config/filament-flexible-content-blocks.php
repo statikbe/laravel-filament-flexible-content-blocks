@@ -113,7 +113,7 @@ return [
                 /*Page::class => [
                     'overview_image' => [
                         'thumb' => [
-                            'fit' => 'fit_crop',
+                            'fit' => Fit::Crop,
                             'width' => 400,
                             'height' => 400,
                             'responsive' => true,
@@ -323,7 +323,7 @@ return [
                 'class' => 'section--secondary',
             ],
             'light' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.grey',
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.light',
                 'class' => 'section--light',
             ],
         ],
