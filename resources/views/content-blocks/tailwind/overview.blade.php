@@ -1,11 +1,9 @@
-<div class="py-12">
-    <div class="container px-4 mx-auto">
+<div class="section section--default">
+    <div class="container">
         @if($title)
-            <div class="mb-6 prose max-w-none">
-                <h2>{{$replaceParameters($title)}}</h2>
-            </div>
+            <h2>{{$replaceParameters($title)}}</h2>
         @endif
-        <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-{{$gridColumns ?? 3}}">
+        <div @class(['grid gap-4 ', 'sm:grid-cols-2 md:grid-cols-' . $gridColumns => $gridColumns > 1])>
             @foreach($getOverviewItems() as $overviewItem)
                 @php
                     /* @var \Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasOverviewAttributes&Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\Linkable $overviewItem */

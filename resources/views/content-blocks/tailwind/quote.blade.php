@@ -1,12 +1,12 @@
-<div class="py-12 section section--default">
-    <div class="container px-4 mx-auto">
-        <blockquote class="pl-6 border-l-2 border-gray-200 quote">
-            <div class="text-2xl">
+<div class="section section--default">
+    <div class="container">
+        <blockquote class="pl-6 border-l-2 border-gray-200">
+            <div class="text-xl md:text-2xl">
                 {!! $replaceParameters($quote) !!}
             </div>
 
             @if($author)
-                <footer class="quote__footer"><small>{{$replaceParameters($author)}}</small></footer>
+                <footer class="text-sm">{{$replaceParameters($author)}}</footer>
             @endif
         </blockquote>
     </div>

@@ -1,4 +1,4 @@
-<div class="py-12">
+<div class="section section--default">
     <div class="container">
         {!! $replaceParameters($content) !!}
     </div>
