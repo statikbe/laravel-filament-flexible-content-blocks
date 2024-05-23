@@ -21,7 +21,7 @@
                 'loading' => 'lazy',
             ])}}
             @if($heroImageCopyright)
-                <span class="absolute bottom-0 right-0 px-2 py-1 text-sm text-white bg-black/30 z-10">&copy; {{ Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks::replaceParameters($heroImageCopyright) }}</span>
+                <small class="absolute bottom-0 right-0 px-2 py-1 text-white bg-black/30 z-10">&copy; {{ Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks::replaceParameters($heroImageCopyright) }}</small>
             @endif
         </div>
     @endif

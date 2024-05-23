@@ -242,11 +242,11 @@ return [
             ],
             '33%' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.33%',
-                'class' => 'lg:w-1/3',
+                'class' => 'md:w-1/3',
             ],
             '25%' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.25%',
-                'class' => 'lg:w-1/4',
+                'class' => 'md:w-1/4',
             ],
         ],
         'default' => '100%',
