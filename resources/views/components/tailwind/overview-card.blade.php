@@ -1,15 +1,15 @@
-<div class="relative transition-all duration-300 ease-out bg-white group card card--overview hover:shadow-md">
+<div class="relative transition duration-300 ease-out bg-white group hover:shadow-md">
     @if($image)
         {!! $image !!}
     @endif
-    <div class="p-4 prose max-w-none sm:p-6">
+    <div class="p-4 sm:p-6">
         @if($title)
             <a href="{{$url}}" class="before:absolute before:inset-0">
-                <h3 class="card__title @if(!$image) mt-0 @endif">{{Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks::replaceParameters($title)}}</h3>
+                <h3 class="@if(!$image) mt-0 @endif">{{Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks::replaceParameters($title)}}</h3>
             </a>
         @endif
         @if($description)
-            <div class="card__description">{!! Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks::replaceParameters($description) !!}</div>
+            <div>{!! Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks::replaceParameters($description) !!}</div>
         @endif
         @if($url)
             <div class="flex justify-end">
