@@ -44,7 +44,7 @@ class CallToActionData
             $linkableModel = Relation::getMorphedModel($linkableType);
 
             if (! $linkableModel) {
-                throw new LinkableModelNotFoundException("No linkable model could be found for '{$linkableType}'");
+                throw new LinkableModelNotFoundException("No linkable model could be found for '{$linkableType}' in morph map.");
             }
 
             /** @var Linkable&Model $page */
