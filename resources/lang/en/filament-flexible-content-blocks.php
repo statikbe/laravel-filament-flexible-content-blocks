@@ -138,7 +138,7 @@ return [
     'form_component.content_blocks.background_colour.default' => 'Default',
     'form_component.content_blocks.background_colour.primary' => 'Primary',
     'form_component.content_blocks.background_colour.secondary' => 'Secondary',
-    'form_component.content_blocks.background_colour.grey' => 'Grey',
+    'form_component.content_blocks.background_colour.light' => 'Light',
 
     'form_component.content_blocks.block_styles.default' => 'Default',
 

@@ -1,5 +1,5 @@
 @if($template)
-    <div class="py-12">
+    <div class="section section--default">
         <div class="container">
             @include($template, ['record' => $record])
         </div>

@@ -113,7 +113,7 @@ return [
                 /*Page::class => [
                     'overview_image' => [
                         'thumb' => [
-                            'fit' => 'fit_crop',
+                            'fit' => Fit::Crop,
                             'width' => 400,
                             'height' => 400,
                             'responsive' => true,
@@ -161,6 +161,7 @@ return [
     | List the models that can be used to add items from in the overview block.
     */
     'overview_models' => [
+        \App\Models\TranslatablePage::class,
         //e.g. 'App\Models\FlexiblePage',
     ],
 
@@ -242,11 +243,11 @@ return [
             ],
             '33%' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.33%',
-                'class' => 'lg:w-1/3',
+                'class' => 'md:w-1/3',
             ],
             '25%' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.25%',
-                'class' => 'lg:w-1/4',
+                'class' => 'md:w-1/4',
             ],
         ],
         'default' => '100%',
@@ -312,19 +313,19 @@ return [
         'options' => [
             'default' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.default',
-                'class' => '',
+                'class' => 'section--default',
             ],
             'primary' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.primary',
-                'class' => 'bg-primary-500 text-primary-contrast',
+                'class' => 'section--primary',
             ],
             'secondary' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.secondary',
-                'class' => 'bg-secondary text-secondary-contrast',
+                'class' => 'section--secondary',
             ],
-            'grey' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.grey',
-                'class' => 'bg-slate-200',
+            'light' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.light',
+                'class' => 'section--light',
             ],
         ],
         'default' => 'default',

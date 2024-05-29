@@ -142,7 +142,7 @@ return [
     'form_component.content_blocks.background_colour.default' => 'Standaard',
     'form_component.content_blocks.background_colour.primary' => 'Primair',
     'form_component.content_blocks.background_colour.secondary' => 'Secundair',
-    'form_component.content_blocks.background_colour.grey' => 'Grijs',
+    'form_component.content_blocks.background_colour.light' => 'Light',
 
     'form_component.content_blocks.block_styles.default' => 'Standaard',
 
