@@ -104,6 +104,8 @@ return [
     'form_component.content_blocks.cards.card_title' => 'Card title',
     'form_component.content_blocks.cards.card_text' => 'Card text',
     'form_component.content_blocks.cards.card_image' => 'Card image',
+    'form_component.content_blocks.template.label' => 'Template',
+    'form_component.content_blocks.template.template' => 'Template',
 
     'form_component.content_blocks.image_position.left' => 'Left',
     'form_component.content_blocks.image_position.center' => 'Center',
