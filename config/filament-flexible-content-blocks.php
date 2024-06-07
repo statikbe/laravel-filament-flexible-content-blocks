@@ -161,7 +161,6 @@ return [
     | List the models that can be used to add items from in the overview block.
     */
     'overview_models' => [
-        \App\Models\TranslatablePage::class,
         //e.g. 'App\Models\FlexiblePage',
     ],
 
