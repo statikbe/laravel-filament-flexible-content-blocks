@@ -2,6 +2,21 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.0.1 - 2024-06-07
+
+### What's Changed
+
+* Update parent-child.md by @Sindoweb in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/39
+* Small label updates
+* EN translation of template block
+* Improve default HTML/CSS/JS of blocks
+
+### New Contributors
+
+* @Sindoweb made their first contribution in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/39
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v2.0.0...v2.0.1
+
 ## v2.0.0 - 2024-05-22
 
 - Laravel 11 upgrade.
