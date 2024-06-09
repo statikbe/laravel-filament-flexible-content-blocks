@@ -16,6 +16,7 @@ class TitleField extends TextInput
         return static::make($field)
             ->label(trans("filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.{$field}_lbl"))
             ->maxLength(255)
+            ->live()
             ->addsTranslatableHint()
             ->required($required);
     }

@@ -19,6 +19,11 @@ trait HasTranslatedSlugAttributeTrait
         $this->mergeTranslatable(['slug']);
     }
 
+    public function addParentSlug(){
+        $this->slugOptions = $this->getSlugOptions();
+        $this->addSlug();
+    }
+
     protected static function bootHasTranslatedSlugAttributeTrait(): void
     {
         //dispatch event when slug changes for published models:
@@ -41,6 +46,12 @@ trait HasTranslatedSlugAttributeTrait
                     ];
                 }
             }
+
+            /* Update slugs. If slug was empty before */
+            $oldTranslations = $record->getTranslations('slug');
+            $record->addParentSlug();
+            $newTranslations = $record->getTranslations('slug');
+            $record->setTranslations('slug', array_merge($newTranslations, $oldTranslations));
 
             if (! empty($changedSlugs)) {
                 $published = true;

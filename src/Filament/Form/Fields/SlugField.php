@@ -37,7 +37,20 @@ class SlugField extends TextInput
             //make the slug required on edit. on create, the slug is not required so if kept blank a slug is generated.
             ->required(fn (?Model $record): bool => $record && $record->id > 0)
             //hide slug field on creation, because the spatie sluggable will overwrite it anyways:
-            ->hidden(fn (?Model $record): bool => is_null($record))
+            ->hidden(function (?Model $record, Page $livewire): bool {
+                if (empty($record)) {
+                    return true;
+                }
+
+                if (isset($record->translatable) && in_array(static::FIELD, $record->translatable)) {
+                    if (method_exists($livewire, 'getActiveFormsLocale')) {
+                        $locale = $livewire->getActiveFormsLocale();
+                        return empty($record->getTranslation(static::FIELD, $locale, false));
+                    }
+                }
+
+                return false;
+            })
             ->addsTranslatableHint();
     }
 
