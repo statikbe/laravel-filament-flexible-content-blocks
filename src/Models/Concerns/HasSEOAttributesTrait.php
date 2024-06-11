@@ -3,6 +3,7 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Support\Str;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -46,10 +47,10 @@ trait HasSEOAttributesTrait
     public function getSEODescription(): ?string
     {
         if (! $this->seo_description && isset($this->intro)) {
-            return $this->intro;
+            return Str::squish(strip_tags($this->intro));
         }
 
-        return $this->seo_description;
+        return Str::squish($this->seo_description);
     }
 
     protected function registerSEOImageMediaCollectionAndConversion()
