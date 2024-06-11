@@ -45,6 +45,7 @@ class SlugField extends TextInput
                 if (isset($record->translatable) && in_array(static::FIELD, $record->translatable)) {
                     if (method_exists($livewire, 'getActiveFormsLocale')) {
                         $locale = $livewire->getActiveFormsLocale();
+
                         return empty($record->getTranslation(static::FIELD, $locale, false));
                     }
                 }

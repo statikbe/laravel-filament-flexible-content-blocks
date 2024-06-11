@@ -19,7 +19,8 @@ trait HasTranslatedSlugAttributeTrait
         $this->mergeTranslatable(['slug']);
     }
 
-    public function addParentSlug(){
+    public function addParentSlug()
+    {
         $this->slugOptions = $this->getSlugOptions();
         $this->addSlug();
     }
