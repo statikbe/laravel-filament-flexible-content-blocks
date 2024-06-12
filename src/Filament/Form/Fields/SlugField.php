@@ -50,7 +50,7 @@ class SlugField extends TextInput
 
                         $noSlug = empty($record->getTranslation(static::FIELD, $locale, false));
                         //update translated slug in form:
-                        if(!$noSlug && empty($get(self::FIELD))){
+                        if (! $noSlug && empty($get(self::FIELD))) {
                             $set(self::FIELD, $record->getTranslation(static::FIELD, $locale, false));
                         }
 
