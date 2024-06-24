@@ -9,16 +9,17 @@ abstract class ImageField
 {
     use HasImageEditor;
 
-    protected static function createImageField(string $field, bool $translatable = false): SpatieMediaLibraryFileUpload
+    protected static function createImageField(string $field, bool $translatable = false, array $externalImageEditorConfig=null): SpatieMediaLibraryFileUpload
     {
         if ($translatable) {
             return self::addImageEditor(
                 TranslatableSpatieMediaLibraryFileUpload::make($field)
                     ->hint(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.translatable_image_hint'))
-                    ->hintIcon('heroicon-s-language')
+                    ->hintIcon('heroicon-s-language'),
+                $externalImageEditorConfig
             );
         } else {
-            return self::addImageEditor(SpatieMediaLibraryFileUpload::make($field));
+            return self::addImageEditor(SpatieMediaLibraryFileUpload::make($field), $externalImageEditorConfig);
         }
     }
 }
