@@ -9,7 +9,7 @@ abstract class ImageField
 {
     use HasImageEditor;
 
-    protected static function createImageField(string $field, bool $translatable = false, array $externalImageEditorConfig=null): SpatieMediaLibraryFileUpload
+    protected static function createImageField(string $field, bool $translatable = false, ?array $externalImageEditorConfig = null): SpatieMediaLibraryFileUpload
     {
         if ($translatable) {
             return self::addImageEditor(
