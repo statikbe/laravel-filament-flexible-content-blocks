@@ -12,8 +12,7 @@ class OverviewCard extends Component
         public ?string $description = null,
         public ?string $image = null,
         public ?string $url = null,
-    ) {
-    }
+    ) {}
 
     public function render()
     {
