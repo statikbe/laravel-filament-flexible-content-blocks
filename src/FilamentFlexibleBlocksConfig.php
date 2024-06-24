@@ -32,9 +32,9 @@ class FilamentFlexibleBlocksConfig
     /**
      * @throws Exception
      */
-    public static function getImageEditorConfig(SpatieMediaLibraryFileUpload $fileUpload): SpatieMediaLibraryFileUpload
+    public static function getImageEditorConfig(SpatieMediaLibraryFileUpload $fileUpload, array $externalConfig=null): SpatieMediaLibraryFileUpload
     {
-        $imageEditorConfig = config('filament-flexible-content-blocks.image_editor');
+        $imageEditorConfig = $externalConfig ? $externalConfig : config('filament-flexible-content-blocks.image_editor');
 
         if ($imageEditorConfig && isset($imageEditorConfig['enabled']) && $imageEditorConfig['enabled']) {
             $fileUpload->imageEditor();
