@@ -17,8 +17,7 @@ class CallToActionData
         public ?string $label = null,
         public ?string $buttonStyle = null,
         public bool $openNewWindow = false,
-    ) {
-    }
+    ) {}
 
     /**
      * @param  array{cta_model: string, entry_id: ?string, url: ?string, button_style: ?string, button_label: ?string, button_open_new_window: ?boolean}  $callToActionBlockData
