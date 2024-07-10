@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.0.3 - 2024-07-10
+
+- Make call to actions more configurable to support the new asset manager package, see https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager
+
 ## v2.0.1 - 2024-06-07
 
 ### What's Changed
