@@ -25,16 +25,16 @@ trait HasCallToAction
             ->setAsRouteType();
 
         $types = collect(FilamentFlexibleBlocksConfig::getCallToActionModels(static::class))
-            ->map(function($item) {
-                if(is_array($item)){
-                    if(isset($item['call_to_action_type']) && isset($item['model'])){
+            ->map(function ($item) {
+                if (is_array($item)) {
+                    if (isset($item['call_to_action_type']) && isset($item['model'])) {
                         return new $item['call_to_action_type']($item['call_to_action_type']);
-                    }
-                    else if(isset($item['model'])) {
+                    } elseif (isset($item['model'])) {
                         return new CallToActionType($item['model']);
                     }
+                } else {
+                    return new CallToActionType($item);
                 }
-                else return new CallToActionType($item);
             })
             ->toArray();
 

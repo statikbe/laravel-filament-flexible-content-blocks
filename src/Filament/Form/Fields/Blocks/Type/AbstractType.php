@@ -237,7 +237,7 @@ abstract class AbstractType
         return $this;
     }
 
-    public function getOptionLabelFromRecord(Model $record, ?string $locale=null): string
+    public function getOptionLabelFromRecord(Model $record, ?string $locale = null): string
     {
         return ($this->getOptionLabelFromRecordUsing)($record, $locale);
     }

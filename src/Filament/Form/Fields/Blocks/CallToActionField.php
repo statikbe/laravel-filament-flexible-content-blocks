@@ -107,10 +107,10 @@ class CallToActionField extends Component
                         }),
                     Select::make(static::FIELD_ENTRY_ID)
                         ->columnSpan(4)
-                        ->label(function(Get $get) use ($types) {
+                        ->label(function (Get $get) use ($types) {
                             //get the selected type:
                             $selectedTypeModel = $get(static::FIELD_CTA_MODEL);
-                            $selectedType = collect($types)->filter(fn(CallToActionType $type) => !$type->isUrlType() && !$type->isRouteType() && $type->getModel() === $selectedTypeModel)->first();
+                            $selectedType = collect($types)->filter(fn (CallToActionType $type) => ! $type->isUrlType() && ! $type->isRouteType() && $type->getModel() === $selectedTypeModel)->first();
 
                             return $selectedType?->getLabel() ??
                                 trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_entry_id');
