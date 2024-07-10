@@ -24,7 +24,19 @@ trait HasCallToAction
         $routeType->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_model_type_route'))
             ->setAsRouteType();
 
-        $types = collect(FilamentFlexibleBlocksConfig::getCallToActionModels(static::class))->map(fn ($item) => new CallToActionType($item))->toArray();
+        $types = collect(FilamentFlexibleBlocksConfig::getCallToActionModels(static::class))
+            ->map(function($item) {
+                if(is_array($item)){
+                    if(isset($item['call_to_action_type']) && isset($item['model'])){
+                        return new $item['call_to_action_type']($item['call_to_action_type']);
+                    }
+                    else if(isset($item['model'])) {
+                        return new CallToActionType($item['model']);
+                    }
+                }
+                else return new CallToActionType($item);
+            })
+            ->toArray();
 
         return array_merge(['url' => $urlType, 'route' => $routeType], $types);
     }

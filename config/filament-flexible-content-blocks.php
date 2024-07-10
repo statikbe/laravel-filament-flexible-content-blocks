@@ -170,9 +170,17 @@ return [
     |--------------------------------------------------------------------------
     |
     | List the models that can be used to link to with call-to-action buttons.
+    | Or in case you want to extend the CTA types, you can also add an array with keys `model` and `call_to_action_type`,
+    | to which you can respectively add the model and its the custom CTA type implementation.
     */
     'call_to_action_models' => [
         //e.g. 'App\Models\FlexiblePage',
+        //Or if you want to implement a custom CTA type, e.g. for the asset manager see https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager:
+        /*[
+            'model' => \Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset::class,
+            'call_to_action_type' => \Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Form\Fields\Blocks\Type\AssetCallToActionType::class,
+        ],*/
+        \App\Models\TranslatablePage::class,
     ],
 
     /*

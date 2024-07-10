@@ -88,10 +88,15 @@ abstract class AbstractType
             $keyName = $query->getModel()->getKeyName();
 
             if ($this->hasOptionLabelFromRecordUsingCallback()) {
+                $locale = null;
+                if (method_exists($component->getLivewire(), 'getActiveFormsLocale')) {
+                    $locale = $component->getLivewire()->getActiveFormsLocale();
+                }
+
                 return $query
                     ->get()
                     ->mapWithKeys(fn (Model $record) => [
-                        $record->{$keyName} => $this->getOptionLabelFromRecord($record),
+                        $record->{$keyName} => $this->getOptionLabelFromRecord($record, $locale),
                     ])
                     ->toArray();
             }
@@ -121,10 +126,15 @@ abstract class AbstractType
             $keyName = $query->getModel()->getKeyName();
 
             if ($this->hasOptionLabelFromRecordUsingCallback()) {
+                $locale = null;
+                if (method_exists($component->getLivewire(), 'getActiveFormsLocale')) {
+                    $locale = $component->getLivewire()->getActiveFormsLocale();
+                }
+
                 return $query
                     ->get()
                     ->mapWithKeys(fn (Model $record) => [
-                        $record->{$keyName} => $this->getOptionLabelFromRecord($record),
+                        $record->{$keyName} => $this->getOptionLabelFromRecord($record, $locale),
                     ])
                     ->toArray();
             }
@@ -152,7 +162,12 @@ abstract class AbstractType
             }
 
             if ($this->hasOptionLabelFromRecordUsingCallback()) {
-                return $this->getOptionLabelFromRecord($record);
+                $locale = null;
+                if (method_exists($component->getLivewire(), 'getActiveFormsLocale')) {
+                    $locale = $component->getLivewire()->getActiveFormsLocale();
+                }
+
+                return $this->getOptionLabelFromRecord($record, $locale);
             }
 
             return $record->getAttributeValue($this->getTitleColumnName());
@@ -222,9 +237,9 @@ abstract class AbstractType
         return $this;
     }
 
-    public function getOptionLabelFromRecord(Model $record): string
+    public function getOptionLabelFromRecord(Model $record, ?string $locale=null): string
     {
-        return ($this->getOptionLabelFromRecordUsing)($record);
+        return ($this->getOptionLabelFromRecordUsing)($record, $locale);
     }
 
     public function hasOptionLabelFromRecordUsingCallback(): bool
