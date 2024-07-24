@@ -30,7 +30,7 @@ class MediaEmbedField extends TextInput
     {
         $this->media = $condition;
 
-        $this->rule(new MediaEmbedRule(), $condition);
+        $this->rule(new MediaEmbedRule, $condition);
 
         return $this;
     }

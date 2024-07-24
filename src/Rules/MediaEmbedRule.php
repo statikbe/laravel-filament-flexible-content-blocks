@@ -11,7 +11,7 @@ class MediaEmbedRule implements Rule
 
     public function __construct()
     {
-        $this->mediaEmbed = new MediaEmbed();
+        $this->mediaEmbed = new MediaEmbed;
     }
 
     public function passes($attribute, $value): bool

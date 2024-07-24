@@ -65,7 +65,7 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
 
     public function getEmbedCode(array $attributes = []): ?string
     {
-        $mediaObject = (new MediaEmbed())->parseUrl($this->embedUrl);
+        $mediaObject = (new MediaEmbed)->parseUrl($this->embedUrl);
         if (! $mediaObject) {
             return '';
         }
@@ -76,7 +76,7 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
 
     public function getEmbedSrc(array $attributes = []): ?string
     {
-        $mediaObject = (new MediaEmbed())->parseUrl($this->embedUrl);
+        $mediaObject = (new MediaEmbed)->parseUrl($this->embedUrl);
         if (! $mediaObject) {
             return '';
         }

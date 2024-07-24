@@ -67,7 +67,7 @@ class SlugField extends TextInput
     {
         $linkModel = $livewire->getResource()::getModel();
         /* @var Linkable $link */
-        $link = new $linkModel();
+        $link = new $linkModel;
 
         if (method_exists($livewire, 'getActiveFormsLocale') && method_exists($link, 'setTranslation')) {
             $locale = $livewire->getActiveFormsLocale();

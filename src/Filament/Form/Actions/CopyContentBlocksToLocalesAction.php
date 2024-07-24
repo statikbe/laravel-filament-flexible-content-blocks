@@ -24,7 +24,7 @@ class CopyContentBlocksToLocalesAction extends Actions
                 ->modalWidth('md')
                 ->icon('heroicon-o-language')
                 ->action(function (Get $get, Model $record, Livewire $livewire) {
-                    $handler = new CopyContentBlocksToLocalesActionHandler();
+                    $handler = new CopyContentBlocksToLocalesActionHandler;
                     $handler->handle($record, $livewire, $get(ContentBlocksField::FIELD));
                 }),
         ]);
