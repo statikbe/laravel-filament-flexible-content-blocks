@@ -1,5 +1,5 @@
-<div class="section section--default">
+<section class="section section--default">
     <div class="container">
         {!! $replaceParameters($content) !!}
     </div>
-</div>
+</section>

@@ -6,7 +6,7 @@
             </div>
 
             @if($author)
-                <footer class="text-sm">{{$replaceParameters($author)}}</footer>
+                <cite class="text-sm">{{$replaceParameters($author)}}</cite>
             @endif
         </blockquote>
     </div>

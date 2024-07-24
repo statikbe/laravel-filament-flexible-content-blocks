@@ -1,4 +1,4 @@
-<div @class(['section section--light' => !$hasHeroImage(), 'relative py-10 bg-light sm:py-20 before:bg-black/25 before:z-10 before:absolute before:inset-0' => $hasHeroImage()])>
+<section @class(['section section--light' => !$hasHeroImage(), 'relative py-10 bg-light sm:py-20 before:bg-black/25 before:z-10 before:absolute before:inset-0' => $hasHeroImage()])>
     <div class="container">
         <div class="relative z-10">
             @if($title)
@@ -25,4 +25,4 @@
             @endif
         </div>
     @endif
-</div>
+</section>

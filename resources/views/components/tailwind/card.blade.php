@@ -2,7 +2,7 @@
     /* @var \Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CardData $card */
 @endphp
 
-<div class="relative transition duration-300 ease-out bg-white group @if($isFullyClickable()) hover:shadow-md @endif">
+<article class="relative transition duration-300 ease-out bg-white group @if($isFullyClickable()) hover:shadow-md @endif">
     @if(!$slot->isEmpty())
         {{-- Image slot --}}
         {{ $slot }}
@@ -36,4 +36,4 @@
             </div>
         @endif
     </div>
-</div>
+</article>

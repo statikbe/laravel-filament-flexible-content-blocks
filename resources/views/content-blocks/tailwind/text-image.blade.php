@@ -1,4 +1,4 @@
-<div class="section {{ $getBackgroundColourClass() }}">
+<section class="section {{ $getBackgroundColourClass() }}">
     <div class="container">
         <div @class(['flex flex-wrap -mx-4', 'md:flex-row-reverse' => $hasImage() && $imagePosition === 'right'])>
             @if($hasImage())
@@ -29,4 +29,4 @@
             </div>
         </div>
     </div>
-</div>
+</section>

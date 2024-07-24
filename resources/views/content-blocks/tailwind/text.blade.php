@@ -1,5 +1,5 @@
 @if($content)
-    <div class="section {{ $getBackgroundColourClass() }}">
+    <section class="section {{ $getBackgroundColourClass() }}">
         <div class="container">
             <div class="w-full md:w-3/4">
                 @if($title)
@@ -8,5 +8,5 @@
                 {!! $replaceParameters($content) !!}
             </div>
         </div>
-    </div>
+    </section>
 @endif

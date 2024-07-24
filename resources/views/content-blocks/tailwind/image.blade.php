@@ -1,4 +1,4 @@
-<div class="section {{ $getBackgroundColourClass() }}">
+<section class="section {{ $getBackgroundColourClass() }}">
     <div class="container">
         <div @class(['w-full', $getImageWidthClass(),
                       '' => $imagePosition === 'left',
@@ -10,4 +10,4 @@
             @endif
         </div>
     </div>
-</div>
+</section>

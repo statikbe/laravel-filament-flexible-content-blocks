@@ -1,4 +1,4 @@
-<div class="section {{ $getBackgroundColourClass() }}">
+<section class="section {{ $getBackgroundColourClass() }}">
     <div class="container">
         @if($title)
             <h2>{{$replaceParameters($title)}}</h2>
@@ -15,4 +15,4 @@
             @endforeach
         </div>
     </div>
-</div>
+</section>
