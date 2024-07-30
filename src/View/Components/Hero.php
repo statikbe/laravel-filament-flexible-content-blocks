@@ -53,6 +53,12 @@ class Hero extends Component
         return $this->page->hasHeroImage();
     }
 
+    public function getHeroImageUrl(): string
+    {
+        return $this->page->getHeroImageUrl();
+    }
+
+
     public function render()
     {
         $themePrefix = FilamentFlexibleBlocksConfig::getViewThemePrefix();
