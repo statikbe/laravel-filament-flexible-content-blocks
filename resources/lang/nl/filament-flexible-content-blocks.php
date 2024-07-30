@@ -119,14 +119,20 @@ return [
     'form_component.content_blocks.image_width.33%' => '1/3',
     'form_component.content_blocks.image_width.25%' => '1/4',
 
-    'form_component.content_blocks.call_to_action_btn.primary' => 'Primair',
-    'form_component.content_blocks.call_to_action_btn.primary_chevron' => 'Primair >',
-    'form_component.content_blocks.call_to_action_btn.secondary' => 'Secundair',
-    'form_component.content_blocks.call_to_action_btn.secondary_chevron' => 'Secundair >',
-    'form_component.content_blocks.call_to_action_btn.ghost' => 'Transparant',
-    'form_component.content_blocks.call_to_action_btn.ghost_chevron' => 'Transparant >',
-    'form_component.content_blocks.call_to_action_btn.link' => 'Link',
-    'form_component.content_blocks.call_to_action_btn.link_chevron' => 'Link >',
+    'form_component.content_blocks.call_to_action_btn.kul.primary' => 'Primary',
+    'form_component.content_blocks.call_to_action_btn.kul.secondary' => 'Secondary',
+    'form_component.content_blocks.call_to_action_btn.kul.tertiary' => 'Tertiary',
+    'form_component.content_blocks.call_to_action_btn.kul.ghost' => 'Ghost',
+    'form_component.content_blocks.call_to_action_btn.kul.link' => 'Link',
+
+    'form_component.content_blocks.call_to_action_btn.tailwind.primary' => 'Primary',
+    'form_component.content_blocks.call_to_action_btn.tailwind.primary_chevron' => 'Primary >',
+    'form_component.content_blocks.call_to_action_btn.tailwind.secondary' => 'Secondary',
+    'form_component.content_blocks.call_to_action_btn.tailwind.secondary_chevron' => 'Secondary >',
+    'form_component.content_blocks.call_to_action_btn.tailwind.ghost' => 'Transparent',
+    'form_component.content_blocks.call_to_action_btn.tailwind.ghost_chevron' => 'Transparent >',
+    'form_component.content_blocks.call_to_action_btn.tailwind.link' => 'Link',
+    'form_component.content_blocks.call_to_action_btn.tailwind.link_chevron' => 'Link >',
 
     'form_component.content_blocks.call_to_action_lbl' => 'Call to action',
     'form_component.content_blocks.add_call_to_action' => 'Voeg call to action toe',
@@ -142,7 +148,7 @@ return [
     'form_component.content_blocks.background_colour.default' => 'Standaard',
     'form_component.content_blocks.background_colour.primary' => 'Primair',
     'form_component.content_blocks.background_colour.secondary' => 'Secundair',
-    'form_component.content_blocks.background_colour.light' => 'Light',
+    'form_component.content_blocks.background_colour.tertiary' => 'Tertiary',
 
     'form_component.content_blocks.block_styles.default' => 'Standaard',
 

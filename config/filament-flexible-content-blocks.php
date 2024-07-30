@@ -234,6 +234,36 @@ return [
     | component here. Each option has label with the translation key and the corresponding CSS class that will be applied.
     | In the 'default' key, you can set the default option.
     */
+    // TODO: support theme config eg: image_width.tailwind.options or image_width.kul.options
+    // kul:
+    'image_width' => [
+        'options' => [
+            '100%' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.100%',
+                'class' => '1200',
+            ],
+            '75%' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.75%',
+                'class' => '900',
+            ],
+            '50%' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.50%',
+                'class' => '600',
+            ],
+            '33%' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.33%',
+                'class' => '400',
+            ],
+            '25%' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.25%',
+                'class' => '300',
+            ],
+        ],
+        'default' => '100%',
+    ],
+
+    // tailwind:
+    /* 
     'image_width' => [
         'options' => [
             '100%' => [
@@ -259,6 +289,7 @@ return [
         ],
         'default' => '100%',
     ],
+    */
 
     /*
     |--------------------------------------------------------------------------
@@ -269,43 +300,74 @@ return [
     | component here. Each option has label with the translation key and the corresponding CSS class that will be applied.
     | In the 'default' key, you can set the default option.
     */
+    // TODO: support theme config eg: call_to_action_buttons.tailwind.options or call_to_action_buttons.kul.options
+    // kul:
     'call_to_action_buttons' => [
         'options' => [
             'primary' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.primary',
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.kul.primary',
+                'class' => 'btn btn-primary',
+            ],
+            'secondary' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.kul.secondary',
+                'class' => 'btn btn-secondary',
+            ],
+            'tertiary' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.kul.tertiary',
+                'class' => 'btn btn-tertiary',
+            ],
+            'link' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.kul.link',
+                'class' => 'btn btn-link',
+            ],
+            'ghost' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.kul.ghost',
+                'class' => 'btn btn-ghost',
+            ],
+        ],
+        'default' => 'primary',
+    ],
+
+    // tailwind:
+    /*  
+    'call_to_action_buttons' => [
+        'options' => [
+            'primary' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.tailwind.primary',
                 'class' => 'btn btn--primary',
             ],
             'primary_chevron' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.primary_chevron',
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.tailwind.primary_chevron',
                 'class' => 'btn btn--primary btn--ext',
             ],
             'secondary' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.secondary',
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.tailwind.secondary',
                 'class' => 'btn btn--secondary',
             ],
             'secondary_chevron' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.secondary_chevron',
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.tailwind.secondary_chevron',
                 'class' => 'btn btn--secondary btn--ext',
             ],
             'ghost' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.ghost',
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.tailwind.ghost',
                 'class' => 'btn btn--ghost',
             ],
             'ghost_chevron' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.ghost_chevron',
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.tailwind.ghost_chevron',
                 'class' => 'btn btn--ghost btn--ext',
             ],
             'link' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.link',
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.tailwind.link',
                 'class' => 'link',
             ],
             'link_chevron' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.link_chevron',
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.tailwind.link_chevron',
                 'class' => 'link link--ext',
             ],
         ],
         'default' => 'primary',
     ],
+    */
 
     /*
     |--------------------------------------------------------------------------
@@ -316,6 +378,32 @@ return [
     | component here. Each option has label with the translation key and the corresponding CSS class that will be applied.
     | In the 'default' key, you can set the default option.
     */
+    // TODO: support theme config eg: background_colours.tailwind.options or background_colours.kul.options
+    // kul:
+    'background_colours' => [
+        'options' => [
+            'default' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.default',
+                'class' => 'card-gray',
+            ],
+            'primary' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.primary',
+                'class' => 'card-primary',
+            ],
+            'secondary' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.secondary',
+                'class' => 'card-secondary',
+            ],
+            'tertiary' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.tertiary',
+                'class' => 'card-tertiary',
+            ],
+        ],
+        'default' => 'default',
+    ],
+
+    // tailwind:
+    /*  
     'background_colours' => [
         'options' => [
             'default' => [
@@ -337,6 +425,7 @@ return [
         ],
         'default' => 'default',
     ],
+    */
 
     /*
     |--------------------------------------------------------------------------
