@@ -6,6 +6,7 @@
                     @if ($title)
                         <h2 class="card-title">{{ $replaceParameters($title) }}</h2>
                     @endif
+
                     @if ($content)
                         {!! $replaceParameters($content) !!}
                     @endif

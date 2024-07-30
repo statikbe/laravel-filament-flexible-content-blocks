@@ -6,9 +6,7 @@
 ])>
     @if ($hasImage())
         <div @class([
-            $hasImage() && $imagePosition === 'right'
-                ? 'card-img-right'
-                : 'card-img-left',
+            $imagePosition === 'right' ? 'card-img-right' : 'card-img-left',
         ]) style="background-image: url({{ $getImageUrl() }})">
             @if ($imageCopyright)
                 <small
@@ -22,9 +20,11 @@
         @if ($title)
             <h2 class="card-title">{{ $replaceParameters($title) }}</h2>
         @endif
+
         @if ($text)
             {!! $replaceParameters($text) !!}
         @endif
+
         @if ($callToActions)
             <br>
             @foreach ($callToActions as $callToAction)

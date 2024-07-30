@@ -17,6 +17,7 @@
         @if ($title)
             <h2>{{ $replaceParameters($title) }}</h2>
         @endif
+
         @if ($text)
             <div>
                 {!! $replaceParameters($text) !!}

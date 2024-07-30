@@ -3,7 +3,7 @@
 @endphp
 
 
-<div {{ $attributes->merge(['class' => '']) }}>
+<article {{ $attributes->merge(['class' => '']) }}>
     <div class="card card-primary">
         @if ($card->imageUrl)
             <div class="card-img-top" style="background-image: url({{ $card->imageUrl }})"></div>
@@ -33,4 +33,4 @@
             @endif
         </div>
     </div>
-</div>
+</article>

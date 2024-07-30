@@ -1,4 +1,4 @@
-<div {{ $attributes->merge(['class' => '']) }}>
+<article {{ $attributes->merge(['class' => '']) }}>
     <div @class(['card', $colourClass])>
         <div class="card-img-top" style="background-image: url({{ $image }})"></div>
         <div class="card-body">
@@ -19,4 +19,4 @@
             @endif
         </div>
     </div>
-</div>
+</article>

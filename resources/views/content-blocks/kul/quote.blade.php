@@ -1,4 +1,4 @@
-<div class="card {{ $getBackgroundColourClass() }}">
+<section class="card {{ $getBackgroundColourClass() }}">
     <div class="card-body">
         <blockquote class="blockquote">
             {!! $replaceParameters($quote) !!}
@@ -8,4 +8,4 @@
             @endif
         </blockquote>
     </div>
-</div>
+</section>

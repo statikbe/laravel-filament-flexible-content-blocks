@@ -5,7 +5,7 @@
 @endif
 
 
-<div class="row">
+<section class="row">
     @foreach ($cards as $card)
         @php
             /* @var \Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CardData $card */
@@ -18,4 +18,4 @@
             'col-xs-6 col-md-3' => $gridColumns == 4,
         ]) />
     @endforeach
-</div>
+</section>
