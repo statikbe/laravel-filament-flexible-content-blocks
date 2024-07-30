@@ -1,6 +1,6 @@
-@if($template)
+@if ($template)
     <div class="section section--default">
-        <div class="tw-container">
+        <div class="container">
             @include($template, ['record' => $record])
         </div>
     </div>
