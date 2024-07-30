@@ -1,16 +1,16 @@
 <section class="section {{ $getBackgroundColourClass() }}">
-    <div class="container">
+    <div class="tw-container">
         @if($title)
             <h2>{{$replaceParameters($title)}}</h2>
         @endif
-        <div @class(['grid gap-4 ', 'sm:grid-cols-2 md:grid-cols-' . $gridColumns => $gridColumns > 1])>
+        <div @class(['tw-grid tw-gap-4 ', 'sm:tw-grid-cols-2 md:tw-grid-cols-' . $gridColumns => $gridColumns > 1])>
             @foreach($cards as $card)
                 @php
                      /* @var \Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CardData $card */
                 @endphp
 
                 <x-flexible-card :data="$card">
-                    {!! $getCardImageMedia($card->imageId, $card->title, false, ['class' => 'w-full']) !!}
+                    {!! $getCardImageMedia($card->imageId, $card->title, false, ['class' => 'tw-w-full']) !!}
                 </x-flexible-card>
             @endforeach
         </div>
