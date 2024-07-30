@@ -8,10 +8,12 @@
 <section class="row">
     @foreach ($cards as $card)
         @php
-            /* @var \Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CardData $card */
+            /* @var \Statikbe\FilamentFlexibleCgroup-hover:tw-bg-red-500ontentBlocks\Filament\Form\Fields\Blocks\Data\CardData $card */
+
+            $backgroundClass = $getBackgroundColourClass();
         @endphp
 
-        <x-flexible-card :data="$card" @class([
+        <x-flexible-card :backgroundClass="$backgroundClass" :data="$card" @class([
             'col-xs-24 col-md-12' => $gridColumns == 1,
             'col-xs-12 col-md-6' => $gridColumns == 2,
             'col-xs-8 col-md-4' => $gridColumns == 3,

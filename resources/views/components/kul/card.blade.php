@@ -4,7 +4,7 @@
 
 
 <article {{ $attributes->merge(['class' => '']) }}>
-    <div class="card card-primary">
+    <div class="card {{ $backgroundClass }}">
         @if ($card->imageUrl)
             <div class="card-img-top" style="background-image: url({{ $card->imageUrl }})"></div>
         @endif
