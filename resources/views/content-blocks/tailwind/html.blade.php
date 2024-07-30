@@ -1,5 +1,5 @@
 <section class="section section--default">
-    <div class="container">
-        {!! $replaceParameters($content) !!}
-    </div>
+  <div class="tw-container">
+    {!! $replaceParameters($content) !!}
+  </div>
 </section>
