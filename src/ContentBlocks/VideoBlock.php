@@ -19,8 +19,6 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
 
     public ?string $embedUrl;
 
-    public ?string $overlayImageId;
-
     /**
      * Create a new component instance.
      */
@@ -29,7 +27,6 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
         parent::__construct($record, $blockData);
 
         $this->embedUrl = $blockData['embed_url'] ?? null;
-        $this->overlayImageId = $this->getMediaUuid($blockData['overlay_image']) ?? null;
     }
 
     public static function getNameSuffix(): string
@@ -102,21 +99,16 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
 
     public function getOverlayImageMedia(array $attributes = []): ?HtmlableMedia
     {
-        return $this->getHtmlableMedia($this->overlayImageId, static::CONVERSION_CROP, null, $attributes);
+        return $this->getHtmlableMedia($this->getBlockId(), static::CONVERSION_CROP, null, $attributes);
     }
 
     public function getOverlayImageUrl(): ?string
     {
-        return $this->getMediaUrl($this->overlayImageId);
+        return $this->getMediaUrl($this->getBlockId());
     }
 
     public function hasOverlayImage(): bool
     {
-        return isset($this->overlayImageId) && ! is_null($this->overlayImageId);
-    }
-
-    public function getImageUuids(): array
-    {
-        return $this->overlayImageId ? [$this->overlayImageId] : [];
+        return $this->hasMedia($this->getBlockId());
     }
 }

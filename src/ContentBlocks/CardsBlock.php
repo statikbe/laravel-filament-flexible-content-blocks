@@ -20,7 +20,6 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\BlockIdField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BackgroundColourField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockSpatieMediaLibraryFileUpload;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockStyleField;
-use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToActionField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToActionRepeater;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CardData;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\GridColumnsField;
@@ -120,18 +119,18 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
             });
     }
 
-    public function getCardImageMedia(?string $imageId, ?string $imageTitle, ?string $conversion = null, array $attributes = []): ?HtmlableMedia
+    public function getCardImageMedia(?string $cardBlockId, ?string $imageTitle, ?string $conversion = null, array $attributes = []): ?HtmlableMedia
     {
-        if (! $imageId) {
+        if (! $cardBlockId) {
             return null;
         }
 
-        return $this->getHtmlableMedia($imageId, $this->getImageConversionType($conversion), $imageTitle, $attributes);
+        return $this->getHtmlableMedia($cardBlockId, $this->getImageConversionType($conversion), $imageTitle, $attributes);
     }
 
-    public function getCardImageUrl(string $imageId, ?string $conversion = null): ?string
+    public function getCardImageUrl(string $cardBlockId, ?string $conversion = null): ?string
     {
-        return $this->getMediaUrl(imageId: $imageId, conversion: $this->getImageConversionType($conversion));
+        return $this->getMediaUrl(blockId: $cardBlockId, conversion: $this->getImageConversionType($conversion));
     }
 
     /**
@@ -144,10 +143,7 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
             try {
                 $cardData[] = CardData::create(
                     cardBlockData: $card,
-                    imageUrl: $card['image'] ? $this->getCardImageUrl($this->getMediaUuid($card['image'])) : null,
-                    imageHtml: $card['image'] ? $this->getCardImageMedia($this->getMediaUuid($card['image']), $card['title']) : null,
-                    blockStyle: $this->hasDefaultBlockStyle() ? null : $this->blockStyle,
-                    buttonStyleClasses: CallToActionField::getButtonStyleClasses(static::class)
+                    cardsBlock: $this
                 );
             } catch (LinkableModelNotFoundException $ex) {
                 $ex->setRecord($this->record);
@@ -170,19 +166,5 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
         }
 
         return $searchable;
-    }
-
-    public function getImageUuids(): array
-    {
-        $uuids = [];
-        if ($this->blockData['cards']) {
-            foreach ($this->blockData['cards'] as $card) {
-                if ($card['image']) {
-                    $uuids[] = $card['image'];
-                }
-            }
-        }
-
-        return $uuids;
     }
 }

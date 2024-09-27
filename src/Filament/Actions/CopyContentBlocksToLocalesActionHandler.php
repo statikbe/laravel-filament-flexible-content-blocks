@@ -117,8 +117,8 @@ class CopyContentBlocksToLocalesActionHandler
         }
 
         //generate new block id:
-        if (isset($dataBlock['block_id']) && $dataBlock['block_id']) {
-            $dataBlock['block_id'] = BlockIdField::generateBlockId();
+        if (isset($dataBlock[BlockIdField::FIELD]) && $dataBlock[BlockIdField::FIELD]) {
+            $dataBlock[BlockIdField::FIELD] = BlockIdField::generateBlockId();
         }
 
         //handle all block IDs in deeper data structures, e.g. cards.

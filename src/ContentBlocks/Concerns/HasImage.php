@@ -5,7 +5,9 @@ namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\Conversions\Conversion;
 use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Collections\MediaCollection;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
@@ -14,28 +16,51 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Enums\ImageFormat;
 trait HasImage
 {
     /**
-     * Returns the media with UUID $imageId
+     * Returns the first media with block UUID $blockId
      */
-    protected function getMedia(?string $imageId, ?string $collection = null): ?Media
+    protected function getMedia(?string $blockId, ?string $collection = null): ?Media
     {
-        if (! $imageId) {
+        return $this->getAllMedia($blockId, $collection)?->first();
+    }
+
+    protected function getAllMedia(?string $blockId, ?string $collection = null): ?MediaCollection
+    {
+        if (! $blockId) {
+            $blockId = $this->getBlockId();
+        }
+
+        if (! $blockId) {
             return null;
         }
 
-        /* @var HasMedia $recordWithMedia */
+        /* @var HasMedia&InteractsWithMedia $recordWithMedia */
         $recordWithMedia = $this->record;
 
-        return $recordWithMedia->getMedia($collection ?? static::getName(), function (Media $media) use ($imageId) {
-            return $media->uuid === $imageId;
-        })->first();
+        return $recordWithMedia->getMedia($collection ?? static::getName(), [
+            'block' => $blockId,
+        ]);
+    }
+
+    public function hasImage(?string $blockId, ?string $collection = null): bool
+    {
+        if (! $blockId) {
+            $blockId = $this->getBlockId();
+        }
+
+        /* @var HasMedia&InteractsWithMedia $recordWithMedia */
+        $recordWithMedia = $this->record;
+
+        return $recordWithMedia->hasMedia($collection ?? static::getName(), [
+            'block' => $blockId,
+        ]);
     }
 
     /**
      * Returns an HTML view of the first image
      */
-    protected function getHtmlableMedia(?string $imageId, string $conversion, ?string $imageTitle, array $attributes = [], ?string $collection = null): ?HtmlableMedia
+    protected function getHtmlableMedia(?string $blockId, string $conversion, ?string $imageTitle, array $attributes = [], ?string $collection = null): ?HtmlableMedia
     {
-        $media = $this->getMedia($imageId);
+        $media = $this->getMedia($blockId);
         $html = null;
 
         if ($media) {
@@ -58,9 +83,9 @@ trait HasImage
     /**
      * Returns the image url for the given UUID.
      */
-    protected function getMediaUrl(string $imageId, ?string $collection = null, ?string $conversion = null): ?string
+    protected function getMediaUrl(string $blockId, ?string $collection = null, ?string $conversion = null): ?string
     {
-        $media = $this->getMedia($imageId, $collection);
+        $media = $this->getMedia($blockId, $collection);
 
         return $media?->getFullUrl();
     }
@@ -86,11 +111,4 @@ trait HasImage
 
         return $conversion;
     }
-
-    /**
-     * Return all image UUIDs of this block.
-     *
-     * @return array<string>
-     */
-    abstract public function getImageUuids(): array;
 }
