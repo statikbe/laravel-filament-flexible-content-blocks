@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.1.0 - 2024-09-27
+
+This release contains a refactor of the spatie medialibrary block image field. The field no longer stores a Media UUID in the content blocks data but makes now fully use of the block ID to filter out the correct media.
+
+**IMPORTANT:** The refactor required a small change in the Blade view of the Cards Block. In case you would have published this view, please use [the upgrade guide](https://github.com/statikbe/laravel-filament-flexible-content-blocks/blob/main/UPGRADE.md).
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v2.0.3...v2.1.0
+
 ## v2.0.3 - 2024-07-10
 
 - Make call to actions more configurable to support the new asset manager package, see https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager
