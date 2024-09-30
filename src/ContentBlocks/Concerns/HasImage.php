@@ -41,7 +41,7 @@ trait HasImage
         ]);
     }
 
-    public function hasImage(?string $blockId, ?string $collection = null): bool
+    public function hasImage(?string $blockId = null, ?string $collection = null): bool
     {
         if (! $blockId) {
             $blockId = $this->getBlockId();
