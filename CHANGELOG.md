@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.1.1 - 2024-09-30
+
+Fix small bug in hasImage function of blocks.
+
 ## v2.1.0 - 2024-09-27
 
 This release contains a refactor of the spatie medialibrary block image field. The field no longer stores a Media UUID in the content blocks data but makes now fully use of the block ID to filter out the correct media.
