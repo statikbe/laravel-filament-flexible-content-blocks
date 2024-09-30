@@ -109,6 +109,6 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
 
     public function hasOverlayImage(): bool
     {
-        return $this->hasMedia($this->getBlockId());
+        return $this->hasImage($this->getBlockId());
     }
 }
