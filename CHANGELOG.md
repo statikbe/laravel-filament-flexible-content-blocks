@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.1.3 - 2024-09-30
+
+### What's Changed
+
+* Update VideoBlock.php by @Sindoweb in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/46
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v2.1.1...v2.1.3
+
 ## v2.1.1 - 2024-09-30
 
 Fix small bug in hasImage function of blocks.
