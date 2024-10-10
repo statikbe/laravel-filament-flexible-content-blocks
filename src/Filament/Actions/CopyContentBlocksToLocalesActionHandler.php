@@ -103,7 +103,7 @@ class CopyContentBlocksToLocalesActionHandler
 
             //copy media to new block:
             $oldBlockMedia = $record->getMedia('*', ['block' => $oldBlockId]);
-            foreach($oldBlockMedia as $oldBlockMediaItem) {
+            foreach ($oldBlockMedia as $oldBlockMediaItem) {
                 $this->copyImage($record, $oldBlockMediaItem, $newBlockId);
             }
 
