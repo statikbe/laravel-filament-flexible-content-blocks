@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.1.4 - 2024-10-09
+
+Enforce media library v11 because we use the enum Fit in the config file.
+
 ## v2.1.3 - 2024-09-30
 
 ### What's Changed
