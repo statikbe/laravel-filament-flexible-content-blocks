@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.1.5 - 2024-10-10
+
+Fix copy blocks to all locales actions
+
 ## v2.1.4 - 2024-10-09
 
 Enforce media library v11 because we use the enum Fit in the config file.
