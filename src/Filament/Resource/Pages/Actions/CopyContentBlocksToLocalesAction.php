@@ -5,6 +5,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Resource\Pages\Actions
 use Filament\Pages\Actions\Action;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Actions\CopyContentBlocksToLocalesActionHandler;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 
@@ -33,9 +34,9 @@ class CopyContentBlocksToLocalesAction extends Action
         $this->action(function () {
             /** @var EditRecord $page * */
             $page = $this->livewire;
-            /* @var Model&HasContentBlocks $record */
+            /* @var Model&HasContentBlocks&HasMedia $record */
             $record = $page->getRecord();
-            $handler = new CopyContentBlocksToLocalesActionHandler;
+            $handler = new CopyContentBlocksToLocalesActionHandler();
             $handler->handle($record, $this->livewire, $record->content_blocks);
         });
     }
