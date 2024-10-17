@@ -1,5 +1,17 @@
 # Upgrades
 
+## v2.1.0
+
+Since v2.1.0 the media UUID is no longer stored in the block data. This has impact on the Cards Block. 
+If you are using the Cards Block and have published the views, please edit your custom view and change the 
+`$getCardImageMedia()` to the code blow in the Blade view:
+
+```php 
+<x-flexible-card :data="$card">
+    {!! $getCardImageMedia($card->cardId, $card->title, false, ['class' => 'w-full']) !!}
+</x-flexible-card>
+```
+
 ## v2.0.0
 
 To upgrade to Laravel 11, we needed to migrate to spatie-medialibrary v11, which required an upgrade to spatie-image v3.

@@ -35,8 +35,6 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
 
     public ?string $text;
 
-    public ?string $imageId;
-
     public ?string $imageTitle;
 
     public ?string $imageCopyright;
@@ -55,7 +53,6 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
 
         $this->title = $blockData['title'] ?? null;
         $this->text = $blockData['text'] ?? null;
-        $this->imageId = $this->getMediaUuid($blockData['image']) ?? null;
         $this->imageTitle = $blockData['image_title'] ?? null;
         $this->imageCopyright = $blockData['image_copyright'] ?? null;
         $this->imagePosition = $blockData['image_position'] ?? null;
@@ -133,17 +130,12 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
 
     public function getImageMedia(?string $conversion = null, array $attributes = []): ?HtmlableMedia
     {
-        return $this->getHtmlableMedia($this->imageId, $this->getImageConversionType($conversion), $this->imageTitle, $attributes);
+        return $this->getHtmlableMedia($this->getBlockId(), $this->getImageConversionType($conversion), $this->imageTitle, $attributes);
     }
 
     public function getImageUrl(?string $conversion = null): ?string
     {
-        return $this->getMediaUrl(imageId: $this->imageId, conversion: $this->getImageConversionType($conversion));
-    }
-
-    public function hasImage(): bool
-    {
-        return isset($this->imageId) && ! is_null($this->imageId);
+        return $this->getMediaUrl(blockId: $this->getBlockId(), conversion: $this->getImageConversionType($conversion));
     }
 
     public function getSearchableContent(): array
@@ -155,10 +147,5 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
         $this->addSearchableContent($searchable, $this->imageCopyright);
 
         return $searchable;
-    }
-
-    public function getImageUuids(): array
-    {
-        return $this->imageId ? [$this->imageId] : [];
     }
 }

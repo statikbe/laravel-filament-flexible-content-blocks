@@ -10,6 +10,9 @@ use Livewire\Component as Livewire;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Actions\CopyContentBlocksToLocalesActionHandler;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\ContentBlocksField;
 
+/**
+ * This action can be added as a form component.
+ */
 class CopyContentBlocksToLocalesAction extends Actions
 {
     public static function create(): static

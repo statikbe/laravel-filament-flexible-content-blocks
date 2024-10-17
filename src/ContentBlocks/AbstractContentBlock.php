@@ -38,12 +38,12 @@ abstract class AbstractContentBlock extends Component
         $this->blockData = $blockData;
 
         //block id:
-        if (! isset($this->blockData['block_id']) || ! $this->blockData['block_id']) {
+        if (! isset($this->blockData[BlockIdField::FIELD]) || ! $this->blockData[BlockIdField::FIELD]) {
             //initialise the ID for a new block, then never change it.
-            $this->blockData['block_id'] = BlockIdField::generateBlockId();
+            $this->blockData[BlockIdField::FIELD] = BlockIdField::generateBlockId();
         }
 
-        $this->blockId = $this->blockData['block_id'];
+        $this->blockId = $this->blockData[BlockIdField::FIELD];
     }
 
     /**
@@ -157,27 +157,6 @@ abstract class AbstractContentBlock extends Component
     public function replaceParameters(?string $content): ?string
     {
         return FilamentFlexibleContentBlocks::replaceParameters($content);
-    }
-
-    /**
-     * Sometimes the media UUID is saved as an array instead of a string. This converts array uuids to a string.
-     */
-    protected function getMediaUuid(string|array|null $uuid): ?string
-    {
-        if (! $uuid) {
-            return null;
-        }
-
-        if (is_array($uuid)) {
-            if (empty($uuid)) {
-                return null;
-            }
-
-            //take the first value:
-            return array_values($uuid)[0];
-        }
-
-        return $uuid;
     }
 
     public function getBlockId(): string

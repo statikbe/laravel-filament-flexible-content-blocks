@@ -6,11 +6,9 @@ use Closure;
 use Filament\Forms\Components\Concerns\CanBeValidated;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Get;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
-use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\BlockIdField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Concerns\HasImageEditor;
@@ -41,69 +39,6 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
             return $media->filter(function (Media $item) use ($get) {
                 return $item->getCustomProperty('block') === $get(BlockIdField::FIELD);
             });
-        });
-
-        //temp until PR is merged:
-        $this->loadStateFromRelationshipsUsing(static function (SpatieMediaLibraryFileUpload $component, HasMedia $record): void {
-            /** @var Model&HasMedia $record */
-            $media = $record->load('media')->getMedia($component->getCollection())
-                ->when(
-                    $component->hasMediaFilter(),
-                    fn (Collection $media) => $component->filterMedia($media)
-                )
-                ->when(
-                    ! $component->isMultiple(),
-                    fn (Collection $media): Collection => $media->take(1),
-                )
-                ->mapWithKeys(function (Media $media): array {
-                    $uuid = $media->getAttributeValue('uuid');
-
-                    return [$uuid => $uuid];
-                })
-                ->toArray();
-
-            $component->state($media);
-        });
-
-        //Make sure the uuid of the image is added to the form data
-        $this->dehydrated(true);
-
-        //TODO remove after filament release >3.2.72
-        $this->getUploadedFileUsing(static function (SpatieMediaLibraryFileUpload $component, string $file): ?array {
-            if (! $component->getRecord()) {
-                return null;
-            }
-
-            /** @var ?Media $media */
-            $media = $component->getRecord()->getRelationValue('media')->firstWhere('uuid', $file);
-
-            $url = null;
-
-            if ($component->getVisibility() === 'private') {
-                $conversion = $component->getConversion();
-
-                try {
-                    $url = $media?->getTemporaryUrl(
-                        now()->addMinutes(5),
-                        (filled($conversion) && $media->hasGeneratedConversion($conversion)) ? $conversion : '',
-                    );
-                } catch (Throwable $exception) {
-                    // This driver does not support creating temporary URLs.
-                }
-            }
-
-            if ($component->getConversion() && $media?->hasGeneratedConversion($component->getConversion())) {
-                $url ??= $media->getUrl($component->getConversion());
-            }
-
-            $url ??= $media?->getUrl();
-
-            return [
-                'name' => $media?->getAttributeValue('name') ?? $media?->getAttributeValue('file_name'),
-                'size' => $media?->getAttributeValue('size'),
-                'type' => $media?->getAttributeValue('mime_type'),
-                'url' => $url,
-            ];
         });
     }
 
@@ -149,10 +84,12 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
 
             $name = $this->getName();
 
+            $validationMessages = $this->getValidationMessages();
+
             $validator = Validator::make(
                 [$name => $files],
                 ["{$name}.*" => ['file', ...$this->getValidationRulesTrait()]], //Changed to load validation rules of trait (see on top of class) instead of the rules from BaseFileUpload.
-                [],
+                $validationMessages ? ["{$name}.*" => $validationMessages] : [],
                 ["{$name}.*" => $this->getValidationAttribute()],
             );
 

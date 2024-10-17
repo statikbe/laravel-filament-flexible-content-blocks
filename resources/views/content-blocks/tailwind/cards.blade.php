@@ -13,7 +13,7 @@
                 @endphp
 
                 <x-flexible-card :data="$card">
-                    {!! $getCardImageMedia($card->imageId, $card->title, false, ['class' => 'w-full']) !!}
+                    {!! $getCardImageMedia($card->cardId, $card->title, false, ['class' => 'w-full']) !!}
                 </x-flexible-card>
             @endforeach
         </div>

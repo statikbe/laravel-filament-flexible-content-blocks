@@ -2,15 +2,15 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Resource\Pages\Actions;
 
-use Filament\Pages\Actions\Action;
+use Filament\Actions\Action;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Actions\CopyContentBlocksToLocalesActionHandler;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 
 class CopyContentBlocksToLocalesAction extends Action
 {
-    //TODO refactor to create function to support filament v3 see CopyContentBlocksToLocalesAction for resources.
     public static function getDefaultName(): ?string
     {
         return 'copy_content_blocks_to_other_locales_page_action';
@@ -33,7 +33,7 @@ class CopyContentBlocksToLocalesAction extends Action
         $this->action(function () {
             /** @var EditRecord $page * */
             $page = $this->livewire;
-            /* @var Model&HasContentBlocks $record */
+            /* @var Model&HasContentBlocks&HasMedia $record */
             $record = $page->getRecord();
             $handler = new CopyContentBlocksToLocalesActionHandler;
             $handler->handle($record, $this->livewire, $record->content_blocks);
