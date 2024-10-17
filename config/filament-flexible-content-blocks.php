@@ -263,7 +263,7 @@ return [
     ],
 
     // tailwind:
-    /* 
+    /*
     'image_width' => [
         'options' => [
             '100%' => [
@@ -329,7 +329,7 @@ return [
     ],
 
     // tailwind:
-    /*  
+    /*
     'call_to_action_buttons' => [
         'options' => [
             'primary' => [
@@ -403,7 +403,7 @@ return [
     ],
 
     // tailwind:
-    /*  
+    /*
     'background_colours' => [
         'options' => [
             'default' => [

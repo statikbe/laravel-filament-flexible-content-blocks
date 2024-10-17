@@ -10,6 +10,7 @@ use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 class Card extends Component
 {
     public CardData $card;
+
     public ?string $backgroundClass;
 
     private ?string $titleUrl;
@@ -46,7 +47,7 @@ class Card extends Component
         $this->backgroundClass = $backgroundClass;
     }
 
-    public function getTitleUrl() : ?string
+    public function getTitleUrl(): ?string
     {
         if (! $this->titleUrl) {
             $this->titleUrl = $this->card->callToActions[0]->url ?? null;
@@ -55,7 +56,7 @@ class Card extends Component
         return $this->titleUrl;
     }
 
-    public function isFullyClickable() : bool
+    public function isFullyClickable(): bool
     {
         return count($this->card->callToActions) === 1;
     }
@@ -67,7 +68,7 @@ class Card extends Component
         //get another template if the block style is set:
         $templateSuffix = '';
         if ($this->card->blockStyle && ! empty(trim($this->card->blockStyle))) {
-            $templateSuffix = '-' . $this->card->blockStyle;
+            $templateSuffix = '-'.$this->card->blockStyle;
         }
 
         return view("filament-flexible-content-blocks::components.{$themePrefix}card{$templateSuffix}");
