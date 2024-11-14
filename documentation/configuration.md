@@ -47,13 +47,21 @@ If you want to customise the flexible block list on a model, you can overwrite t
 
 It is possible to create different themes for the views of the blocks and their components.
 Creating a new theme is done by publishing the views (see README.md) and then renaming the `tailwind` directory
-to your theme name, e.g. `bootstrap`. You should then specify in the var below the name of your new theme.
 
 ```php 
 'theme' => 'tailwind',
 ```
 
+available themes include:
+- `tailwind`
+- `bootstrap4-kul`
+
 ### bootstrap4-kul
+
+An example config file for this theme can be found [here](../config/filament-flexible-content-blocks-bootstrap4-kul.php).
+
+Copy this file into the local config directory of your laravel project and rename it to `filament-flexible-content-blocks.php`
+
 
 Make sure the general layout of your project follows the guidelines outlined in the [styleguide of kul](https://stijl.kuleuven.be/releases/3.0.0/techspecs/index.html)
 
