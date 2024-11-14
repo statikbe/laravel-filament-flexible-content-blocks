@@ -13,11 +13,15 @@
             $backgroundClass = $getBackgroundColourClass();
         @endphp
 
-        <x-flexible-card :backgroundClass="$backgroundClass" :data="$card" @class([
-            'col-xs-24 col-md-12' => $gridColumns == 1,
-            'col-xs-12 col-md-6' => $gridColumns == 2,
-            'col-xs-8 col-md-4' => $gridColumns == 3,
-            'col-xs-6 col-md-3' => $gridColumns == 4,
-        ]) />
+        <x-flexible-card 
+            :backgroundClass="$backgroundClass" 
+            :data="$card" 
+            @class([
+                'col-xs-24 col-md-12' => $gridColumns == 1,
+                'col-xs-12 col-md-6' => $gridColumns == 2,
+                'col-xs-8 col-md-4' => $gridColumns == 3,
+                'col-xs-6 col-md-3' => $gridColumns == 4,
+            ]) 
+        />
     @endforeach
 </section>

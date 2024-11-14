@@ -28,7 +28,10 @@
             @if ($card->callToActions)
                 <br>
                 @foreach ($card->callToActions as $callToAction)
-                    <x-flexible-call-to-action :data="$callToAction" :isFullyClickable="$isFullyClickable()"></x-flexible-call-to-action>
+                    <x-flexible-call-to-action 
+                        :data="$callToAction" 
+                        :isFullyClickable="$isFullyClickable()"
+                    ></x-flexible-call-to-action>
                 @endforeach
             @endif
         </div>

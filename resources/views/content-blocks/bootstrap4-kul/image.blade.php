@@ -11,8 +11,11 @@
             'class' => $getImageWidthClass()
         ]) }}
         @if ($imageCopyright)
-            <small class="tw-absolute tw-bottom-0 tw-bg-black/80 tw-text-white tw-px-1">
-                &copy; {{ $replaceParameters($imageCopyright) }}</small>
+            <small 
+                class="tw-absolute tw-bottom-0 tw-bg-black/80 tw-text-white tw-px-1"
+            >
+                &copy; {{ $replaceParameters($imageCopyright) }}
+            </small>
         @endif
     </div>
 </section>

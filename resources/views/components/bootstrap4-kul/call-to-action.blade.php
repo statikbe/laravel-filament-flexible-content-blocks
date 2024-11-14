@@ -3,10 +3,20 @@
 @endphp
 
 
-<a class="btn @if ($callToAction->buttonStyle) {{ $callToAction->buttonStyle }} @endif" href="{{ $callToAction->url }}"
-   @if ($callToAction->label) title="{{ Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks::replaceParameters($callToAction->label) }}" @endif
-   @if ($callToAction->openNewWindow) target="_blank" rel="noopener noreferrer" @endif>
-    @if ($callToAction->label)
+<a 
+    @class([
+        'btn', 
+        isset($callToAction->buttonStyle) => $callToAction->buttonStyle
+    ])
+    href="{{ $callToAction->url }}"
+    @if (isset($callToAction->label))
+        title="{{ Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks::replaceParameters($callToAction->label) }}" 
+    @endif
+    @if (isset($callToAction->openNewWindow)) 
+        target="_blank" rel="noopener noreferrer" 
+    @endif
+>
+    @if (isset($callToAction->label))
         {{ Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks::replaceParameters($callToAction->label) }}
     @else
         &xrarr;

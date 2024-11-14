@@ -10,8 +10,10 @@
         ]) style="background-image: url({{ $getImageUrl() }})">
             @if ($imageCopyright)
                 <small
-                       class="tw-absolute tw-bottom-0 tw-left-0 tw-bg-black tw-text-white tw-px-1 tw-bg-opacity-70">&copy;
-                    {{ $replaceParameters($imageCopyright) }}</small>
+                    class="tw-absolute tw-bottom-0 tw-left-0 tw-bg-black tw-text-white tw-px-1 tw-bg-opacity-70"
+                >
+                    &copy; {{ $replaceParameters($imageCopyright) }}
+                </small>
             @endif
         </div>
     @endif

@@ -4,7 +4,9 @@
             {!! $replaceParameters($quote) !!}
 
             @if ($author)
-                <footer class="blockquote-footer">{{ $replaceParameters($author) }}</footer>
+                <footer class="blockquote-footer">
+                    {{ $replaceParameters($author) }}
+                </footer>
             @endif
         </blockquote>
     </div>
