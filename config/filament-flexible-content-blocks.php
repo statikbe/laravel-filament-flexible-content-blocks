@@ -320,19 +320,19 @@ return [
         'options' => [
             'default' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.default',
-                'class' => '',
+                'class' => 'section--default',
             ],
             'primary' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.primary',
-                'class' => 'bg-primary-500 text-primary-contrast',
+                'class' => 'section--primary',
             ],
             'secondary' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.secondary',
-                'class' => 'bg-secondary text-secondary-contrast',
+                'class' => 'section--secondary',
             ],
-            'tertiary' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.tertiary',
-                'class' => 'bg-slate-200',
+            'light' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.light',
+                'class' => 'section--light',
             ],
         ],
         'default' => 'default',
