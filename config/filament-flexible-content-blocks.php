@@ -13,6 +13,8 @@ use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextImageBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\VideoBlock;
 
+$theme = 'bootstrap4-kul';
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -59,7 +61,7 @@ return [
      | Creating a new theme is done by publishing the views (see README.md) and then renaming the `tailwind` directory
      | to your theme name, e.g. `bootstrap`. You should then specify in the var below the name of your new theme.
      */
-    'theme' => 'tailwind',
+    'theme' => $theme,
 
     /*
      |--------------------------------------------------------------------------
@@ -234,62 +236,46 @@ return [
     | component here. Each option has label with the translation key and the corresponding CSS class that will be applied.
     | In the 'default' key, you can set the default option.
     */
-    // TODO: support theme config eg: image_width.tailwind.options or image_width.kul.options
-    // kul:
     'image_width' => [
         'options' => [
             '100%' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.100%',
-                'class' => '1200',
+                'class' => [
+                    'bootstrap4-kul' => 'tw-w-full', 
+                    'tailwind' => 'w-full'
+                ][$theme],
             ],
             '75%' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.75%',
-                'class' => '900',
+                'class' => [
+                    'bootstrap4-kul' => 'tw-w-full md:tw-w-3/4',
+                    'tailwind' => 'w-full md:w-3/4'
+                ][$theme],
             ],
             '50%' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.50%',
-                'class' => '600',
+                'class' => [
+                    'bootstrap4-kul' => 'tw-w-full md:tw-w-1/2',
+                    'tailwind' => 'w-full md:w-1/2'
+                ][$theme],
             ],
             '33%' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.33%',
-                'class' => '400',
+                'class' => [
+                    'bootstrap4-kul' => 'tw-w-full lg:tw-w-1/3', 
+                    'tailwind' => 'w-full lg:w-1/3'
+                ][$theme],
             ],
             '25%' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.25%',
-                'class' => '300',
+                'class' => [
+                    'bootstrap4-kul' => 'tw-w-full lg:tw-w-1/4',
+                    'tailwind' => 'w-full lg:w-1/4'
+                ][$theme],
             ],
         ],
         'default' => '100%',
     ],
-
-    // tailwind:
-    /*
-    'image_width' => [
-        'options' => [
-            '100%' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.100%',
-                'class' => 'w-full',
-            ],
-            '75%' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.75%',
-                'class' => 'md:w-3/4',
-            ],
-            '50%' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.50%',
-                'class' => 'md:w-1/2',
-            ],
-            '33%' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.33%',
-                'class' => 'md:w-1/3',
-            ],
-            '25%' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.25%',
-                'class' => 'md:w-1/4',
-            ],
-        ],
-        'default' => '100%',
-    ],
-    */
 
     /*
     |--------------------------------------------------------------------------
@@ -300,74 +286,70 @@ return [
     | component here. Each option has label with the translation key and the corresponding CSS class that will be applied.
     | In the 'default' key, you can set the default option.
     */
-    // TODO: support theme config eg: call_to_action_buttons.tailwind.options or call_to_action_buttons.kul.options
-    // kul:
     'call_to_action_buttons' => [
         'options' => [
-            'primary' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.kul.primary',
-                'class' => 'btn btn-primary',
+            'bootstrap4-kul' => [
+                'primary' => [
+                    'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.primary',
+                    'class' => 'btn btn-primary',
+                ],
+                'secondary' => [
+                    'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.secondary',
+                    'class' => 'btn btn-secondary',
+                ],
+                'tertiary' => [
+                    'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.tertiary',
+                    'class' => 'btn btn-tertiary',
+                ],
+                'link' => [
+                    'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.link',
+                    'class' => 'btn btn-link',
+                ],
+                'ghost' => [
+                    'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.ghost',
+                    'class' => 'btn btn-ghost',
+                ],
             ],
-            'secondary' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.kul.secondary',
-                'class' => 'btn btn-secondary',
-            ],
-            'tertiary' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.kul.tertiary',
-                'class' => 'btn btn-tertiary',
-            ],
-            'link' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.kul.link',
-                'class' => 'btn btn-link',
-            ],
-            'ghost' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.kul.ghost',
-                'class' => 'btn btn-ghost',
-            ],
-        ],
-        'default' => 'primary',
+            'tailwind' => [
+                'primary' => [
+                    'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.primary',
+                    'class' => 'btn btn--primary',
+                ],
+                'primary_chevron' => [
+                    'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.primary_chevron',
+                    'class' => 'btn btn--primary btn--ext',
+                ],
+                'secondary' => [
+                    'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.secondary',
+                    'class' => 'btn btn--secondary',
+                ],
+                'secondary_chevron' => [
+                    'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.secondary_chevron',
+                    'class' => 'btn btn--secondary btn--ext',
+                ],
+                'ghost' => [
+                    'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.ghost',
+                    'class' => 'btn btn--ghost',
+                ],
+                'ghost_chevron' => [
+                    'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.ghost_chevron',
+                    'class' => 'btn btn--ghost btn--ext',
+                ],
+                'link' => [
+                    'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.link',
+                    'class' => 'link',
+                ],
+                'link_chevron' => [
+                    'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.link_chevron',
+                    'class' => 'link link--ext',
+                ],
+            ]
+        ][$theme],
+        'default' => [
+            'bootstrap4-kul' => 'primary',
+            'tailwind' => 'primary'
+        ][$theme],
     ],
-
-    // tailwind:
-    /*
-    'call_to_action_buttons' => [
-        'options' => [
-            'primary' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.tailwind.primary',
-                'class' => 'btn btn--primary',
-            ],
-            'primary_chevron' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.tailwind.primary_chevron',
-                'class' => 'btn btn--primary btn--ext',
-            ],
-            'secondary' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.tailwind.secondary',
-                'class' => 'btn btn--secondary',
-            ],
-            'secondary_chevron' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.tailwind.secondary_chevron',
-                'class' => 'btn btn--secondary btn--ext',
-            ],
-            'ghost' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.tailwind.ghost',
-                'class' => 'btn btn--ghost',
-            ],
-            'ghost_chevron' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.tailwind.ghost_chevron',
-                'class' => 'btn btn--ghost btn--ext',
-            ],
-            'link' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.tailwind.link',
-                'class' => 'link',
-            ],
-            'link_chevron' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.tailwind.link_chevron',
-                'class' => 'link link--ext',
-            ],
-        ],
-        'default' => 'primary',
-    ],
-    */
 
     /*
     |--------------------------------------------------------------------------
@@ -378,54 +360,39 @@ return [
     | component here. Each option has label with the translation key and the corresponding CSS class that will be applied.
     | In the 'default' key, you can set the default option.
     */
-    // TODO: support theme config eg: background_colours.tailwind.options or background_colours.kul.options
-    // kul:
     'background_colours' => [
         'options' => [
             'default' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.default',
-                'class' => 'card-gray',
+                'class' => [
+                    'bootstrap4-kul' => 'card-gray', 
+                    'tailwind' => ''
+                ][$theme],
             ],
             'primary' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.primary',
-                'class' => 'card-primary',
+                'class' => [
+                    'bootstrap4-kul' => 'card-primary',
+                    'tailwind' => 'bg-primary-500 text-primary-contrast'
+                ][$theme],
             ],
             'secondary' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.secondary',
-                'class' => 'card-secondary',
+                'class' => [
+                    'bootstrap4-kul' => 'card-secondary',
+                    'tailwind' => 'bg-secondary text-secondary-contrast'
+                ][$theme],
             ],
             'tertiary' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.tertiary',
-                'class' => 'card-tertiary',
+                'class' => [
+                    'bootstrap4-kul' => 'card-tertiary', 
+                    'tailwind' => 'bg-slate-200'
+                ][$theme],
             ],
         ],
         'default' => 'default',
     ],
-
-    // tailwind:
-    /*
-    'background_colours' => [
-        'options' => [
-            'default' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.default',
-                'class' => 'section--default',
-            ],
-            'primary' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.primary',
-                'class' => 'section--primary',
-            ],
-            'secondary' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.secondary',
-                'class' => 'section--secondary',
-            ],
-            'light' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.light',
-                'class' => 'section--light',
-            ],
-        ],
-        'default' => 'default',
-    ],
-    */
 
     /*
     |--------------------------------------------------------------------------
