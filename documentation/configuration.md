@@ -53,6 +53,20 @@ to your theme name, e.g. `bootstrap`. You should then specify in the var below t
 'theme' => 'tailwind',
 ```
 
+### bootstrap4-kul
+
+Make sure the general layout of your project follows the guidelines outlined in the [styleguide of kul](https://stijl.kuleuven.be/releases/3.0.0/techspecs/index.html)
+
+This theme uses the bootstrap4 components provided by kul. It does also depend on tailwindcss, so make sure this is installed in your project as well.
+
+Make sure to add the `tw` prefix to your tailwind classes to avoid collisions with the kul styles.
+```js
+// tailwind.config.js
+export default {
+    prefix: "tw-",
+}
+```
+
 ## Templates for template block
 
 You need to list the Blade templates that are available in the dropdown in the template block. The template block enables 
