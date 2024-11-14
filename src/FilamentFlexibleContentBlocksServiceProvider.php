@@ -37,7 +37,7 @@ class FilamentFlexibleContentBlocksServiceProvider extends PackageServiceProvide
                 Card::class,
                 IncludesHead::class,
                 IncludesBody::class,
-                )
+            )
             ->hasMigrations(['create_default_pages_table', 'create_default_translatable_pages_table'])
             ->hasTranslations()
             ->hasCommand(UpgradeSpatieImageFieldsCommand::class);

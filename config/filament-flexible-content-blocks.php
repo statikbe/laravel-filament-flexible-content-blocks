@@ -241,36 +241,36 @@ return [
             '100%' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.100%',
                 'class' => [
-                    'bootstrap4-kul' => 'tw-w-full', 
-                    'tailwind' => 'w-full'
+                    'bootstrap4-kul' => 'tw-w-full',
+                    'tailwind' => 'w-full',
                 ][$theme],
             ],
             '75%' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.75%',
                 'class' => [
                     'bootstrap4-kul' => 'tw-w-full md:tw-w-3/4',
-                    'tailwind' => 'w-full md:w-3/4'
+                    'tailwind' => 'w-full md:w-3/4',
                 ][$theme],
             ],
             '50%' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.50%',
                 'class' => [
                     'bootstrap4-kul' => 'tw-w-full md:tw-w-1/2',
-                    'tailwind' => 'w-full md:w-1/2'
+                    'tailwind' => 'w-full md:w-1/2',
                 ][$theme],
             ],
             '33%' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.33%',
                 'class' => [
-                    'bootstrap4-kul' => 'tw-w-full lg:tw-w-1/3', 
-                    'tailwind' => 'w-full lg:w-1/3'
+                    'bootstrap4-kul' => 'tw-w-full lg:tw-w-1/3',
+                    'tailwind' => 'w-full lg:w-1/3',
                 ][$theme],
             ],
             '25%' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.25%',
                 'class' => [
                     'bootstrap4-kul' => 'tw-w-full lg:tw-w-1/4',
-                    'tailwind' => 'w-full lg:w-1/4'
+                    'tailwind' => 'w-full lg:w-1/4',
                 ][$theme],
             ],
         ],
@@ -343,11 +343,11 @@ return [
                     'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.link_chevron',
                     'class' => 'link link--ext',
                 ],
-            ]
+            ],
         ][$theme],
         'default' => [
             'bootstrap4-kul' => 'primary',
-            'tailwind' => 'primary'
+            'tailwind' => 'primary',
         ][$theme],
     ],
 
@@ -365,29 +365,29 @@ return [
             'default' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.default',
                 'class' => [
-                    'bootstrap4-kul' => 'card-gray', 
-                    'tailwind' => ''
+                    'bootstrap4-kul' => 'card-gray',
+                    'tailwind' => '',
                 ][$theme],
             ],
             'primary' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.primary',
                 'class' => [
                     'bootstrap4-kul' => 'card-primary',
-                    'tailwind' => 'bg-primary-500 text-primary-contrast'
+                    'tailwind' => 'bg-primary-500 text-primary-contrast',
                 ][$theme],
             ],
             'secondary' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.secondary',
                 'class' => [
                     'bootstrap4-kul' => 'card-secondary',
-                    'tailwind' => 'bg-secondary text-secondary-contrast'
+                    'tailwind' => 'bg-secondary text-secondary-contrast',
                 ][$theme],
             ],
             'tertiary' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.tertiary',
                 'class' => [
-                    'bootstrap4-kul' => 'card-tertiary', 
-                    'tailwind' => 'bg-slate-200'
+                    'bootstrap4-kul' => 'card-tertiary',
+                    'tailwind' => 'bg-slate-200',
                 ][$theme],
             ],
         ],
