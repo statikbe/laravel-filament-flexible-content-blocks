@@ -1,6 +1,6 @@
 <section @class([
     'card tw-relative',
-    $hasImage() ? 'card-cover card-inverse' : 'card-gray',
+    $hasImage() ? 'card-cover card-inverse' : '',
     $getBackgroundColourClass(),
 ])>
 

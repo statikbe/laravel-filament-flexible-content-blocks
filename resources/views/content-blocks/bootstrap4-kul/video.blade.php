@@ -7,7 +7,7 @@
                     {{ $getOverlayImageMedia(attributes: ['alt' => '', 'class' => 'tw-w-full', 'loading' => 'lazy']) }}
                     <div class="tw-absolute tw-inset-0">
                         <div class="tw-flex tw-items-center tw-justify-center tw-h-full">
-                            <button class="tw-flex tw-flex-col tw-items-center tw-justify-center before:tw-transition-all before:tw-duration-300 before:tw-ease-in-out group-hover:before:tw-bg-black/30 before:tw-absolute before:tw-bg-black/0 before:tw-inset-0 group-hover:tw-bg-black/0"
+                            <button class="tw-bg-transparent tw-flex tw-flex-col tw-items-center tw-justify-center before:tw-transition-all before:tw-duration-300 before:tw-ease-in-out group-hover:before:tw-bg-black/30 before:tw-absolute before:tw-bg-black/0 before:tw-inset-0 group-hover:tw-bg-black/0"
                                     @click="isPlaying = !isPlaying; $nextTick(() => { $refs.iframeElement.setAttribute('src', embedUrl) });">
                                 <div
                                      class="tw-relative tw-z-10 tw-text-white tw-p-2 tw-bg-black tw-rounded-full tw-bg-opacity-70 ">
