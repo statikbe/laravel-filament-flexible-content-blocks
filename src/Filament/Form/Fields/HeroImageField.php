@@ -18,6 +18,7 @@ class HeroImageField extends ImageField
                 /** @var HasHeroImageAttributes $record */
                 return $record->getHeroImageCollection();
             })
-            ->conversion('thumbnail');
+            ->conversion('thumbnail')
+            ->imageEditor(config('filament-flexible-content-blocks.image_editor.enabled'));
     }
 }
