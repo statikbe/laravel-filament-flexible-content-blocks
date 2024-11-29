@@ -121,6 +121,7 @@ return [
     'form_component.content_blocks.call_to_action_btn.primary_chevron' => 'Primary >',
     'form_component.content_blocks.call_to_action_btn.secondary' => 'Secondary',
     'form_component.content_blocks.call_to_action_btn.secondary_chevron' => 'Secondary >',
+    'form_component.content_blocks.call_to_action_btn.tertiary' => 'Tertiary',
     'form_component.content_blocks.call_to_action_btn.ghost' => 'Transparent',
     'form_component.content_blocks.call_to_action_btn.ghost_chevron' => 'Transparent >',
     'form_component.content_blocks.call_to_action_btn.link' => 'Link',
@@ -140,7 +141,8 @@ return [
     'form_component.content_blocks.background_colour.default' => 'Default',
     'form_component.content_blocks.background_colour.primary' => 'Primary',
     'form_component.content_blocks.background_colour.secondary' => 'Secondary',
-    'form_component.content_blocks.background_colour.light' => 'Light',
+    'form_component.content_blocks.background_colour.tertiary' => 'Tertiary',
+    'form_component.content_blocks.background_colour.gray' => 'Gray',
 
     'form_component.content_blocks.block_styles.default' => 'Default',
 

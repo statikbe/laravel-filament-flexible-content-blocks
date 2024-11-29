@@ -11,6 +11,8 @@ class Card extends Component
 {
     public CardData $card;
 
+    public ?string $backgroundClass;
+
     private ?string $titleUrl;
 
     /**
@@ -24,7 +26,8 @@ class Card extends Component
         ?array $callToActions = [],
         ?string $image = null,
         ?string $imageUrl = null,
-        ?string $blockStyle = null
+        ?string $blockStyle = null,
+        ?string $backgroundClass = null
     ) {
         if ($data) {
             $this->card = $data;
@@ -41,6 +44,7 @@ class Card extends Component
         }
 
         $this->titleUrl = $titleUrl;
+        $this->backgroundClass = $backgroundClass;
     }
 
     public function getTitleUrl(): ?string

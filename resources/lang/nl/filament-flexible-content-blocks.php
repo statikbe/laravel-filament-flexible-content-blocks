@@ -123,6 +123,7 @@ return [
     'form_component.content_blocks.call_to_action_btn.primary_chevron' => 'Primair >',
     'form_component.content_blocks.call_to_action_btn.secondary' => 'Secundair',
     'form_component.content_blocks.call_to_action_btn.secondary_chevron' => 'Secundair >',
+    'form_component.content_blocks.call_to_action_btn.tertiary' => 'Tertiair',
     'form_component.content_blocks.call_to_action_btn.ghost' => 'Transparant',
     'form_component.content_blocks.call_to_action_btn.ghost_chevron' => 'Transparant >',
     'form_component.content_blocks.call_to_action_btn.link' => 'Link',
@@ -142,7 +143,8 @@ return [
     'form_component.content_blocks.background_colour.default' => 'Standaard',
     'form_component.content_blocks.background_colour.primary' => 'Primair',
     'form_component.content_blocks.background_colour.secondary' => 'Secundair',
-    'form_component.content_blocks.background_colour.light' => 'Light',
+    'form_component.content_blocks.background_colour.tertiary' => 'Tertiary',
+    'form_component.content_blocks.background_colour.gray' => 'Grijs',
 
     'form_component.content_blocks.block_styles.default' => 'Standaard',
 
