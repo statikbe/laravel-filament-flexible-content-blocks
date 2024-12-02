@@ -22,7 +22,7 @@ class CallToActionData
     ) {}
 
     /**
-     * @param  array{cta_model: string, entry_id: ?string, url: ?string, button_style: ?string, button_label: ?string, button_open_new_window: ?boolean}  $callToActionBlockData
+     * @param  array{cta_model: string, entry_id: ?string, url: ?string, button_style: ?string, button_label: ?string, button_open_new_window: ?bool}  $callToActionBlockData
      *
      * @throws LinkableModelNotFoundException
      * @throws CallToActionNotDefinedException
@@ -53,8 +53,7 @@ class CallToActionData
                 /** @var Linkable&Model $page */
                 $page = $linkableModel::findOrFail($callToActionBlockData[CallToActionField::FIELD_ENTRY_ID]);
                 $url = $page->getViewUrl();
-            }
-            catch(ModelNotFoundException $ex){
+            } catch (ModelNotFoundException $ex) {
                 //The url could not be created because the entry could not be found. By catching the exception, we avoid a 404.
                 Log::warning("The url could not be created because the entry could not be found ({$linkableModel}: {$callToActionBlockData[CallToActionField::FIELD_ENTRY_ID]}). This will probably result in a dead link.");
             }
