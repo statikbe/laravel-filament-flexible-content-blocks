@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.1.6 - 2024-12-02
+
+Fix model entry to found exception which results in a 404 page for assets in CTA fields
+
 ## v2.1.5 - 2024-10-10
 
 Fix copy blocks to all locales actions
