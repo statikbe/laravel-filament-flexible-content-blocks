@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.1.7 - 2024-12-11
+
+### What's Changed
+
+* Fix scope `published` to return correct published posts by @andrii-trush in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/56
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v2.1.6...v2.1.7
+
 ## v2.1.6 - 2024-12-02
 
 Fix model entry to found exception which results in a 404 page for assets in CTA fields
