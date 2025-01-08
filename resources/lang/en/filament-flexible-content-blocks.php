@@ -133,6 +133,8 @@ return [
     'form_component.content_blocks.call_to_action_cta_model' => 'Type',
     'form_component.content_blocks.call_to_action_entry_id' => 'Page',
     'form_component.content_blocks.call_to_action_button_style' => 'Button style',
+    'form_component.content_blocks.call_to_action_button_icon' => 'Button Icon',
+    'form_component.content_blocks.call_to_action_button_icon_position' => 'Button Icon Position',
     'form_component.content_blocks.call_to_action_button_label' => 'Button label',
     'form_component.content_blocks.call_to_action_button_open_in_new_window' => 'Open in new window?',
     'form_component.content_blocks.call_to_action_route' => 'Route',
