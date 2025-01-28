@@ -259,7 +259,7 @@ abstract class AbstractType
 
     public function getAlias(): string
     {
-        //TODO check if this needs to be changed for projects without morph map.
+        // TODO check if this needs to be changed for projects without morph map.
         return app($this->getModel())->getMorphClass();
     }
 

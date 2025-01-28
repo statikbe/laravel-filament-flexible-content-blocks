@@ -14,7 +14,7 @@ trait HasContentBlocksTrait
 {
     public function initializeHasContentBlocksTrait(): void
     {
-        //set casts of attributes:
+        // set casts of attributes:
         $this->mergeCasts([
             'content_blocks' => 'array',
         ]);

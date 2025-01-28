@@ -54,7 +54,7 @@ class CallToActionData
                 $page = $linkableModel::findOrFail($callToActionBlockData[CallToActionField::FIELD_ENTRY_ID]);
                 $url = $page->getViewUrl();
             } catch (ModelNotFoundException $ex) {
-                //The url could not be created because the entry could not be found. By catching the exception, we avoid a 404.
+                // The url could not be created because the entry could not be found. By catching the exception, we avoid a 404.
                 Log::warning("The url could not be created because the entry could not be found ({$linkableModel}: {$callToActionBlockData[CallToActionField::FIELD_ENTRY_ID]}). This will probably result in a dead link.");
             }
         }

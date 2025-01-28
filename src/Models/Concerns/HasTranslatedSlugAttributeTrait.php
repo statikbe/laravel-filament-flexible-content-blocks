@@ -27,7 +27,7 @@ trait HasTranslatedSlugAttributeTrait
 
     protected static function bootHasTranslatedSlugAttributeTrait(): void
     {
-        //dispatch event when slug changes for published models:
+        // dispatch event when slug changes for published models:
         static::updating(function (self $record) {
             $newSlugs = $record->getTranslations('slug');
             $existingSlugs = $record->getOriginal('slug');
@@ -60,7 +60,7 @@ trait HasTranslatedSlugAttributeTrait
                     $published = $record->isPublishedForDates($record->getOriginal('publishing_begins_at'), $record->getOriginal('publishing_ends_at'));
                 }
 
-                //dispatch event:
+                // dispatch event:
                 SlugChanged::dispatch($record, $changedSlugs, $published);
             }
         });

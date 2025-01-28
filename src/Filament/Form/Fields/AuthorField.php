@@ -18,7 +18,7 @@ class AuthorField extends Select
             ->relationship('author', 'name')
             ->default(Auth::user()->id)
             ->searchable()
-            //this is a default search query, add your own implementation by implementing getSearchResultsUsing on creation of the field.
+            // this is a default search query, add your own implementation by implementing getSearchResultsUsing on creation of the field.
             ->getSearchResultsUsing(function (string $searchQuery) {
                 $searchQuery = trim(Str::lower($searchQuery));
 

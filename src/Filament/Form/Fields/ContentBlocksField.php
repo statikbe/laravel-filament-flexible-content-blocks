@@ -12,7 +12,7 @@ class ContentBlocksField extends Builder
 {
     const FIELD = 'content_blocks';
 
-    //cache of instantiated blocks:
+    // cache of instantiated blocks:
     protected ?array $contentBlocks;
 
     public static function create(): static
@@ -22,12 +22,12 @@ class ContentBlocksField extends Builder
             ->addActionLabel(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_add_lbl'))
             ->addBetweenActionLabel(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_add_lbl'))
             ->blocks(function (Livewire $livewire, ContentBlocksField $component) {
-                //this function is called very often, therefore we cache the results here.
-                //caching on model level causes weird behaviour with livewire entangle because the block components are not refreshed each time the builder is recreated.
+                // this function is called very often, therefore we cache the results here.
+                // caching on model level causes weird behaviour with livewire entangle because the block components are not refreshed each time the builder is recreated.
                 if (! isset($component->contentBlocks)) {
                     /** @var Page $livewire */
-                    //to set the blocks, filament uses the childComponents.
-                    //set the blocks based on the list of block classes configured on the resource.
+                    // to set the blocks, filament uses the childComponents.
+                    // set the blocks based on the list of block classes configured on the resource.
                     $resource = $livewire::getResource();
 
                     $component->contentBlocks = array_values($resource::getModel()::getFilamentContentBlocks());
@@ -47,7 +47,7 @@ class ContentBlocksField extends Builder
     {
         return collect($this->getState())
             ->filter(function ($itemData): bool {
-                //extra condition to make sure $itemData has a type:
+                // extra condition to make sure $itemData has a type:
                 return is_array($itemData) && array_key_exists('type', $itemData) && $this->hasBlock($itemData['type']);
             })
             ->map(

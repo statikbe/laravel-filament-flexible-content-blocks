@@ -6,7 +6,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockStyl
 
 trait HasBlockStyle
 {
-    //we need to use a static string instead of a const, because PHP8.1 is lacking const in traits:
+    // we need to use a static string instead of a const, because PHP8.1 is lacking const in traits:
     public static string $DEFAULT_BLOCK_STYLE = 'default';
 
     public ?string $blockStyle;

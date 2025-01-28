@@ -42,7 +42,7 @@ class TemplateBlock extends AbstractFilamentFlexibleContentBlock
 
     public static function visible(): bool|Closure
     {
-        //only show block when templates are set in the config:
+        // only show block when templates are set in the config:
         return ! empty(FilamentFlexibleBlocksConfig::getTemplatesConfig(static::class));
     }
 }

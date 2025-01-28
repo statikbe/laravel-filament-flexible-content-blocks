@@ -43,7 +43,7 @@ class FilamentFlexibleContentBlocks
             return $content;
         }
 
-        //the code below is based on the Illuminate\Translation\Translator->makeReplacements implementation:
+        // the code below is based on the Illuminate\Translation\Translator->makeReplacements implementation:
         $shouldReplace = [];
 
         foreach (static::getReplacerParameters() as $key => $value) {

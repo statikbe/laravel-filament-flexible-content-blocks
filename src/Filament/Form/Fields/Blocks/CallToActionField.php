@@ -108,7 +108,7 @@ class CallToActionField extends Component
                     Select::make(static::FIELD_ENTRY_ID)
                         ->columnSpan(4)
                         ->label(function (Get $get) use ($types) {
-                            //get the selected type:
+                            // get the selected type:
                             $selectedTypeModel = $get(static::FIELD_CTA_MODEL);
                             $selectedType = collect($types)->filter(fn (CallToActionType $type) => ! $type->isUrlType() && ! $type->isRouteType() && $type->getModel() === $selectedTypeModel)->first();
 

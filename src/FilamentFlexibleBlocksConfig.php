@@ -83,12 +83,12 @@ class FilamentFlexibleBlocksConfig
         return Cache::rememberForever('filament-flexible-content-blocks::link_routes', function () {
             /* @var RouteCollection $routeCollection */
             $routeCollection = app()->get('router')->getRoutes()->getRoutes();
-            //Default remove all routes with parameters and no GET requests:
+            // Default remove all routes with parameters and no GET requests:
             $filteredRoutes = collect($routeCollection)->filter(function (Route $route) {
                 return collect($route->methods())->contains('GET') && empty($route->parameterNames());
             });
 
-            //keep routes that match the allowed route parameters:
+            // keep routes that match the allowed route parameters:
             $allowedRoutePatterns = config('filament-flexible-content-blocks.link_routes.allowed');
             if (! empty($allowedRoutePatterns)) {
                 $filteredRoutes = $filteredRoutes->filter(function (Route $route) use ($allowedRoutePatterns) {
@@ -96,7 +96,7 @@ class FilamentFlexibleBlocksConfig
                 });
             }
 
-            //remove routes that match the allowed route parameters:
+            // remove routes that match the allowed route parameters:
             $disallowedRoutePatterns = config('filament-flexible-content-blocks.link_routes.denied');
             if (! empty($disallowedRoutePatterns)) {
                 $filteredRoutes = $filteredRoutes->filter(function (Route $route) use ($disallowedRoutePatterns) {
@@ -174,9 +174,9 @@ class FilamentFlexibleBlocksConfig
             return $configuredConversion($conversion);
         }
 
-        //handle array configuration:
+        // handle array configuration:
         $alreadyDoneConversions = [];
-        //specific cases for specific method calls on the conversion object:
+        // specific cases for specific method calls on the conversion object:
         if (isset($configuredConversion['fit']) && isset($configuredConversion['width']) && isset($configuredConversion['height'])) {
             $conversion->fit($configuredConversion['fit'], $configuredConversion['width'], $configuredConversion['height']);
             $alreadyDoneConversions = ['fit', 'width', 'height'];
@@ -202,7 +202,7 @@ class FilamentFlexibleBlocksConfig
             $conversion->queued();
             $alreadyDoneConversions[] = 'queued';
         }
-        //do the manipulations that are left:
+        // do the manipulations that are left:
         foreach ($configuredConversion as $operation => $value) {
             if (! in_array($operation, $alreadyDoneConversions)) {
                 $conversion->{$operation}($value);

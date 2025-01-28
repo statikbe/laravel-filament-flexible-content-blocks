@@ -114,7 +114,7 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
                 static::addCropImageConversion($record, 800, 420);
                 static::addContainImageConversion($record, 800, 420);
 
-                //for filament upload field
+                // for filament upload field
                 $record->addFilamentThumbnailMediaConversion();
             });
     }

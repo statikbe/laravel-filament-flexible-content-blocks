@@ -20,7 +20,7 @@ class BlockStyleField extends Select
             ->helperText(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.block_style_help'))
             ->options(FilamentFlexibleBlocksConfig::getBlockStyleSelectOptions($blockClass))
             ->default(FilamentFlexibleBlocksConfig::getBlockStyleDefault($blockClass))
-            //only show when enabled and when there are styles configured:
+            // only show when enabled and when there are styles configured:
             ->visible($blockClass::hasBlockStyles() && count(FilamentFlexibleBlocksConfig::getBlockStyleSelectOptions($blockClass)) > 1)
             ->selectablePlaceholder(false)
             ->required($required);
