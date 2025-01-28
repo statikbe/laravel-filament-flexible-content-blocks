@@ -63,7 +63,7 @@ trait HasOverviewAttributesTrait
                 FilamentFlexibleBlocksConfig::mergeConfiguredModelImageConversion(static::class, $this->getOverviewImageCollection(), $this->getOverviewImageConversionName(), $conversion);
                 FilamentFlexibleBlocksConfig::addExtraModelImageConversions(static::class, $this->getOverviewImageCollection(), $this);
 
-                //for filament upload field
+                // for filament upload field
                 $this->addFilamentThumbnailMediaConversion();
             });
     }

@@ -47,7 +47,7 @@ class CardData
                 try {
                     $callToActions[] = CallToActionData::create($callToAction, $buttonStyleClasses);
                 } catch (CallToActionNotDefinedException $ex) {
-                    //if the data is not available, we do not create a call to action.
+                    // if the data is not available, we do not create a call to action.
                 }
             }
         }

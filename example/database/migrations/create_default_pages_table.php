@@ -13,40 +13,40 @@ return new class extends Migration
 
             $table->string('title');
 
-            //Intro:
+            // Intro:
             $table->text('intro')->nullable();
 
-            //Hero image:
+            // Hero image:
             $table->string('hero_image_copyright')->nullable();
             $table->string('hero_image_title')->nullable();
 
-            //Publishing:
+            // Publishing:
             $table->timestamp('publishing_begins_at')->nullable();
             $table->timestamp('publishing_ends_at')->nullable();
             $table->index('publishing_begins_at');
             $table->index('publishing_ends_at');
 
-            //SEO:
+            // SEO:
             $table->string('seo_title')->nullable();
             $table->text('seo_description')->nullable();
             $table->json('seo_keywords')->nullable();
 
-            //Overview:
+            // Overview:
             $table->string('overview_title')->nullable();
             $table->text('overview_description')->nullable();
 
-            //Content blocks:
-            $table->json('content_blocks')->default('[]'); //Default only works on JSON on MySQL 8 or newer
+            // Content blocks:
+            $table->json('content_blocks')->default('[]'); // Default only works on JSON on MySQL 8 or newer
 
-            //Slug:
+            // Slug:
             $table->string('slug');
 
-            //Author:
+            // Author:
             $table->unsignedBigInteger('author_id')->nullable();
             $table->foreign('author_id')
                 ->references('id')->on('users')->onDelete('set null');
 
-            //Parent-child:
+            // Parent-child:
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->foreign('parent_id')->references('id')->on('pages');
 

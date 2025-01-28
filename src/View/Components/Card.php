@@ -61,7 +61,7 @@ class Card extends Component
     {
         $themePrefix = FilamentFlexibleBlocksConfig::getViewThemePrefix();
 
-        //get another template if the block style is set:
+        // get another template if the block style is set:
         $templateSuffix = '';
         if ($this->card->blockStyle && ! empty(trim($this->card->blockStyle))) {
             $templateSuffix = '-'.$this->card->blockStyle;

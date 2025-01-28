@@ -20,7 +20,7 @@ trait HasSlugAttributeTrait
 
     protected static function bootHasSlugAttributeTrait(): void
     {
-        //dispatch event when slug changes for published models:
+        // dispatch event when slug changes for published models:
         static::updating(function (self $record) {
             $newSlug = $record->slug;
             $existingSlug = $record->getOriginal('slug');
@@ -39,7 +39,7 @@ trait HasSlugAttributeTrait
                     $published = $record->isPublishedForDates($record->getOriginal('publishing_begins_at'), $record->getOriginal('publishing_ends_at'));
                 }
 
-                //dispatch event:
+                // dispatch event:
                 SlugChanged::dispatch($record, $changedSlugs, $published);
             }
         });

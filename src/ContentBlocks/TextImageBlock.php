@@ -123,7 +123,7 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
                 static::addCropImageConversion($record, 1200, 630);
                 static::addContainImageConversion($record, 1200, 630);
 
-                //for filament upload field
+                // for filament upload field
                 $record->addFilamentThumbnailMediaConversion();
             });
     }

@@ -11,45 +11,45 @@ return new class extends Migration
         Schema::create('translatable_pages', function (Blueprint $table) {
             $table->id();
 
-            $table->json('title')->default('{}'); //Default only works on JSON on MySQL 8 or newer
+            $table->json('title')->default('{}'); // Default only works on JSON on MySQL 8 or newer
 
-            //Intro:
+            // Intro:
             $table->json('intro')->default('{}');
 
-            //Hero image:
+            // Hero image:
             $table->json('hero_image_copyright')->default('{}');
             $table->json('hero_image_title')->default('{}');
 
-            //Publishing:
+            // Publishing:
             $table->timestamp('publishing_begins_at')->nullable();
             $table->timestamp('publishing_ends_at')->nullable();
             $table->index('publishing_begins_at');
             $table->index('publishing_ends_at');
 
-            //SEO:
+            // SEO:
             $table->json('seo_title')->nullable();
             $table->json('seo_description')->nullable();
             $table->json('seo_keywords')->nullable();
 
-            //Overview:
+            // Overview:
             $table->json('overview_title')->nullable();
             $table->json('overview_description')->nullable();
 
-            //Content blocks:
-            $table->json('content_blocks')->default('[]'); //Default only works on JSON on MySQL 8 or newer
+            // Content blocks:
+            $table->json('content_blocks')->default('[]'); // Default only works on JSON on MySQL 8 or newer
 
-            //Slug:
+            // Slug:
             $table->json('slug')->default('{}');
 
-            //Unique code:
+            // Unique code:
             $table->string('code')->nullable()->unique();
 
-            //Author:
+            // Author:
             $table->unsignedBigInteger('author_id')->nullable();
             $table->foreign('author_id')
                 ->references('id')->on('users')->onDelete('set null');
 
-            //Parent-child:
+            // Parent-child:
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->foreign('parent_id')->references('id')->on('pages');
 
