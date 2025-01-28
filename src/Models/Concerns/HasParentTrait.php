@@ -13,6 +13,11 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasParent;
  */
 trait HasParentTrait
 {
+
+    public function initializeHasParentTrait(): void
+    {
+        $this->mergeFillable(['parent_id']);
+    }
     public function parent(): BelongsTo
     {
         return $this->belongsTo(static::class, 'parent_id');

@@ -7,7 +7,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasPageAttributes;
 
 class ParentField extends Select
 {
-    const FIELD = 'parent';
+    const FIELD = 'parent_id';
 
     public static function create(): static
     {
@@ -17,6 +17,7 @@ class ParentField extends Select
             ->relationship(name: 'parent', titleAttribute: null)
             ->getOptionLabelFromRecordUsing(fn (HasPageAttributes $record) => $record->title)
             ->searchable(['title', 'intro'])
+            ->preload()
             ->required(false);
     }
 }
