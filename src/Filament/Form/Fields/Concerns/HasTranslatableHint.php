@@ -4,6 +4,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Concerns;
 
 use Filament\Forms\Components\Field;
 use Illuminate\Database\Eloquent\Model;
+use Livewire\Component;
 
 /**
  * Checks if the field is translatable and adds a default translatable hint, if no other hint is provided.
@@ -29,5 +30,14 @@ trait HasTranslatableHint
         };
 
         return $this;
+    }
+
+    protected function hasTranslatableField(?Model $record, Field $component, Component $livewire): bool
+    {
+        if(method_exists($livewire, 'getTranslatableLocales') && count($livewire->getTranslatableLocales()) <= 1){
+            return false;
+        }
+
+        return ($record && isset($record->translatable) && in_array($component->getName(), $record->translatable));
     }
 }
