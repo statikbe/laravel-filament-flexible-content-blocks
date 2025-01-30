@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.1.8 - 2025-01-30
+
+Improve translatable field hint: do not show hint when only one locale is set.
+
 ## v2.1.7 - 2024-12-11
 
 ### What's Changed
