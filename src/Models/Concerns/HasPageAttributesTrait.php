@@ -17,7 +17,7 @@ trait HasPageAttributesTrait
     {
         $this->mergeFillable(['title', 'publishing_begins_at', 'publishing_ends_at']);
 
-        //set casts of attributes:
+        // set casts of attributes:
         $this->mergeCasts([
             'publishing_begins_at' => 'datetime',
             'publishing_ends_at' => 'datetime',
@@ -84,7 +84,7 @@ trait HasPageAttributesTrait
      */
     public function scopePublished(Builder $query): Builder
     {
-        //we need to cover each situation where publishing_begins_at and publishing_ends_at are null:
+        // we need to cover each situation where publishing_begins_at and publishing_ends_at are null:
         return $query->where(function (Builder $publishedQuery) {
             $this->createPublishedSubquery($publishedQuery);
         });
@@ -95,7 +95,7 @@ trait HasPageAttributesTrait
      */
     public function scopeUnpublished(Builder $query): Builder
     {
-        //we need to cover each situation where publishing_begins_at and publishing_ends_at are null:
+        // we need to cover each situation where publishing_begins_at and publishing_ends_at are null:
         return $query->whereNot(function (Builder $publishedQuery) {
             $this->createPublishedSubquery($publishedQuery);
         });

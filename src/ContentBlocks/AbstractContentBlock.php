@@ -37,9 +37,9 @@ abstract class AbstractContentBlock extends Component
         $this->record = $record;
         $this->blockData = $blockData;
 
-        //block id:
+        // block id:
         if (! isset($this->blockData[BlockIdField::FIELD]) || ! $this->blockData[BlockIdField::FIELD]) {
-            //initialise the ID for a new block, then never change it.
+            // initialise the ID for a new block, then never change it.
             $this->blockData[BlockIdField::FIELD] = BlockIdField::generateBlockId();
         }
 
@@ -85,7 +85,7 @@ abstract class AbstractContentBlock extends Component
     {
         return function (\Filament\Forms\Components\Component $component) {
             return array_merge([
-                //keep track of block id:
+                // keep track of block id:
                 BlockIdField::create(),
             ],
                 $component->evaluate(static::makeFilamentSchema()));
@@ -111,7 +111,7 @@ abstract class AbstractContentBlock extends Component
      */
     public static function addMediaCollectionAndConversion(HasMedia&HasMediaAttributes $record): void
     {
-        //overwrite to add collection and conversion here if the block has images
+        // overwrite to add collection and conversion here if the block has images
     }
 
     /**

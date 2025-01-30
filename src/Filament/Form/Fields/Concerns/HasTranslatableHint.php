@@ -34,10 +34,10 @@ trait HasTranslatableHint
 
     protected function hasTranslatableField(?Model $record, Field $component, Component $livewire): bool
     {
-        if(method_exists($livewire, 'getTranslatableLocales') && count($livewire->getTranslatableLocales()) <= 1){
+        if (method_exists($livewire, 'getTranslatableLocales') && count($livewire->getTranslatableLocales()) <= 1) {
             return false;
         }
 
-        return ($record && isset($record->translatable) && in_array($component->getName(), $record->translatable));
+        return $record && isset($record->translatable) && in_array($component->getName(), $record->translatable);
     }
 }

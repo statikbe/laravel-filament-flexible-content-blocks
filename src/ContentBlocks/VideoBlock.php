@@ -92,7 +92,7 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
             ->registerMediaConversions(function (Media $media) use ($record) {
                 static::addCropImageConversion($record, 1200, 675);
 
-                //for filament upload field
+                // for filament upload field
                 $record->addFilamentThumbnailMediaConversion();
             });
     }

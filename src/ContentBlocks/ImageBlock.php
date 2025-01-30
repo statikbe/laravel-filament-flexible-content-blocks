@@ -99,14 +99,14 @@ class ImageBlock extends AbstractFilamentFlexibleContentBlock
                 static::addCropImageConversion($record, 1200, 630);
                 static::addContainImageConversion($record, 1200, 630);
 
-                //for filament upload field
+                // for filament upload field
                 $record->addFilamentThumbnailMediaConversion();
             });
     }
 
     public static function getImageConversionTypeDefault(): string
     {
-        //change the default image conversion for the image block to show the real aspect ratio.
+        // change the default image conversion for the image block to show the real aspect ratio.
         return static::CONVERSION_CONTAIN;
     }
 

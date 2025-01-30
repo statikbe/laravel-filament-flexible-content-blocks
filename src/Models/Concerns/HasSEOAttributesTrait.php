@@ -63,7 +63,7 @@ trait HasSEOAttributesTrait
                 FilamentFlexibleBlocksConfig::mergeConfiguredModelImageConversion(static::class, $this->getSEOImageCollection(), $this->getSEOImageConversionName(), $conversion);
                 FilamentFlexibleBlocksConfig::addExtraModelImageConversions(static::class, $this->getSEOImageCollection(), $this);
 
-                //for filament upload field
+                // for filament upload field
                 $this->addFilamentThumbnailMediaConversion();
             });
     }

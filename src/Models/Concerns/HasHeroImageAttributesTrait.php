@@ -41,10 +41,10 @@ trait HasHeroImageAttributesTrait
                 FilamentFlexibleBlocksConfig::mergeConfiguredModelImageConversion(static::class, $this->getHeroImageCollection(), $this->getHeroImageConversionName(), $conversion);
                 FilamentFlexibleBlocksConfig::addExtraModelImageConversions(static::class, $this->getHeroImageCollection(), $this);
 
-                //for filament upload field
+                // for filament upload field
                 $this->addFilamentThumbnailMediaConversion();
 
-                //add extra conversion for overview image format, when the hero is used as fallback for the overview image:
+                // add extra conversion for overview image format, when the hero is used as fallback for the overview image:
                 if (method_exists($this, 'overviewImage')) {
                     $overviewConversion = $this->addMediaConversion($this->getOverviewImageConversionName())
                         ->withResponsiveImages()
@@ -53,7 +53,7 @@ trait HasHeroImageAttributesTrait
                     FilamentFlexibleBlocksConfig::mergeConfiguredModelImageConversion(static::class, $this->getHeroImageCollection(), $this->getOverviewImageConversionName(), $overviewConversion);
                 }
 
-                //add extra conversion for SEO image format, when the hero is used as fallback for the SEO image:
+                // add extra conversion for SEO image format, when the hero is used as fallback for the SEO image:
                 if (method_exists($this, 'heroImage')) {
                     $seoConversion = $this->addMediaConversion($this->getSEOImageConversionName())
                         ->fit(Fit::Crop, 1200, 630)

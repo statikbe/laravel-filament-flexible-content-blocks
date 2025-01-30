@@ -44,10 +44,10 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
 
     public function getState(): mixed
     {
-        //if the language switch is used, the form data needs to reset with a UUID in an array.
-        //often a string UUID is returned by getState() so this function is overwritten to wrap string UUIDs in an array:
+        // if the language switch is used, the form data needs to reset with a UUID in an array.
+        // often a string UUID is returned by getState() so this function is overwritten to wrap string UUIDs in an array:
         $state = parent::getState();
-        //transform strings to arrays since the upload field expects an array of UUIDs:
+        // transform strings to arrays since the upload field expects an array of UUIDs:
         if ($state && ! is_array($state)) {
             $state = array_filter([$state]);
         }
@@ -73,9 +73,9 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
             $rules[] = "min:{$count}";
         }
 
-        //Changed to support the language switch
+        // Changed to support the language switch
         $rules[] = function (string $attribute, array|string|TemporaryUploadedFile $value, Closure $fail): void {
-            //Changed: Transform $value to array
+            // Changed: Transform $value to array
             if (is_string($value) || $value instanceof TemporaryUploadedFile) {
                 $value = [$value];
             }
@@ -88,7 +88,7 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
 
             $validator = Validator::make(
                 [$name => $files],
-                ["{$name}.*" => ['file', ...$this->getValidationRulesTrait()]], //Changed to load validation rules of trait (see on top of class) instead of the rules from BaseFileUpload.
+                ["{$name}.*" => ['file', ...$this->getValidationRulesTrait()]], // Changed to load validation rules of trait (see on top of class) instead of the rules from BaseFileUpload.
                 $validationMessages ? ["{$name}.*" => $validationMessages] : [],
                 ["{$name}.*" => $this->getValidationAttribute()],
             );
