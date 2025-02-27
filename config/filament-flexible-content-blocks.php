@@ -305,6 +305,11 @@ return [
             ],
         ],
         'default' => 'primary',
+        'icon_positions'=> [
+            'flex-row-reverse' =>'left',
+            'flex-row' => 'right',
+        ],
+        'icon_position_default' => 'left',
     ],
 
     /*

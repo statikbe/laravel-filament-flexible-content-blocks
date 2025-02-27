@@ -43,6 +43,10 @@ class CallToActionField extends Component
 
     const FIELD_BUTTON_OPEN_NEW_WINDOW = 'button_open_new_window';
 
+    const FIELD_ICON = 'icon';
+    
+    const FIELD_ICON_POSITION = 'icon_position';
+
     protected string $view = 'filament-forms::components.fieldset';
 
     public bool|Closure $isRequired = false;
@@ -160,6 +164,16 @@ class CallToActionField extends Component
                         ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_button_open_in_new_window'))
                         ->columnSpan(1)
                         ->inline(false),
+                    TextInput::make(static::FIELD_ICON)
+                        ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_button_icon'))
+                        ->reactive()
+                        ->columnSpan(3),
+                    Select::make(static::FIELD_ICON_POSITION)
+                        ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_button_icon_position'))
+                        ->options(FilamentFlexibleBlocksConfig::getCallToActionButtonsIconPositionOptions(static::class))
+                        ->default(FilamentFlexibleBlocksConfig::getCallToActionButtonIconPositionDefault(static::class))
+                        ->visible(static::FIELD_ICON != '')
+                        ->columnSpan(2),
                 ]),
         ];
     }

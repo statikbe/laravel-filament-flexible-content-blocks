@@ -512,6 +512,14 @@ class FilamentFlexibleBlocksConfig
     /**
      * @return array<string, string>
      */
+    public static function getCallToActionButtonsIconPositionOptions(string $blockClass): array
+    {
+        return self::getCallToActionButtonsConfig($blockClass)['icon_positions'];
+    }
+
+    /**
+     * @return array<string, string>
+     */
     public static function getCallToActionButtonsSelectOptions(string $blockClass): array
     {
         return self::getSelectOptions(self::getCallToActionButtonsConfig($blockClass));
@@ -531,6 +539,13 @@ class FilamentFlexibleBlocksConfig
     public static function getCallToActionButtonDefault(string $blockClass): ?string
     {
         return self::getDefault(self::getCallToActionButtonsConfig($blockClass));
+    }
+    /**
+     * @param  class-string<AbstractContentBlock>  $blockClass
+     */
+    public static function getCallToActionButtonIconPositionDefault(string $blockClass): ?string
+    {
+        return self::getCallToActionButtonsConfig($blockClass)['icon_position_default'];
     }
 
     /**
