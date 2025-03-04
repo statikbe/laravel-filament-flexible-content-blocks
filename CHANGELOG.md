@@ -2,6 +2,19 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.2.0 - 2025-03-04
+
+### What's Changed
+
+* Bump aglipanci/laravel-pint-action from 2.4 to 2.5 by @dependabot in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/60
+* Laravel 12 Compatibility by @laraben in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/63
+
+### New Contributors
+
+* @laraben made their first contribution in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/63
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v2.1.8...v2.2.0
+
 ## v2.1.8 - 2025-01-30
 
 Improve translatable field hint: do not show hint when only one locale is set.
