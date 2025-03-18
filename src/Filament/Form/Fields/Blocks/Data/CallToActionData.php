@@ -19,6 +19,8 @@ class CallToActionData
         public ?string $label = null,
         public ?string $buttonStyle = null,
         public bool $openNewWindow = false,
+        public ?string $icon,
+        public ?string $icon_position,
     ) {}
 
     /**
@@ -64,11 +66,17 @@ class CallToActionData
             $buttonStyle = $buttonStyleClasses[$buttonStyle];
         }
 
+        $icon = $callToActionBlockData[CallToActionField::FIELD_ICON] ?? null;
+        
+        $icon_position = $callToActionBlockData[CallToActionField::FIELD_ICON_POSITION] ?? null;
+
         return new self(
             $url,
             $callToActionBlockData[CallToActionField::FIELD_BUTTON_LABEL] ?? null,
             $buttonStyle,
             $callToActionBlockData[CallToActionField::FIELD_BUTTON_OPEN_NEW_WINDOW] ?? false,
+            $icon ?? '',
+            $icon_position ?? 'left',
         );
     }
 }
