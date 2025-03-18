@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.2.1 - 2025-03-18
+
+### What's Changed
+
+* Update ParentField.php by @Sindoweb in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/50
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v2.2.0...v2.2.1
+
 ## v2.2.0 - 2025-03-04
 
 ### What's Changed
