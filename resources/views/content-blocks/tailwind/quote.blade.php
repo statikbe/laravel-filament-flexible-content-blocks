@@ -5,8 +5,8 @@
                 {!! $replaceParameters($quote) !!}
             </div>
 
-            @if($author)
-                <cite class="text-sm">{{$replaceParameters($author)}}</cite>
+            @if ($author)
+                <cite class="text-sm">{{ $replaceParameters($author) }}</cite>
             @endif
         </blockquote>
     </div>
