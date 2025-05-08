@@ -1,4 +1,4 @@
-<section id="image" class="card {{ $getBackgroundColourClass() }} tw-w-full">
+<section class="card {{ $getBackgroundColourClass() }} tw-w-full">
     <div @class([
         'tw-flex',
         'tw-justify-start' => $imagePosition === 'left',
