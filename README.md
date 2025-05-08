@@ -426,11 +426,12 @@ Below is a list of ideas and missing features. PR's are welcome!
 - Command to generate migrations
 - Command to generate models
 - Command to generate Filament resource and pages
-- Integrate image asset manager
+- ~~Integrate image asset manager~~, see [Filament Flexible Blocks Asset Manager](https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager)
 - Store links to models in rich editor
 - Redirects
 - Reusable blocks. Name: global block?
 - Focal point for image resizing
+- Widget to show which records do not have a translated version
 
 ## Changelog
 

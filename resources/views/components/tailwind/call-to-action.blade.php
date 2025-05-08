@@ -2,7 +2,6 @@
     /* @var \Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CallToActionData $callToAction */
 @endphp
 
-
 @if($callToAction->url)
     <div {{ $attributes }}>
         <a href="{{ $callToAction->url }}"

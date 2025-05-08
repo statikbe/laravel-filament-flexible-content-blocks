@@ -106,7 +106,7 @@ trait HasPageAttributesTrait
         $publishedQuery->orWhere(function (Builder $option1) {
             $option1->whereNull('publishing_begins_at')
                 ->whereNotNull('publishing_ends_at')
-                ->where('publishing_ends_at', '>', 'now()');
+                ->whereRaw('publishing_ends_at > now()');
         })->orWhere(function (Builder $option2) {
             $option2->whereNotNull('publishing_begins_at')
                 ->whereNotNull('publishing_ends_at')

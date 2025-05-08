@@ -11,7 +11,9 @@ class TitleColumn extends \Filament\Tables\Columns\TextColumn
 {
     public static function create(): static
     {
-        return static::make('title')
+        $field = static::getFieldName();
+
+        return static::make($field)
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.columns.title'))
             ->limit(50)
             ->tooltip(function (TextColumn $column): ?string {
@@ -25,5 +27,10 @@ class TitleColumn extends \Filament\Tables\Columns\TextColumn
                 return $state;
             })
             ->sortable();
+    }
+
+    public static function getFieldName(): string
+    {
+        return 'title';
     }
 }

@@ -2,6 +2,43 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.2.1 - 2025-03-18
+
+### What's Changed
+
+* Update ParentField.php by @Sindoweb in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/50
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v2.2.0...v2.2.1
+
+## v2.2.0 - 2025-03-04
+
+### What's Changed
+
+* Bump aglipanci/laravel-pint-action from 2.4 to 2.5 by @dependabot in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/60
+* Laravel 12 Compatibility by @laraben in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/63
+
+### New Contributors
+
+* @laraben made their first contribution in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/63
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v2.1.8...v2.2.0
+
+## v2.1.8 - 2025-01-30
+
+Improve translatable field hint: do not show hint when only one locale is set.
+
+## v2.1.7 - 2024-12-11
+
+### What's Changed
+
+* Fix scope `published` to return correct published posts by @andrii-trush in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/56
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v2.1.6...v2.1.7
+
+## v2.1.6 - 2024-12-02
+
+Fix model entry to found exception which results in a 404 page for assets in CTA fields
+
 ## v2.1.5 - 2024-10-10
 
 Fix copy blocks to all locales actions
