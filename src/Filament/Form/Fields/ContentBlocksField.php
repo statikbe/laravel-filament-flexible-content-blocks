@@ -3,10 +3,12 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
 
 use Filament\Forms\ComponentContainer;
+use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Builder;
 use Filament\Resources\Pages\Page;
-use Filament\Resources\Resource;
+use Filament\Support\Enums\MaxWidth;
 use Livewire\Component as Livewire;
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 
 class ContentBlocksField extends Builder
 {
@@ -34,6 +36,12 @@ class ContentBlocksField extends Builder
                 }
 
                 return $component->contentBlocks;
+            })
+            ->blockPreviews(FilamentFlexibleBlocksConfig::isBlockPreviewEnabled(),
+                areInteractive: FilamentFlexibleBlocksConfig::blockPreviewsAreInteractive())
+            ->editAction(function (Action $action) {
+                $action->slideOver()
+                    ->modalWidth(MaxWidth::FiveExtraLarge);
             });
     }
 
