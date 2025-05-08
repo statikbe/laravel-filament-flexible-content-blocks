@@ -76,7 +76,7 @@ trait HasCallToAction
                 try {
                     $data[] = CallToActionData::create($callToAction, CallToActionField::getButtonStyleClasses(static::class));
                 } catch (CallToActionNotDefinedException $ex) {
-                    //do not include the data if nothing is specified.
+                    // do not include the data if nothing is specified.
                 } catch (LinkableModelNotFoundException $ex) {
                     $ex->setRecord($this->record);
                     throw $ex;

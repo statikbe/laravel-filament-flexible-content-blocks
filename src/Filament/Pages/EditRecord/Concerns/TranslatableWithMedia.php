@@ -37,7 +37,7 @@ trait TranslatableWithMedia
                 ->unique()
                 ->all();
 
-            //CHANGE
+            // CHANGE
             $this->form->fill([
                 ...$this->data,
                 ...$localeData,
@@ -55,8 +55,8 @@ trait TranslatableWithMedia
                 throw $exception;
             }
 
-            //$dehydratedLocaleData = $this->form->dehydrateState($localeData);
-            //CHANGE:
+            // $dehydratedLocaleData = $this->form->dehydrateState($localeData);
+            // CHANGE:
             $localeData = Arr::only($this->form->getState(), array_keys($localeData));
 
             $localeData = $this->mutateFormDataBeforeSave($localeData);

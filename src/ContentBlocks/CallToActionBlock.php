@@ -115,7 +115,7 @@ class CallToActionBlock extends AbstractFilamentFlexibleContentBlock
                     ->format(ImageFormat::WEBP->value);
                 FilamentFlexibleBlocksConfig::mergeConfiguredFlexibleBlockImageConversion(static::class, static::getName(), static::CONVERSION_DEFAULT, $conversion);
 
-                //for filament upload field
+                // for filament upload field
                 $record->addFilamentThumbnailMediaConversion();
             });
     }

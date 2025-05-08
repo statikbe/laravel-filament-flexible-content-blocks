@@ -50,7 +50,7 @@ class UpgradeSpatieImageFieldsCommand extends Command implements PromptsForMissi
         $model::orderBy('id', 'desc')->chunk(50, function (Collection $models) {
             foreach ($models as $model) {
                 /* @var HasContentBlocks $model */
-                //check if the model is translated:
+                // check if the model is translated:
                 if (isset($model->translatable) && in_array('content_blocks', $model->translatable)) {
                     foreach (FilamentFlexibleContentBlocks::getLocales() as $locale) {
                         $contentBlocks = $model->getTranslation('content_blocks', $locale);
@@ -62,7 +62,7 @@ class UpgradeSpatieImageFieldsCommand extends Command implements PromptsForMissi
                 } else {
                     $model->content_blocks = $this->upgradeContentBlocks($model->content_blocks, $model);
 
-                    //save upgrade
+                    // save upgrade
                     $model->save();
                 }
 
@@ -79,7 +79,7 @@ class UpgradeSpatieImageFieldsCommand extends Command implements PromptsForMissi
     public function upgradeContentBlocks(array $contentBlocks, Model $model): array
     {
         foreach ($contentBlocks as &$block) {
-            //add block id to each block:
+            // add block id to each block:
             if (! isset($block['data'][BlockIdField::FIELD])) {
                 $block['data'][BlockIdField::FIELD] = BlockIdField::generateBlockId();
             }
@@ -90,7 +90,7 @@ class UpgradeSpatieImageFieldsCommand extends Command implements PromptsForMissi
                 }
             }
 
-            //cards:
+            // cards:
             if ($block['type'] === 'filament-flexible-content-blocks::cards') {
                 if (isset($block['data']['cards'])) {
                     foreach ($block['data']['cards'] as $card) {
@@ -116,13 +116,13 @@ class UpgradeSpatieImageFieldsCommand extends Command implements PromptsForMissi
             /* @var Media $media */
             $media = Media::findByUuid($mediaUuid);
             if ($media) {
-                //Check if there is already a block assigned. If so, this means it is already used by another block.
-                //This is possible because of the old copy content blocks button to other locales, that did not copy media for each locale.
+                // Check if there is already a block assigned. If so, this means it is already used by another block.
+                // This is possible because of the old copy content blocks button to other locales, that did not copy media for each locale.
                 if ($media->getCustomProperty('block')) {
-                    //make a copy of the media:
+                    // make a copy of the media:
                     $media = $media->copy($model, $media->collection_name, $media->disk);
                 }
-                //add block id as custom property to media:
+                // add block id as custom property to media:
                 $media->setCustomProperty('block', $blockId);
                 $media->save();
 
