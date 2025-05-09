@@ -47,6 +47,8 @@ return [
     'form_component.intro_lbl' => 'Introductie',
     'form_component.content_blocks_lbl' => 'Inhoudsblokken',
     'form_component.content_blocks_add_lbl' => 'Voeg blok toe',
+    'form_component.content_blocks_collapse_all_lbl' => 'Alles inklappen',
+    'form_component.content_blocks_expand_all_lbl' => 'Alles uitklappen',
     'form_component.image_position_lbl' => 'Uitlijning afbeelding',
     'form_component.image_position_help' => 'Selecteer de positie van de afbeelding in relatie met de tekst.',
     'form_component.image_width_lbl' => 'Breedte van de afbeelding',
