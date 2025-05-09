@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.3.0 - 2025-05-09
+
+New feature:
+
+- block previews!
+
+**Note:** update your configuration file with the new configuration settings for block previews (see at the bottom of the config file).
+
 ## v2.2.1 - 2025-03-18
 
 ### What's Changed
