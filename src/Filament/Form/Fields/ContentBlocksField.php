@@ -50,12 +50,12 @@ class ContentBlocksField extends Builder
             ->collapsible()
             ->collapseAllAction(
                 fn (Action $action) => $action
-                    //->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.form_component.content_blocks_collapse_all_lbl'))
+                    // ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.form_component.content_blocks_collapse_all_lbl'))
                     ->color('primary'),
             )
             ->expandAllAction(
                 fn (Action $action) => $action
-                    //->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.form_component.content_blocks_expand_all_lbl'))
+                    // ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.form_component.content_blocks_expand_all_lbl'))
                     ->color('primary'),
             );
     }
