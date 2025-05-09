@@ -454,7 +454,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 ## Credits
 
 - [Sten Govaerts](https://github.com/sten)
-- [Stijn Elskens](https://github.com/stijnelskens)
+- [Seppe Van Besauw](https://github.com/sevbesau)
 - [All Contributors](../../contributors)
 
 ## License
