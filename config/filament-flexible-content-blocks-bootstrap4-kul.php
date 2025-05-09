@@ -59,7 +59,7 @@ return [
      | Creating a new theme is done by publishing the views (see README.md) and then renaming the `tailwind` directory
      | to your theme name, e.g. `bootstrap`. You should then specify in the var below the name of your new theme.
      */
-    'theme' => 'tailwind',
+    'theme' => 'bootstrap4-kul',
 
     /*
      |--------------------------------------------------------------------------
@@ -238,23 +238,23 @@ return [
         'options' => [
             '100%' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.100%',
-                'class' => 'w-full',
+                'class' => 'tw-w-full',
             ],
             '75%' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.75%',
-                'class' => 'w-full md:w-3/4',
+                'class' => 'tw-w-full md:tw-w-3/4',
             ],
             '50%' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.50%',
-                'class' => 'w-full md:w-1/2',
+                'class' => 'tw-w-full md:tw-w-1/2',
             ],
             '33%' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.33%',
-                'class' => 'w-full lg:w-1/3',
+                'class' => 'tw-w-full lg:tw-w-1/3',
             ],
             '25%' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.image_width.25%',
-                'class' => 'w-full lg:w-1/4',
+                'class' => 'tw-w-full lg:tw-w-1/4',
             ],
         ],
         'default' => '100%',
@@ -273,35 +273,23 @@ return [
         'options' => [
             'primary' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.primary',
-                'class' => 'btn btn--primary',
-            ],
-            'primary_chevron' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.primary_chevron',
-                'class' => 'btn btn--primary btn--ext',
+                'class' => 'btn btn-primary',
             ],
             'secondary' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.secondary',
-                'class' => 'btn btn--secondary',
+                'class' => 'btn btn-secondary',
             ],
-            'secondary_chevron' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.secondary_chevron',
-                'class' => 'btn btn--secondary btn--ext',
-            ],
-            'ghost' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.ghost',
-                'class' => 'btn btn--ghost',
-            ],
-            'ghost_chevron' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.ghost_chevron',
-                'class' => 'btn btn--ghost btn--ext',
+            'tertiary' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.tertiary',
+                'class' => 'btn btn-tertiary',
             ],
             'link' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.link',
-                'class' => 'link',
+                'class' => 'btn btn-link',
             ],
-            'link_chevron' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.link_chevron',
-                'class' => 'link link--ext',
+            'ghost' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_btn.ghost',
+                'class' => 'btn btn-ghost',
             ],
         ],
         'default' => 'primary',
@@ -320,19 +308,19 @@ return [
         'options' => [
             'default' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.default',
-                'class' => 'section--default',
+                'class' => 'card-gray',
             ],
             'primary' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.primary',
-                'class' => 'section--primary',
+                'class' => 'card-primary',
             ],
             'secondary' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.secondary',
-                'class' => 'section--secondary',
+                'class' => 'card-secondary',
             ],
-            'light' => [
-                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.light',
-                'class' => 'section--light',
+            'tertiary' => [
+                'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.tertiary',
+                'class' => 'card-tertiary',
             ],
         ],
         'default' => 'default',
@@ -443,25 +431,6 @@ return [
     | of parameters with their value that will be replaced in the text fields of the content blocks.
     |
     | The value of `text_parameter_replacer` should be class name or null. If null is set, parameter replacement is disabled.
-    */
+     */
     'text_parameter_replacer' => null,
-
-    /*
-    |--------------------------------------------------------------------------
-    | Block preview
-    |--------------------------------------------------------------------------
-    |
-    | If you prefer to render read-only previews in the content block builder instead of the blocks’ forms, you can
-    | enable this.
-    |
-    | You can set whether the previews are interactive or not.
-    |
-    | The preview blocks will probably need the CSS stylesheet of the website in which the content is rendered. In case,
-    | you have set up this stylesheet differently from the default Laravel app.css, you can change this also.
-    */
-    'block_preview' => [
-        'enabled' => false,
-        'previews_are_interactive' => false,
-        'stylesheet' => 'resources/css/app.css',
-    ],
 ];
