@@ -382,3 +382,19 @@ You can either list the allowed or denied routes. You can use wildcards with `*`
     ],
 ],
 ```
+
+## Block previews
+
+You can show previews of the blocks instead of the forms by enabling this setting below. This will show a preview of the block,
+styled in the design of the given stylesheet. The style is scoped to only that block preview.
+
+It is possible to enable interactivity with the blocks, if enabled you will for instance be able to click links and
+call-to-actions. **Warning:** This might lead the user to another page and edits might get lost. 
+
+```php
+'block_preview' => [
+    'enabled' => false,
+    'previews_are_interactive' => false,
+    'stylesheet' => 'resources/css/app.css',
+],
+```

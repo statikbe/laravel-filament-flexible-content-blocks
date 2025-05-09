@@ -6,6 +6,7 @@ use Closure;
 use Filament\Forms\Components\Builder\Block;
 use Illuminate\View\Component;
 use Spatie\MediaLibrary\HasMedia;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Builder\ContentBlockWithPreview;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\BlockIdField;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks;
@@ -71,11 +72,12 @@ abstract class AbstractContentBlock extends Component
      */
     public static function make(): Block
     {
-        return Block::make(static::getName())
+        return ContentBlockWithPreview::make(static::getName())
             ->label(static::getLabel())
             ->icon(static::getIcon())
             ->schema(static::getFilamentBlockSchema())
-            ->visible(static::visible());
+            ->visible(static::visible())
+            ->contentBlockClass(static::class);
     }
 
     /**
@@ -105,6 +107,13 @@ abstract class AbstractContentBlock extends Component
      * @return \Illuminate\Contracts\View\View|\Closure|string
      */
     abstract public function render();
+
+    public static function getPreviewView(): string
+    {
+        $themePrefix = FilamentFlexibleBlocksConfig::getViewThemePrefix();
+
+        return "filament-flexible-content-blocks::content-blocks.{$themePrefix}.preview";
+    }
 
     /**
      * Registers media collection and conversions for the media fields of this block to the model.

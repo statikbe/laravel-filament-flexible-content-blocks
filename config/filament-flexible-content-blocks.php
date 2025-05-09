@@ -443,6 +443,25 @@ return [
     | of parameters with their value that will be replaced in the text fields of the content blocks.
     |
     | The value of `text_parameter_replacer` should be class name or null. If null is set, parameter replacement is disabled.
-     */
+    */
     'text_parameter_replacer' => null,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Block preview
+    |--------------------------------------------------------------------------
+    |
+    | If you prefer to render read-only previews in the content block builder instead of the blocks’ forms, you can
+    | enable this.
+    |
+    | You can set whether the previews are interactive or not.
+    |
+    | The preview blocks will probably need the CSS stylesheet of the website in which the content is rendered. In case,
+    | you have set up this stylesheet differently from the default Laravel app.css, you can change this also.
+    */
+    'block_preview' => [
+        'enabled' => false,
+        'previews_are_interactive' => false,
+        'stylesheet' => 'resources/css/app.css',
+    ],
 ];

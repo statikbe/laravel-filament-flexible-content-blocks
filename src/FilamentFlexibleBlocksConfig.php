@@ -533,6 +533,21 @@ class FilamentFlexibleBlocksConfig
         return self::getDefault(self::getCallToActionButtonsConfig($blockClass));
     }
 
+    public static function isBlockPreviewEnabled(): bool
+    {
+        return config('filament-flexible-content-blocks.block_preview.enabled', false);
+    }
+
+    public static function blockPreviewsAreInteractive(): bool
+    {
+        return config('filament-flexible-content-blocks.block_preview.previews_are_interactive', false);
+    }
+
+    public static function getBlockPreviewStylesheet(): string
+    {
+        return config('filament-flexible-content-blocks.block_preview.stylesheet', 'resources/css/app.css');
+    }
+
     /**
      * @param  class-string<AbstractContentBlock>  $blockClass
      */
