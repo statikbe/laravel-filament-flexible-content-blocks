@@ -1,12 +1,13 @@
 @if ($content)
-    <section class="section {{ $getBackgroundColourClass() }}">
-        <div class="container">
-            <div class="w-full md:w-3/4">
-                @if ($title)
-                    <h2>{{ $replaceParameters($title) }}</h2>
-                @endif
+    <div class="container {{ $getBackgroundColourClass() }}">
+        <section class="max-w-2xl py-3 text-balance">
+            @if ($title)
+                <h2>{{ $replaceParameters($title) }}</h2>
+            @endif
+
+            <div class="text-base">
                 {!! $replaceParameters($content) !!}
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 @endif
