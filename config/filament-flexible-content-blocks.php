@@ -460,7 +460,7 @@ return [
     | you have set up this stylesheet differently from the default Laravel app.css, you can change this also.
     */
     'block_preview' => [
-        'enabled' => true,
+        'enabled' => false,
         'previews_are_interactive' => false,
         'stylesheet' => 'resources/css/app.css',
     ],
