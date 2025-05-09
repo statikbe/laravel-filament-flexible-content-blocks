@@ -27,7 +27,7 @@ The key goals of this package are:
 - support content translations
 - provide a start set of content blocks for most general requirements
 
-:sparkles: New features:
+:sparkles: **New features:**
 - Content block previews! You can now show a preview of what the block looks like on the actual page, styled with the 
 correct stylesheet. See [the preview block configuration](documentation%2Fconfiguration.md#block-previews).
 - :art: Simple asset manager, see [Filament Flexible Blocks Asset Manager](https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager)
