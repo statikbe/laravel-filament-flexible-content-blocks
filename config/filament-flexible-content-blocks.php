@@ -266,7 +266,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | CTA buttons can have different styles. You can define the options of the select form
-    | component here. Each option has label with the translation key and the corresponding CSS class that will be applied.
+    | component here. Each option has a label with the translation key and the corresponding CSS class(es) that will be applied.
     | In the 'default' key, you can set the default option.
     */
     'call_to_action_buttons' => [
@@ -313,26 +313,26 @@ return [
     |--------------------------------------------------------------------------
     |
     | Some blocks allow to select a background colour to tweak the styling. You can define the options of the select form
-    | component here. Each option has label with the translation key and the corresponding CSS class that will be applied.
+    | component here. Each option has a label with the translation key and the corresponding CSS class(es) that will be applied.
     | In the 'default' key, you can set the default option.
     */
     'background_colours' => [
         'options' => [
             'default' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.default',
-                'class' => 'section--default',
+                'class' => 'content-block_bg--default',
             ],
             'primary' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.primary',
-                'class' => 'section--primary',
+                'class' => 'content-block_bg--primary',
             ],
             'secondary' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.secondary',
-                'class' => 'section--secondary',
+                'class' => 'content-block_bg--secondary',
             ],
             'light' => [
                 'label' => 'filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.background_colour.light',
-                'class' => 'section--light',
+                'class' => 'content-block_bg--light',
             ],
         ],
         'default' => 'default',
