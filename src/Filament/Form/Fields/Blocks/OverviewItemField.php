@@ -61,7 +61,7 @@ class OverviewItemField extends Component
             Select::make('overview_model')
                 ->columnSpan(2)
                 ->label($this->getLabel())
-                ->disableLabel()
+                ->hiddenLabel()
                 ->options(array_map(
                     fn (OverviewType $type): string => $type->getLabel(),
                     $types,
@@ -74,7 +74,7 @@ class OverviewItemField extends Component
             Select::make('overview_id')
                 ->columnSpan(4)
                 ->label($selectedType?->getLabel())
-                ->disableLabel()
+                ->hiddenLabel()
                 ->options($selectedType?->getOptionsUsing)
                 ->getSearchResultsUsing($selectedType?->getSearchResultsUsing)
                 ->getOptionLabelUsing($selectedType?->getOptionLabelUsing)

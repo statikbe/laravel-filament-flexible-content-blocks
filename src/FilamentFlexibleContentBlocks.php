@@ -15,7 +15,7 @@ class FilamentFlexibleContentBlocks
      */
     public static $locales;
 
-    private static $replacerParameters;
+    protected static $replacerParameters;
 
     /**
      * Set the supported locales array for translated content blocks.
@@ -47,8 +47,8 @@ class FilamentFlexibleContentBlocks
         $shouldReplace = [];
 
         foreach (static::getReplacerParameters() as $key => $value) {
-            $shouldReplace[':'.Str::ucfirst($key ?? '')] = Str::ucfirst($value ?? '');
-            $shouldReplace[':'.Str::upper($key ?? '')] = Str::upper($value ?? '');
+            $shouldReplace[':'.Str::ucfirst($key)] = Str::ucfirst($value ?? '');
+            $shouldReplace[':'.Str::upper($key)] = Str::upper($value ?? '');
             $shouldReplace[':'.$key] = $value;
         }
 

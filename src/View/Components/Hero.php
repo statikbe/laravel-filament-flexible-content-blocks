@@ -24,7 +24,9 @@ class Hero extends Component
     public function __construct(HasPageAttributes|HasHeroImageAttributes|HasIntroAttribute $page)
     {
         $this->page = $page;
-        $this->title = $page->title;
+        if (isset($page->title)) {
+            $this->title = $page->title;
+        }
 
         if (isset($page->intro)) {
             $this->intro = $page->intro;
