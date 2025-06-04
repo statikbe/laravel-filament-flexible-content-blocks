@@ -199,6 +199,7 @@ public static function table(Table $table): Table {
         ->actions([
             Tables\Actions\EditAction::make(),
             PublishAction::make(),
+            ReplicateAction::make(),
         ])
         ->bulkActions([
             Tables\Actions\DeleteBulkAction::make(),
@@ -219,6 +220,21 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Actions\ViewAction;
     Tables\Actions\EditAction::make(),
     PublishAction::make(),
     ViewAction::make(), // <-- Add this
+])
+```
+
+#### (optional) Adding a ReplicateAction to your table
+
+If you want to be able to replicate the model record, you can add the `ReplicateAction`.
+This action will copy all data attributes and also copy all media/images of the record.
+
+```php
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Actions\ViewAction;
+
+->actions([
+    Tables\Actions\EditAction::make(),
+    PublishAction::make(),
+    ReplicateAction::make(), // <-- Add this
 ])
 ```
 
