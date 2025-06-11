@@ -357,6 +357,23 @@ return [
     ],
 
     /*
+     |--------------------------------------------------------------------------
+     | Blocks wrapper styling
+     |--------------------------------------------------------------------------
+     |
+     | To tweak the display, within the admin section, of the configured content blocks for a page.
+     | The default classes - which you can overrule - will:
+     | - improve the spacing between the configured content blocks
+     | - improve the contrast between the content blocks by adding background colors
+     | (P.S. The classes are organized in an array for better readability so that you can group related classes)
+     */
+    'admin_blocks_wrapper_classes' => [
+        '[&>ul]:space-y-6',
+        '[&>ul>li]:bg-gray-50 [&>ul>li>.fi-fo-builder-item-header]:bg-gray-100',
+        '[&>ul>li>.fi-fo-builder-item-header]:rounded-t-xl [&>ul>li.fi-collapsed>.fi-fo-builder-item-header]:rounded-b-xl',
+    ],
+
+    /*
     |--------------------------------------------------------------------------
     | Grid columns
     |--------------------------------------------------------------------------

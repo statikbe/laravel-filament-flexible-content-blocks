@@ -21,8 +21,7 @@ class ContentBlocksField extends Builder
     {
         return static::make(static::FIELD)
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_lbl'))
-            ->extraFieldWrapperAttributes(['class' => 'admin_content-blocks_wrapper'])
-            ->extraAttributes(['class' => 'admin_content-blocks [&>ul]:space-y-6 [&>ul>li]:bg-gray-50 [&>ul>li>.fi-fo-builder-item-header]:bg-gray-100 [&>ul>li>.fi-fo-builder-item-header]:rounded-t-xl [&>ul>li.fi-collapsed>.fi-fo-builder-item-header]:rounded-b-xl'])
+            ->extraAttributes(['class' => implode(' ', FilamentFlexibleBlocksConfig::getAdminBlocksWrapperClasses())])
             ->addActionLabel(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_add_lbl'))
             ->addBetweenActionLabel(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_add_lbl'))
             ->blocks(function (Livewire $livewire, ContentBlocksField $component) {
@@ -50,12 +49,12 @@ class ContentBlocksField extends Builder
             ->collapsible()
             ->collapseAllAction(
                 fn (Action $action) => $action
-                    //->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.form_component.content_blocks_collapse_all_lbl'))
+                    ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_collapse_all_lbl'))
                     ->color('primary'),
             )
             ->expandAllAction(
                 fn (Action $action) => $action
-                    //->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.form_component.content_blocks_expand_all_lbl'))
+                    ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_expand_all_lbl'))
                     ->color('primary'),
             );
     }
