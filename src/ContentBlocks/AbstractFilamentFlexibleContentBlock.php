@@ -19,6 +19,14 @@ abstract class AbstractFilamentFlexibleContentBlock extends AbstractContentBlock
      */
     abstract public static function getNameSuffix(): string;
 
+    /**
+     * Will be used to label each block based on their content
+     */
+    public static function getContentSummary(array $state): ?string
+    {
+        return '';
+    }
+
     public static function getName(): string
     {
         $nameSuffix = static::getNameSuffix();
@@ -26,11 +34,23 @@ abstract class AbstractFilamentFlexibleContentBlock extends AbstractContentBlock
         return sprintf('%s::%s', FilamentFlexibleContentBlocksServiceProvider::$name, $nameSuffix);
     }
 
-    public static function getLabel(): string
+    public static function getLabel(?array $state): string
     {
-        $name = static::getNameSuffix();
+        $nameSuffix = static::getNameSuffix();
+        $staticLabel = trans("filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.{$nameSuffix}.label");
+        $contentSummary = ($state === null) ? '' : static::getContentSummary($state);
 
-        return trans("filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.{$name}.label");
+        return ($contentSummary !== null && $contentSummary !== '')
+            ? $staticLabel . ' - ' . self::shortenString($contentSummary, 40)
+            : $staticLabel;
+    }
+
+    private static function shortenString(string $input, int $maxLength): string
+    {
+        if (strlen($input) > $maxLength) {
+            return substr($input, 0, $maxLength) . '...';
+        }
+        return $input;
     }
 
     public static function getFieldLabel(string $field): string

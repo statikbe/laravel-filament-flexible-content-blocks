@@ -82,6 +82,11 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
         return 'overview';
     }
 
+    public static function getContentSummary(array $state): ?string
+    {
+        return $state['title'];
+    }
+
     /**
      * @return Collection<HasOverviewAttributes>
      */

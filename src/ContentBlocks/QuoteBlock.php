@@ -37,6 +37,11 @@ class QuoteBlock extends AbstractFilamentFlexibleContentBlock
         return 'quote';
     }
 
+    public static function getContentSummary(array $state): ?string
+    {
+        return $state['quote'];
+    }
+
     public static function getIcon(): string
     {
         return 'heroicon-o-chat-bubble-bottom-center-text';

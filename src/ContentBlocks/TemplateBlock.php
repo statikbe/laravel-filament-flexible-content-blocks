@@ -40,6 +40,15 @@ class TemplateBlock extends AbstractFilamentFlexibleContentBlock
         return 'template';
     }
 
+    public static function getContentSummary(array $state): ?string
+    {
+        if ($state[static::FIELD_TEMPLATE]) {
+            return FilamentFlexibleBlocksConfig::getTemplatesSelectOptions(static::class)[$state[static::FIELD_TEMPLATE]];
+        }
+
+        return null;
+    }
+
     public static function visible(): bool|Closure
     {
         // only show block when templates are set in the config:

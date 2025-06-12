@@ -3,6 +3,7 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
 use Closure;
+use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
@@ -95,6 +96,16 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
                     return $state['title'] ?? null;
                 })
                 ->collapsible()
+                ->collapseAllAction(
+                    fn (Action $action) => $action
+                        ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_collapse_all_lbl'))
+                        ->color('success'),
+                )
+                ->expandAllAction(
+                    fn (Action $action) => $action
+                        ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_expand_all_lbl'))
+                        ->color('success'),
+                )
                 ->minItems(1),
         ];
     }
@@ -102,6 +113,11 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
     public static function getNameSuffix(): string
     {
         return 'cards';
+    }
+
+    public static function getContentSummary(array $state): ?string
+    {
+        return $state['title'];
     }
 
     /**

@@ -56,6 +56,11 @@ class ImageBlock extends AbstractFilamentFlexibleContentBlock
         return 'image';
     }
 
+    public static function getContentSummary(array $state): ?string
+    {
+        return $state['image_title'];
+    }
+
     public static function getIcon(): string
     {
         return 'heroicon-o-camera';

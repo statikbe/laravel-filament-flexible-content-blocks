@@ -34,6 +34,11 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
         return 'video';
     }
 
+    public static function getContentSummary(array $state): ?string
+    {
+        return $state['embed_url'];
+    }
+
     public static function getIcon(): string
     {
         return 'heroicon-o-video-camera';
