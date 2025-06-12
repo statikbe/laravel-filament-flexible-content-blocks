@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property self $parent
- * @property $parent_id
+ * @property int $parent_id
  * @property Collection $children
  */
 interface HasParent

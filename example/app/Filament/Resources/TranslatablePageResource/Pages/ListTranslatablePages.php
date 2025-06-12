@@ -3,8 +3,8 @@
 namespace App\Filament\Resources\TranslatablePageResource\Pages;
 
 use App\Filament\Resources\TranslatablePageResource;
-use Filament\Pages\Actions;
-use Filament\Pages\Actions\LocaleSwitcher;
+use Filament\Actions;
+use Filament\Actions\LocaleSwitcher;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Resources\Pages\ListRecords\Concerns\Translatable;
 
