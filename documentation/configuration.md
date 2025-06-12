@@ -400,3 +400,41 @@ call-to-actions. **Warning:** This might lead the user to another page and edits
 ],
 ```
 
+In case your fonts are not loaded via CSS but in the HTML `<head>`, you can include the fonts in Filament 
+via a render hook in the `boot` function of the panel service provider. For example:
+
+```php
+public function boot(): void
+{
+    FilamentView::registerRenderHook(
+        PanelsRenderHook::HEAD_START,
+        fn (): string => Blade::render(<<<'BLADE'
+            <link rel="preload" href="{{ $googleFontUrl }}" as="style">
+            <link rel="stylesheet" href="{{ $googleFontUrl }}" media="print" onload="this.media='all'">
+        BLADE, [
+            'googleFontUrl' => "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;1,400&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap",
+        ]),
+    );
+}
+```
+
+To make sure the font is applied to the preview, you probably have to overwrite the `preview` blade template. 
+Here is an example:
+
+```php
+<template shadowrootmode="open">
+    @if($stylesheet)
+        <style>
+            @import '{{$stylesheet}}';
+
+            .flexible-block-preview {
+                font-family: "Montserrat", "Open Sans", sans-serif !important;
+            }
+        </style>
+    @endif
+    
+    <div class="flexible-block-preview">
+        {!! Blade::renderComponent($component) !!}
+    </div>
+</template>
+```
