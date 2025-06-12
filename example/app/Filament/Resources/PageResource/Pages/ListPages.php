@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\FlexiblePageResource\Pages;
 
 use App\Filament\Resources\PageResource;
-use Filament\Pages\Actions;
+use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
 class ListPages extends ListRecords

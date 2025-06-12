@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.4.0 - 2025-06-03
+
+- Replicate actions for table and form to copy a model with content blocks and copy all images
+- Fix deprecation warnings
+- Fix (some) typing phpstan errors
+
 ## v2.3.0 - 2025-05-09
 
 New feature:

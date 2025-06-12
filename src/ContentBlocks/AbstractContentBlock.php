@@ -112,7 +112,7 @@ abstract class AbstractContentBlock extends Component
     {
         $themePrefix = FilamentFlexibleBlocksConfig::getViewThemePrefix();
 
-        return "filament-flexible-content-blocks::content-blocks.{$themePrefix}.preview";
+        return "filament-flexible-content-blocks::content-blocks.{$themePrefix}preview";
     }
 
     /**

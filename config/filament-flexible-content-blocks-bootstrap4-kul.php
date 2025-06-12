@@ -180,7 +180,6 @@ return [
             'model' => \Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset::class,
             'call_to_action_type' => \Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Form\Fields\Blocks\Type\AssetCallToActionType::class,
         ],*/
-        \App\Models\TranslatablePage::class,
     ],
 
     /*

@@ -2,10 +2,11 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 use MediaEmbed\MediaEmbed;
 
-class MediaEmbedRule implements Rule
+class MediaEmbedRule implements ValidationRule
 {
     private MediaEmbed $mediaEmbed;
 
@@ -14,20 +15,10 @@ class MediaEmbedRule implements Rule
         $this->mediaEmbed = new MediaEmbed;
     }
 
-    public function passes($attribute, $value): bool
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        if ($value) {
-            $parsedUrl = $this->mediaEmbed->parseUrl($value);
-            if ($parsedUrl) {
-                return true;
-            }
+        if (! $value || ! $this->mediaEmbed->parseUrl($value)) {
+            $fail(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.media_embed.validation'));
         }
-
-        return false;
-    }
-
-    public function message(): string
-    {
-        return trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.media_embed.validation');
     }
 }

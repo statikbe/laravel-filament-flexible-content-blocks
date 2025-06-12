@@ -1,10 +1,9 @@
-<div>
+<template shadowrootmode="open">
     @if($stylesheet)
-        <style scoped>
+        <style>
             @import '{{$stylesheet}}';
         </style>
     @endif
 
     {!! Blade::renderComponent($component) !!}
-</div>
-
+</template>

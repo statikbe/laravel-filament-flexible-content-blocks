@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\View\Components;
 
+use Illuminate\Support\Str;
 use Illuminate\View\Component;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CallToActionData;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CardData;
@@ -33,10 +34,11 @@ class Card extends Component
             $this->card = $data;
         } else {
             $this->card = new CardData(
+                cardId: Str::uuid(),
                 title: $title,
                 text: $text,
                 callToActions: $callToActions,
-                imageId: null,
+                hasImage: ! is_null($imageUrl) || ! is_null($image),
                 imageUrl: $imageUrl,
                 imageHtml: $image,
                 blockStyle: $blockStyle
