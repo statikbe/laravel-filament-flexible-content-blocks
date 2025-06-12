@@ -1,4 +1,7 @@
-<div>
+@props([
+    'class' => '',
+])
+<div id="content-blocks-wrapper" @class([ $class ])>
     @if(is_array($contentBlocks))
         @foreach($contentBlocks ?? [] as $block)
             {{

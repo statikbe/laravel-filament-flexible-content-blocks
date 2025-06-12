@@ -21,6 +21,7 @@ class ContentBlocksField extends Builder
     {
         return static::make(static::FIELD)
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_lbl'))
+            ->extraAttributes(['class' => implode(' ', FilamentFlexibleBlocksConfig::getAdminBlocksWrapperClasses())])
             ->addActionLabel(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_add_lbl'))
             ->addBetweenActionLabel(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_add_lbl'))
             ->blocks(function (Livewire $livewire, ContentBlocksField $component) {
@@ -42,7 +43,20 @@ class ContentBlocksField extends Builder
             ->editAction(function (Action $action) {
                 $action->slideOver()
                     ->modalWidth(MaxWidth::FiveExtraLarge);
-            });
+            })
+            ->blockIcons()
+            ->reorderableWithButtons()
+            ->collapsible()
+            ->collapseAllAction(
+                fn (Action $action) => $action
+                    ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_collapse_all_lbl'))
+                    ->color('primary'),
+            )
+            ->expandAllAction(
+                fn (Action $action) => $action
+                    ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_expand_all_lbl'))
+                    ->color('primary'),
+            );
     }
 
     /**

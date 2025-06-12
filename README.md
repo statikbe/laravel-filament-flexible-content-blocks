@@ -333,6 +333,22 @@ If you want to customise these component views, you can [publish the views](#ins
 
 You can use the SEO library of your preference to render the SEO tags on the page, e.g. with [`artesaos/seotools`](https://github.com/artesaos/seotools).
 
+### 5. Configure tailwind
+
+Do the step below to ensure that tailwind will pick up the css classes used by the flexible content blocks components.
+
+1. In the tailwind config of your filament back-end, add the following lines to the `content` array:
+```
+'./config/filament-flexible-content-blocks.php',
+```
+
+2. Likewise, in the tailwind config of your front-end, add the following lines to the `content` array:
+
+```
+'./vendor/statikbe/laravel-filament-flexible-content-blocks/**/*.blade.php',
+'./config/filament-flexible-content-blocks.php',
+```
+
 ## AI features
 
 We are dreaming up some exciting new AI-based features to ease content creation and translation. The first has arrived:

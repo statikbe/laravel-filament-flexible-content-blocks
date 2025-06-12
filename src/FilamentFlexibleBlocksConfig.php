@@ -412,6 +412,11 @@ class FilamentFlexibleBlocksConfig
         return self::getConfig($blockClass, 'block_styles');
     }
 
+    public static function getAdminBlocksWrapperClasses(): array
+    {
+        return config('filament-flexible-content-blocks.admin_blocks_wrapper_classes', []);
+    }
+
     /**
      * @return array<string, string>
      */
