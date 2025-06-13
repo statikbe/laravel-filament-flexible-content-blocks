@@ -28,6 +28,7 @@ The key goals of this package are:
 - provide a start set of content blocks for most general requirements
 
 :sparkles: **New features:**
+- Improved styling of the blocks in Filament to improve UX when editing many blocks.
 - Replicate action to copy the model with content blocks and its images.
 - Content block previews! You can now show a preview of what the block looks like on the actual page, styled with the 
 correct stylesheet. See [the preview block configuration](documentation%2Fconfiguration.md#block-previews).

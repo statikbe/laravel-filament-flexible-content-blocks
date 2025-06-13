@@ -362,10 +362,11 @@ return [
      |--------------------------------------------------------------------------
      |
      | To tweak the display, within the admin section, of the configured content blocks for a page.
-     | The default classes - which you can overrule - will:
+     | The default configured classes below - which you can overrule - will:
      | - improve the spacing between the configured content blocks
      | - improve the contrast between the content blocks by adding background colors
-     | (P.S. The classes are organized in an array for better readability so that you can group related classes)
+     | If you do not want to alter the styling of the blocks, you can just leave the array empty.
+     | (PS: The classes are organized in an array for better readability so that you can group related classes)
      */
     'admin_blocks_wrapper_classes' => [
         '[&>ul]:space-y-6',
