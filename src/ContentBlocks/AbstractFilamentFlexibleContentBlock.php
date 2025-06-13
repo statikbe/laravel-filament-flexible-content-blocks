@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
+use Illuminate\Support\Str;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocksServiceProvider;
 
@@ -41,17 +42,8 @@ abstract class AbstractFilamentFlexibleContentBlock extends AbstractContentBlock
         $contentSummary = ($state === null) ? '' : static::getContentSummary($state);
 
         return ($contentSummary !== null && $contentSummary !== '')
-            ? $staticLabel.' - '.self::shortenString($contentSummary, 40)
+            ? $staticLabel.' - '.Str::limit($contentSummary, 40, '...')
             : $staticLabel;
-    }
-
-    private static function shortenString(string $input, int $maxLength): string
-    {
-        if (strlen($input) > $maxLength) {
-            return substr($input, 0, $maxLength).'...';
-        }
-
-        return $input;
     }
 
     public static function getFieldLabel(string $field): string
