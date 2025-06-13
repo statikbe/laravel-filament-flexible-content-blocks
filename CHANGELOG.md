@@ -2,6 +2,20 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.5.0 - 2025-06-13
+
+### What's Changed
+
+* Improved loading of CSS-styles for the block previews and updated docs on how to support different fonts in preview blocks.
+* Flex content blocks styling improvements for better UX while editing by @bverbist in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/64
+* Flex content blocks labels based on content by @bverbist in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/66
+
+### New Contributors
+
+* @bverbist made their first contribution in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/64
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v2.4.0...v2.5.0
+
 ## v2.4.0 - 2025-06-03
 
 - Replicate actions for table and form to copy a model with content blocks and copy all images
