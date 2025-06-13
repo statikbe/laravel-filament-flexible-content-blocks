@@ -39,6 +39,11 @@ class TextBlock extends AbstractFilamentFlexibleContentBlock
         return 'text';
     }
 
+    public static function getContentSummary(array $state): ?string
+    {
+        return $state['title'] ?? $state['content'];
+    }
+
     public static function getIcon(): string
     {
         return 'heroicon-o-bars-3-bottom-left';

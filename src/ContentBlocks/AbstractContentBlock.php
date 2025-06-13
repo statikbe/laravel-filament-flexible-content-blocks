@@ -60,7 +60,7 @@ abstract class AbstractContentBlock extends Component
     /**
      * Get translated label of this block
      */
-    abstract public static function getLabel(): string;
+    abstract public static function getLabel(?array $state): string;
 
     /**
      * Get the translated label of the given field.
@@ -73,7 +73,9 @@ abstract class AbstractContentBlock extends Component
     public static function make(): Block
     {
         return ContentBlockWithPreview::make(static::getName())
-            ->label(static::getLabel())
+            ->label(function (?array $state) {
+                return static::getLabel($state);
+            })
             ->icon(static::getIcon())
             ->schema(static::getFilamentBlockSchema())
             ->visible(static::visible())

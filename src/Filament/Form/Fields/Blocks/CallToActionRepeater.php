@@ -3,6 +3,7 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks;
 
 use Closure;
+use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Repeater;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
 
@@ -41,6 +42,18 @@ class CallToActionRepeater extends Repeater
             return $state[CallToActionField::FIELD_BUTTON_LABEL] ?? null;
         });
         $this->addActionLabel(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.add_call_to_action'));
+        $this->reorderableWithButtons()
+            ->collapsible()
+            ->collapseAllAction(
+                fn (Action $action) => $action
+                    ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_collapse_all_lbl'))
+                    ->color('success'),
+            )
+            ->expandAllAction(
+                fn (Action $action) => $action
+                    ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_expand_all_lbl'))
+                    ->color('success'),
+            );
     }
 
     public function callToActionTypes(array|Closure|null $types): static

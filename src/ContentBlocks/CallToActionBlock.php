@@ -67,6 +67,11 @@ class CallToActionBlock extends AbstractFilamentFlexibleContentBlock
         return 'call-to-action';
     }
 
+    public static function getContentSummary(array $state): ?string
+    {
+        return $state['title'] ?? $state['text'];
+    }
+
     /**
      * {@inheritDoc}
      */

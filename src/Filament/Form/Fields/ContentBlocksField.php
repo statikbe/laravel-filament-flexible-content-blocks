@@ -45,6 +45,7 @@ class ContentBlocksField extends Builder
                     ->modalWidth(MaxWidth::FiveExtraLarge);
             })
             ->blockIcons()
+            ->blockNumbers(false)
             ->reorderableWithButtons()
             ->collapsible()
             ->collapseAllAction(
