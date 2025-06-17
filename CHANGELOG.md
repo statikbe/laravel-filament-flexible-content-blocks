@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.5.1 - 2025-06-17
+
+### What's Changed
+
+* [flex content blocks] fix so that one can overrule the 'call_to_actio… by @bverbist in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/68
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v2.5.0...v.2.5.1
+
 ## v2.5.0 - 2025-06-13
 
 ### What's Changed
