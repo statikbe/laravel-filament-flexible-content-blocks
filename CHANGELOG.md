@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.5.2 - 2025-06-18
+
+### What's Changed
+
+* Fix image position overrule by @bverbist in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/69
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v.2.5.1...v2.5.2
+
 ## v2.5.1 - 2025-06-17
 
 ### What's Changed
