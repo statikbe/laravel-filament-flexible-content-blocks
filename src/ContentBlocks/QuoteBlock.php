@@ -96,11 +96,11 @@ class QuoteBlock extends AbstractFilamentFlexibleContentBlock
                         ->maxLength(255),
                     ImagePositionField::create(static::class)
                         ->required(function (Get $get) {
-                            return !!$get('image');
+                            return (bool) $get('image');
                         }),
                     ImageConversionTypeField::create(static::class)
                         ->required(function (Get $get) {
-                            return !!$get('image');
+                            return (bool) $get('image');
                         }),
                 ])->columnSpan(1),
             ]),
