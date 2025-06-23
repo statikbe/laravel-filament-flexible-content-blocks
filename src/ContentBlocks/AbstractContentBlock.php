@@ -174,4 +174,9 @@ abstract class AbstractContentBlock extends Component
     {
         return $this->blockId;
     }
+
+    public static function getBlockSetting(string $settingName, bool | int | string $defaultValue): bool | int | string | null
+    {
+        return FilamentFlexibleBlocksConfig::getBlockSettings(static::class)[$settingName] ?? $defaultValue;
+    }
 }

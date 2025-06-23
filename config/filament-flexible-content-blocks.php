@@ -481,4 +481,22 @@ return [
         'previews_are_interactive' => false,
         'stylesheet' => 'resources/css/app.css',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Block settings
+    |--------------------------------------------------------------------------
+    |
+    | Some blocks allow their behavior to be tweaked slightly by changing one or more of their settings below.
+    */
+    'block_settings' => [
+        CardsBlock::class => [
+            'call_to_action_min_items' => 0,
+            'call_to_action_max_items' => 2,
+        ],
+        TextImageBlock::class => [
+            'call_to_action_min_items' => 0,
+            'call_to_action_max_items' => 2,
+        ],
+    ],
 ];

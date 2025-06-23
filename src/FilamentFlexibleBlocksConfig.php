@@ -553,6 +553,11 @@ class FilamentFlexibleBlocksConfig
         return config('filament-flexible-content-blocks.block_preview.stylesheet', 'resources/css/app.css');
     }
 
+    public static function getBlockSettings(string $blockClass): array
+    {
+        return config("filament-flexible-content-blocks.block_settings.$blockClass", []);
+    }
+
     /**
      * @param  class-string<AbstractContentBlock>  $blockClass
      */

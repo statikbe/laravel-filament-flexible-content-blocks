@@ -344,6 +344,19 @@ return [
     ],
 
     /*
+     |--------------------------------------------------------------------------
+     | Blocks wrapper styling
+     |--------------------------------------------------------------------------
+     |
+     | To tweak the display, within the admin section, of the configured content blocks for a page.
+     | The default classes - which you can overrule - will/could:
+     | - improve the spacing between the configured content blocks
+     | - improve the contrast between the content blocks by adding background colors
+     | (P.S. The classes are organized in an array for better readability so that you can group related classes)
+     */
+    'admin_blocks_wrapper_classes' => [], // TODO
+
+    /*
     |--------------------------------------------------------------------------
     | Grid columns
     |--------------------------------------------------------------------------
@@ -432,4 +445,41 @@ return [
     | The value of `text_parameter_replacer` should be class name or null. If null is set, parameter replacement is disabled.
      */
     'text_parameter_replacer' => null,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Block preview
+    |--------------------------------------------------------------------------
+    |
+    | If you prefer to render read-only previews in the content block builder instead of the blocks’ forms, you can
+    | enable this.
+    |
+    | You can set whether the previews are interactive or not.
+    |
+    | The preview blocks will probably need the CSS stylesheet of the website in which the content is rendered. In case,
+    | you have set up this stylesheet differently from the default Laravel app.css, you can change this also.
+    */
+    'block_preview' => [
+        'enabled' => false,
+        'previews_are_interactive' => false,
+        'stylesheet' => 'resources/css/app.css',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Block settings
+    |--------------------------------------------------------------------------
+    |
+    | Some blocks allow their behavior to be tweaked slightly by changing one or more of their settings below.
+    */
+    'block_settings' => [
+        CardsBlock::class => [
+            'call_to_action_min_items' => 0,
+            'call_to_action_max_items' => 2,
+        ],
+        TextImageBlock::class => [
+            'call_to_action_min_items' => 0,
+            'call_to_action_max_items' => 2,
+        ],
+    ],
 ];

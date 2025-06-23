@@ -89,8 +89,8 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
                         ->maxFiles(1),
                     CallToActionRepeater::create('card_call_to_action', static::class)
                         ->callToActionTypes(static::getCallToActionTypes())
-                        ->minItems(0)
-                        ->maxItems(2),
+                        ->minItems(static::getBlockSetting('call_to_action_min_items', 0))
+                        ->maxItems(static::getBlockSetting('call_to_action_max_items', 2)),
                 ])
                 ->itemLabel(function (array $state): ?string {
                     return $state['title'] ?? null;
