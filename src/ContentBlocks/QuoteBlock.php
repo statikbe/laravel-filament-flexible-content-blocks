@@ -6,6 +6,7 @@ use Closure;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Get;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -93,8 +94,14 @@ class QuoteBlock extends AbstractFilamentFlexibleContentBlock
                     TextInput::make('image_copyright')
                         ->label(static::getFieldLabel('image_copyright'))
                         ->maxLength(255),
-                    ImagePositionField::create(static::class),
-                    ImageConversionTypeField::create(static::class),
+                    ImagePositionField::create(static::class)
+                        ->required(function (Get $get) {
+                            return !!$get('image');
+                        }),
+                    ImageConversionTypeField::create(static::class)
+                        ->required(function (Get $get) {
+                            return !!$get('image');
+                        }),
                 ])->columnSpan(1),
             ]),
             Grid::make(2)->schema([
