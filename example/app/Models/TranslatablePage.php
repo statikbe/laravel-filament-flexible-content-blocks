@@ -9,6 +9,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Concerns\HasAuthorAttributeTra
 use Statikbe\FilamentFlexibleContentBlocks\Models\Concerns\HasCodeTrait;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Concerns\HasDefaultContentBlocksTrait;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Concerns\HasTranslatedContentBlocksTrait;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Concerns\HasTranslatedHeroCallToActionsTrait;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Concerns\HasTranslatedHeroImageAttributesTrait;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Concerns\HasTranslatedIntroAttributeTrait;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Concerns\HasTranslatedOverviewAttributesTrait;
@@ -33,6 +34,7 @@ class TranslatablePage extends Model implements HasCode, HasContentBlocks, HasHe
     use HasFactory;
     use HasTranslatedContentBlocksTrait;
     use HasTranslatedHeroImageAttributesTrait;
+    use HasTranslatedHeroCallToActionsTrait;
     use HasTranslatedIntroAttributeTrait;
     use HasTranslatedOverviewAttributesTrait;
     use HasTranslatedPageAttributesTrait;

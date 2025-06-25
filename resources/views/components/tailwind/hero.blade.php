@@ -16,6 +16,14 @@
                     {!! Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks::replaceParameters($intro) !!}
                 </div>
             @endif
+
+            @if ($heroCallToActions)
+                <div class="flex flex-wrap gap-4 mt-4">
+                    @foreach ($heroCallToActions as $callToAction)
+                        <x-flexible-call-to-action :data="$callToAction"></x-flexible-call-to-action>
+                    @endforeach
+                </div>
+            @endif
         </div>
     </div>
     @if ($hasHeroImage())
