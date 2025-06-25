@@ -33,8 +33,8 @@ class TranslatablePage extends Model implements HasCode, HasContentBlocks, HasHe
     use HasDefaultContentBlocksTrait;
     use HasFactory;
     use HasTranslatedContentBlocksTrait;
-    use HasTranslatedHeroImageAttributesTrait;
     use HasTranslatedHeroCallToActionsTrait;
+    use HasTranslatedHeroImageAttributesTrait;
     use HasTranslatedIntroAttributeTrait;
     use HasTranslatedOverviewAttributesTrait;
     use HasTranslatedPageAttributesTrait;

@@ -28,8 +28,8 @@ class Page extends Model implements HasContentBlocks, HasHeroImageAttributes, Ha
     use HasAuthorAttributeTrait;
     use HasDefaultContentBlocksTrait;
     use HasFactory;
-    use HasHeroImageAttributesTrait;
     use HasHeroCallToActionsTrait;
+    use HasHeroImageAttributesTrait;
     use HasIntroAttributeTrait;
     use HasOverviewAttributesTrait;
     use HasPageAttributesTrait;
