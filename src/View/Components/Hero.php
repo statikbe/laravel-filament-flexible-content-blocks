@@ -4,14 +4,18 @@ namespace Statikbe\FilamentFlexibleContentBlocks\View\Components;
 
 use Illuminate\View\Component;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToActionField;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CallToActionData;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Groups\HeroCallToActionSection;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasHeroCallToActionsAttribute;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasHeroImageAttributes;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasIntroAttribute;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasPageAttributes;
 
 class Hero extends Component
 {
-    public HasPageAttributes|HasHeroImageAttributes|HasIntroAttribute $page;
+    public HasPageAttributes|HasHeroImageAttributes|HasHeroCallToActionsAttribute|HasIntroAttribute $page;
 
     public string $title;
 
@@ -21,9 +25,13 @@ class Hero extends Component
 
     public ?string $heroImageCopyright = null;
 
-    public function __construct(HasPageAttributes|HasHeroImageAttributes|HasIntroAttribute $page)
+    /* @var CallToActionData[] $heroCallToActions */
+    public array $heroCallToActions = [];
+
+    public function __construct(HasPageAttributes|HasHeroImageAttributes|HasHeroCallToActionsAttribute|HasIntroAttribute $page)
     {
         $this->page = $page;
+
         if (isset($page->title)) {
             $this->title = $page->title;
         }
@@ -38,6 +46,16 @@ class Hero extends Component
 
         if (isset($page->hero_image_copyright)) {
             $this->heroImageCopyright = $page->hero_image_copyright;
+        }
+
+        if (isset($page->hero_call_to_actions)) {
+            $buttonStyleClasses = CallToActionField::getButtonStyleClasses(HeroCallToActionSection::class);
+
+            $this->heroCallToActions = collect($page->hero_call_to_actions)
+                ->map(function ($callToAction) use ($buttonStyleClasses) {
+                    return CallToActionData::create($callToAction, $buttonStyleClasses);
+                })
+                ->toArray();
         }
     }
 

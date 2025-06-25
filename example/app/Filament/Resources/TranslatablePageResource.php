@@ -15,6 +15,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Actions\CopyContentBloc
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\AuthorField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\CodeField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\ContentBlocksField;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Groups\HeroCallToActionSection;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Groups\HeroImageSection;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Groups\OverviewFields;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Groups\PublicationSection;
@@ -51,6 +52,7 @@ class TranslatablePageResource extends Resource
                                 IntroField::create(),
                                 AuthorField::create(),
                                 HeroImageSection::create(true),
+                                HeroCallToActionSection::create(),
                                 PublicationSection::create(),
                             ]),
                         Tab::make('Content')

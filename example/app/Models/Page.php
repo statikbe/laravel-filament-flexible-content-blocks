@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Concerns\HasAuthorAttributeTrait;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Concerns\HasDefaultContentBlocksTrait;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Concerns\HasHeroCallToActionsTrait;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Concerns\HasHeroImageAttributesTrait;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Concerns\HasIntroAttributeTrait;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Concerns\HasOverviewAttributesTrait;
@@ -27,6 +28,7 @@ class Page extends Model implements HasContentBlocks, HasHeroImageAttributes, Ha
     use HasAuthorAttributeTrait;
     use HasDefaultContentBlocksTrait;
     use HasFactory;
+    use HasHeroCallToActionsTrait;
     use HasHeroImageAttributesTrait;
     use HasIntroAttributeTrait;
     use HasOverviewAttributesTrait;
