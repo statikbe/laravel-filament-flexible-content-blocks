@@ -2,6 +2,36 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.5.2 - 2025-06-18
+
+### What's Changed
+
+* Fix image position overrule by @bverbist in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/69
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v.2.5.1...v2.5.2
+
+## v2.5.1 - 2025-06-17
+
+### What's Changed
+
+* [flex content blocks] fix so that one can overrule the 'call_to_actio… by @bverbist in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/68
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v2.5.0...v.2.5.1
+
+## v2.5.0 - 2025-06-13
+
+### What's Changed
+
+* Improved loading of CSS-styles for the block previews and updated docs on how to support different fonts in preview blocks.
+* Flex content blocks styling improvements for better UX while editing by @bverbist in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/64
+* Flex content blocks labels based on content by @bverbist in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/66
+
+### New Contributors
+
+* @bverbist made their first contribution in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/64
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v2.4.0...v2.5.0
+
 ## v2.4.0 - 2025-06-03
 
 - Replicate actions for table and form to copy a model with content blocks and copy all images

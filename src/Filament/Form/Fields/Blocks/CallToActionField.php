@@ -150,8 +150,8 @@ class CallToActionField extends Component
                 ->schema([
                     Select::make(static::FIELD_BUTTON_STYLE)
                         ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_button_style'))
-                        ->options(FilamentFlexibleBlocksConfig::getCallToActionButtonsSelectOptions(static::class))
-                        ->default(FilamentFlexibleBlocksConfig::getCallToActionButtonDefault(static::class))
+                        ->options(FilamentFlexibleBlocksConfig::getCallToActionButtonsSelectOptions($this->blockClass))
+                        ->default(FilamentFlexibleBlocksConfig::getCallToActionButtonDefault($this->blockClass))
                         ->columnSpan(2),
                     TextInput::make(static::FIELD_BUTTON_LABEL)
                         ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_button_label'))
