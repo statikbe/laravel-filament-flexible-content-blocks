@@ -35,10 +35,16 @@ abstract class AbstractFilamentFlexibleContentBlock extends AbstractContentBlock
         return sprintf('%s::%s', FilamentFlexibleContentBlocksServiceProvider::$name, $nameSuffix);
     }
 
-    public static function getLabel(?array $state): string
+    public static function getLabel(): string
     {
-        $nameSuffix = static::getNameSuffix();
-        $staticLabel = trans("filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.{$nameSuffix}.label");
+        $name = static::getNameSuffix();
+
+        return trans("filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.{$name}.label");
+    }
+
+    public static function getContextualLabel(?array $state): ?string
+    {
+        $staticLabel = static::getLabel();
         $contentSummary = ($state === null) ? '' : static::getContentSummary($state);
 
         return ($contentSummary !== null && $contentSummary !== '')
