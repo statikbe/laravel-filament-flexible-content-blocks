@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.5.5 - 2025-07-02
+
+Fix bug in call to action data validation
+
 ## v2.5.4 - 2025-07-02
 
 Fix bug in call to actions
