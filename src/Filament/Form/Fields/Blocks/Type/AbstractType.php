@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use function Filament\Support\get_model_label;
 
 abstract class AbstractType
 {
@@ -254,7 +255,15 @@ abstract class AbstractType
 
     public function getLabel(): string
     {
-        return $this->label ?? Str::ucfirst(Filament::getModelResource($this->getModel())::getModelLabel());
+        if ($this->label) {
+            return $this->label;
+        }
+
+        if ($resource = Filament::getModelResource($this->getModel())) {
+            return Str::ucfirst($resource::getModelLabel());
+        }
+
+        return Str::ucfirst(get_model_label($this->getModel()));
     }
 
     public function getAlias(): string
