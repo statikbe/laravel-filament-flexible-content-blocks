@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * @property self $parent
+ * @property self|null $parent
  * @property int $parent_id
  * @property Collection $children
  */

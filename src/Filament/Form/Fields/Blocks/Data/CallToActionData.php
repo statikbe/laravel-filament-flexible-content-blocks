@@ -29,10 +29,16 @@ class CallToActionData
      */
     public static function create(array $callToActionBlockData, array $buttonStyleClasses): self
     {
-        if (! ($callToActionBlockData[CallToActionField::FIELD_URL] ??
-                $callToActionBlockData[CallToActionField::FIELD_ROUTE] ??
-                $callToActionBlockData[CallToActionField::FIELD_CTA_MODEL])) {
+        if (empty($callToActionBlockData[CallToActionField::FIELD_CTA_MODEL])) {
             throw CallToActionNotDefinedException::create('The call to action data does not specify a route, url or model.');
+        }
+
+        if ($callToActionBlockData[CallToActionField::FIELD_CTA_MODEL] === CallToActionType::TYPE_URL && empty($callToActionBlockData[CallToActionField::FIELD_URL])) {
+            throw CallToActionNotDefinedException::create('The call to action data does not specify a URL.');
+        }
+
+        if ($callToActionBlockData[CallToActionField::FIELD_CTA_MODEL] === CallToActionType::TYPE_ROUTE && empty($callToActionBlockData[CallToActionField::FIELD_ROUTE])) {
+            throw CallToActionNotDefinedException::create('The call to action data does not specify a route.');
         }
 
         $url = null;

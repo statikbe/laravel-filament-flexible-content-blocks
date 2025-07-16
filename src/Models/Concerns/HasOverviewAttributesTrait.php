@@ -45,6 +45,9 @@ trait HasOverviewAttributesTrait
 
     public function getOverviewDescription(): ?string
     {
+        if (! $this->overview_description && isset($this->intro)) {
+            return $this->intro;
+        }
         if (! $this->overview_description && isset($this->seo_description)) {
             return $this->seo_description;
         }

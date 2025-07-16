@@ -2,6 +2,21 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.5.5 - 2025-07-02
+
+Fix bug in call to action data validation
+
+## v2.5.4 - 2025-07-02
+
+Fix bug in call to actions
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v2.5.3...v2.5.4
+
+## v2.5.3 - 2025-06-26
+
+- Revert `getLabel()` back to make sure it the package stays backward compatible with existing project with custom blocks.
+- Introduced a new function `getContextualLabel()` which can be overwritten in custom blocks to provide more block context in the label
+
 ## v2.5.2 - 2025-06-18
 
 ### What's Changed

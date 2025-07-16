@@ -60,7 +60,16 @@ abstract class AbstractContentBlock extends Component
     /**
      * Get translated label of this block
      */
-    abstract public static function getLabel(?array $state): string;
+    abstract public static function getLabel(): string;
+
+    /**
+     * Get the translated label of this block in the context of the given state.
+     * You can use this to display the title or other state data in the block label.
+     */
+    public static function getContextualLabel(?array $state): ?string
+    {
+        return null;
+    }
 
     /**
      * Get the translated label of the given field.
@@ -74,7 +83,7 @@ abstract class AbstractContentBlock extends Component
     {
         return ContentBlockWithPreview::make(static::getName())
             ->label(function (?array $state) {
-                return static::getLabel($state);
+                return static::getContextualLabel($state) ?? static::getLabel();
             })
             ->icon(static::getIcon())
             ->schema(static::getFilamentBlockSchema())
