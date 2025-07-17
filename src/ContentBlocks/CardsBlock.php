@@ -25,6 +25,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToAct
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CardData;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\GridColumnsField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\ImageConversionTypeField;
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
 
@@ -89,8 +90,8 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
                         ->maxFiles(1),
                     CallToActionRepeater::create('card_call_to_action', static::class)
                         ->callToActionTypes(static::getCallToActionTypes())
-                        ->minItems(0)
-                        ->maxItems(2),
+                        ->minItems(FilamentFlexibleBlocksConfig::getCallToActionNumberOfItems(static::class, 'min', 0))
+                        ->maxItems(FilamentFlexibleBlocksConfig::getCallToActionNumberOfItems(static::class, 'max', 2)),
                 ])
                 ->itemLabel(function (array $state): ?string {
                     return $state['title'] ?? null;

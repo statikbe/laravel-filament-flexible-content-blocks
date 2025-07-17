@@ -103,7 +103,8 @@ class CallToActionBlock extends AbstractFilamentFlexibleContentBlock
             ]),
             CallToActionRepeater::create('call_to_action', static::class)
                 ->callToActionTypes(static::getCallToActionTypes())
-                ->minItems(1),
+                ->minItems(FilamentFlexibleBlocksConfig::getCallToActionNumberOfItems(static::class, 'min', 1))
+                ->maxItems(FilamentFlexibleBlocksConfig::getCallToActionNumberOfItems(static::class, 'max', 3)),
         ];
     }
 
