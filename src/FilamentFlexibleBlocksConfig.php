@@ -553,9 +553,13 @@ class FilamentFlexibleBlocksConfig
         return config('filament-flexible-content-blocks.block_preview.stylesheet', 'resources/css/app.css');
     }
 
-    public static function getBlockSettings(string $blockClass): array
+    public static function getCallToActionNumberOfItems(string $blockClass, string $settingName, int $defaultValue): int
     {
-        return config("filament-flexible-content-blocks.block_settings.$blockClass", []);
+        $ctaItemsConfig = config('filament-flexible-content-blocks.block_specific.'.$blockClass.'.call_to_action_number_of_items',
+            config('filament-flexible-content-blocks.call_to_action_number_of_items', [])
+        );
+
+        return $ctaItemsConfig[$settingName] ?? $defaultValue;
     }
 
     /**

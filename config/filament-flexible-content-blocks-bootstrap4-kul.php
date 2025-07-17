@@ -296,6 +296,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Call-to-action number of items validation
+    |--------------------------------------------------------------------------
+    |
+    | Some blocks allow adding call-to-action items. You can define the default min- and max number of items here.
+    | If needed, you can overrule the default min/max for a particular block in the 'block_specific' configuration.
+    */
+    'call_to_action_number_of_items' => [
+        'min' => 0,
+        'max' => 2,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Background colours options
     |--------------------------------------------------------------------------
     |
@@ -409,6 +422,12 @@ return [
     | parameters used above to customise a block class.
     */
     'block_specific' => [
+        CallToActionBlock::class => [
+            'call_to_action_number_of_items' => [
+                'min' => 1,
+                'max' => 3,
+            ],
+        ],
         /*
         //Examples:
         TextImageBlock::class => [
@@ -463,23 +482,5 @@ return [
         'enabled' => false,
         'previews_are_interactive' => false,
         'stylesheet' => 'resources/css/app.css',
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Block settings
-    |--------------------------------------------------------------------------
-    |
-    | Some blocks allow their behavior to be tweaked slightly by changing one or more of their settings below.
-    */
-    'block_settings' => [
-        CardsBlock::class => [
-            'call_to_action_min_items' => 0,
-            'call_to_action_max_items' => 2,
-        ],
-        TextImageBlock::class => [
-            'call_to_action_min_items' => 0,
-            'call_to_action_max_items' => 2,
-        ],
     ],
 ];

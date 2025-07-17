@@ -20,6 +20,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToAct
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CallToActionData;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\ImageConversionTypeField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\ImagePositionField;
+use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
 
@@ -113,8 +114,8 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
             ]),
             CallToActionRepeater::create('call_to_action', static::class)
                 ->callToActionTypes(static::getCallToActionTypes())
-                ->minItems(static::getBlockSetting('call_to_action_min_items', 0))
-                ->maxItems(static::getBlockSetting('call_to_action_max_items', 2)),
+                ->minItems(FilamentFlexibleBlocksConfig::getCallToActionNumberOfItems(static::class, 'min', 0))
+                ->maxItems(FilamentFlexibleBlocksConfig::getCallToActionNumberOfItems(static::class, 'max', 2)),
         ];
     }
 
