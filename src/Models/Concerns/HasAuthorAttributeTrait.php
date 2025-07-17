@@ -12,6 +12,11 @@ use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
  */
 trait HasAuthorAttributeTrait
 {
+    public function initializeHasAuthorAttributeTrait(): void
+    {
+        $this->mergeFillable(['author_id']);
+    }
+
     public function initializeHasAuthorTrait(): void
     {
         $this->mergeFillable(['author_id']);

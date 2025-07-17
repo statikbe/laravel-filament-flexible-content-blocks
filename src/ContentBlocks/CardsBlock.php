@@ -99,12 +99,16 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
                 ->collapseAllAction(
                     fn (Action $action) => $action
                         ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_collapse_all_lbl'))
-                        ->color('success'),
+                        ->button()
+                        ->color('gray')
+                        ->extraAttributes(['class' => 'content-blocks-repeater-collapse-all']),
                 )
                 ->expandAllAction(
                     fn (Action $action) => $action
                         ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks_expand_all_lbl'))
-                        ->color('success'),
+                        ->button()
+                        ->color('gray')
+                        ->extraAttributes(['class' => 'content-blocks-repeater-expand-all']),
                 )
                 ->minItems(1),
         ];

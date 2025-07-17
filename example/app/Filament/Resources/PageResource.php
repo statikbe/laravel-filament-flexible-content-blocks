@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\AuthorField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\ContentBlocksField;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Groups\HeroCallToActionSection;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Groups\HeroImageSection;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Groups\OverviewFields;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Groups\PublicationSection;
@@ -44,6 +45,7 @@ class PageResource extends Resource
                                 PublicationSection::create(),
                                 AuthorField::create(),
                                 HeroImageSection::create(),
+                                HeroCallToActionSection::create(),
                                 IntroField::create(),
                             ]),
                         Tab::make('Content')
