@@ -30,10 +30,13 @@ class CopyContentBlocksToLocalesAction extends Action
 
         $this->icon('heroicon-o-language');
 
+        // hide if there is only one locale available
+        $this->hidden(fn ($livewire) => method_exists($livewire, 'getTranslatableLocales') && count($livewire->getTranslatableLocales()) <= 1);
+
         $this->action(function () {
-            /** @var EditRecord $page * */
+            /** @var EditRecord $page */
             $page = $this->livewire;
-            /* @var Model&HasContentBlocks&HasMedia $record */
+            /** @var Model&HasContentBlocks&HasMedia $record */
             $record = $page->getRecord();
             $handler = new CopyContentBlocksToLocalesActionHandler;
             $handler->handle($record, $this->livewire, $record->content_blocks);
