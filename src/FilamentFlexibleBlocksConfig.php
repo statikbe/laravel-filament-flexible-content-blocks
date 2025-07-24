@@ -405,7 +405,7 @@ class FilamentFlexibleBlocksConfig
 
     /**
      * @param  class-string<AbstractContentBlock>  $blockClass
-     * @return array{options?: array<string, string>, default?: string, enabled_for_all_blocks?: bool}
+     * @return array{options?: array<string, string>, default?: string, enabled_for_all_blocks?: bool, enabled?:bool}
      */
     public static function getBlockStyleConfig(string $blockClass): array
     {

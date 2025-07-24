@@ -34,7 +34,7 @@ class FilamentFlexibleContentBlocksServiceProvider extends PackageServiceProvide
                 CallToAction::class,
                 Card::class,
             )
-            ->hasMigrations(['create_default_pages_table', 'create_default_translatable_pages_table', 'add_hero_call_to_actions_to_pages_tables'])
+            ->hasMigrations(['create_default_pages_table', 'create_default_translatable_pages_table'])
             ->hasTranslations()
             ->hasCommand(UpgradeSpatieImageFieldsCommand::class);
     }

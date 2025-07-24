@@ -44,7 +44,7 @@ return [
     'form_component.hero_image_title_lbl' => 'Titel van de hoofdafbeelding',
     'form_component.hero_image_copyright_lbl' => 'Auteursrechten van de hoofdafbeelding',
     'form_component.hero_image_section_title' => 'Hoofdafbeelding',
-    'form_component.hero_cta_section_title' => 'Hoofd call to actions',
+    'form_component.hero_cta_section_title' => 'Hoofd call-to-actions',
     'form_component.intro_lbl' => 'Introductie',
     'form_component.content_blocks_lbl' => 'Inhoudsblokken',
     'form_component.content_blocks_add_lbl' => 'Voeg blok toe',

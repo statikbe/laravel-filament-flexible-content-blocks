@@ -44,7 +44,7 @@ return [
     'form_component.hero_image_title_lbl' => 'Hero image title',
     'form_component.hero_image_copyright_lbl' => 'Hero image copyright',
     'form_component.hero_image_section_title' => 'Hero image',
-    'form_component.hero_cta_section_title' => 'Hero call to actions',
+    'form_component.hero_cta_section_title' => 'Hero call-to-actions',
     'form_component.intro_lbl' => 'Introduction',
     'form_component.content_blocks_lbl' => 'Content blocks',
     'form_component.content_blocks_add_lbl' => 'Add block',

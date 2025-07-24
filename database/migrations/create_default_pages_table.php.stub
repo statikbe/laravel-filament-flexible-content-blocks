@@ -19,6 +19,7 @@ return new class extends Migration
             //Hero image:
             $table->string('hero_image_copyright')->nullable();
             $table->string('hero_image_title')->nullable();
+            $table->json('hero_call_to_actions')->nullable();
 
             //Publishing:
             $table->timestamp('publishing_begins_at')->nullable();

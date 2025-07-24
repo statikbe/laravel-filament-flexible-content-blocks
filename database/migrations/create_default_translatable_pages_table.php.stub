@@ -19,6 +19,7 @@ return new class extends Migration
             //Hero image:
             $table->json('hero_image_copyright')->default('{}');
             $table->json('hero_image_title')->default('{}');
+            $table->json('hero_call_to_actions')->nullable();
 
             //Publishing:
             $table->timestamp('publishing_begins_at')->nullable();
