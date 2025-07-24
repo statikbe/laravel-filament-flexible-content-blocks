@@ -48,7 +48,7 @@ abstract class AbstractFilamentFlexibleContentBlock extends AbstractContentBlock
         $contentSummary = ($state === null) ? '' : static::getContentSummary($state);
 
         return ($contentSummary !== null && $contentSummary !== '')
-            ? $staticLabel.' - '.Str::limit($contentSummary, 40, '...')
+            ? $staticLabel.' - '.Str::limit(strip_tags($contentSummary), 40, '...')
             : $staticLabel;
     }
 
