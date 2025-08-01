@@ -12,4 +12,6 @@ use Illuminate\Database\Eloquent\Builder;
 interface HasCode
 {
     public function scopeCode(Builder $query, string $code): Builder;
+
+    public static function getByCode(string $code): ?static;
 }

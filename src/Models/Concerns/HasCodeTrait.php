@@ -20,4 +20,9 @@ trait HasCodeTrait
     {
         return $query->where('code', $code);
     }
+
+    public static function getByCode(string $code): ?static
+    {
+        return static::query()->code($code)->first();
+    }
 }
