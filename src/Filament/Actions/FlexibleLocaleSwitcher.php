@@ -14,8 +14,8 @@ class FlexibleLocaleSwitcher extends LocaleSwitcher
     {
         parent::setUp();
 
-        $this->visible(function (Page $page){
-            return count($page::getResource()::getTranslatableLocales()) < 2;
+        $this->visible(function (Page $livewire) {
+            return count($livewire::getResource()::getTranslatableLocales()) > 2;
         });
     }
 }
