@@ -16,7 +16,7 @@ class FlexibleLocaleSwitcher extends LocaleSwitcher
 
         $this->visible(function (Page $livewire) {
             if (method_exists($livewire::class, 'getResource')) {
-                return count($livewire::getResource()::getTranslatableLocales()) > 2;
+                return count($livewire::getResource()::getTranslatableLocales()) > 1;
             }
 
             return true;
