@@ -2,13 +2,11 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
 
-use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasCallToAction;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\CallToActionBlock;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToActionRepeater;
 
 class HeroCallToActionsField extends CallToActionRepeater
 {
-    use HasCallToAction;
-
     const FIELD = 'hero_call_to_actions';
 
     /**
@@ -18,7 +16,7 @@ class HeroCallToActionsField extends CallToActionRepeater
     public static function createField(): static
     {
         return parent::create(static::FIELD, static::class)
-            ->callToActionTypes(static::getCallToActionTypes())
+            ->callToActionTypes(CallToActionBlock::getCallToActionTypes())
             ->minItems(0);
     }
 }
