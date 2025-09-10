@@ -17,7 +17,6 @@ use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImageConver
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BackgroundColourField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockSpatieMediaLibraryFileUpload;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockStyleField;
-use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\ImageConversionTypeField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\ImagePositionField;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
@@ -95,10 +94,6 @@ class QuoteBlock extends AbstractFilamentFlexibleContentBlock
                         ->label(static::getFieldLabel('image_copyright'))
                         ->maxLength(255),
                     ImagePositionField::create(static::class)
-                        ->required(function (Get $get) {
-                            return (bool) $get('image');
-                        }),
-                    ImageConversionTypeField::create(static::class)
                         ->required(function (Get $get) {
                             return (bool) $get('image');
                         }),
