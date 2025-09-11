@@ -8,7 +8,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/statikbe/laravel-filament-flexible-content-blocks.svg?style=flat-square)](https://packagist.org/packages/statikbe/laravel-filament-flexible-content-blocks)
 
 The Laravel Filament Flexible Content Blocks package helps you to easily create content in Filament for any 
-model, with predefined blocks, and foreach block an extendable Blade view component. 
+model, with predefined blocks, and for each block an extendable Blade view component. 
 
 You can use this opinionated package to create a basic CMS, by setting up your own page model and implementing the predefined traits to 
 select the functionality you need, then quickly setup a Filament resource by implementing the ready-made fields. Or you can 
