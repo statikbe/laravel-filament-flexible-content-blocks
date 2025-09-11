@@ -31,6 +31,10 @@ trait HasTranslatedSlugAttributeTrait
         static::updating(function (self $record) {
             $newSlugs = $record->getTranslations('slug');
             $existingSlugs = $record->getOriginal('slug');
+            if (is_string($existingSlugs)) {
+                $existingSlugs = json_decode($existingSlugs, true);
+            }
+
             $changedSlugs = [];
             foreach ($existingSlugs as $locale => $existingSlug) {
                 if (! isset($newSlugs[$locale])) {
