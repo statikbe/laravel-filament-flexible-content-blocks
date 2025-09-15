@@ -9,7 +9,6 @@ use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\ImageBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\OverviewBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\QuoteBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TemplateBlock;
-use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextImageBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\VideoBlock;
 
@@ -38,7 +37,6 @@ return [
     |
     */
     'default_flexible_blocks' => [
-        TextBlock::class,
         VideoBlock::class,
         ImageBlock::class,
         HtmlBlock::class,
@@ -462,7 +460,7 @@ return [
                 'default' => 'left',
             ],
         ],
-        TextBlock::class => [
+        VideoBlock::class => [
             'block_styles' => [
                 'enabled' => true,
                 'options' => [
