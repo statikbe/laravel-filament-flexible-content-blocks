@@ -115,6 +115,14 @@ return [
     'form_component.content_blocks.template.label' => 'Template',
     'form_component.content_blocks.template.template' => 'Template',
 
+    'form_component.content_blocks.collapsible_group.label' => 'Uitklapbare tekst groep',
+    'form_component.content_blocks.collapsible_group.group_title' => 'Groep titel',
+    'form_component.content_blocks.collapsible_group.group_intro' => 'Groep intro',
+    'form_component.content_blocks.collapsible_group.collapsible_items' => 'Uitklapbare items',
+    'form_component.content_blocks.collapsible_group.item_title' => 'Titel',
+    'form_component.content_blocks.collapsible_group.item_text' => 'Uitklapbare tekst',
+    'form_component.content_blocks.collapsible_group.item_is_open_by_default' => 'Standaard uitgeklapt?',
+
     'form_component.content_blocks.image_position.left' => 'Links',
     'form_component.content_blocks.image_position.center' => 'Midden',
     'form_component.content_blocks.image_position.right' => 'Rechts',

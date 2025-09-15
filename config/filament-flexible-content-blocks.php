@@ -4,6 +4,7 @@
 use Spatie\Image\Enums\Fit;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\CallToActionBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\CardsBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\CollapsibleGroupBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\HtmlBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\ImageBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\OverviewBlock;
@@ -48,6 +49,7 @@ return [
         CallToActionBlock::class,
         CardsBlock::class,
         TemplateBlock::class,
+        CollapsibleGroupBlock::class,
     ],
 
     /*
