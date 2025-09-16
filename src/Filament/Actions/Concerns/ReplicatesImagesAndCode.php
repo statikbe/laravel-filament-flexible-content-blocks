@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Actions\Concerns;
 
+use App\Filament\Resources\PageResource;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -23,30 +24,32 @@ trait ReplicatesImagesAndCode
     {
         parent::setUp();
 
-        $this->beforeReplicaSaved(function (Model&HasMedia $record) {
-            $this->originalRecord = $record;
+        $this->icon('heroicon-o-document-duplicate')
+            ->beforeReplicaSaved(function (Model&HasMedia $record) {
+                $this->originalRecord = $record;
 
-            if (method_exists($this->replica, 'hasAttribute')) {
-                // clear the code field because it should be unique:
-                if ($this->replica->hasAttribute(CodeField::FIELD)) {
-                    $this->replica->setAttribute(CodeField::FIELD, null);
-                }
+                if (method_exists($this->replica, 'hasAttribute')) {
+                    // clear the code field because it should be unique:
+                    if ($this->replica->hasAttribute(CodeField::FIELD)) {
+                        $this->replica->setAttribute(CodeField::FIELD, null);
+                    }
 
-                // add '(copy)' postfix to title
-                if ($this->replica->hasAttribute(TitleField::getFieldName())) {
-                    if ($this->replica instanceof HasTranslations) {
-                        $translations = $this->replica->getTranslations(TitleField::getFieldName());
-                        foreach ($translations as $locale => $title) {
-                            if (! empty(trim($title))) {
-                                $translations[$locale] = $title.' (copy)';
+                    // add '(copy)' postfix to title
+                    if ($this->replica->hasAttribute(TitleField::getFieldName())) {
+                        if ($this->replica instanceof HasTranslations) {
+                            $translations = $this->replica->getTranslations(TitleField::getFieldName());
+                            foreach ($translations as $locale => $title) {
+                                if (! empty(trim($title))) {
+                                    $translations[$locale] = $title.' (copy)';
+                                }
                             }
+                            $this->replica->setTranslations(TitleField::getFieldName(), $translations);
                         }
-                        $this->replica->setTranslations(TitleField::getFieldName(), $translations);
                     }
                 }
-            }
-        })
-            ->after(fn ($record) => $this->copyImagesToNewRecord());
+            })
+            ->after(fn ($record) => $this->copyImagesToNewRecord())
+            ->successRedirectUrl(fn () => PageResource::getUrl('edit', ['record' => $this->getReplica()]));
     }
 
     public function copyImagesToNewRecord(): void
