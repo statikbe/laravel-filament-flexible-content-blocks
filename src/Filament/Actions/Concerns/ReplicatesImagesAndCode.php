@@ -48,8 +48,7 @@ trait ReplicatesImagesAndCode
                     }
                 }
             })
-            ->after(fn ($record) => $this->copyImagesToNewRecord())
-            ->successRedirectUrl(fn () => PageResource::getUrl('edit', ['record' => $this->getReplica()]));
+            ->after(fn ($record) => $this->copyImagesToNewRecord());
     }
 
     public function copyImagesToNewRecord(): void
