@@ -9,7 +9,6 @@ use Filament\Resources\Pages\Page;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
-use Spatie\Translatable\HasTranslations;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Concerns\HasTranslatableHint;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\Linkable;
 
