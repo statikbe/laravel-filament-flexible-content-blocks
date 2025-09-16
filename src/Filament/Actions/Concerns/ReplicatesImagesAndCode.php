@@ -2,7 +2,6 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Actions\Concerns;
 
-use App\Filament\Resources\PageResource;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
