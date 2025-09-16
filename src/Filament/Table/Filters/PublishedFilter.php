@@ -15,8 +15,20 @@ class PublishedFilter extends TernaryFilter
             ->trueLabel(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.filter.is_published.published_label'))
             ->falseLabel(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.filter.is_published.unpublished_label'))
             ->queries(
-                true: fn (Builder $query): Builder => $query->published(),
-                false: fn (Builder $query): Builder => $query->unpublished(),
+                true: function (Builder $query): Builder {
+                    if (method_exists($query, 'published')) {
+                        return $query->published();
+                    }
+
+                    return $query;
+                },
+                false: function (Builder $query): Builder {
+                    if (method_exists($query, 'unpublished')) {
+                        return $query->unpublished();
+                    }
+
+                    return $query;
+                },
                 blank: fn (Builder $query): Builder => $query,
             );
     }
