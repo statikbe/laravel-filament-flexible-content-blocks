@@ -36,7 +36,7 @@ trait ReplicatesImagesAndCode
 
                     // add '(copy)' postfix to title
                     if ($this->replica->hasAttribute(TitleField::getFieldName())) {
-                        if ($this->replica instanceof HasTranslations) {
+                        if (method_exists($this->replica, 'getTranslations')) {
                             $translations = $this->replica->getTranslations(TitleField::getFieldName());
                             foreach ($translations as $locale => $title) {
                                 if (! empty(trim($title))) {
