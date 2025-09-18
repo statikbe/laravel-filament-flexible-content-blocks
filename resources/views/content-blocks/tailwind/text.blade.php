@@ -1,13 +1,16 @@
-@if ($content)
-    <div class="container {{ $getBackgroundColourClass() }}">
-        <section class="max-w-2xl py-3 text-balance">
+<div @class([
+    'content-block content-block--text',
+    $getBackgroundColourClass(),
+])>
+    <div class="container">
+        <div class="max-w-2xl py-3 text-balance">
             @if ($title)
                 <h2>{{ $replaceParameters($title) }}</h2>
             @endif
 
-            <div class="text-base">
+            <div class="text-base canBeRichEditorContent">
                 {!! $replaceParameters($content) !!}
             </div>
-        </section>
+        </div>
     </div>
-@endif
+</div>
