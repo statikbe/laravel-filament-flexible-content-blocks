@@ -24,6 +24,7 @@ trait ReplicatesImagesAndCode
         parent::setUp();
 
         $this->icon('heroicon-o-document-duplicate')
+            ->color('gray')
             ->beforeReplicaSaved(function (Model&HasMedia $record) {
                 $this->originalRecord = $record;
 

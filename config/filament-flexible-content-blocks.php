@@ -431,8 +431,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | In case you have overwritten the default User model, you need to add the new class here to create the author relationship.
+    | If you have created a different name column than the defaults Laravel provides, you can change that here as well.
     */
     'author_model' => 'App\Models\User',
+    'author_name_column' => 'name',
 
     /*
     |--------------------------------------------------------------------------

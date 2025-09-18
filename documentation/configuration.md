@@ -131,9 +131,12 @@ You can set the date formatting of the publishing dates. Formatting parameters a
 ## Author model
 
 In case you have overwritten the default User model, you need to add the new class here to create the author relationship.
+You can also change the database column with the name to search on. 
+It should be the column and not a computed attribute, because it is used in queries. 
 
 ```php 
 'author_model' => 'App\Models\User',
+'author_name_column' => 'name',
 ```
 
 ## Text parameter replacer

@@ -304,6 +304,11 @@ class FilamentFlexibleBlocksConfig
         return config('filament-flexible-content-blocks.author_model', 'Illuminate\Foundation\Auth\User');
     }
 
+    public static function getAuthorNameColumn(): string
+    {
+        return config('filament-flexible-content-blocks.author_name_column', 'name');
+    }
+
     public static function getPublishingDateFormatting(): string
     {
         return config('filament-flexible-content-blocks.formatting.publishing_dates', 'd/m/Y G:i');
