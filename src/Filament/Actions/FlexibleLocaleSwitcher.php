@@ -15,11 +15,11 @@ class FlexibleLocaleSwitcher extends LocaleSwitcher
         parent::setUp();
 
         $this->visible(function (Page $livewire) {
-            if (method_exists($livewire::class, 'getResource')) {
+            if (method_exists($livewire::class, 'getResource') && method_exists($livewire::getResource(), 'getTranslatableLocales')) {
                 return count($livewire::getResource()::getTranslatableLocales()) > 1;
             }
 
-            return true;
+            return false;
         });
     }
 }
