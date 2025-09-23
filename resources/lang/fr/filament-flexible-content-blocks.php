@@ -6,7 +6,7 @@ return [
     'columns.is_published_state_published' => 'Publié',
     'columns.is_published_state_unpublished' => 'Non publié',
     'columns.is_published_state_published_future_info' => 'sera publié le :date',
-    'columns.is_published_state_unpublished_future_info' => 'sera retiré de la publication le :date',
+    'columns.is_published_state_unpublished_future_info' => 'sera dépublié le :date',
 
     'filter.is_published.label' => 'Afficher publiés :',
     'filter.is_published.published_label' => 'Publié',
