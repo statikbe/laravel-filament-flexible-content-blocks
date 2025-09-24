@@ -2,6 +2,33 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.6.0 - 2025-09-24
+
+This is a release with many new tweaks and features for [the new Flexible Content Block Pages package](https://github.com/statikbe/laravel-filament-flexible-content-block-pages).
+
+### What's Changed
+
+* Quote-block optional image by @bverbist in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/70
+* Allow call to actions on a page for the hero component by @bverbist in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/72
+* Possibility to overrule, via a setting, the min- and max allowed cta's within both Cards and TextImage content blocks by @bverbist in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/71
+* ensuring all options selectable in the "content-blocks select list by @bverbist in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/75
+* French copy - Update filament-flexible-content-blocks.php by @sigridviaene in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/76
+* use intro as fallback for overview description
+* hide copy content blocks to other locales action, if there is only 1 locale
+* fix block preview label: strip html tags
+* convenience function `getByCode` to query model by code
+* smarter language switch action that hides the lang switch when there is only 1 locale
+* deprecate the TextBlock because it is very similar to other blocks
+* improve replicate action: add "(copy)" to title
+* fix builder block popup to not fall off the window
+* many small bugs
+
+### New Contributors
+
+* @sigridviaene made their first contribution in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/76
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v2.5.5...2.6.0
+
 ## v2.5.5 - 2025-07-02
 
 Fix bug in call to action data validation
