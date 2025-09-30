@@ -378,12 +378,6 @@ You will find the SEO AI action already set up in the `SEOFields` group.
 
 To build your content, the package provides the default blocks listed below. 
 
-### Text block
-
-A basic block with title and text.
-
-![text.png](https://raw.githubusercontent.com/statikbe/laravel-filament-flexible-content-blocks/main/documentation/img/blocks/text.png)
-
 ### Text with image block
 
 Additionally to the text block, you can add an image with its title and copyright. The image can be positioned left or 

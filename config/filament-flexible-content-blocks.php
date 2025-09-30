@@ -10,7 +10,6 @@ use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\ImageBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\OverviewBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\QuoteBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TemplateBlock;
-use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextImageBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\VideoBlock;
 
@@ -39,7 +38,6 @@ return [
     |
     */
     'default_flexible_blocks' => [
-        TextBlock::class,
         VideoBlock::class,
         ImageBlock::class,
         HtmlBlock::class,
@@ -392,6 +390,10 @@ return [
         '[&>ul]:space-y-6',
         '[&>ul>li]:bg-gray-50 [&>ul>li>.fi-fo-builder-item-header]:bg-gray-100',
         '[&>ul>li>.fi-fo-builder-item-header]:rounded-t-xl [&>ul>li.fi-collapsed>.fi-fo-builder-item-header]:rounded-b-xl',
+        /* The class below ensures that all options of the "content-blocks select list" (when
+         | adding a content-block) are always visible. Needed as in some cases, a negative top value
+         | resulted in the top option(s) to be outside the viewport */
+        '[&_.fi-fo-builder-block-picker_.fi-dropdown-panel]:!top-[unset]',
     ],
 
     /*
@@ -435,8 +437,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | In case you have overwritten the default User model, you need to add the new class here to create the author relationship.
+    | If you have created a different name column than the defaults Laravel provides, you can change that here as well.
     */
     'author_model' => 'App\Models\User',
+    'author_name_column' => 'name',
 
     /*
     |--------------------------------------------------------------------------
@@ -464,7 +468,7 @@ return [
                 'default' => 'left',
             ],
         ],
-        TextBlock::class => [
+        VideoBlock::class => [
             'block_styles' => [
                 'enabled' => true,
                 'options' => [

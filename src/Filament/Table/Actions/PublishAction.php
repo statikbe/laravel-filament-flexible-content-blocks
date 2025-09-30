@@ -23,9 +23,9 @@ class PublishAction extends Action
                 /** @var Model&HasPageAttributes $page */
                 $page = $this->getRecord();
                 if (method_exists($page, 'isPublished') && ! $page->isPublished()) {
-                    $page->publishing_begins_at = Carbon::now();
+                    $page->setAttribute('publishing_begins_at', Carbon::now());
                     if (method_exists($page, 'wasUnpublished') && $page->wasUnpublished()) {
-                        $page->publishing_ends_at = null;
+                        $page->setAttribute('publishing_ends_at', null);
                     }
                     $page->save();
 
@@ -35,7 +35,7 @@ class PublishAction extends Action
                         ->body(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.table_action.publish.publish_notification_success_msg'))
                         ->send();
                 } else {
-                    $page->publishing_ends_at = Carbon::now();
+                    $page->setAttribute('publishing_ends_at', Carbon::now());
                     $page->save();
 
                     Notification::make()

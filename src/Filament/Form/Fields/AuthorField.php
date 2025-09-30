@@ -21,13 +21,14 @@ class AuthorField extends Select
             // this is a default search query, add your own implementation by implementing getSearchResultsUsing on creation of the field.
             ->getSearchResultsUsing(function (string $searchQuery) {
                 $searchQuery = trim(Str::lower($searchQuery));
+                $authorNameColumn = FilamentFlexibleBlocksConfig::getAuthorNameColumn();
 
                 return FilamentFlexibleBlocksConfig::getAuthorModel()::query()
-                    ->whereRaw('LOWER(`name`) LIKE ? ', "%{$searchQuery}%")
+                    ->whereRaw("LOWER(`{$authorNameColumn}`) LIKE ? ", "%{$searchQuery}%")
                     ->orWhereRaw('LOWER(`email`) LIKE ? ', "%{$searchQuery}%")
-                    ->orderBy('name', 'asc')
+                    ->orderBy($authorNameColumn, 'asc')
                     ->limit(50)
-                    ->pluck('name', 'id');
+                    ->pluck($authorNameColumn, 'id');
             });
     }
 }

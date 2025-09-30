@@ -12,6 +12,11 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Backgroun
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockStyleField;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 
+/**
+ * @deprecated This block has very similar or fewer functionality than other blocks.
+ * This block has been removed from the default blocks in the configuration.
+ * Use TextImageBlock or CallToActionBlock
+ */
 class TextBlock extends AbstractFilamentFlexibleContentBlock
 {
     use HasBackgroundColour;

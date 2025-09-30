@@ -22,7 +22,7 @@ class PublishedColumn extends TextColumn
         return static::make('is_published')
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.columns.is_published'))
             ->getStateUsing(function (Model $record) {
-                /** @var HasPageAttributes $record */
+                /** @var Model&HasPageAttributes $record */
                 if ($record->isPublished()) {
                     return static::STATE_PUBLISHED;
                 } else {
@@ -30,16 +30,22 @@ class PublishedColumn extends TextColumn
                 }
             })
             ->formatStateUsing(function (TextColumn $column, string $state) use ($options): string {
-                /** @var HasPageAttributes $record */
+                /** @var Model&HasPageAttributes $record */
                 $record = $column->getRecord();
                 $formattedState = $options[$state];
                 if ($record->willBecomePublished()) {
-                    $info = trans('filament-flexible-content-blocks::filament-flexible-content-blocks.columns.is_published_state_published_future_info', ['date' => $record->publishing_begins_at->format('d/m/Y')]);
-                    $formattedState = "$formattedState ($info)";
+                    $publishingBeginsAt = $record->getAttribute('publishing_begins_at');
+                    if ($publishingBeginsAt) {
+                        $info = trans('filament-flexible-content-blocks::filament-flexible-content-blocks.columns.is_published_state_published_future_info', ['date' => $publishingBeginsAt->format('d/m/Y')]);
+                        $formattedState = "$formattedState ($info)";
+                    }
                 }
                 if ($record->willBecomeUnpublished()) {
-                    $info = trans('filament-flexible-content-blocks::filament-flexible-content-blocks.columns.is_published_state_unpublished_future_info', ['date' => $record->publishing_ends_at->format('d/m/Y')]);
-                    $formattedState = "$formattedState ($info)";
+                    $publishingEndsAt = $record->getAttribute('publishing_ends_at');
+                    if ($publishingEndsAt) {
+                        $info = trans('filament-flexible-content-blocks::filament-flexible-content-blocks.columns.is_published_state_unpublished_future_info', ['date' => $publishingEndsAt->format('d/m/Y')]);
+                        $formattedState = "$formattedState ($info)";
+                    }
                 }
 
                 return $formattedState;
