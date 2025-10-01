@@ -115,6 +115,14 @@ return [
     'form_component.content_blocks.template.label' => 'Modèle',
     'form_component.content_blocks.template.template' => 'Modèle',
 
+    'form_component.content_blocks.collapsible_group.label' => 'Groupe accordéon',
+    'form_component.content_blocks.collapsible_group.group_title' => 'Titre du groupe',
+    'form_component.content_blocks.collapsible_group.group_intro' => 'Introduction du groupe',
+    'form_component.content_blocks.collapsible_group.collapsible_items' => "Éléments de l’accordéon",
+    'form_component.content_blocks.collapsible_group.item_title' => 'Titre',
+    'form_component.content_blocks.collapsible_group.item_text' => 'Texte déroulant',
+    'form_component.content_blocks.collapsible_group.item_is_open_by_default' => 'Ouverte par défaut?',
+
     'form_component.content_blocks.image_position.left' => 'Gauche',
     'form_component.content_blocks.image_position.center' => 'Centre',
     'form_component.content_blocks.image_position.right' => 'Droite',
