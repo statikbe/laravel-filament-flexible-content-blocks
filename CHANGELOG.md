@@ -2,6 +2,13 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.6.1 - 2025-10-01
+
+New content block: Collapsible group.
+This is a block with collapsible items with a title and description. This is useful for example for FAQ pages.
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/2.6.0...v2.6.1
+
 ## v2.6.0 - 2025-09-24
 
 This is a release with many new tweaks and features for [the new Flexible Content Block Pages package](https://github.com/statikbe/laravel-filament-flexible-content-block-pages).
