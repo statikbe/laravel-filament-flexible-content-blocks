@@ -35,7 +35,7 @@ correct stylesheet. See [the preview block configuration](documentation%2Fconfig
 - :art: Simple asset manager, see [Filament Flexible Blocks Asset Manager](https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager)
 
 **NOTE:**
-For a complete, out-of-the-box, content management solution, check out our new [Filament Flexible Content Block Pages](https://github.com/statikbe/laravel-filament-flexible-content-block-pages) package with page management,
+:rocket: For a complete, out-of-the-box, content management solution, check out our new [Filament Flexible Content Block Pages](https://github.com/statikbe/laravel-filament-flexible-content-block-pages) package with page management,
 a menu builder, tag management and many SEO features.
 
 ## Upgrades
