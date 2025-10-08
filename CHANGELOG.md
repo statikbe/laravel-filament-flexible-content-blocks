@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.6.2 - 2025-10-08
+
+### What's Changed
+
+* Update ContentBlocks.php by @Sindoweb in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/78
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v2.6.1...v2.6.2
+
 ## v2.6.1 - 2025-10-01
 
 New content block: Collapsible group.
