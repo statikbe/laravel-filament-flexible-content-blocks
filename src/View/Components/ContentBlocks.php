@@ -30,7 +30,7 @@ class ContentBlocks extends Component
         $blockClassIndex = collect($blockClasses)->mapWithKeys(fn ($item, $key) => [$item::getName() => $item]);
         $blocks = [];
 
-        if (isset($page->content_blocks)) {
+        if (! empty($page->content_blocks)) {
             foreach ($page->content_blocks as $blockData) {
                 if (isset($blockData['type']) && $blockClassIndex->has($blockData['type'])) {
                     $blockClass = $blockClassIndex->get($blockData['type']);

@@ -53,7 +53,7 @@ return [
     'form_component.image_position_lbl' => 'Alignement de l\'image',
     'form_component.image_position_help' => 'Sélectionnez la position de l\'image par rapport au texte.',
     'form_component.image_width_lbl' => 'Largeur de l\'image',
-    'form_component.background_colour_lbl' => 'Couleur de fond',
+    'form_component.background_colour_lbl' => 'Couleur de l\'arrière-plan',
     'form_component.block_style_lbl' => 'Style de bloc',
     'form_component.block_style_help' => 'Ceci affichera le bloc dans un style différent.',
     'form_component.copy_content_blocks_to_other_locales_lbl' => 'Copier les blocs de contenu vers d\'autres langues',
@@ -78,7 +78,7 @@ return [
     'form_component.content_blocks.video.label' => 'Vidéo',
     'form_component.content_blocks.video.embed_url' => 'URL média',
     'form_component.content_blocks.video.help' => 'Ajoutez l\'URL, par exemple d\'une vidéo YouTube ou Vimeo.',
-    'form_component.content_blocks.video.overlay_image' => 'Image de prévisualisation',
+    'form_component.content_blocks.video.overlay_image' => 'Image d\'aperçu',
     'form_component.content_blocks.video.sr_msg' => 'Lire la vidéo',
     'form_component.content_blocks.html.title' => 'HTML',
     'form_component.content_blocks.html.label' => 'HTML',
@@ -115,6 +115,14 @@ return [
     'form_component.content_blocks.template.label' => 'Modèle',
     'form_component.content_blocks.template.template' => 'Modèle',
 
+    'form_component.content_blocks.collapsible_group.label' => 'Groupe accordéon',
+    'form_component.content_blocks.collapsible_group.group_title' => 'Titre du groupe',
+    'form_component.content_blocks.collapsible_group.group_intro' => 'Introduction du groupe',
+    'form_component.content_blocks.collapsible_group.collapsible_items' => 'Éléments de l\'accordéon',
+    'form_component.content_blocks.collapsible_group.item_title' => 'Titre',
+    'form_component.content_blocks.collapsible_group.item_text' => 'Texte déroulant',
+    'form_component.content_blocks.collapsible_group.item_is_open_by_default' => 'Ouverte par défaut?',
+
     'form_component.content_blocks.image_position.left' => 'Gauche',
     'form_component.content_blocks.image_position.center' => 'Centre',
     'form_component.content_blocks.image_position.right' => 'Droite',
@@ -142,8 +150,8 @@ return [
     'form_component.content_blocks.call_to_action_cta_model' => 'Type',
     'form_component.content_blocks.call_to_action_entry_id' => 'Page',
     'form_component.content_blocks.call_to_action_button_style' => 'Style du bouton',
-    'form_component.content_blocks.call_to_action_button_label' => 'Label du bouton',
-    'form_component.content_blocks.call_to_action_button_open_in_new_window' => 'Ouvrir dans une nouvelle fenêtre ?',
+    'form_component.content_blocks.call_to_action_button_label' => 'Texte du bouton',
+    'form_component.content_blocks.call_to_action_button_open_in_new_window' => 'Ouvrir dans une nouvelle fenêtre?',
     'form_component.content_blocks.call_to_action_route' => 'Route',
 
     'form_component.content_blocks.background_colour.default' => 'Par défaut',
@@ -157,10 +165,10 @@ return [
     'form_component.grid_columns_lbl' => 'Nombre de colonnes',
 
     'form_component.image_conversion_type_lbl' => 'Conversion de l\'image',
-    'form_component.image_conversion_type_crop' => 'Rogner',
+    'form_component.image_conversion_type_crop' => 'Recadrer',
     'form_component.image_conversion_type_contain' => 'Conserver le ratio d\'aspect',
 
-    'form_component.content_blocks.templates_options.footer' => 'Pied de page',
+    'form_component.content_blocks.templates_options.footer' => 'Footer',
 
     'form_component.media_embed.validation' => 'L\'URL ajoutée n\'est pas correcte.',
 

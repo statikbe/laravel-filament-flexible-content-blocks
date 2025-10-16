@@ -113,6 +113,14 @@ return [
     'form_component.content_blocks.template.label' => 'Template',
     'form_component.content_blocks.template.template' => 'Template',
 
+    'form_component.content_blocks.collapsible_group.label' => 'Collapsible text group',
+    'form_component.content_blocks.collapsible_group.group_title' => 'Group title',
+    'form_component.content_blocks.collapsible_group.group_intro' => 'Group intro',
+    'form_component.content_blocks.collapsible_group.collapsible_items' => 'Collapsible items',
+    'form_component.content_blocks.collapsible_group.item_title' => 'Title',
+    'form_component.content_blocks.collapsible_group.item_text' => 'Collapsible text',
+    'form_component.content_blocks.collapsible_group.item_is_open_by_default' => 'Open by default?',
+
     'form_component.content_blocks.image_position.left' => 'Left',
     'form_component.content_blocks.image_position.center' => 'Center',
     'form_component.content_blocks.image_position.right' => 'Right',
