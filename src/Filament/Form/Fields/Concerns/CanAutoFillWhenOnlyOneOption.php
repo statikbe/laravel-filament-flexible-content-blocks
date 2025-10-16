@@ -15,18 +15,21 @@ trait CanAutoFillWhenOnlyOneOption
     public function autoFillWhenOnlyOneOptionAndRequired(): static
     {
         $this->autoFillModeWhenOnlyOneOption = self::AUTO_FILL_MODE_ONLY_ONE_AND_REQUIRED;
+
         return $this;
     }
 
     public function autoFillWhenOnlyOneOption(): static
     {
         $this->autoFillModeWhenOnlyOneOption = self::AUTO_FILL_MODE_ONLY_ONE;
+
         return $this;
     }
 
     public function noAutoFill(): static
     {
         $this->autoFillModeWhenOnlyOneOption = self::AUTO_FILL_MODE_DISABLED;
+
         return $this;
     }
 
