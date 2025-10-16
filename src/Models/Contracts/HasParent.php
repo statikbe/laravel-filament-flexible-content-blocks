@@ -3,6 +3,7 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Models\Contracts;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -31,5 +32,5 @@ interface HasParent
     /**
      * Checks if this model is the parent of the given $child.
      */
-    public function isParentOf(self $child): bool;
+    public function isParentOf(HasParent&Model $child): bool;
 }
