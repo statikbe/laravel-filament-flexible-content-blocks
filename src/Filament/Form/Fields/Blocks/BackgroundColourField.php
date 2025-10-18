@@ -2,11 +2,11 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks;
 
-use Filament\Forms\Components\Select;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Generic\GenericSelectField;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 
-class BackgroundColourField extends Select
+class BackgroundColourField extends GenericSelectField
 {
     const FIELD = 'background_colour';
 
