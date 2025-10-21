@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.6.4 - 2025-10-21
+
+- Improved config return type for getCallToActionModels
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v2.6.3...v2.6.4
+
 ## v2.6.3 - 2025-10-16
 
 ### What's Changed
