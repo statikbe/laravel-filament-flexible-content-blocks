@@ -327,7 +327,7 @@ class FilamentFlexibleBlocksConfig
 
     /**
      * @param  class-string<AbstractContentBlock>  $blockClass
-     * @return array<class-string>
+     * @return array<class-string|array>
      */
     public static function getCallToActionModels(string $blockClass): array
     {
