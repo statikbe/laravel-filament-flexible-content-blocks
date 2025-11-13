@@ -7,6 +7,7 @@ use Illuminate\Console\Concerns\PromptsForMissingInput as PromptsForMissingInput
 use Illuminate\Contracts\Console\PromptsForMissingInput;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\BlockIdField;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks;
@@ -40,33 +41,34 @@ class UpgradeSpatieImageFieldsCommand extends Command implements PromptsForMissi
 
     public function handle(): int
     {
-        $model = $this->argument('model');
+        /** @var class-string<Model&HasContentBlocks> $modelClass */
+        $modelClass = $this->argument('model');
 
         $customImage = $this->option('customimage');
         if ($customImage) {
             $this->imageFields[] = $customImage;
         }
 
-        $model::orderBy('id', 'desc')->chunk(50, function (Collection $models) {
+        $modelClass::orderBy('id', 'desc')->chunk(50, function (Collection $models) {
             foreach ($models as $model) {
-                /* @var HasContentBlocks $model */
+                /** @var Model $model */
                 // check if the model is translated:
                 if (isset($model->translatable) && in_array('content_blocks', $model->translatable)) {
                     foreach (FilamentFlexibleContentBlocks::getLocales() as $locale) {
-                        $contentBlocks = $model->getTranslation('content_blocks', $locale);
+                        $contentBlocks = $model->getTranslation('content_blocks', $locale); // @phpstan-ignore-line
                         $upgradedContentBlocks = $this->upgradeContentBlocks($contentBlocks, $model);
 
-                        $model->setTranslation('content_blocks', $locale, $upgradedContentBlocks);
+                        $model->setTranslation('content_blocks', $locale, $upgradedContentBlocks); // @phpstan-ignore-line
                         $model->save();
                     }
                 } else {
-                    $model->content_blocks = $this->upgradeContentBlocks($model->content_blocks, $model);
+                    $model->setAttribute('content_blocks', $this->upgradeContentBlocks($model->getAttribute('content_blocks'), $model));
 
                     // save upgrade
                     $model->save();
                 }
 
-                $this->comment("Model {$model->id} upgraded.");
+                $this->comment("Model {$model->getKey()} upgraded.");
             }
         });
 
@@ -75,8 +77,7 @@ class UpgradeSpatieImageFieldsCommand extends Command implements PromptsForMissi
         return self::SUCCESS;
     }
 
-    // Generate function
-    public function upgradeContentBlocks(array $contentBlocks, Model $model): array
+    public function upgradeContentBlocks(array $contentBlocks, Model&HasContentBlocks&HasMedia $model): array
     {
         foreach ($contentBlocks as &$block) {
             // add block id to each block:
@@ -110,16 +111,17 @@ class UpgradeSpatieImageFieldsCommand extends Command implements PromptsForMissi
         return $contentBlocks;
     }
 
-    private function updateMedia(?string $mediaUuid, string $blockId, Model $model): string
+    private function updateMedia(?string $mediaUuid, string $blockId, Model&HasMedia $model): string
     {
         if ($mediaUuid) {
-            /* @var Media $media */
             $media = Media::findByUuid($mediaUuid);
             if ($media) {
                 // Check if there is already a block assigned. If so, this means it is already used by another block.
                 // This is possible because of the old copy content blocks button to other locales, that did not copy media for each locale.
+                // @phpstan-ignore-next-line
                 if ($media->getCustomProperty('block')) {
                     // make a copy of the media:
+                    // @phpstan-ignore-next-line
                     $media = $media->copy($model, $media->collection_name, $media->disk);
                 }
                 // add block id as custom property to media:

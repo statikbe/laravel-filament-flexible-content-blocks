@@ -15,7 +15,9 @@ class FlexibleLocaleSwitcher extends LocaleSwitcher
         parent::setUp();
 
         $this->visible(function (Page $livewire) {
+            // @phpstan-ignore-next-line - getResource() exists on resource pages
             if (method_exists($livewire::class, 'getResource') && method_exists($livewire::getResource(), 'getTranslatableLocales')) {
+                // @phpstan-ignore-next-line - getResource() exists on resource pages
                 return count($livewire::getResource()::getTranslatableLocales()) > 1;
             }
 

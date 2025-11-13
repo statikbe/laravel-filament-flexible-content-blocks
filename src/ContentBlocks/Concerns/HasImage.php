@@ -36,9 +36,12 @@ trait HasImage
         /* @var HasMedia&InteractsWithMedia $recordWithMedia */
         $recordWithMedia = $this->record;
 
-        return $recordWithMedia->getMedia($collection ?? static::getName(), [
+        /** @var MediaCollection $media */
+        $media = $recordWithMedia->getMedia($collection ?? static::getName(), [
             'block' => $blockId,
         ]);
+
+        return $media;
     }
 
     public function hasImage(?string $blockId = null, ?string $collection = null): bool
@@ -50,6 +53,7 @@ trait HasImage
         /* @var HasMedia&InteractsWithMedia $recordWithMedia */
         $recordWithMedia = $this->record;
 
+        // @phpstan-ignore-next-line    Discrepancy between the spatie/medialibrary interface and trait.
         return $recordWithMedia->hasMedia($collection ?? static::getName(), [
             'block' => $blockId,
         ]);

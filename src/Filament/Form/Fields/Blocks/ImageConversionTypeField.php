@@ -16,8 +16,8 @@ class ImageConversionTypeField extends Select
     {
         return static::make(static::FIELD)
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.image_conversion_type_lbl'))
-            ->options($blockClass::getImageConversionTypeOptions())
-            ->default($blockClass::getImageConversionTypeDefault())
+            ->options($blockClass::getImageConversionTypeOptions()) // @phpstan-ignore-line
+            ->default($blockClass::getImageConversionTypeDefault()) // @phpstan-ignore-line
             ->selectablePlaceholder(false)
             ->required($required);
     }

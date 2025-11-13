@@ -3,6 +3,7 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
 
 use Filament\Forms\Components\Select;
+use Illuminate\Database\Eloquent\Model;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasPageAttributes;
 
 class ParentField extends Select
@@ -15,7 +16,7 @@ class ParentField extends Select
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.parent_lbl'))
             ->helperText(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.parent_help'))
             ->relationship(name: 'parent', titleAttribute: null)
-            ->getOptionLabelFromRecordUsing(fn (HasPageAttributes $record) => $record->title)
+            ->getOptionLabelFromRecordUsing(fn (Model&HasPageAttributes $record) => $record->getAttribute('title'))
             ->searchable(['title', 'intro'])
             ->required(false);
     }

@@ -18,7 +18,7 @@ class SEOAIAction extends Action
 {
     const NAME = 'AIseo';
 
-    private static function getAIParameters($title, $html): array
+    protected static function getAIParameters($title, $html): array
     {
         return [
             'model' => 'gpt-3.5-turbo',
@@ -38,14 +38,14 @@ class SEOAIAction extends Action
         ];
     }
 
-    private static function invoke(Set $set, Model&HasPageAttributes&HasContentBlocks $record): void
+    protected static function invoke(Set $set, Model&HasPageAttributes&HasContentBlocks $record): void
     {
-        $title = $record->title;
+        $title = $record->getAttribute('title');
         $html = $record->getSearchableBlockContent(false);
 
         try {
             $response = OpenAI::chat()->create(static::getAIParameters($title, $html));
-            $result = $response->choices[0]?->message?->content;
+            $result = ! empty($response->choices) ? $response->choices[0]->message->content : null;
 
             if ($result) {
                 $result = json_decode($result);
@@ -56,7 +56,7 @@ class SEOAIAction extends Action
                     $set(SEODescriptionField::getFieldName(), $result->description);
                 }
                 if ($result->tags) {
-                    $set(SEOKeywordsField::FIELD, array_map('trim', explode(',', $result->tags) ?? []));
+                    $set(SEOKeywordsField::FIELD, array_map('trim', explode(',', $result->tags)));
                 }
 
                 Notification::make()

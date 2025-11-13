@@ -17,6 +17,11 @@ class LinkableModelNotFoundException extends \Exception
     {
         $this->record = $record;
 
-        $this->message = $this->message." of record {$record->id}";
+        $this->message = $this->message." of record {$record->getKey()}";
+    }
+
+    public function getRecord(): ?Model
+    {
+        return $this->record;
     }
 }

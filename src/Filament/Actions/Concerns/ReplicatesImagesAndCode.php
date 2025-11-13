@@ -5,15 +5,12 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Actions\Concerns;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Spatie\Translatable\HasTranslations;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\CodeField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\TitleField;
 
 /**
  * @mixin \Filament\Tables\Actions\ReplicateAction
  * @mixin \Filament\Actions\ReplicateAction
- *
- * @property Model&HasMedia&HasTranslations $replica
  */
 trait ReplicatesImagesAndCode
 {
@@ -36,7 +33,7 @@ trait ReplicatesImagesAndCode
 
                     // add '(copy)' postfix to title
                     if ($this->replica->hasAttribute(TitleField::getFieldName())) {
-                        if (method_exists($this->replica, 'getTranslations')) {
+                        if (method_exists($this->replica, 'getTranslations') && method_exists($this->replica, 'setTranslations')) {
                             $translations = $this->replica->getTranslations(TitleField::getFieldName());
                             foreach ($translations as $locale => $title) {
                                 if (! empty(trim($title))) {

@@ -39,7 +39,7 @@ class CopyContentBlocksToLocalesAction extends Action
             /** @var Model&HasContentBlocks&HasMedia $record */
             $record = $page->getRecord();
             $handler = new CopyContentBlocksToLocalesActionHandler;
-            $handler->handle($record, $this->livewire, $record->content_blocks);
+            $handler->handle($record, $this->livewire, $record->getAttribute('content_blocks'));
         });
     }
 }

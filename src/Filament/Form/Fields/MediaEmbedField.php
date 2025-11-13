@@ -10,6 +10,8 @@ class MediaEmbedField extends TextInput
 {
     protected bool|Closure $isUrl = true;
 
+    protected bool|Closure $media = false;
+
     protected static function getFieldName(): string
     {
         return 'media_embed';

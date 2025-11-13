@@ -51,7 +51,9 @@ class CopyContentBlocksToLocalesActionHandler
                     $convertedContentBlocks = $this->convertContentBlockIdAndImages($record, $contentBlocks, $otherLocale);
                     $record->setTranslation(ContentBlocksField::FIELD, $otherLocale, $convertedContentBlocks);
                     // update form data:
-                    $livewire->otherLocaleData[$otherLocale][ContentBlocksField::FIELD] = $convertedContentBlocks;
+                    if (property_exists($livewire, 'otherLocaleData') && array_key_exists($otherLocale, $livewire->otherLocaleData)) {
+                        $livewire->otherLocaleData[$otherLocale][ContentBlocksField::FIELD] = $convertedContentBlocks;
+                    }
                 }
 
                 if ($otherLocales->isNotEmpty()) {

@@ -22,7 +22,7 @@ class CallToActionData
     ) {}
 
     /**
-     * @param  array{cta_model: string, entry_id: ?string, url: ?string, button_style: ?string, button_label: ?string, button_open_new_window: ?bool}  $callToActionBlockData
+     * @param  array{cta_model: string, entry_id: ?string, url: ?string, route: ?string, button_style: ?string, button_label: ?string, button_open_new_window: ?bool}  $callToActionBlockData
      *
      * @throws LinkableModelNotFoundException
      * @throws CallToActionNotDefinedException
