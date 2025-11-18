@@ -45,6 +45,8 @@ return [
     'form_component.hero_image_copyright_lbl' => 'Droits d\'auteur de l\'image principale',
     'form_component.hero_image_section_title' => 'Image principale',
     'form_component.hero_cta_section_title' => 'Call-to-actions principales',
+    'form_component.hero_video_url_lbl' => 'URL de la vidéo principale',
+    'form_component.hero_video_url_help' => 'Ajoutez l\'URL d\'une vidéo YouTube ou Vimeo, par exemple.',
     'form_component.intro_lbl' => 'Introduction',
     'form_component.content_blocks_lbl' => 'Blocs de contenu',
     'form_component.content_blocks_add_lbl' => 'Ajouter un bloc',
