@@ -38,4 +38,10 @@
             @endif
         </div>
     @endif
+    @if($hasHeroVideo())
+        <div>
+            {{-- TODO Ben --}}
+            {!! $getHeroVideo() !!}
+        </div>
+    @endif
 </section>

@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Type;
 
+use Illuminate\Database\Eloquent\Model;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\Linkable;
 
 class CallToActionType extends AbstractType
@@ -22,6 +23,16 @@ class CallToActionType extends AbstractType
         $this->model($model);
 
         $this->setUp();
+    }
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // use the translated title attribute:
+        $this->getOptionLabelFromRecordUsing(function (Model $record, ?string $locale = null): string {
+            return method_exists($record, 'translate') ? $record->translate($this->getTitleColumnName(), $locale ?? app()->getLocale()) : $record->{$this->getTitleColumnName()};
+        });
     }
 
     /**

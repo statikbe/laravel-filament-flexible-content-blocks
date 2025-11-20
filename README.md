@@ -137,6 +137,11 @@ Adds a hero image as well as a title (e.g. for accessibility in `alt` tags) and 
 be implemented with [HasHeroImageAttributesTrait](src%2FModels%2FConcerns%2FHasHeroImageAttributesTrait.php) and 
 [HasTranslatedHeroImageAttributesTrait](src%2FModels%2FConcerns%2FHasTranslatedHeroImageAttributesTrait.php). 
 
+#### __[HasHeroVideoUrlAttribute](src/Models/Contracts/HasHeroVideoAttribute.php)__:
+Adds a hero video URL that can be used to create a hero with a video playing in the background. 
+This can be implemented with [HasHeroVideoAttributeTrait](src/Models/Concerns/HasHeroVideoAttributeTrait.php) and
+[HasTranslatedHeroVideoUrlAttributeTrait](src/Models/Concerns/HasTranslatedHeroVideoUrlAttributeTrait.php).
+
 #### __[HasContentBlocks](src%2FModels%2FContracts%2FHasContentBlocks.php)__:
 Adds a JSON column to your model to store the data of the flexible content blocks. 
 This is required if you want to use the flexible content blocks. Implement it with 
@@ -455,17 +460,16 @@ to extend from, because this super class contains logic to add the package's own
 A lot of the customisation of content blocks and their behaviour can be done through the configuration file. 
 Please, consult [the configuration documentation](documentation%2Fconfiguration.md).
 
-
 ## Roadmap
 
 Below is a list of ideas and missing features. PR's are welcome!
 
-- Command to generate migrations
-- Command to generate models
-- Command to generate Filament resource and pages
+- ~~Command to generate migrations~~, use the new [Filament Flexible Content Block Pages](https://github.com/statikbe/laravel-filament-flexible-content-block-pages)
+- ~~Command to generate models~~, use the new [Filament Flexible Content Block Pages](https://github.com/statikbe/laravel-filament-flexible-content-block-pages)
+- ~~Command to generate Filament resource and pages~~, use [Filament Flexible Content Block Pages](https://github.com/statikbe/laravel-filament-flexible-content-block-pages)
 - ~~Integrate image asset manager~~, see [Filament Flexible Blocks Asset Manager](https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager)
 - Store links to models in rich editor
-- Redirects
+- ~~Redirects~~, see 
 - Reusable blocks. Name: global block?
 - Focal point for image resizing
 - Widget to show which records do not have a translated version
