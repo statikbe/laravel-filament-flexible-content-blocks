@@ -16,11 +16,11 @@ trait HasHeroVideoAttributeTrait
 
     public function getHeroVideoUrl(): ?string
     {
-        return $this->hasProperty('hero_video_url') ? $this->hero_video_url : null;
+        return $this->hasAttribute('hero_video_url') ? $this->hero_video_url : null;
     }
 
     public function hasHeroVideoUrl(): bool
     {
-        return $this->hasProperty('hero_video_url') && ! empty(trim($this->hero_video_url));
+        return $this->hasAttribute('hero_video_url') && ! empty(trim($this->hero_video_url));
     }
 }

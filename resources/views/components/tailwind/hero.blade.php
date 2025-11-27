@@ -26,7 +26,12 @@
             @endif
         </div>
     </div>
-    @if ($hasHeroImage())
+    @if ($hasHeroVideoUrl())
+        <div class="absolute inset-0">
+            {{-- TODO video background component --}}
+            {!! $getHeroVideoUrl() !!}
+        </div>
+    @elseif ($hasHeroImage())
         <div class="absolute inset-0">
             {{ $getHeroImageMedia(null, [
                 'class' => 'w-full h-full object-cover object-center',
@@ -36,12 +41,6 @@
                 <small class="absolute bottom-0 right-0 px-2 py-1 text-white bg-black/30 z-10">&copy;
                     {{ Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocks::replaceParameters($heroImageCopyright) }}</small>
             @endif
-        </div>
-    @endif
-    @if($hasHeroVideo())
-        <div>
-            {{-- TODO Ben --}}
-            {!! $getHeroVideo() !!}
         </div>
     @endif
 </section>
