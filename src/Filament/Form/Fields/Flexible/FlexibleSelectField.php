@@ -1,12 +1,15 @@
 <?php
 
-namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Generic;
+namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Flexible;
 
 use Filament\Forms\Components\Select;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Concerns\CanAutoFillWhenOnlyOneOption;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Concerns\CanHideWhenOnlyOneOption;
 
-class GenericSelectField extends Select
+/**
+ * This select can be configured to be hidden when there are no or one option available.
+ */
+class FlexibleSelectField extends Select
 {
     use CanAutoFillWhenOnlyOneOption;
     use CanHideWhenOnlyOneOption;

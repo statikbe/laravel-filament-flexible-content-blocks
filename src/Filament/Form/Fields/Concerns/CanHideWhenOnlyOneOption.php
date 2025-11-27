@@ -2,6 +2,9 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Concerns;
 
+/**
+ * @see FlexibleSelectField
+ */
 trait CanHideWhenOnlyOneOption
 {
     protected bool $shouldHideWhenOnlyOneOption = false;

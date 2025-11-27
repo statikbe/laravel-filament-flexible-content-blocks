@@ -3,10 +3,10 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks;
 
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
-use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Generic\GenericSelectField;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Flexible\FlexibleSelectField;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 
-class BlockStyleField extends GenericSelectField
+class BlockStyleField extends FlexibleSelectField
 {
     const FIELD = 'block_style';
 

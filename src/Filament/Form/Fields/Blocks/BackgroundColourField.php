@@ -3,10 +3,10 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks;
 
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
-use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Generic\GenericSelectField;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Flexible\FlexibleSelectField;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 
-class BackgroundColourField extends GenericSelectField
+class BackgroundColourField extends FlexibleSelectField
 {
     const FIELD = 'background_colour';
 

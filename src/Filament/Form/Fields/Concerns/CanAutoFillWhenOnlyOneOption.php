@@ -2,6 +2,11 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Concerns;
 
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Flexible\FlexibleSelectField;
+
+/**
+ * @see FlexibleSelectField
+ */
 trait CanAutoFillWhenOnlyOneOption
 {
     const AUTO_FILL_MODE_DISABLED = 'disabled';
