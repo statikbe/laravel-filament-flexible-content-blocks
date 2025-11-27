@@ -10,12 +10,13 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Groups\HeroCallT
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasHeroCallToActionsAttribute;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasHeroImageAttributes;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasHeroVideoAttribute;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasIntroAttribute;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasPageAttributes;
 
 class Hero extends Component
 {
-    public HasPageAttributes|HasHeroImageAttributes|HasHeroCallToActionsAttribute|HasIntroAttribute $page;
+    public HasPageAttributes|HasHeroImageAttributes|HasHeroCallToActionsAttribute|HasIntroAttribute|HasHeroVideoAttribute $page;
 
     public string $title;
 
@@ -28,7 +29,7 @@ class Hero extends Component
     /* @var CallToActionData[] $heroCallToActions */
     public array $heroCallToActions = [];
 
-    public function __construct(HasPageAttributes|HasHeroImageAttributes|HasHeroCallToActionsAttribute|HasIntroAttribute $page)
+    public function __construct(HasPageAttributes|HasHeroImageAttributes|HasHeroCallToActionsAttribute|HasIntroAttribute|HasHeroVideoAttribute $page)
     {
         $this->page = $page;
 
@@ -76,6 +77,16 @@ class Hero extends Component
     public function getHeroImageUrl(): string
     {
         return $this->page->getHeroImageUrl();
+    }
+
+    public function hasHeroVideoUrl(): bool
+    {
+        return method_exists($this->page, 'hasHeroVideoUrl') && $this->page->hasHeroVideoUrl();
+    }
+
+    public function getHeroVideoUrl(): ?string
+    {
+        return method_exists($this->page, 'getHeroVideoUrl') ? $this->page->getHeroVideoUrl() : null;
     }
 
     public function render()
