@@ -1,15 +1,10 @@
 <?php
 
-use Filament\Facades\Filament;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
-use Livewire\Livewire;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\ImageBlock;
-use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextImageBlock;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\BlockIdField;
 use Statikbe\FilamentFlexibleContentBlocks\Tests\Models\TranslatablePage;
-use Statikbe\FilamentFlexibleContentBlocks\Tests\Resources\TranslatablePageResource;
 
 beforeEach(function () {
     setupFilamentPanel();

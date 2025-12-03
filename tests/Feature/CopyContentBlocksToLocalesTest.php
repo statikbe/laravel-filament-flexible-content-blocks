@@ -1,8 +1,6 @@
 <?php
 
-use Filament\Facades\Filament;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\ImageBlock;
@@ -368,7 +366,6 @@ it('copies multiple media items from a block', function () {
     });
     expect($copiedMedia->count())->toBe(2);
 });
-
 
 it('preserves block type when copying', function () {
     $page = TranslatablePage::factory()->create([
