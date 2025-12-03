@@ -7,6 +7,7 @@ use Filament\Forms\Components\Section;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\HeroImageCopyrightField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\HeroImageField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\HeroImageTitleField;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\HeroVideoUrlField;
 
 class HeroImageSection extends Section
 {
@@ -21,6 +22,8 @@ class HeroImageSection extends Section
                         HeroImageTitleField::create(),
                         HeroImageCopyrightField::create(),
                     ])->columnSpan(1),
+
+                    HeroVideoUrlField::create(),
                 ]),
             ]);
     }

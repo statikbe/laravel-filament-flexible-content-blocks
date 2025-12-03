@@ -26,7 +26,12 @@
             @endif
         </div>
     </div>
-    @if ($hasHeroImage())
+    @if ($hasHeroVideoUrl())
+        <div class="absolute inset-0">
+            {{-- TODO video background component --}}
+            {!! $getHeroVideoUrl() !!}
+        </div>
+    @elseif ($hasHeroImage())
         <div class="absolute inset-0">
             {{ $getHeroImageMedia(null, [
                 'class' => 'w-full h-full object-cover object-center',
