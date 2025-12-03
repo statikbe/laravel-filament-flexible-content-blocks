@@ -5,7 +5,6 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Tests\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
-use Statikbe\FilamentFlexibleContentBlocks\Tests\Factories\PageFactory;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Concerns\HasAuthorAttributeTrait;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Concerns\HasDefaultContentBlocksTrait;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Concerns\HasHeroCallToActionsTrait;
@@ -23,6 +22,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasOverviewAttribute
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasPageAttributes;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasSEOAttributes;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\Linkable;
+use Statikbe\FilamentFlexibleContentBlocks\Tests\Factories\PageFactory;
 
 class Page extends Model implements HasContentBlocks, HasHeroImageAttributes, HasIntroAttribute, HasMedia, HasMediaAttributes, HasOverviewAttributes, HasPageAttributes, HasSEOAttributes, Linkable
 {

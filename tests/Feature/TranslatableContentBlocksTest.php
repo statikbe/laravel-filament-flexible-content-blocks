@@ -1,6 +1,5 @@
 <?php
 
-use Filament\Facades\Filament;
 use Livewire\Livewire;
 use Statikbe\FilamentFlexibleContentBlocks\Tests\Models\TranslatablePage;
 use Statikbe\FilamentFlexibleContentBlocks\Tests\Resources\TranslatablePageResource;

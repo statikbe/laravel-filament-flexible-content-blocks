@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Statikbe\FilamentFlexibleContentBlocks\Tests\Factories\TranslatablePageFactory;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Concerns\HasAuthorAttributeTrait;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Concerns\HasCodeTrait;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Concerns\HasDefaultContentBlocksTrait;
@@ -27,6 +26,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasOverviewAttribute
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasPageAttributes;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasSEOAttributes;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\Linkable;
+use Statikbe\FilamentFlexibleContentBlocks\Tests\Factories\TranslatablePageFactory;
 
 class TranslatablePage extends Model implements HasCode, HasContentBlocks, HasHeroImageAttributes, HasIntroAttribute, HasMedia, HasMediaAttributes, HasOverviewAttributes, HasPageAttributes, HasSEOAttributes, Linkable
 {
@@ -50,7 +50,7 @@ class TranslatablePage extends Model implements HasCode, HasContentBlocks, HasHe
      * Override to disable media conversions in tests to avoid image processing errors
      * with fake uploaded files
      */
-    public function registerMediaConversions(\Spatie\MediaLibrary\MediaCollections\Models\Media $media = null): void
+    public function registerMediaConversions(?\Spatie\MediaLibrary\MediaCollections\Models\Media $media = null): void
     {
         // Don't register any conversions in tests
     }
