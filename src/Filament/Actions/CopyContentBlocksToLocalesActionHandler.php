@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Actions;
 
+use Exception;
 use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -68,7 +69,7 @@ class CopyContentBlocksToLocalesActionHandler
 
                 // reload page to see the changes:
                 redirect(request()->header('Referer'));
-            } catch (\Exception $exception) {
+            } catch (Exception $exception) {
                 Log::error($exception);
 
                 DB::rollBack();

@@ -4,6 +4,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
 use Closure;
 use Filament\Forms\Components\Builder\Block;
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 use Spatie\MediaLibrary\HasMedia;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Builder\ContentBlockWithPreview;
@@ -96,7 +97,7 @@ abstract class AbstractContentBlock extends Component
      */
     protected static function getFilamentBlockSchema(): Closure
     {
-        return function (\Filament\Forms\Components\Component $component) {
+        return function (\Filament\Schemas\Components\Component $component) {
             return array_merge([
                 // keep track of block id:
                 BlockIdField::create(),
@@ -108,14 +109,14 @@ abstract class AbstractContentBlock extends Component
     /**
      * Returns the block's form schema consisting of an list of Filament form components or a closure that returns such a list.
      *
-     * @return array<\Filament\Forms\Components\Component>|Closure
+     * @return array<\Filament\Schemas\Components\Component>|Closure
      */
     abstract protected static function makeFilamentSchema(): array|Closure;
 
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
+     * @return View|Closure|string
      */
     abstract public function render();
 

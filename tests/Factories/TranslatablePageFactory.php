@@ -4,10 +4,11 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Tests\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Statikbe\FilamentFlexibleContentBlocks\Tests\Models\TranslatablePage;
 
 class TranslatablePageFactory extends Factory
 {
-    protected $model = \Statikbe\FilamentFlexibleContentBlocks\Tests\Models\TranslatablePage::class;
+    protected $model = TranslatablePage::class;
 
     public function definition(): array
     {

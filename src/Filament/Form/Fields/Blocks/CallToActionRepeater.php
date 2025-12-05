@@ -3,7 +3,7 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks;
 
 use Closure;
-use Filament\Forms\Components\Actions\Action;
+use Filament\Actions\Action;
 use Filament\Forms\Components\Repeater;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
 
@@ -35,7 +35,7 @@ class CallToActionRepeater extends Repeater
             CallToActionField::make('call_to_action', $this->blockClass)
                 ->types(fn () => $this->getCallToActionTypes())
                 ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_lbl'))
-                ->view('filament-forms::components.grid'),
+                ->view('filament-schemas::components.grid'),
         ]);
         $this->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_lbl'));
         $this->itemLabel(function (array $state): ?string {

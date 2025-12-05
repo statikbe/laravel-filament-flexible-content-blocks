@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Actions\Concerns;
 
+use Filament\Actions\ReplicateAction;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -10,7 +11,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\TitleField;
 
 /**
  * @mixin \Filament\Tables\Actions\ReplicateAction
- * @mixin \Filament\Actions\ReplicateAction
+ * @mixin ReplicateAction
  */
 trait ReplicatesImagesAndCode
 {

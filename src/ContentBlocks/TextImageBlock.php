@@ -2,9 +2,10 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
-use Filament\Forms\Components\Grid;
+use Closure;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Grid;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -81,7 +82,7 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
     /**
      * {@inheritDoc}
      */
-    protected static function makeFilamentSchema(): array|\Closure
+    protected static function makeFilamentSchema(): array|Closure
     {
         return [
             TextInput::make('title')

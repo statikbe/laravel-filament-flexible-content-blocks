@@ -17,6 +17,7 @@ use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
 use Spatie\MediaLibrary\MediaLibraryServiceProvider;
 use Spatie\Translatable\TranslatableServiceProvider;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocksServiceProvider;
+use Statikbe\FilamentFlexibleContentBlocks\Tests\Models\User;
 use Statikbe\FilamentFlexibleContentBlocks\Tests\Providers\TestPanelProvider;
 
 class TestCase extends Orchestra
@@ -64,7 +65,7 @@ class TestCase extends Orchestra
         // Set up Filament config
         config()->set('filament-flexible-content-blocks.supported_locales', ['en', 'nl']);
         config()->set('filament-flexible-content-blocks.default_locale', 'en');
-        config()->set('filament-flexible-content-blocks.author_model', \Statikbe\FilamentFlexibleContentBlocks\Tests\Models\User::class);
+        config()->set('filament-flexible-content-blocks.author_model', User::class);
     }
 
     protected function defineDatabaseMigrations()

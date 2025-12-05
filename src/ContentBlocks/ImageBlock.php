@@ -2,8 +2,9 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
-use Filament\Forms\Components\Grid;
+use Closure;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Grid;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -69,7 +70,7 @@ class ImageBlock extends AbstractFilamentFlexibleContentBlock
     /**
      * {@inheritDoc}
      */
-    protected static function makeFilamentSchema(): array|\Closure
+    protected static function makeFilamentSchema(): array|Closure
     {
         return [
             Grid::make(2)->schema([

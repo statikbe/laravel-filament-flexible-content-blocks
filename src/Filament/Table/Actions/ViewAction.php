@@ -2,8 +2,8 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Actions;
 
+use Filament\Actions\Action;
 use Filament\Resources\Pages\Page;
-use Filament\Tables\Actions\Action;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\Linkable;
 
 class ViewAction extends Action
@@ -23,7 +23,7 @@ class ViewAction extends Action
 
         $this->icon('heroicon-s-eye');
 
-        $this->disabledForm();
+        $this->disabledSchema();
 
         $this->url(function (Linkable $record, Page $livewire): string {
             $locale = app()->getLocale();

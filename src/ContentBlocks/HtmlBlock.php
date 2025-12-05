@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
+use Closure;
 use Filament\Forms\Components\Textarea;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 
@@ -32,7 +33,7 @@ class HtmlBlock extends AbstractFilamentFlexibleContentBlock
     /**
      * {@inheritDoc}
      */
-    protected static function makeFilamentSchema(): array|\Closure
+    protected static function makeFilamentSchema(): array|Closure
     {
         return [
             Textarea::make('content')

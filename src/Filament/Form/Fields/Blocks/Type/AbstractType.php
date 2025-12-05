@@ -3,6 +3,7 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Type;
 
 use Closure;
+use Exception;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\Select;
 use Illuminate\Database\Connection;
@@ -281,7 +282,7 @@ abstract class AbstractType
     public function getTitleColumnName(): string
     {
         if (blank($this->titleColumnName)) {
-            throw new \Exception("Type [{$this->getModel()}] must have a [titleColumnName()] set.");
+            throw new Exception("Type [{$this->getModel()}] must have a [titleColumnName()] set.");
         }
 
         return $this->titleColumnName;

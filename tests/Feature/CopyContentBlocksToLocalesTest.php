@@ -7,7 +7,7 @@ use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\ImageBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextImageBlock;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\BlockIdField;
 use Statikbe\FilamentFlexibleContentBlocks\Tests\Models\TranslatablePage;
-use Statikbe\FilamentFlexibleContentBlocks\Tests\Resources\TranslatablePageResource;
+use Statikbe\FilamentFlexibleContentBlocks\Tests\Resources\TranslatablePageResource\Pages\EditTranslatablePage;
 
 beforeEach(function () {
     setupFilamentPanel();
@@ -38,7 +38,7 @@ it('can copy content blocks from EN to NL locale', function () {
         ],
     ]);
 
-    $component = Livewire::test(TranslatablePageResource\Pages\EditTranslatablePage::class, [
+    $component = Livewire::test(EditTranslatablePage::class, [
         'record' => $page->getRouteKey(),
     ])
         ->assertSet('activeLocale', 'en')
@@ -78,7 +78,7 @@ it('generates new block IDs when copying to other locales', function () {
         ],
     ]);
 
-    Livewire::test(TranslatablePageResource\Pages\EditTranslatablePage::class, [
+    Livewire::test(EditTranslatablePage::class, [
         'record' => $page->getRouteKey(),
     ])
         ->callAction('copy_content_blocks_to_other_locales_page_action');
@@ -123,7 +123,7 @@ it('copies media to new locale with new block ID', function () {
 
     expect($page->getMedia(ImageBlock::getName()))->toHaveCount(1);
 
-    Livewire::test(TranslatablePageResource\Pages\EditTranslatablePage::class, [
+    Livewire::test(EditTranslatablePage::class, [
         'record' => $page->getRouteKey(),
     ])
         ->callAction('copy_content_blocks_to_other_locales_page_action');
@@ -170,7 +170,7 @@ it('copies blocks to NL locale (multiple locales configured)', function () {
         ],
     ]);
 
-    Livewire::test(TranslatablePageResource\Pages\EditTranslatablePage::class, [
+    Livewire::test(EditTranslatablePage::class, [
         'record' => $page->getRouteKey(),
     ])
         ->callAction('copy_content_blocks_to_other_locales_page_action');
@@ -221,7 +221,7 @@ it('replaces existing blocks in target locale', function () {
         ],
     ]);
 
-    Livewire::test(TranslatablePageResource\Pages\EditTranslatablePage::class, [
+    Livewire::test(EditTranslatablePage::class, [
         'record' => $page->getRouteKey(),
     ])
         ->callAction('copy_content_blocks_to_other_locales_page_action');
@@ -248,7 +248,7 @@ it('handles empty content blocks gracefully', function () {
         ],
     ]);
 
-    $component = Livewire::test(TranslatablePageResource\Pages\EditTranslatablePage::class, [
+    $component = Livewire::test(EditTranslatablePage::class, [
         'record' => $page->getRouteKey(),
     ])
         ->callAction('copy_content_blocks_to_other_locales_page_action');
@@ -296,7 +296,7 @@ it('copies multiple blocks with correct order', function () {
         ],
     ]);
 
-    Livewire::test(TranslatablePageResource\Pages\EditTranslatablePage::class, [
+    Livewire::test(EditTranslatablePage::class, [
         'record' => $page->getRouteKey(),
     ])
         ->callAction('copy_content_blocks_to_other_locales_page_action');
@@ -345,7 +345,7 @@ it('copies multiple media items from a block', function () {
     $originalMediaCount = $page->getMedia(TextImageBlock::getName())->count();
     expect($originalMediaCount)->toBe(2);
 
-    Livewire::test(TranslatablePageResource\Pages\EditTranslatablePage::class, [
+    Livewire::test(EditTranslatablePage::class, [
         'record' => $page->getRouteKey(),
     ])
         ->callAction('copy_content_blocks_to_other_locales_page_action');
@@ -393,7 +393,7 @@ it('preserves block type when copying', function () {
         ],
     ]);
 
-    Livewire::test(TranslatablePageResource\Pages\EditTranslatablePage::class, [
+    Livewire::test(EditTranslatablePage::class, [
         'record' => $page->getRouteKey(),
     ])
         ->callAction('copy_content_blocks_to_other_locales_page_action');
@@ -419,7 +419,7 @@ it('action is hidden when only one locale is available', function () {
         'content_blocks' => ['en' => []],
     ]);
 
-    $component = Livewire::test(TranslatablePageResource\Pages\EditTranslatablePage::class, [
+    $component = Livewire::test(EditTranslatablePage::class, [
         'record' => $page->getRouteKey(),
     ]);
 
@@ -456,7 +456,7 @@ it('does not copy blocks from other locales to EN', function () {
 
     $originalEnBlocks = $page->getTranslation('content_blocks', 'en');
 
-    Livewire::test(TranslatablePageResource\Pages\EditTranslatablePage::class, [
+    Livewire::test(EditTranslatablePage::class, [
         'record' => $page->getRouteKey(),
     ])
         ->set('activeLocale', 'en')

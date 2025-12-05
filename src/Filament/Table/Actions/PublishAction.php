@@ -3,8 +3,9 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Actions;
 
 use Carbon\Carbon;
+use Exception;
+use Filament\Actions\Action;
 use Filament\Notifications\Notification;
-use Filament\Tables\Actions\Action;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasPageAttributes;
@@ -44,7 +45,7 @@ class PublishAction extends Action
                         ->body(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.table_action.publish.unpublish_notification_success_msg'))
                         ->send();
                 }
-            } catch (\Exception $ex) {
+            } catch (Exception $ex) {
                 Log::error($ex);
                 Notification::make()
                     ->danger()

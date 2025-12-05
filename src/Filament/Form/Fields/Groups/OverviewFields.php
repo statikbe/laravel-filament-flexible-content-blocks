@@ -2,7 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Groups;
 
-use Filament\Forms\Components\Grid;
+use Filament\Schemas\Components\Grid;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\OverviewDescriptionField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\OverviewImageField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\OverviewTitleField;

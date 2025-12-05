@@ -2,8 +2,8 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Actions;
 
-use Filament\Actions\LocaleSwitcher;
 use Filament\Pages\Page;
+use LaraZeus\SpatieTranslatable\Actions\LocaleSwitcher;
 
 /**
  * Hides the language switcher if there is only one locale configured.

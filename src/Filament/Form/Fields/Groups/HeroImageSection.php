@@ -2,8 +2,8 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Groups;
 
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Section;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\HeroImageCopyrightField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\HeroImageField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\HeroImageTitleField;
