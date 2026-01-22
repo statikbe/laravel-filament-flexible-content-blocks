@@ -11,7 +11,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\HeroVideoUrlFiel
 
 class HeroImageSection extends Section
 {
-    public static function create(bool $translatableImage = false, bool $enableVideoUrlField=false): static
+    public static function create(bool $translatableImage = false, bool $enableVideoUrlField = false): static
     {
         $fields = [
             HeroImageField::create($translatableImage),
@@ -21,7 +21,7 @@ class HeroImageSection extends Section
             ])->columnSpan(1),
         ];
 
-        if($enableVideoUrlField) {
+        if ($enableVideoUrlField) {
             $fields[] = HeroVideoUrlField::create();
         }
 
