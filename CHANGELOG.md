@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.7.1 - 2026-01-22
+
+- Make hero video url field in hero image section optional with create flag
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v2.7.0...v2.7.1
+
 ## v2.7.0 - 2026-01-19
 
 - make hero changes more flexible, see FlexibleSelectField
