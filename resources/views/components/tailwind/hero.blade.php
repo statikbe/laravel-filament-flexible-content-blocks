@@ -26,11 +26,11 @@
             @endif
         </div>
     </div>
+
     @if ($hasHeroVideoUrl())
-        <div class="absolute inset-0">
-            {{-- TODO video background component --}}
-            {!! $getHeroVideoUrl() !!}
-        </div>
+        <x-flexible-video-background :videoUrl="$getHeroVideoUrl()"
+                                     wrapperClass="min-h-[337px] md:min-h-[474px]"
+        />
     @elseif ($hasHeroImage())
         <div class="absolute inset-0">
             {{ $getHeroImageMedia(null, [
