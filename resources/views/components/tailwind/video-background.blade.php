@@ -1,6 +1,8 @@
 @props([
     'videoPlatform',
     'videoId',
+    'videoWidth' => 640,
+    'videoHeight' => 360,
     'wrapperClass' => '',
     'buttonWrapperClass' => 'absolute top-4 md:top-8 right-4 md:right-8 z-30',
     'buttonClass' => 'w-8 md:w-12 text-white',
@@ -25,19 +27,30 @@
          * See https://alpinejs.dev/essentials/lifecycle
          */
 
-        Alpine.data('initVideoPlayerData', ({ videoPlatform, videoId, playerElementId }) => ({
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        Alpine.data('initVideoPlayerData', ({ videoPlatform, videoId, videoWidth, videoHeight, playerElementId }) => ({
+            videoWidth,
+            videoHeight,
+            wrapperElement: null,
+            videoElement: null,
             videoPlayer: null,
             isPlaying: null,
 
-            initPlayer(element) {
+            initPlayer(wrapperElement) {
+                this.wrapperElement = wrapperElement;
+                this.videoElement = wrapperElement.querySelector('#' + playerElementId);
+
                 /* hiding the video itself from screen readers */
-                element.querySelector('#' + playerElementId).setAttribute('aria-hidden', 'true');
+                this.videoElement.setAttribute('aria-hidden', 'true');
 
                 if (videoPlatform === 'youtube') {
                     this.loadYouTubeApi()
                         .then(() => {
                             this.videoPlayer = new YT.Player(playerElementId, {
                                 videoId: videoId,
+                                height: videoHeight,
+                                width: videoWidth,
                                 playerVars: {
                                     autoplay: 1,
                                     rel: 0, /* You can't disable "related videos" anymore, but when set to 0, related videos will come from the same channel as the video that was just played */
@@ -49,8 +62,13 @@
                                 },
                                 events: {
                                     onReady: () => {
-                                        this.videoPlayer.playVideo();
-                                        this.isPlaying = true;
+                                        if (prefersReducedMotion) {
+                                            this.videoPlayer.pauseVideo();
+                                            this.isPlaying = false;
+                                        } else {
+                                            this.videoPlayer.playVideo();
+                                            this.isPlaying = true;
+                                        }
 
                                         this.videoPlayer.mute();
                                     },
@@ -60,6 +78,8 @@
                                 },
                             });
                         });
+
+                    this.initVideoRatio();
                 }
             },
 
@@ -83,6 +103,57 @@
                 });
             },
 
+            initVideoRatio() {
+                this.resizeVideo();
+
+                window.addEventListener('resize', () => {
+                    this.resizeVideo({ isResize: true });
+                });
+            },
+
+            /**
+             * To ensure that the video fills its container.
+             */
+            resizeVideo({ isResize = false } = {}) {
+                if (isResize) {
+                    console.log('resizing video');
+                    this.pauseVideo();
+                }
+                const containerWidth = this.wrapperElement.clientWidth;
+                const containerHeight = this.wrapperElement.clientHeight;
+
+                if (containerWidth / containerHeight >= this.videoWidth / this.videoHeight) {
+                    /**
+                     * The container ratio is larger than the (16:9) video ratio
+                     * --> We stretch the video height to a height larger than the container (overflow)
+                     *     so that the resulting width becomes the container width
+                     */
+
+                    const newVideoHeight = Math.ceil(containerWidth * (this.videoWidth / this.videoHeight));
+                    if (isResize) {
+                        console.log('newVideoHeight', newVideoHeight);
+                    }
+
+                    this.videoElement.style.left = `-4px`;
+                    this.videoElement.style.width = `101%`;
+                    this.videoElement.style.height = `${newVideoHeight}px`;
+                    this.videoElement.style.transform = `translateY(-${(newVideoHeight - containerHeight) / 2}px)`;
+                } else {
+                    /**
+                     * The container ratio is smaller than the (16:9) video ratio
+                     * --> We stretch the video width to a width larger than the container (overflow)
+                     *     so that the resulting height becomes the container height
+                     */
+
+                    const newVideoWidth = Math.ceil(containerHeight * (this.videoWidth / this.videoHeight) * 1.3);
+                    const newVideoHeight = Math.ceil(newVideoWidth * (this.videoHeight / this.videoWidth));
+
+                    this.videoElement.style.width = `${newVideoWidth}px`;
+                    this.videoElement.style.height = `${newVideoHeight}px`;
+                    this.videoElement.style.transform = `translateX(-${(newVideoWidth - containerWidth) / 2}px) translateY(-${(newVideoHeight - containerHeight) / 2}px)`;
+                }
+            },
+
             playVideo() {
                 if (videoPlatform === 'youtube') {
                     this.videoPlayer.playVideo();
@@ -104,17 +175,20 @@
 
 <div @class([
          'relative overflow-hidden',
+         'w-full h-full',
          $wrapperClass,
-    ])
+     ])
      x-data="initVideoPlayerData({
             videoPlatform: '{{ $videoPlatform->value }}',
             videoId: '{{ $videoId }}',
+            videoWidth: '{{ $videoWidth }}',
+            videoHeight: '{{ $videoHeight }}',
             playerElementId: '{{ $playerElementId }}',
          })"
      x-init="initPlayer($el)"
 >
     <div id="{{ $playerElementId }}"
-         class="!absolute top-0 left-0 w-full h-full z-20 pointer-events-none"
+         class="!absolute top-0 left-0 h-full z-20 pointer-events-none"
     ></div>
 
     <div x-show="videoPlayer"
