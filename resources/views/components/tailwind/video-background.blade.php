@@ -32,17 +32,16 @@
         Alpine.data('initVideoPlayerData', ({ videoPlatform, videoId, videoWidth, videoHeight, playerElementId }) => ({
             videoWidth,
             videoHeight,
+            playerElementId,
             wrapperElement: null,
-            videoElement: null,
             videoPlayer: null,
             isPlaying: null,
 
             initPlayer(wrapperElement) {
                 this.wrapperElement = wrapperElement;
-                this.videoElement = wrapperElement.querySelector('#' + playerElementId);
 
                 /* hiding the video itself from screen readers */
-                this.videoElement.setAttribute('aria-hidden', 'true');
+                wrapperElement.querySelector('#' + playerElementId).setAttribute('aria-hidden', 'true');
 
                 if (videoPlatform === 'youtube') {
                     this.loadYouTubeApi()
@@ -106,21 +105,19 @@
             initVideoRatio() {
                 this.resizeVideo();
 
-                window.addEventListener('resize', () => {
+                window.addEventListener('resize', this.debounce(() => {
                     this.resizeVideo({ isResize: true });
-                });
+                }));
             },
 
             /**
              * To ensure that the video fills its container.
              */
             resizeVideo({ isResize = false } = {}) {
-                if (isResize) {
-                    console.log('resizing video');
-                    this.pauseVideo();
-                }
                 const containerWidth = this.wrapperElement.clientWidth;
                 const containerHeight = this.wrapperElement.clientHeight;
+
+                const videoElement = document.getElementById(this.playerElementId);
 
                 if (containerWidth / containerHeight >= this.videoWidth / this.videoHeight) {
                     /**
@@ -130,14 +127,11 @@
                      */
 
                     const newVideoHeight = Math.ceil(containerWidth * (this.videoWidth / this.videoHeight));
-                    if (isResize) {
-                        console.log('newVideoHeight', newVideoHeight);
-                    }
 
-                    this.videoElement.style.left = `-4px`;
-                    this.videoElement.style.width = `101%`;
-                    this.videoElement.style.height = `${newVideoHeight}px`;
-                    this.videoElement.style.transform = `translateY(-${(newVideoHeight - containerHeight) / 2}px)`;
+                    videoElement.style.left = `-4px`;
+                    videoElement.style.width = `101%`;
+                    videoElement.style.height = `${newVideoHeight}px`;
+                    videoElement.style.transform = `translateY(-${(newVideoHeight - containerHeight) / 2}px)`;
                 } else {
                     /**
                      * The container ratio is smaller than the (16:9) video ratio
@@ -148,9 +142,9 @@
                     const newVideoWidth = Math.ceil(containerHeight * (this.videoWidth / this.videoHeight) * 1.3);
                     const newVideoHeight = Math.ceil(newVideoWidth * (this.videoHeight / this.videoWidth));
 
-                    this.videoElement.style.width = `${newVideoWidth}px`;
-                    this.videoElement.style.height = `${newVideoHeight}px`;
-                    this.videoElement.style.transform = `translateX(-${(newVideoWidth - containerWidth) / 2}px) translateY(-${(newVideoHeight - containerHeight) / 2}px)`;
+                    videoElement.style.width = `${newVideoWidth}px`;
+                    videoElement.style.height = `${newVideoHeight}px`;
+                    videoElement.style.transform = `translateX(-${(newVideoWidth - containerWidth) / 2}px) translateY(-${(newVideoHeight - containerHeight) / 2}px)`;
                 }
             },
 
@@ -168,6 +162,14 @@
                 }
 
                 this.isPlaying = false;
+            },
+
+            debounce(func, timeout = 100) {
+                let timer;
+                return (...args) => {
+                    clearTimeout(timer);
+                    timer = setTimeout(() => { func.apply(this, args); }, timeout);
+                };
             },
         }));
     });
