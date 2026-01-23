@@ -58,6 +58,7 @@
                                     color: 'white', /* This parameter specifies the color that will be used in the player's video progress bar to highlight the amount of the video that the viewer has already seen. Valid parameter values are red and white */
                                     loop: 1, /* In the case of a single video player, a setting of 1 causes the player to play the initial video again and again */
                                     mute: 1,
+                                    playlist: videoId, /* has to be a playlist - even when only 1 video - otherwise the loop does not work */
                                 },
                                 events: {
                                     onReady: () => {
@@ -119,14 +120,16 @@
 
                 const videoElement = document.getElementById(this.playerElementId);
 
-                if (containerWidth / containerHeight >= this.videoWidth / this.videoHeight) {
+                const videoRatio = this.videoWidth / this.videoHeight;
+
+                if (containerWidth / containerHeight >= videoRatio) {
                     /**
                      * The container ratio is larger than the (16:9) video ratio
                      * --> We stretch the video height to a height larger than the container (overflow)
                      *     so that the resulting width becomes the container width
                      */
 
-                    const newVideoHeight = Math.ceil(containerWidth * (this.videoWidth / this.videoHeight));
+                    const newVideoHeight = Math.ceil(containerWidth * (videoRatio));
 
                     videoElement.style.left = `-4px`;
                     videoElement.style.width = `101%`;
@@ -139,8 +142,13 @@
                      *     so that the resulting height becomes the container height
                      */
 
-                    const newVideoWidth = Math.ceil(containerHeight * (this.videoWidth / this.videoHeight) * 1.3);
-                    const newVideoHeight = Math.ceil(newVideoWidth * (this.videoHeight / this.videoWidth));
+                    /* we use the amplifier to make sure the "black padding" - added by youtube - is not visible anymore */
+                    const amplifier = containerWidth < 500
+                        ? 1.1
+                        : 1.4;
+
+                    const newVideoWidth = Math.ceil(containerHeight * (videoRatio) * amplifier);
+                    const newVideoHeight = Math.ceil(newVideoWidth * (1 / videoRatio));
 
                     videoElement.style.width = `${newVideoWidth}px`;
                     videoElement.style.height = `${newVideoHeight}px`;
