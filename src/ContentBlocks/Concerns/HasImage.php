@@ -91,7 +91,7 @@ trait HasImage
     {
         $media = $this->getMedia($blockId, $collection);
 
-        return $media?->getFullUrl();
+        return $media?->getFullUrl($conversion);
     }
 
     protected static function addCropImageConversion(HasMedia&HasMediaAttributes $record, int $width, int $height): Conversion
