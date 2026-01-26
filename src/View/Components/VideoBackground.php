@@ -10,7 +10,9 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Enums\VideoPlatform;
 class VideoBackground extends Component
 {
     public string $videoUrl;
+
     public VideoPlatform $videoPlatform;
+
     public string $videoId;
 
     public function __construct(
@@ -28,7 +30,8 @@ class VideoBackground extends Component
         return view("filament-flexible-content-blocks::components.{$themePrefix}video-background");
     }
 
-    public static function determineVideoPlatform(string $videoUrl): ?VideoPlatform {
+    public static function determineVideoPlatform(string $videoUrl): ?VideoPlatform
+    {
         if (Str::contains($videoUrl, 'youtube', ignoreCase: true)) {
             return VideoPlatform::YOUTUBE;
         }
@@ -36,7 +39,8 @@ class VideoBackground extends Component
         return null;
     }
 
-    public static function determineVideoId(string $videoUrl, VideoPlatform $videoPlatform): ?string {
+    public static function determineVideoId(string $videoUrl, VideoPlatform $videoPlatform): ?string
+    {
         switch ($videoPlatform) {
             case VideoPlatform::YOUTUBE:
                 /**
