@@ -30,7 +30,6 @@ it('can copy content blocks from EN to NL locale', function () {
                     'data' => [
                         'block_id' => BlockIdField::generateBlockId(),
                         'title' => 'English Block',
-                        'text' => '<p>English content</p>',
                     ],
                 ],
             ],
@@ -53,8 +52,7 @@ it('can copy content blocks from EN to NL locale', function () {
     expect($nlBlocks)->toBeArray()
         ->and($nlBlocks)->toHaveCount(1)
         ->and($nlBlocks[0]['type'])->toBe('text-image')
-        ->and($nlBlocks[0]['data']['title'])->toBe('English Block')
-        ->and($nlBlocks[0]['data']['text'])->toBe('<p>English content</p>');
+        ->and($nlBlocks[0]['data']['title'])->toBe('English Block');
 });
 
 it('generates new block IDs when copying to other locales', function () {

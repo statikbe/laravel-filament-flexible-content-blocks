@@ -16,19 +16,19 @@ class TranslatablePageFactory extends Factory
         $titleNl = $this->faker->sentence(4);
 
         return [
-            'title' => json_encode(['en' => $titleEn, 'nl' => $titleNl]),
-            'slug' => json_encode(['en' => Str::slug($titleEn), 'nl' => Str::slug($titleNl)]),
-            'intro' => json_encode(['en' => $this->faker->paragraph(), 'nl' => $this->faker->paragraph()]),
-            'hero_image_copyright' => json_encode(['en' => $this->faker->name(), 'nl' => $this->faker->name()]),
-            'hero_image_title' => json_encode(['en' => $this->faker->sentence(3), 'nl' => $this->faker->sentence(3)]),
+            'title' => ['en' => $titleEn, 'nl' => $titleNl],
+            'slug' => ['en' => Str::slug($titleEn), 'nl' => Str::slug($titleNl)],
+            'intro' => ['en' => '<p>'.$this->faker->paragraph().'</p>', 'nl' => '<p>'.$this->faker->paragraph().'</p>'],
+            'hero_image_copyright' => ['en' => $this->faker->name(), 'nl' => $this->faker->name()],
+            'hero_image_title' => ['en' => $this->faker->sentence(3), 'nl' => $this->faker->sentence(3)],
             'publishing_begins_at' => now()->subDay(),
             'publishing_ends_at' => null,
-            'seo_title' => json_encode(['en' => $this->faker->sentence(6), 'nl' => $this->faker->sentence(6)]),
-            'seo_description' => json_encode(['en' => $this->faker->paragraph(), 'nl' => $this->faker->paragraph()]),
-            'seo_keywords' => json_encode(['en' => [$this->faker->word(), $this->faker->word()], 'nl' => [$this->faker->word(), $this->faker->word()]]),
-            'overview_title' => json_encode(['en' => $this->faker->sentence(4), 'nl' => $this->faker->sentence(4)]),
-            'overview_description' => json_encode(['en' => $this->faker->paragraph(), 'nl' => $this->faker->paragraph()]),
-            'content_blocks' => json_encode([]),
+            'seo_title' => ['en' => $this->faker->sentence(6), 'nl' => $this->faker->sentence(6)],
+            'seo_description' => ['en' => $this->faker->paragraph(), 'nl' => $this->faker->paragraph()],
+            'seo_keywords' => ['en' => [$this->faker->word(), $this->faker->word()], 'nl' => [$this->faker->word(), $this->faker->word()]],
+            'overview_title' => ['en' => $this->faker->sentence(4), 'nl' => $this->faker->sentence(4)],
+            'overview_description' => ['en' => '<p>'.$this->faker->paragraph().'</p>', 'nl' => '<p>'.$this->faker->paragraph().'</p>'],
+            'content_blocks' => [],
             'code' => $this->faker->unique()->word(),
             'author_id' => null,
             'parent_id' => null,
@@ -38,7 +38,7 @@ class TranslatablePageFactory extends Factory
     public function withContentBlocks(array $blocks = []): static
     {
         return $this->state(fn (array $attributes) => [
-            'content_blocks' => json_encode($blocks),
+            'content_blocks' => $blocks,
         ]);
     }
 

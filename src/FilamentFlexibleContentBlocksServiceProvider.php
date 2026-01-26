@@ -51,6 +51,6 @@ class FilamentFlexibleContentBlocksServiceProvider extends PackageServiceProvide
         FilamentFlexibleContentBlocks::setLocales($supportedLocales);
 
         // Override default timeout to 120 seconds
-        Config::set('openai.request_timeout', env('OPENAI_REQUEST_TIMEOUT', 120));
+        Config::set('openai.request_timeout', config('openai.request_timeout', 120));
     }
 }

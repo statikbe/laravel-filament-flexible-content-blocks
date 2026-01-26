@@ -7,6 +7,7 @@ use BladeUI\Icons\BladeIconsServiceProvider;
 use Filament\Actions\ActionsServiceProvider;
 use Filament\FilamentServiceProvider;
 use Filament\Forms\FormsServiceProvider;
+use Filament\Schemas\SchemasServiceProvider;
 use Filament\Support\SupportServiceProvider;
 use Filament\Tables\TablesServiceProvider;
 use Filament\Widgets\WidgetsServiceProvider;
@@ -34,20 +35,23 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            ActionsServiceProvider::class,
-            BladeCaptureDirectiveServiceProvider::class,
-            BladeHeroiconsServiceProvider::class,
-            BladeIconsServiceProvider::class,
-            FilamentServiceProvider::class,
-            FormsServiceProvider::class,
-            LivewireServiceProvider::class,
-            MediaLibraryServiceProvider::class,
-            SupportServiceProvider::class,
-            TablesServiceProvider::class,
-            TranslatableServiceProvider::class,
-            WidgetsServiceProvider::class,
-            FilamentFlexibleContentBlocksServiceProvider::class,
-            TestPanelProvider::class,
+            // Sorted alphabetically by full namespace for Filament v4 compatibility
+            // See: https://github.com/filamentphp/filament/discussions/17917
+            BladeHeroiconsServiceProvider::class,        // BladeUI\Heroicons\...
+            BladeIconsServiceProvider::class,            // BladeUI\Icons\...
+            ActionsServiceProvider::class,               // Filament\Actions\...
+            FilamentServiceProvider::class,              // Filament\...
+            FormsServiceProvider::class,                 // Filament\Forms\...
+            SchemasServiceProvider::class,               // Filament\Schemas\...
+            SupportServiceProvider::class,               // Filament\Support\...
+            TablesServiceProvider::class,                // Filament\Tables\...
+            WidgetsServiceProvider::class,               // Filament\Widgets\...
+            LivewireServiceProvider::class,              // Livewire\...
+            BladeCaptureDirectiveServiceProvider::class, // RyanChandler\...
+            MediaLibraryServiceProvider::class,          // Spatie\MediaLibrary\...
+            TranslatableServiceProvider::class,          // Spatie\Translatable\...
+            FilamentFlexibleContentBlocksServiceProvider::class, // Statikbe\...\...ServiceProvider
+            TestPanelProvider::class,                    // Statikbe\...\...PanelProvider
         ];
     }
 

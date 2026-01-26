@@ -10,4 +10,7 @@ parameters:
     tmpDir: build/phpstan
     checkOctaneCompatibility: true
     checkModelProperties: true
+    ignoreErrors:
+        # Ignore unused trait warnings - these traits are meant for package consumers
+        - '#^Trait .+ is used zero times and is not analysed\.$#'
 
