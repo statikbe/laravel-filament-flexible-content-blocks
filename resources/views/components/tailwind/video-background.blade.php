@@ -5,13 +5,15 @@
     'videoHeight' => 360,
     'wrapperClass' => '',
     'buttonWrapperClass' => 'absolute top-4 md:top-8 right-4 md:right-8 z-30',
-    'buttonClass' => 'w-8 md:w-12 text-white',
+    'buttonClass' => 'rounded-full bg-white/70 flex flex-row justify-center items-center p-1 md:p-2',
+    'buttonIconClass' => 'w-8 md:w-10 text-black',
     'playButtonClass' => '',
     'playButtonIcon' => 'heroicon-o-play-circle',
     'playButtonAriaText' => 'Play Video',
     'pauseButtonClass' => '',
     'pauseButtonIcon' => 'heroicon-o-pause-circle',
     'pauseButtonAriaText' => 'Pause Video',
+    'minScreenWidthForAutoplay' => 768,
 ])
 
 @php
@@ -29,7 +31,7 @@
 
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        Alpine.data('initVideoPlayerData', ({ videoPlatform, videoId, videoWidth, videoHeight, playerElementId }) => ({
+        Alpine.data('initVideoPlayerData', ({ videoPlatform, videoId, videoWidth, videoHeight, playerElementId, minScreenWidthForAutoplay }) => ({
             videoWidth,
             videoHeight,
             playerElementId,
@@ -42,6 +44,7 @@
 
                 /* hiding the video itself from screen readers */
                 wrapperElement.querySelector('#' + playerElementId).setAttribute('aria-hidden', 'true');
+                const shouldAutoplayVideo = window.innerWidth >= minScreenWidthForAutoplay;
 
                 if (videoPlatform === 'youtube') {
                     this.loadYouTubeApi()
@@ -51,7 +54,7 @@
                                 height: videoHeight,
                                 width: videoWidth,
                                 playerVars: {
-                                    autoplay: 1,
+                                    autoplay: shouldAutoplayVideo ? 1 : 0,
                                     rel: 0, /* You can't disable "related videos" anymore, but when set to 0, related videos will come from the same channel as the video that was just played */
                                     playsinline: 1, /* Results in inline playback for mobile browsers and for WebViews created with the allowsInlineMediaPlayback property set to YES */
                                     controls: 0, /* Player controls do not display in the player */
@@ -62,7 +65,7 @@
                                 },
                                 events: {
                                     onReady: () => {
-                                        if (prefersReducedMotion) {
+                                        if (prefersReducedMotion || !shouldAutoplayVideo) {
                                             this.videoPlayer.pauseVideo();
                                             this.isPlaying = false;
                                         } else {
@@ -194,6 +197,7 @@
             videoWidth: '{{ $videoWidth }}',
             videoHeight: '{{ $videoHeight }}',
             playerElementId: '{{ $playerElementId }}',
+            minScreenWidthForAutoplay: '{{ $minScreenWidthForAutoplay }}',
          })"
      x-init="initPlayer($el)"
 >
@@ -207,7 +211,10 @@
          ])
     >
         <button type="button"
-                class="group"
+                @class([
+                    'group',
+                    $buttonClass,
+                ])
         >
             <span class="sr-only"
                   x-show="isPlaying"
@@ -215,7 +222,7 @@
 
             {{ svg($pauseButtonIcon, [
                 'x-show' => 'isPlaying',
-                'class' => $buttonClass . ' ' . $pauseButtonClass,
+                'class' => $buttonIconClass . ' ' . $pauseButtonClass,
                 'x-on:click' => 'pauseVideo();',
             ]) }}
 
@@ -225,7 +232,7 @@
 
             {{ svg($playButtonIcon, [
                 'x-show' => '!isPlaying',
-                'class' => $buttonClass . ' ' . $playButtonClass,
+                'class' => $buttonIconClass . ' ' . $playButtonClass,
                 'x-on:click' => 'playVideo();',
             ]) }}
         </button>
