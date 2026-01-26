@@ -40,8 +40,10 @@
             initPlayer(wrapperElement) {
                 this.wrapperElement = wrapperElement;
 
+                const videoElement = wrapperElement.querySelector('#' + playerElementId);
+
                 /* hiding the video itself from screen readers */
-                wrapperElement.querySelector('#' + playerElementId).setAttribute('aria-hidden', 'true');
+                videoElement.setAttribute('aria-hidden', 'true');
 
                 if (videoPlatform === 'youtube') {
                     this.loadYouTubeApi()
@@ -80,6 +82,33 @@
                         });
 
                     this.initVideoRatio();
+                } else if (videoPlatform === 'vimeo') {
+                    this.loadVimeoApi()
+                        .then(() => {
+                            this.videoPlayer = new Vimeo.Player(playerElementId, {
+                                id: videoId,
+                                height: videoHeight,
+                                width: videoWidth,
+                                autoplay: true,
+                                loop: true,
+                                muted: true,
+                                controls: false,
+                                responsive: false, // we control sizing manually
+                                fullscreen: false,
+                            });
+
+                            this.videoPlayer.ready().then(() => {
+                                if (prefersReducedMotion) {
+                                    this.videoPlayer.pause();
+                                    this.isPlaying = false;
+                                } else {
+                                    this.videoPlayer.play();
+                                    this.isPlaying = true;
+                                }
+
+                                this.initVideoRatio();
+                            });
+                        });
                 }
             },
 
@@ -97,9 +126,23 @@
                      */
                     window.onYouTubeIframeAPIReady = () => resolve();
 
-                    const tag = document.createElement('script');
-                    tag.src = "https://www.youtube.com/iframe_api";
-                    document.head.appendChild(tag);
+                    const scriptTag = document.createElement('script');
+                    scriptTag.src = "https://www.youtube.com/iframe_api";
+                    document.head.appendChild(scriptTag);
+                });
+            },
+
+            loadVimeoApi() {
+                return new Promise((resolve) => {
+                    if (window.Vimeo && window.Vimeo.Player) {
+                        resolve();
+                        return;
+                    }
+
+                    const scriptTag = document.createElement('script');
+                    scriptTag.src = 'https://player.vimeo.com/api/player.js';
+                    scriptTag.onload = resolve;
+                    document.head.appendChild(scriptTag);
                 });
             },
 
@@ -118,7 +161,7 @@
                 const containerWidth = this.wrapperElement.clientWidth;
                 const containerHeight = this.wrapperElement.clientHeight;
 
-                const videoElement = document.getElementById(this.playerElementId);
+                const videoElement = document.getElementById(this.playerElementId); // re-fetching it each time!
 
                 const videoRatio = this.videoWidth / this.videoHeight;
 
@@ -159,6 +202,8 @@
             playVideo() {
                 if (videoPlatform === 'youtube') {
                     this.videoPlayer.playVideo();
+                } else if (videoPlatform === 'vimeo') {
+                    this.videoPlayer.play();
                 }
 
                 this.isPlaying = true;
@@ -167,6 +212,8 @@
             pauseVideo() {
                 if (videoPlatform === 'youtube') {
                     this.videoPlayer.pauseVideo();
+                } else if (videoPlatform === 'vimeo') {
+                    this.videoPlayer.pause();
                 }
 
                 this.isPlaying = false;

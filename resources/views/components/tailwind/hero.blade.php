@@ -28,7 +28,8 @@
     </div>
 
     @if ($hasHeroVideoUrl())
-        <x-flexible-video-background :videoUrl="$getHeroVideoUrl()"
+{{--        <x-flexible-video-background :videoUrl="$getHeroVideoUrl()"--}}
+        <x-flexible-video-background videoUrl="https://vimeo.com/347119375"
                                      wrapperClass="min-h-[337px] md:min-h-[474px]"
         />
     @elseif ($hasHeroImage())
