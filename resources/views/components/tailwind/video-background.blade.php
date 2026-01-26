@@ -4,9 +4,9 @@
     'videoWidth' => 640,
     'videoHeight' => 360,
     'wrapperClass' => '',
-    'buttonWrapperClass' => 'absolute top-4 md:top-8 right-4 md:right-8 z-30',
+    'buttonWrapperClass' => 'absolute top-4 md:top-8 right-4 md:right-8 z-40',
     'buttonClass' => 'rounded-full bg-white/70 flex flex-row justify-center items-center p-1 md:p-2',
-    'buttonIconClass' => 'w-8 md:w-10 text-black',
+    'buttonIconClass' => 'w-8 md:w-10 text-black group-hover:text-black/70',
     'playButtonClass' => '',
     'playButtonIcon' => 'heroicon-o-play-circle',
     'playButtonAriaText' => 'Play Video',
@@ -14,6 +14,7 @@
     'pauseButtonIcon' => 'heroicon-o-pause-circle',
     'pauseButtonAriaText' => 'Pause Video',
     'minScreenWidthForAutoplay' => 768,
+    'overlayImageMedia' => null, /* when provided, this image will be shown whenever the video is paused (so also on mobile screens where autoplay is off) */
 ])
 
 @php
@@ -204,6 +205,14 @@
     <div id="{{ $playerElementId }}"
          class="!absolute top-0 left-0 h-full z-20 pointer-events-none"
     ></div>
+
+    @if ($overlayImageMedia)
+        <div x-show="!isPlaying"
+             class="absolute inset-0 z-30"
+        >
+            {!! $overlayImageMedia !!}
+        </div>
+    @endif
 
     <div x-show="videoPlayer"
          @class([

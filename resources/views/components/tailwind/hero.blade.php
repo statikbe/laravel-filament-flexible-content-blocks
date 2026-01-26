@@ -30,6 +30,12 @@
     @if ($hasHeroVideoUrl())
         <x-flexible-video-background :videoUrl="$getHeroVideoUrl()"
                                      wrapperClass="min-h-[337px] md:min-h-[474px]"
+                                     :overlayImageMedia="$hasHeroImage()
+                                         ? $getHeroImageMedia(null, [
+                                             'class' => 'w-full h-full object-cover object-center',
+                                             'loading' => 'lazy',
+                                         ])
+                                         : null"
         />
     @elseif ($hasHeroImage())
         <div class="absolute inset-0">
