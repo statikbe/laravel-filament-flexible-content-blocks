@@ -6,6 +6,7 @@ use Closure;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
+use Filament\Support\Icons\Heroicon;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
@@ -57,9 +58,9 @@ class CallToActionBlock extends AbstractFilamentFlexibleContentBlock
         $this->setBlockStyle($blockData);
     }
 
-    public static function getIcon(): string
+    public static function getIcon(): Heroicon|string
     {
-        return 'heroicon-o-cursor-arrow-rays';
+        return Heroicon::CursorArrowRays;
     }
 
     public static function getNameSuffix(): string

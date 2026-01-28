@@ -9,6 +9,7 @@ use Filament\Schemas\Components\Utilities\Set;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
+use Spatie\Sluggable\HasSlug;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Concerns\HasTranslatableHint;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\Linkable;
 
@@ -45,8 +46,8 @@ class SlugField extends TextInput
                 }
 
                 if (isset($record->translatable) && in_array(static::FIELD, $record->translatable)) {
-                    if (method_exists($livewire, 'getActiveFormsLocale') && method_exists($record, 'getTranslation')) {
-                        $locale = $livewire->getActiveFormsLocale();
+                    if (method_exists($livewire, 'getActiveSchemaLocale') && method_exists($record, 'getTranslation')) {
+                        $locale = $livewire->getActiveSchemaLocale();
 
                         $noSlug = empty($record->getTranslation(static::FIELD, $locale, false));
                         // update translated slug in form:
@@ -66,14 +67,14 @@ class SlugField extends TextInput
     protected static function getUrlWithReplacementSlug(Page $livewire): string
     {
         $linkModel = $livewire->getResource()::getModel();
-        /* @var Linkable $link */
+        /* @var Linkable|HasSlug $link */
         $link = new $linkModel;
 
-        if (method_exists($livewire, 'getActiveFormsLocale') && method_exists($link, 'setTranslation')) {
-            $locale = $livewire->getActiveFormsLocale();
-            $link->setTranslation('slug', $locale, static::URL_REPLACEMENT_SLUG);
+        if (method_exists($livewire, 'getActiveSchemaLocale') && method_exists($link, 'setTranslation')) {
+            $locale = $livewire->getActiveSchemaLocale();
+            $link->setTranslation(static::FIELD, $locale, static::URL_REPLACEMENT_SLUG);
         } else {
-            $link->slug = static::URL_REPLACEMENT_SLUG;
+            $link->{static::FIELD} = static::URL_REPLACEMENT_SLUG;
             $locale = app()->getLocale();
         }
 

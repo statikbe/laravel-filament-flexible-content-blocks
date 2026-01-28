@@ -41,7 +41,7 @@ class FilamentFlexibleBlocksConfig
             $fileUpload->imageEditor();
 
             if (isset($imageEditorConfig['aspect_ratios']) && ! empty($imageEditorConfig['aspect_ratios'])) {
-                $fileUpload->imageEditorAspectRatios($imageEditorConfig['aspect_ratios']);
+                $fileUpload->imageEditorAspectRatioOptions($imageEditorConfig['aspect_ratios']);
             }
 
             if (isset($imageEditorConfig['mode']) && $imageEditorConfig['mode'] >= 1 && $imageEditorConfig['mode'] <= 3) {

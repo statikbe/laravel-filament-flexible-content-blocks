@@ -4,6 +4,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Actions;
 
 use Filament\Actions\Action;
 use Filament\Resources\Pages\Page;
+use Filament\Support\Icons\Heroicon;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\Linkable;
 
 class ViewAction extends Action
@@ -19,9 +20,9 @@ class ViewAction extends Action
 
         $this->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.table_action.view_page_lbl'));
 
-        $this->color('secondary');
+        $this->color('gray');
 
-        $this->icon('heroicon-s-eye');
+        $this->icon(Heroicon::Eye);
 
         $this->disabledSchema();
 

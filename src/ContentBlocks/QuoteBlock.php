@@ -7,6 +7,7 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Utilities\Get;
+use Filament\Support\Icons\Heroicon;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -64,9 +65,9 @@ class QuoteBlock extends AbstractFilamentFlexibleContentBlock
         return $state['quote'];
     }
 
-    public static function getIcon(): string
+    public static function getIcon(): Heroicon|string
     {
-        return 'heroicon-o-chat-bubble-bottom-center-text';
+        return Heroicon::ChatBubbleBottomCenterText;
     }
 
     protected static function makeFilamentSchema(): array|Closure

@@ -34,8 +34,8 @@ class TranslatableSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpl
     private function getCurrentLocaleFilter(Livewire $livewire): array
     {
         $mediaFilters = [];
-        if (method_exists($livewire, 'getActiveFormsLocale')) {
-            $mediaFilters['locale'] = $livewire->getActiveFormsLocale();
+        if (method_exists($livewire, 'getActiveSchemaLocale')) {
+            $mediaFilters['locale'] = $livewire->getActiveSchemaLocale();
         }
 
         return $mediaFilters;

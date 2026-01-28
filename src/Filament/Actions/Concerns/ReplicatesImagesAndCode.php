@@ -3,6 +3,7 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Actions\Concerns;
 
 use Filament\Actions\ReplicateAction;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -10,7 +11,6 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\CodeField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\TitleField;
 
 /**
- * @mixin \Filament\Tables\Actions\ReplicateAction
  * @mixin ReplicateAction
  */
 trait ReplicatesImagesAndCode
@@ -21,7 +21,7 @@ trait ReplicatesImagesAndCode
     {
         parent::setUp();
 
-        $this->icon('heroicon-o-document-duplicate')
+        $this->icon(Heroicon::DocumentDuplicate)
             ->color('gray')
             ->beforeReplicaSaved(function (Model&HasMedia $record) {
                 $this->originalRecord = $record;

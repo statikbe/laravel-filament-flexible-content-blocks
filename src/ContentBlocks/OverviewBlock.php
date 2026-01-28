@@ -6,6 +6,7 @@ use Closure;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Support\Collection;
 use Spatie\MediaLibrary\HasMedia;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBackgroundColour;
@@ -41,9 +42,9 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
         $this->setBlockStyle($blockData);
     }
 
-    public static function getIcon(): string
+    public static function getIcon(): Heroicon|string
     {
-        return 'heroicon-o-rectangle-stack';
+        return Heroicon::RectangleStack;
     }
 
     protected static function makeFilamentSchema(): array|Closure

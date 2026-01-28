@@ -12,6 +12,7 @@ class OverviewFields
     public static function create(int $columns = 1, bool $translatableImage = false): Grid
     {
         return Grid::make($columns)
+            ->columnSpanFull()
             ->schema([
                 OverviewTitleField::create(),
                 OverviewDescriptionField::create(),

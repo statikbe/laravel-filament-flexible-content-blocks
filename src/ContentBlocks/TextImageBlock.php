@@ -6,6 +6,7 @@ use Closure;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
+use Filament\Support\Icons\Heroicon;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -74,9 +75,9 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
         return $state['title'] ?? $state['text'];
     }
 
-    public static function getIcon(): string
+    public static function getIcon(): Heroicon|string
     {
-        return 'heroicon-o-photo';
+        return Heroicon::Photo;
     }
 
     /**

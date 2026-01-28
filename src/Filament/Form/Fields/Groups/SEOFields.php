@@ -15,6 +15,7 @@ class SEOFields
     public static function create(int $columns = 1, bool $translatableImage = false): Grid
     {
         return Grid::make($columns)
+            ->columnSpanFull()
             ->schema([
                 Actions::make([
                     SEOAIAction::create(),

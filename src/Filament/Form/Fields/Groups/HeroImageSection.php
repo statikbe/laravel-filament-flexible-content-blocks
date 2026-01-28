@@ -26,8 +26,9 @@ class HeroImageSection extends Section
         }
 
         return static::make(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.hero_image_section_title'))
+            ->columnSpanFull()
             ->schema([
-                Grid::make(2)->schema($fields),
+                Grid::make(2)->columnSpanFull()->schema($fields),
             ]);
     }
 }

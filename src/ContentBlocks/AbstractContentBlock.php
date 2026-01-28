@@ -4,7 +4,9 @@ namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
 use Closure;
 use Filament\Forms\Components\Builder\Block;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\View\Component;
 use Spatie\MediaLibrary\HasMedia;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Builder\ContentBlockWithPreview;
@@ -25,7 +27,7 @@ abstract class AbstractContentBlock extends Component
 
     protected static Block $block;
 
-    public HasContentBlocks&HasMedia $record;
+    public Model&HasContentBlocks&HasMedia $record;
 
     public ?array $blockData;
 
@@ -56,7 +58,7 @@ abstract class AbstractContentBlock extends Component
     /**
      * Get the heroicon of this block
      */
-    abstract public static function getIcon(): string;
+    abstract public static function getIcon(): Heroicon|string;
 
     /**
      * Get translated label of this block

@@ -5,6 +5,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Actions;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
 use Filament\Schemas\Components\Utilities\Set;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use OpenAI\Laravel\Facades\OpenAI;
@@ -82,7 +83,7 @@ class SEOAIAction extends Action
     public static function create(): static
     {
         return static::make(self::NAME)
-            ->icon('heroicon-o-sparkles')
+            ->icon(Heroicon::Sparkles)
             ->disabled(function ($record) {
                 return ! $record || ! config('openai.api_key');
             })

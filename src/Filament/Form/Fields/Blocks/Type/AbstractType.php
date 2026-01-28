@@ -6,12 +6,14 @@ use Closure;
 use Exception;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\Select;
+use Filament\Resources\Resource;
 use Illuminate\Database\Connection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
+use phpDocumentor\Reflection\Types\ClassString;
 use function Filament\Support\get_model_label;
 
 abstract class AbstractType
@@ -92,8 +94,8 @@ abstract class AbstractType
 
             if ($this->hasOptionLabelFromRecordUsingCallback()) {
                 $locale = null;
-                if (method_exists($component->getLivewire(), 'getActiveFormsLocale')) {
-                    $locale = $component->getLivewire()->getActiveFormsLocale();
+                if (method_exists($component->getLivewire(), 'getActiveSchemaLocale')) {
+                    $locale = $component->getLivewire()->getActiveSchemaLocale();
                 }
 
                 return $query
@@ -130,8 +132,8 @@ abstract class AbstractType
 
             if ($this->hasOptionLabelFromRecordUsingCallback()) {
                 $locale = null;
-                if (method_exists($component->getLivewire(), 'getActiveFormsLocale')) {
-                    $locale = $component->getLivewire()->getActiveFormsLocale();
+                if (method_exists($component->getLivewire(), 'getActiveSchemaLocale')) {
+                    $locale = $component->getLivewire()->getActiveSchemaLocale();
                 }
 
                 return $query
@@ -166,8 +168,8 @@ abstract class AbstractType
 
             if ($this->hasOptionLabelFromRecordUsingCallback()) {
                 $locale = null;
-                if (method_exists($component->getLivewire(), 'getActiveFormsLocale')) {
-                    $locale = $component->getLivewire()->getActiveFormsLocale();
+                if (method_exists($component->getLivewire(), 'getActiveSchemaLocale')) {
+                    $locale = $component->getLivewire()->getActiveSchemaLocale();
                 }
 
                 return $this->getOptionLabelFromRecord($record, $locale);
@@ -262,6 +264,7 @@ abstract class AbstractType
         }
 
         if ($resource = Filament::getModelResource($this->getModel())) {
+            /** @var class-string<Resource> $resource */
             return Str::ucfirst($resource::getModelLabel());
         }
 
