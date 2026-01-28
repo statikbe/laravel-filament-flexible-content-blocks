@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-use phpDocumentor\Reflection\Types\ClassString;
 use function Filament\Support\get_model_label;
 
 abstract class AbstractType
@@ -264,7 +263,7 @@ abstract class AbstractType
         }
 
         if ($resource = Filament::getModelResource($this->getModel())) {
-            /** @var class-string<Resource> $resource */
+            /** @var class-string<resource> $resource */
             return Str::ucfirst($resource::getModelLabel());
         }
 
