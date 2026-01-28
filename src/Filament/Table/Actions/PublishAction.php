@@ -56,19 +56,17 @@ class PublishAction extends Action
 
             return response();
         });
-        $this->label(function () {
+        $this->label(function ($record) {
             /* @var Model|HasPageAttributes $page */
-            $page = $this->getRecord();
-            if (method_exists($page, 'isPublished') && $page->isPublished()) {
+            if (method_exists($record, 'isPublished') && $record->isPublished()) {
                 return trans('filament-flexible-content-blocks::filament-flexible-content-blocks.table_action.publish.unpublish_lbl');
             } else {
                 return trans('filament-flexible-content-blocks::filament-flexible-content-blocks.table_action.publish.publish_lbl');
             }
         });
-        $this->icon(function () {
-            /** @var Model|HasPageAttributes $page */
-            $page = $this->getRecord();
-            if (method_exists($page, 'isPublished') && $page->isPublished()) {
+        $this->icon(function ($record) {
+            /** @var Model|HasPageAttributes $record */
+            if (method_exists($record, 'isPublished') && $record->isPublished()) {
                 return 'heroicon-o-eye-slash';
             } else {
                 return 'heroicon-o-eye';
