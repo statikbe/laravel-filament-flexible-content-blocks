@@ -2,11 +2,12 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Tests\Resources;
 
-use Filament\Forms\Components\Tabs;
-use Filament\Forms\Components\Tabs\Tab;
-use Filament\Forms\Form;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Schemas\Schema;
 use Filament\Tables\Table;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\ContentBlocksField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\IntroField;
@@ -17,18 +18,20 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Columns\PublishedColum
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Columns\TitleColumn;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Filters\PublishedFilter;
 use Statikbe\FilamentFlexibleContentBlocks\Tests\Models\Page;
-use Statikbe\FilamentFlexibleContentBlocks\Tests\Resources\PageResource\Pages;
+use Statikbe\FilamentFlexibleContentBlocks\Tests\Resources\PageResource\Pages\CreatePage;
+use Statikbe\FilamentFlexibleContentBlocks\Tests\Resources\PageResource\Pages\EditPage;
+use Statikbe\FilamentFlexibleContentBlocks\Tests\Resources\PageResource\Pages\ListPages;
 
 class PageResource extends Resource
 {
     protected static ?string $model = Page::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-document-text';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 Tabs::make()
                     ->columnSpan(2)
                     ->tabs([
@@ -57,12 +60,12 @@ class PageResource extends Resource
             ->filters([
                 PublishedFilter::create(),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
+            ->recordActions([
+                EditAction::make(),
                 PublishAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                DeleteBulkAction::make(),
             ]);
     }
 
@@ -76,9 +79,9 @@ class PageResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPages::route('/'),
-            'create' => Pages\CreatePage::route('/create'),
-            'edit' => Pages\EditPage::route('/{record}/edit'),
+            'index' => ListPages::route('/'),
+            'create' => CreatePage::route('/create'),
+            'edit' => EditPage::route('/{record}/edit'),
         ];
     }
 }

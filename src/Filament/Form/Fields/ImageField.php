@@ -3,6 +3,7 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
 
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Support\Icons\Heroicon;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Concerns\HasImageEditor;
 
 abstract class ImageField
@@ -15,7 +16,7 @@ abstract class ImageField
             return self::addImageEditor(
                 TranslatableSpatieMediaLibraryFileUpload::make($field)
                     ->hint(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.translatable_image_hint'))
-                    ->hintIcon('heroicon-s-language'),
+                    ->hintIcon(Heroicon::Language),
                 $externalImageEditorConfig
             );
         } else {

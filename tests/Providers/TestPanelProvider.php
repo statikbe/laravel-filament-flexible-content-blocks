@@ -14,6 +14,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use LaraZeus\SpatieTranslatable\SpatieTranslatablePlugin;
 use Statikbe\FilamentFlexibleContentBlocks\Tests\Resources\PageResource;
 use Statikbe\FilamentFlexibleContentBlocks\Tests\Resources\TranslatablePageResource;
 
@@ -29,7 +30,7 @@ class TestPanelProvider extends PanelProvider
                 TranslatablePageResource::class,
             ])
             ->plugin(
-                \Filament\SpatieLaravelTranslatablePlugin::make()
+                SpatieTranslatablePlugin::make()
                     ->defaultLocales(['en', 'nl'])
             )
             ->middleware([

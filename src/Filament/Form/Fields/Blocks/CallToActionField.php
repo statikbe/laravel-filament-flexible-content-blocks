@@ -3,18 +3,19 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks;
 
 use Closure;
-use Filament\Forms\Components\Component;
 use Filament\Forms\Components\Concerns\CanAllowHtml;
 use Filament\Forms\Components\Concerns\CanBePreloaded;
 use Filament\Forms\Components\Concerns\CanBeSearchable;
 use Filament\Forms\Components\Concerns\HasLoadingMessage;
-use Filament\Forms\Components\Concerns\HasName;
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Get;
-use Filament\Forms\Set;
+use Filament\Schemas\Components\Component;
+use Filament\Schemas\Components\Concerns\HasLabel;
+use Filament\Schemas\Components\Concerns\HasName;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Str;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
@@ -26,6 +27,9 @@ class CallToActionField extends Component
     use CanAllowHtml;
     use CanBePreloaded;
     use CanBeSearchable;
+    use HasLabel {
+        getLabel as getLabelFromHasLabel;
+    }
     use HasLoadingMessage;
     use HasName;
 
@@ -43,7 +47,7 @@ class CallToActionField extends Component
 
     const FIELD_BUTTON_OPEN_NEW_WINDOW = 'button_open_new_window';
 
-    protected string $view = 'filament-forms::components.fieldset';
+    protected string $view = 'filament-schemas::components.fieldset';
 
     public bool|Closure $isRequired = false;
 
@@ -78,7 +82,7 @@ class CallToActionField extends Component
         return $static;
     }
 
-    public function getChildComponents(): array
+    public function getChildComponents(?string $key = null): array
     {
         $types = $this->getTypes();
         $isRequired = $this->isRequired();
@@ -187,7 +191,7 @@ class CallToActionField extends Component
 
     public function getLabel(): string|Htmlable|null
     {
-        $label = parent::getLabel() ?? (string) Str::of($this->getName())
+        $label = $this->getLabelFromHasLabel() ?? (string) Str::of($this->getName())
             ->afterLast('.')
             ->kebab()
             ->replace(['-', '_'], ' ')
