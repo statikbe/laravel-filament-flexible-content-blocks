@@ -193,8 +193,10 @@ class FilamentFlexibleBlocksConfig
             $conversion->focalCrop($configuredConversion['width'], $configuredConversion['height'], $configuredConversion['cropCenterX'] ?? null, $configuredConversion['cropCenterY'] ?? null);
             $alreadyDoneConversions = ['focalCrop', 'width', 'height', 'cropCenterX', 'cropCenterY'];
         }
-        if (isset($configuredConversion['responsive']) && $configuredConversion['responsive']) {
-            $conversion->withResponsiveImages();
+        if (isset($configuredConversion['responsive'])) {
+            if ($configuredConversion['responsive']) {
+                $conversion->withResponsiveImages();
+            }
             $alreadyDoneConversions[] = 'responsive';
         }
         if (isset($configuredConversion['queued']) && $configuredConversion['queued']) {
