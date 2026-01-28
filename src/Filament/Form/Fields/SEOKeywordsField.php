@@ -26,7 +26,7 @@ class SEOKeywordsField extends TagsInput
 
                 if (method_exists($livewire, 'getActiveSchemaLocale')) {
                     $locale = $livewire->getActiveSchemaLocale();
-                } 
+                }
 
                 if ($locale) {
                     $keywords = $record::select("seo_keywords->$locale as seo_keywords")
