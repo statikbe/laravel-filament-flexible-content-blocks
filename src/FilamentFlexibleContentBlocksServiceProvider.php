@@ -6,12 +6,12 @@ use Illuminate\Support\Facades\Config;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Statikbe\FilamentFlexibleContentBlocks\Commands\UpgradeSpatieImageFieldsCommand;
+use Statikbe\FilamentFlexibleContentBlocks\View\Components\BackgroundVideo;
 use Statikbe\FilamentFlexibleContentBlocks\View\Components\CallToAction;
 use Statikbe\FilamentFlexibleContentBlocks\View\Components\Card;
 use Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\View\Components\Hero;
 use Statikbe\FilamentFlexibleContentBlocks\View\Components\OverviewCard;
-use Statikbe\FilamentFlexibleContentBlocks\View\Components\BackgroundVideo;
 
 class FilamentFlexibleContentBlocksServiceProvider extends PackageServiceProvider
 {
