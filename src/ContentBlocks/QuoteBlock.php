@@ -8,6 +8,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Support\Icons\Heroicon;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -39,7 +40,7 @@ class QuoteBlock extends AbstractFilamentFlexibleContentBlock
 
     public ?string $imagePosition;
 
-    public function __construct(HasContentBlocks&HasMedia $record, ?array $blockData)
+    public function __construct(Model&HasContentBlocks&HasMedia $record, ?array $blockData)
     {
         parent::__construct($record, $blockData);
 

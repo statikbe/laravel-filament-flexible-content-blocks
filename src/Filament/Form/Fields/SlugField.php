@@ -39,14 +39,14 @@ class SlugField extends TextInput
             })
             // make the slug required on edit. on create, the slug is not required so if kept blank a slug is generated.
             ->required(fn (?Model $record): bool => $record && $record->getKey() > 0)
-            // hide slug field on creation, because the spatie sluggable will overwrite it anyways:
+            // hide the slug field on creation, because the spatie sluggable will overwrite it anyways:
             ->hidden(function (?Model $record, Page $livewire, Get $get, Set $set): bool {
                 if (empty($record)) {
                     return true;
                 }
 
                 if (isset($record->translatable) && in_array(static::FIELD, $record->translatable)) {
-                    if (method_exists($livewire, 'getActiveSchemaLocale') && method_exists($record, 'getTranslation')) {
+                    if (method_exists($record, 'getTranslation')) {
                         $locale = $livewire->getActiveSchemaLocale();
 
                         $noSlug = empty($record->getTranslation(static::FIELD, $locale, false));
@@ -70,7 +70,7 @@ class SlugField extends TextInput
         /* @var Linkable|HasSlug $link */
         $link = new $linkModel;
 
-        if (method_exists($livewire, 'getActiveSchemaLocale') && method_exists($link, 'setTranslation')) {
+        if (method_exists($link, 'setTranslation')) {
             $locale = $livewire->getActiveSchemaLocale();
             $link->setTranslation(static::FIELD, $locale, static::URL_REPLACEMENT_SLUG);
         } else {

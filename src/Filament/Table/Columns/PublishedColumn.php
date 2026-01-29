@@ -46,8 +46,8 @@ class PublishedColumn extends TextColumn
                 return $formattedState;
             })
             ->icons([
-                Heroicon::Eye->value => static::STATE_PUBLISHED,
-                Heroicon::EyeSlash->value => static::STATE_UNPUBLISHED,
+                static::STATE_PUBLISHED => Heroicon::Eye,
+                static::STATE_UNPUBLISHED => Heroicon::EyeSlash,
             ])
             ->colors([
                 'success' => static::STATE_PUBLISHED,

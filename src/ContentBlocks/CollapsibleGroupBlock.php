@@ -8,6 +8,7 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Support\Icons\Heroicon;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Spatie\MediaLibrary\HasMedia;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBackgroundColour;
@@ -47,7 +48,7 @@ class CollapsibleGroupBlock extends AbstractFilamentFlexibleContentBlock
 
     public Collection $collapsibleItems;
 
-    public function __construct(HasMedia&HasContentBlocks $record, ?array $blockData)
+    public function __construct(Model&HasMedia&HasContentBlocks $record, ?array $blockData)
     {
         parent::__construct($record, $blockData);
 

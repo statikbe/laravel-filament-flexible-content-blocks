@@ -6,6 +6,7 @@ use Closure;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Components\Grid;
 use Filament\Support\Icons\Heroicon;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -40,7 +41,7 @@ class ImageBlock extends AbstractFilamentFlexibleContentBlock
     /**
      * Create a new component instance.
      */
-    public function __construct(HasContentBlocks&HasMedia $record, ?array $blockData)
+    public function __construct(Model&HasContentBlocks&HasMedia $record, ?array $blockData)
     {
         parent::__construct($record, $blockData);
 

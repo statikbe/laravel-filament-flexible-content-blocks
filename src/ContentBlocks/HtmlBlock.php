@@ -5,6 +5,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 use Closure;
 use Filament\Forms\Components\Textarea;
 use Filament\Support\Icons\Heroicon;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 
@@ -15,7 +16,7 @@ class HtmlBlock extends AbstractFilamentFlexibleContentBlock
     /**
      * Create a new component instance.
      */
-    public function __construct(HasContentBlocks&HasMedia $record, ?array $blockData)
+    public function __construct(Model&HasContentBlocks&HasMedia $record, ?array $blockData)
     {
         parent::__construct($record, $blockData);
 

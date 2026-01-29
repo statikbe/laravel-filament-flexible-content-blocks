@@ -36,7 +36,7 @@ abstract class AbstractContentBlock extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(HasContentBlocks&HasMedia $record, ?array $blockData)
+    public function __construct(Model&HasContentBlocks&HasMedia $record, ?array $blockData)
     {
         $this->record = $record;
         $this->blockData = $blockData;

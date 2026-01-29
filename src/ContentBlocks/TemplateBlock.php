@@ -5,6 +5,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 use Closure;
 use Filament\Forms\Components\Select;
 use Filament\Support\Icons\Heroicon;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
@@ -15,7 +16,7 @@ class TemplateBlock extends AbstractFilamentFlexibleContentBlock
 
     public ?string $template;
 
-    public function __construct(HasMedia&HasContentBlocks $record, ?array $blockData)
+    public function __construct(Model&HasMedia&HasContentBlocks $record, ?array $blockData)
     {
         parent::__construct($record, $blockData);
 
