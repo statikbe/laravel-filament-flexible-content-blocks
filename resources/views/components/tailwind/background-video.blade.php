@@ -24,10 +24,10 @@
 @endphp
 
 @once
-    @section('scripts')
-        @parent
-        @vite(['vendor/statikbe/laravel-filament-flexible-content-blocks/resources/js/components/background-video/index.ts'])
-    @endsection
+    {{-- This component uses the transpiled javascript which is build from the typescript
+         /resources/js/components/background-video/index.ts entry file. Applications using this
+         package component need to publish this asset --> see the command to publish the assets in README.md --}}
+    <script type="text/javascript" src="{{ asset('vendor/filament-flexible-content-blocks/js/background-video.js') }}"></script>
 @endonce
 
 <div @class([
