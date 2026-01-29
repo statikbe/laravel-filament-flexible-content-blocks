@@ -483,13 +483,9 @@ to extend from, because this super class contains logic to add the package's own
 A lot of the customisation of content blocks and their behaviour can be done through the configuration file. 
 Please, consult [the configuration documentation](documentation%2Fconfiguration.md).
 
-## Releasing a new version of this package
+## Package development
 
-* When you made changes to some typescript assets, do the following steps **before** making the new release version:
-  * run `nvm use` to make sure you're on the desire node version
-  * run `npm install` to install the latest node_modules
-  * run `npm run build` which will build the needed assets within the `/resources/dist` folder
-  * commit the generated `/resources/dist` asset files
+See [DEV.md](src/DEV.md)
 
 ## Roadmap
 
