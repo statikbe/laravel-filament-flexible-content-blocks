@@ -28,7 +28,7 @@
     </div>
 
     @if ($hasHeroVideoUrl())
-        <x-flexible-video-background :videoUrl="$getHeroVideoUrl()"
+        <x-flexible-background-video :videoUrl="$getHeroVideoUrl()"
                                      wrapperClass="min-h-[337px] md:min-h-[474px]"
                                      :overlayImageMedia="$hasHeroImage()
                                          ? $getHeroImageMedia(null, [

@@ -11,7 +11,7 @@ use Statikbe\FilamentFlexibleContentBlocks\View\Components\Card;
 use Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\View\Components\Hero;
 use Statikbe\FilamentFlexibleContentBlocks\View\Components\OverviewCard;
-use Statikbe\FilamentFlexibleContentBlocks\View\Components\VideoBackground;
+use Statikbe\FilamentFlexibleContentBlocks\View\Components\BackgroundVideo;
 
 class FilamentFlexibleContentBlocksServiceProvider extends PackageServiceProvider
 {
@@ -34,7 +34,7 @@ class FilamentFlexibleContentBlocksServiceProvider extends PackageServiceProvide
                 OverviewCard::class,
                 CallToAction::class,
                 Card::class,
-                VideoBackground::class,
+                BackgroundVideo::class,
             )
             ->hasMigrations(['create_default_pages_table', 'create_default_translatable_pages_table'])
             ->hasTranslations()
