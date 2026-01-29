@@ -67,7 +67,7 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
                     $overviewItemField,
                 ])
                 ->itemLabel(function (array $state) use ($overviewItemField): ?string {
-                    if ($state['overview_model'] && $state['overview_id'] && $overviewItemField->getTypes()[$state['overview_model']]) {
+                    if (isset($state['overview_model']) && $state['overview_model'] && $state['overview_id'] && $overviewItemField->getTypes()[$state['overview_model']]) {
                         return $overviewItemField->getTypes()[$state['overview_model']]->getLabel().' #'.$state['overview_id'];
                     } else {
                         return null;

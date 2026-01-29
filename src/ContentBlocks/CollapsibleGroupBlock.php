@@ -75,7 +75,7 @@ class CollapsibleGroupBlock extends AbstractFilamentFlexibleContentBlock
 
     public static function getContentSummary(array $state): ?string
     {
-        return $state[static::GROUP_TITLE_FIELD] ?? $state[static::GROUP_INTRO_FIELD];
+        return static::convertRichTextToText($state[static::GROUP_TITLE_FIELD] ?? $state[static::GROUP_INTRO_FIELD]);
     }
 
     public static function getIcon(): Heroicon|string

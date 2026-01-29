@@ -70,7 +70,7 @@ class CallToActionBlock extends AbstractFilamentFlexibleContentBlock
 
     public static function getContentSummary(array $state): ?string
     {
-        return $state['title'] ?? $state['text'];
+        return static::convertRichTextToText($state['title'] ?? $state['text']);
     }
 
     /**
