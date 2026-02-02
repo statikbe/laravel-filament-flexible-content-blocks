@@ -13,6 +13,14 @@ use Illuminate\Support\Str;
 
 use function Filament\Support\get_model_label;
 
+/**
+ * Selectable type for different models, where different types of models or data can be selected.
+ * This class helps with implementing the necessary functionality for a Select component.
+ * For instance, for CTAs.
+ *
+ * In case the type or model needs a different label in the Select component, you can overwrite
+ * `getOptionLabelFromRecordUsing` with a custom callback.
+ */
 abstract class AbstractType
 {
     protected ?string $label = null;
@@ -173,6 +181,11 @@ abstract class AbstractType
             }
 
             return $record->getAttributeValue($this->getTitleColumnName());
+        });
+
+        $this->getOptionLabelFromRecordUsing(function (Model $record, ?string $locale = null): string {
+            // default implementation, please overwrite if your model differs:
+            return method_exists($record, 'translate') ? $record->translate($this->getTitleColumnName(), $locale ?? app()->getLocale()) : $record->{$this->getTitleColumnName()};
         });
     }
 
