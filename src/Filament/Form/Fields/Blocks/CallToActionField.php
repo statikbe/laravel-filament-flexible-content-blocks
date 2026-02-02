@@ -47,7 +47,7 @@ class CallToActionField extends Component
 
     const FIELD_BUTTON_OPEN_NEW_WINDOW = 'button_open_new_window';
 
-    protected string $view = 'filament-schemas::components.fieldset';
+    protected string $view = 'filament-schemas::components.grid';
 
     public bool|Closure $isRequired = false;
 
