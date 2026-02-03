@@ -24,8 +24,8 @@ class ViewPageAction extends Action
             ->url(function (Linkable $record, FilamentPage $livewire): string {
                 $locale = app()->getLocale();
 
-                if (method_exists($livewire, 'getActiveLocale')) {
-                    $locale = $livewire->getActiveLocale();
+                if (method_exists($livewire, 'getActiveSchemaLocale')) {
+                    $locale = $livewire->getActiveSchemaLocale();
                 }
 
                 return $record->getPreviewUrl($locale);
