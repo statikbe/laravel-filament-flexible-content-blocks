@@ -3,7 +3,6 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Actions;
 
 use Filament\Actions\Action;
-
 use Filament\Resources\Pages\Page as FilamentPage;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\Linkable;
 
