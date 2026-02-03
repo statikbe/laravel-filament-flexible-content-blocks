@@ -2,6 +2,15 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.8.0 - 2026-02-03
+
+### What's Changed
+
+* Video background component for hero section, currently only including youtube playback, see PR by @bverbist in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/87
+* Improve hero section title
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v2.7.3...v2.8.0
+
 ## v2.7.2 - 2026-01-28
 
 - Handle `responsive` config key when value is false
