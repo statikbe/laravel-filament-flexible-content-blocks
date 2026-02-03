@@ -44,6 +44,7 @@ return [
     'form_component.hero_image_title_lbl' => 'Hero image title',
     'form_component.hero_image_copyright_lbl' => 'Hero image copyright',
     'form_component.hero_image_section_title' => 'Hero image',
+    'form_component.hero_image_or_video_section_title' => 'Hero image or video',
     'form_component.hero_cta_section_title' => 'Hero call-to-actions',
     'form_component.hero_video_url_lbl' => 'Hero video URL',
     'form_component.hero_video_url_help' => 'Add the URL from, for example, a YouTube or Vimeo video.',
