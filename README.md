@@ -81,6 +81,29 @@ php artisan vendor:publish --tag="filament-flexible-content-blocks-migrations"
 php artisan migrate
 ```
 
+### optional installation steps
+
+When you want to use the BackgroundVideo component, you have to make sure that the javascript files, which
+are used by the component, are available in your project. To do this, you have to publish the compiled
+javascript assets by using:
+
+```bash
+php artisan vendor:publish --tag="filament-flexible-content-blocks-assets"
+```
+
+To automate the above, so that these assets will be re-published each time you perform a composer update, you
+can add the following publish command within the `scripts.post-update-cmd` array of your `composer.json`:
+
+```json
+{
+    "scripts": {
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=filament-flexible-content-blocks-assets --force"
+        ]
+    }
+}
+```
+
 ## Dependencies
 
 This is an opinionated package with batteries included. So we picked a set of dependencies to build upon. 
@@ -459,6 +482,10 @@ to extend from, because this super class contains logic to add the package's own
 
 A lot of the customisation of content blocks and their behaviour can be done through the configuration file. 
 Please, consult [the configuration documentation](documentation%2Fconfiguration.md).
+
+## Package development
+
+See [DEV.md](src/DEV.md)
 
 ## Roadmap
 
