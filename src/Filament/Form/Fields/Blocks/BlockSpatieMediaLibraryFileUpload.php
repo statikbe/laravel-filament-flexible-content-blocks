@@ -31,6 +31,9 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
 
         self::addImageEditor($this);
 
+        // TODO: extract to config option
+        $this->disk('public');
+
         $this->customProperties(function (Get $get) {
             return ['block' => $get(BlockIdField::FIELD)];
         });
