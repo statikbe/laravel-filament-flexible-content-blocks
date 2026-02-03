@@ -81,9 +81,9 @@ php artisan vendor:publish --tag="filament-flexible-content-blocks-migrations"
 php artisan migrate
 ```
 
-### optional installation steps
+### Optional installation steps
 
-When you want to use the BackgroundVideo component, you have to make sure that the javascript files, which
+When you want to use the [BackgroundVideo](src/View/Components/BackgroundVideo.php) component, you have to make sure that the javascript files, which
 are used by the component, are available in your project. To do this, you have to publish the compiled
 javascript assets by using:
 
