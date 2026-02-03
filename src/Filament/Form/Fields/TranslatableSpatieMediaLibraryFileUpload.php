@@ -18,6 +18,9 @@ class TranslatableSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpl
 
         self::addImageEditor($this);
 
+        // TODO: extract to config option
+        $this->disk('public');
+
         $this->customProperties(function (Livewire $livewire) {
             return $this->getCurrentLocaleFilter($livewire);
         });
