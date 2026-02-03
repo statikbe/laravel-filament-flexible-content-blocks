@@ -65,6 +65,7 @@ class CallToActionField extends Component
         $this->name($name);
         $this->isSearchable = true;
         $this->blockClass = $blockClass;
+        $this->components(fn (): array => $this->getFieldComponents());
     }
 
     /**
@@ -81,17 +82,15 @@ class CallToActionField extends Component
         return $static;
     }
 
-    public function getCallToActionComponents(): array
+    public function getFieldComponents(): array
     {
         $types = $this->getTypes();
         $isRequired = $this->isRequired();
 
-        /** @var ?CallToActionType $selectedType */
-        $selectedType = $types[$this->evaluate(function (Get $get): ?string {
-            return $get('cta_model');
-        })] ?? null;
-        $selectedTypeIsUrl = $selectedType?->isUrlType() ?? false;
-        $selectedTypeIsRoute = $selectedType?->isRouteType() ?? false;
+        // Helper to get the selected type from form state
+        $getSelectedType = function (Get $get) use ($types): ?CallToActionType {
+            return $types[$get(static::FIELD_CTA_MODEL)] ?? null;
+        };
 
         return [
             Grid::make(6)
@@ -104,7 +103,7 @@ class CallToActionField extends Component
                             $types,
                         ))
                         ->required()
-                        ->reactive()
+                        ->live()
                         ->afterStateUpdated(function (Set $set) {
                             $set(static::FIELD_ENTRY_ID, null);
                         }),
@@ -118,11 +117,36 @@ class CallToActionField extends Component
                             return $selectedType?->getLabel() ??
                                 trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_entry_id');
                         })
-                        ->options($selectedType?->getOptionsUsing)
-                        ->getSearchResultsUsing($selectedType?->getSearchResultsUsing)
-                        ->getOptionLabelUsing($selectedType?->getOptionLabelUsing)
-                        ->required(! $selectedTypeIsUrl && ! $selectedTypeIsRoute && $selectedType)
-                        ->hidden(! $selectedType || $selectedTypeIsUrl || $selectedTypeIsRoute)
+                        ->options(function (Select $component, Get $get) use ($getSelectedType): ?array {
+                            $selectedType = $getSelectedType($get);
+                            if (! $selectedType || $selectedType->isUrlType() || $selectedType->isRouteType()) {
+                                return null;
+                            }
+
+                            return ($selectedType->getOptionsUsing)($component);
+                        })
+                        ->getSearchResultsUsing(function (Select $component, Get $get, ?string $search) use ($getSelectedType): array {
+                            $selectedType = $getSelectedType($get);
+                            if (! $selectedType || $selectedType->isUrlType() || $selectedType->isRouteType()) {
+                                return [];
+                            }
+
+                            return ($selectedType->getSearchResultsUsing)($component, $search);
+                        })
+                        ->getOptionLabelUsing(function (Select $component, Get $get, mixed $value) use ($getSelectedType): mixed {
+                            $selectedType = $getSelectedType($get);
+                            if (! $selectedType || $selectedType->isUrlType() || $selectedType->isRouteType()) {
+                                return $value;
+                            }
+
+                            return ($selectedType->getOptionLabelUsing)($component, $value);
+                        })
+                        ->required(fn (Get $get): bool => (bool) $getSelectedType($get)?->getModel())
+                        ->hidden(function (Get $get) use ($getSelectedType): bool {
+                            $selectedType = $getSelectedType($get);
+
+                            return ! $selectedType || $selectedType->isUrlType() || $selectedType->isRouteType();
+                        })
                         ->searchable($this->isSearchable())
                         ->searchDebounce($this->getSearchDebounce())
                         ->searchPrompt($this->getSearchPrompt())
@@ -137,14 +161,14 @@ class CallToActionField extends Component
                         ->columnSpan(4)
                         ->placeholder('https://')
                         ->url()
-                        ->required($selectedTypeIsUrl)
-                        ->hidden(! $selectedType || ! $selectedTypeIsUrl),
+                        ->required(fn (Get $get): bool => $getSelectedType($get)?->isUrlType() ?? false)
+                        ->hidden(fn (Get $get): bool => ! ($getSelectedType($get)?->isUrlType() ?? false)),
                     Select::make(static::FIELD_ROUTE)
                         ->columnSpan(4)
                         ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.content_blocks.call_to_action_route'))
                         ->options(FilamentFlexibleBlocksConfig::getLinkRoutes())
-                        ->required($selectedTypeIsRoute)
-                        ->hidden(! $selectedType || ! $selectedTypeIsRoute)
+                        ->required(fn (Get $get): bool => $getSelectedType($get)?->isRouteType() ?? false)
+                        ->hidden(fn (Get $get): bool => ! ($getSelectedType($get)?->isRouteType() ?? false))
                         ->loadingMessage($this->getLoadingMessage())
                         ->optionsLimit($this->getOptionsLimit())
                         ->preload($this->isPreloaded()),

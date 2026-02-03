@@ -11,6 +11,7 @@ use Filament\Forms\Components\Select;
 use Filament\Schemas\Components\Component;
 use Filament\Schemas\Components\Concerns\HasLabel;
 use Filament\Schemas\Components\Concerns\HasName;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Illuminate\Contracts\Support\Htmlable;
@@ -40,7 +41,7 @@ class OverviewItemField extends Component
     {
         $this->name($name);
         $this->isSearchable = true;
-        $this->columns(6);
+        $this->components(fn (): array => $this->getFieldComponents());
     }
 
     public static function make(string $name): static
@@ -51,48 +52,72 @@ class OverviewItemField extends Component
         return $static;
     }
 
-    public function getChildComponents(?string $key = null): array
+    public function getFieldComponents(): array
     {
         $types = $this->getTypes();
         $isRequired = $this->isRequired();
 
-        /** @var ?OverviewType $selectedType */
-        $selectedType = $types[$this->evaluate(function (Get $get): ?string {
-            return $get('overview_model');
-        })] ?? null;
-
         return [
-            Select::make('overview_model')
-                ->columnSpan(2)
-                ->label($this->getLabel())
-                ->hiddenLabel()
-                ->options(array_map(
-                    fn (OverviewType $type): string => $type->getLabel(),
-                    $types,
-                ))
-                ->required($isRequired)
-                ->reactive()
-                ->afterStateUpdated(function (Set $set) {
-                    $set('overview_id', null);
-                }),
-            Select::make('overview_id')
-                ->columnSpan(4)
-                ->label($selectedType?->getLabel())
-                ->hiddenLabel()
-                ->options($selectedType?->getOptionsUsing)
-                ->getSearchResultsUsing($selectedType?->getSearchResultsUsing)
-                ->getOptionLabelUsing($selectedType?->getOptionLabelUsing)
-                ->required($isRequired)
-                ->hidden(! $selectedType)
-                ->searchable($this->isSearchable())
-                ->searchDebounce($this->getSearchDebounce())
-                ->searchPrompt($this->getSearchPrompt())
-                ->searchingMessage($this->getSearchingMessage())
-                ->noSearchResultsMessage($this->getNoSearchResultsMessage())
-                ->loadingMessage($this->getLoadingMessage())
-                ->allowHtml($this->isHtmlAllowed())
-                ->optionsLimit($this->getOptionsLimit())
-                ->preload($this->isPreloaded()),
+            Grid::make(6)
+                ->schema([
+                    Select::make('overview_model')
+                        ->columnSpan(2)
+                        ->label($this->getLabel())
+                        ->hiddenLabel()
+                        ->selectablePlaceholder('Select an overview model')
+                        ->options(array_map(
+                            fn (OverviewType $type): string => $type->getLabel(),
+                            $types,
+                        ))
+                        ->required($isRequired)
+                        ->live()
+                        ->afterStateUpdated(function (Set $set) {
+                            $set('overview_id', null);
+                        }),
+                    Select::make('overview_id')
+                        ->columnSpan(4)
+                        ->label(function (Get $get) use ($types): ?string {
+                            $selectedType = $types[$get('overview_model')] ?? null;
+
+                            return $selectedType?->getLabel();
+                        })
+                        ->hiddenLabel()
+                        ->options(function (Select $component, Get $get) use ($types): ?array {
+                            $selectedType = $types[$get('overview_model')] ?? null;
+                            if (! $selectedType) {
+                                return null;
+                            }
+
+                            return ($selectedType->getOptionsUsing)($component);
+                        })
+                        ->getSearchResultsUsing(function (Select $component, Get $get, ?string $search) use ($types): array {
+                            $selectedType = $types[$get('overview_model')] ?? null;
+                            if (! $selectedType) {
+                                return [];
+                            }
+
+                            return ($selectedType->getSearchResultsUsing)($component, $search);
+                        })
+                        ->getOptionLabelUsing(function (Select $component, Get $get, mixed $value) use ($types): mixed {
+                            $selectedType = $types[$get('overview_model')] ?? null;
+                            if (! $selectedType) {
+                                return $value;
+                            }
+
+                            return ($selectedType->getOptionLabelUsing)($component, $value);
+                        })
+                        ->required($isRequired)
+                        ->hidden(fn (Get $get): bool => blank($get('overview_model')))
+                        ->searchable($this->isSearchable())
+                        ->searchDebounce($this->getSearchDebounce())
+                        ->searchPrompt($this->getSearchPrompt())
+                        ->searchingMessage($this->getSearchingMessage())
+                        ->noSearchResultsMessage($this->getNoSearchResultsMessage())
+                        ->loadingMessage($this->getLoadingMessage())
+                        ->allowHtml($this->isHtmlAllowed())
+                        ->optionsLimit($this->getOptionsLimit())
+                        ->preload($this->isPreloaded()),
+                ]),
         ];
     }
 
