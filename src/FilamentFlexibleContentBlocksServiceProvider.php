@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Config;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Statikbe\FilamentFlexibleContentBlocks\Commands\UpgradeSpatieImageFieldsCommand;
+use Statikbe\FilamentFlexibleContentBlocks\View\Components\BackgroundVideo;
 use Statikbe\FilamentFlexibleContentBlocks\View\Components\CallToAction;
 use Statikbe\FilamentFlexibleContentBlocks\View\Components\Card;
 use Statikbe\FilamentFlexibleContentBlocks\View\Components\ContentBlocks;
@@ -33,9 +34,11 @@ class FilamentFlexibleContentBlocksServiceProvider extends PackageServiceProvide
                 OverviewCard::class,
                 CallToAction::class,
                 Card::class,
+                BackgroundVideo::class,
             )
             ->hasMigrations(['create_default_pages_table', 'create_default_translatable_pages_table'])
             ->hasTranslations()
+            ->hasAssets()
             ->hasCommand(UpgradeSpatieImageFieldsCommand::class);
     }
 

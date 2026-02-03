@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.7.2 - 2026-01-28
+
+- Handle `responsive` config key when value is false
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v2.7.1...v2.7.2
+
 ## v2.7.1 - 2026-01-22
 
 - Make hero video url field in hero image section optional with create flag
