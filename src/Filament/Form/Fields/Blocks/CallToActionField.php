@@ -64,7 +64,6 @@ class CallToActionField extends Component
     {
         $this->name($name);
         $this->isSearchable = true;
-        $this->columns(6);
         $this->blockClass = $blockClass;
     }
 
@@ -82,7 +81,7 @@ class CallToActionField extends Component
         return $static;
     }
 
-    public function getChildComponents(?string $key = null): array
+    public function getCallToActionComponents(): array
     {
         $types = $this->getTypes();
         $isRequired = $this->isRequired();
