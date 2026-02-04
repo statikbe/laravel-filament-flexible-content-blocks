@@ -45,7 +45,7 @@ class SlugField extends TextInput
                 }
 
                 if (isset($record->translatable) && in_array(static::FIELD, $record->translatable)) {
-                    if (method_exists($livewire, 'getActiveFormsLocale') && method_exists($record, 'getTranslation')) {
+                    if (method_exists($record, 'getTranslation')) {
                         $locale = $livewire->getActiveFormsLocale();
 
                         $noSlug = empty($record->getTranslation(static::FIELD, $locale, false));
@@ -69,7 +69,7 @@ class SlugField extends TextInput
         /* @var Linkable $link */
         $link = new $linkModel;
 
-        if (method_exists($livewire, 'getActiveFormsLocale') && method_exists($link, 'setTranslation')) {
+        if (method_exists($link, 'setTranslation')) {
             $locale = $livewire->getActiveFormsLocale();
             $link->setTranslation('slug', $locale, static::URL_REPLACEMENT_SLUG);
         } else {

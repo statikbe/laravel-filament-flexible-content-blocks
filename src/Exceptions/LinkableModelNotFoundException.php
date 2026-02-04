@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class LinkableModelNotFoundException extends \Exception
 {
-    private ?Model $record;
+    private ?Model $record = null;
 
     public static function create(string $message)
     {

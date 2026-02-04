@@ -22,9 +22,9 @@ class PublishAction extends Action
             try {
                 /** @var Model&HasPageAttributes $page */
                 $page = $this->getRecord();
-                if (method_exists($page, 'isPublished') && ! $page->isPublished()) {
+                if (! $page->isPublished()) {
                     $page->setAttribute('publishing_begins_at', Carbon::now());
-                    if (method_exists($page, 'wasUnpublished') && $page->wasUnpublished()) {
+                    if ($page->wasUnpublished()) {
                         $page->setAttribute('publishing_ends_at', null);
                     }
                     $page->save();
@@ -56,18 +56,18 @@ class PublishAction extends Action
             return response();
         });
         $this->label(function () {
-            /* @var Model|HasPageAttributes $page */
+            /** @var Model&HasPageAttributes $page */
             $page = $this->getRecord();
-            if (method_exists($page, 'isPublished') && $page->isPublished()) {
+            if ($page->isPublished()) {
                 return trans('filament-flexible-content-blocks::filament-flexible-content-blocks.table_action.publish.unpublish_lbl');
             } else {
                 return trans('filament-flexible-content-blocks::filament-flexible-content-blocks.table_action.publish.publish_lbl');
             }
         });
         $this->icon(function () {
-            /** @var Model|HasPageAttributes $page */
+            /** @var Model&HasPageAttributes $page */
             $page = $this->getRecord();
-            if (method_exists($page, 'isPublished') && $page->isPublished()) {
+            if ($page->isPublished()) {
                 return 'heroicon-o-eye-slash';
             } else {
                 return 'heroicon-o-eye';

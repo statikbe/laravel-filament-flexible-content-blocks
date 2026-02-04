@@ -10,4 +10,9 @@ parameters:
     tmpDir: build/phpstan
     checkOctaneCompatibility: true
     checkModelProperties: true
+    ignoreErrors:
+        - identifier: trait.unused
+        -
+            identifier: larastan.noEnvCallsOutsideOfConfig
+            path: src/FilamentFlexibleContentBlocksServiceProvider.php
 

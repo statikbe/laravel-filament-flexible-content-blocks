@@ -98,10 +98,7 @@ abstract class AbstractType
             $keyName = $query->getModel()->getKeyName();
 
             if ($this->hasOptionLabelFromRecordUsingCallback()) {
-                $locale = null;
-                if (method_exists($component->getLivewire(), 'getActiveFormsLocale')) {
-                    $locale = $component->getLivewire()->getActiveFormsLocale();
-                }
+                $locale = $component->getLivewire()->getActiveFormsLocale();
 
                 return $query
                     ->get()
@@ -136,10 +133,7 @@ abstract class AbstractType
             $keyName = $query->getModel()->getKeyName();
 
             if ($this->hasOptionLabelFromRecordUsingCallback()) {
-                $locale = null;
-                if (method_exists($component->getLivewire(), 'getActiveFormsLocale')) {
-                    $locale = $component->getLivewire()->getActiveFormsLocale();
-                }
+                $locale = $component->getLivewire()->getActiveFormsLocale();
 
                 return $query
                     ->get()
@@ -172,10 +166,7 @@ abstract class AbstractType
             }
 
             if ($this->hasOptionLabelFromRecordUsingCallback()) {
-                $locale = null;
-                if (method_exists($component->getLivewire(), 'getActiveFormsLocale')) {
-                    $locale = $component->getLivewire()->getActiveFormsLocale();
-                }
+                $locale = $component->getLivewire()->getActiveFormsLocale();
 
                 return $this->getOptionLabelFromRecord($record, $locale);
             }
