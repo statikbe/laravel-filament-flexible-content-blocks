@@ -4,6 +4,8 @@ namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
 use Closure;
 use Filament\Forms\Components\Select;
+use Filament\Support\Icons\Heroicon;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
@@ -14,16 +16,16 @@ class TemplateBlock extends AbstractFilamentFlexibleContentBlock
 
     public ?string $template;
 
-    public function __construct(HasMedia&HasContentBlocks $record, ?array $blockData)
+    public function __construct(Model&HasMedia&HasContentBlocks $record, ?array $blockData)
     {
         parent::__construct($record, $blockData);
 
         $this->template = $blockData[static::FIELD_TEMPLATE] ?? null;
     }
 
-    public static function getIcon(): string
+    public static function getIcon(): Heroicon|string
     {
-        return 'heroicon-o-rectangle-group';
+        return Heroicon::RectangleGroup;
     }
 
     protected static function makeFilamentSchema(): array|Closure
@@ -42,11 +44,11 @@ class TemplateBlock extends AbstractFilamentFlexibleContentBlock
 
     public static function getContentSummary(array $state): ?string
     {
-        if ($state[static::FIELD_TEMPLATE]) {
-            return FilamentFlexibleBlocksConfig::getTemplatesSelectOptions(static::class)[$state[static::FIELD_TEMPLATE]];
-        }
+        $template = $state[static::FIELD_TEMPLATE] ?? null;
 
-        return null;
+        return $template
+            ? FilamentFlexibleBlocksConfig::getTemplatesSelectOptions(static::class)[$template]
+            : null;
     }
 
     public static function visible(): bool|Closure

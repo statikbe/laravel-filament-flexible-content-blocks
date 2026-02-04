@@ -1,20 +1,23 @@
 <?php
 
 use Livewire\Livewire;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\QuoteBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextImageBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\VideoBlock;
 use Statikbe\FilamentFlexibleContentBlocks\Tests\Models\TranslatablePage;
-use Statikbe\FilamentFlexibleContentBlocks\Tests\Resources\TranslatablePageResource;
+use Statikbe\FilamentFlexibleContentBlocks\Tests\Resources\TranslatablePageResource\Pages\CreateTranslatablePage;
 
 beforeEach(function () {
     setupFilamentPanel();
     setupTranslatableContentBlocks([
-        \Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextImageBlock::class,
-        \Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\VideoBlock::class,
-        \Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\QuoteBlock::class,
+        TextImageBlock::class,
+        VideoBlock::class,
+        QuoteBlock::class,
     ]);
 });
 
 it('can create translatable page with content blocks in default locale', function () {
-    Livewire::test(TranslatablePageResource\Pages\CreateTranslatablePage::class)
+    Livewire::test(CreateTranslatablePage::class)
         ->fillForm([
             'title' => 'English Title',
             'slug' => 'english-slug',
@@ -49,7 +52,7 @@ it('can create translatable page with content blocks in default locale', functio
 
 it('can save different content blocks per locale', function () {
     // Create a page with English content
-    $pageId = \DB::table('translatable_pages')->insertGetId([
+    $pageId = DB::table('translatable_pages')->insertGetId([
         'title' => json_encode(['en' => 'English Title', 'nl' => 'Dutch Title']),
         'slug' => json_encode(['en' => 'english-slug', 'nl' => 'dutch-slug']),
         'code' => 'multilingual-page',
@@ -88,7 +91,7 @@ it('can save different content blocks per locale', function () {
 
 it('ensures locales maintain independent content blocks', function () {
     // Create a page with content in both locales
-    $pageId = \DB::table('translatable_pages')->insertGetId([
+    $pageId = DB::table('translatable_pages')->insertGetId([
         'title' => json_encode(['en' => 'English', 'nl' => 'Dutch']),
         'slug' => json_encode(['en' => 'english', 'nl' => 'dutch']),
         'code' => 'locale-independence-test',
@@ -127,7 +130,7 @@ it('ensures locales maintain independent content blocks', function () {
 });
 
 it('can create page with empty content blocks in one locale and filled in another', function () {
-    $pageId = \DB::table('translatable_pages')->insertGetId([
+    $pageId = DB::table('translatable_pages')->insertGetId([
         'title' => json_encode(['en' => 'English', 'nl' => 'Dutch']),
         'slug' => json_encode(['en' => 'english', 'nl' => 'dutch']),
         'code' => 'empty-test',
@@ -156,14 +159,14 @@ it('can create page with empty content blocks in one locale and filled in anothe
 });
 
 it('can render translatable content blocks field in create page', function () {
-    $component = Livewire::test(TranslatablePageResource\Pages\CreateTranslatablePage::class);
+    $component = Livewire::test(CreateTranslatablePage::class);
 
     $component->assertFormExists();
     $component->assertFormFieldExists('content_blocks');
 });
 
 it('can switch locales in create form and fill different content blocks per locale via Livewire', function () {
-    $component = Livewire::test(TranslatablePageResource\Pages\CreateTranslatablePage::class)
+    $component = Livewire::test(CreateTranslatablePage::class)
         ->assertSet('activeLocale', 'en') // Verify default locale is English
         ->fillForm([
             'code' => 'multilingual-test',
@@ -219,7 +222,7 @@ it('can switch locales in create form and fill different content blocks per loca
 });
 
 it('maintains separate content blocks when switching locales multiple times via Livewire', function () {
-    $component = Livewire::test(TranslatablePageResource\Pages\CreateTranslatablePage::class)
+    $component = Livewire::test(CreateTranslatablePage::class)
         // Fill English with 2 blocks
         ->fillForm([
             'code' => 'multi-switch-test',
@@ -270,7 +273,7 @@ it('maintains separate content blocks when switching locales multiple times via 
 
 it('preserves content blocks structure when saving with multiple locales', function () {
     // Test with complex nested data
-    $pageId = \DB::table('translatable_pages')->insertGetId([
+    $pageId = DB::table('translatable_pages')->insertGetId([
         'title' => json_encode(['en' => 'Test', 'nl' => 'Test']),
         'slug' => json_encode(['en' => 'test', 'nl' => 'test']),
         'code' => 'complex-test',

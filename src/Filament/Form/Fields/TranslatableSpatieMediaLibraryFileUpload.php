@@ -18,6 +18,9 @@ class TranslatableSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpl
 
         self::addImageEditor($this);
 
+        // TODO: extract to config option
+        $this->disk('public');
+
         $this->customProperties(function (Livewire $livewire) {
             return $this->getCurrentLocaleFilter($livewire);
         });
@@ -34,8 +37,8 @@ class TranslatableSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpl
     private function getCurrentLocaleFilter(Livewire $livewire): array
     {
         $mediaFilters = [];
-        if (method_exists($livewire, 'getActiveFormsLocale')) {
-            $mediaFilters['locale'] = $livewire->getActiveFormsLocale();
+        if (method_exists($livewire, 'getActiveSchemaLocale')) {
+            $mediaFilters['locale'] = $livewire->getActiveSchemaLocale();
         }
 
         return $mediaFilters;

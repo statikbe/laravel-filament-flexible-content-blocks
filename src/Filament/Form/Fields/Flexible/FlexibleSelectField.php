@@ -53,7 +53,7 @@ class FlexibleSelectField extends Select
 
     protected function hasOnlyOneOption(): bool
     {
-        return is_array($this->getCachedOptions()) && count($this->getCachedOptions()) === 1;
+        return count($this->getCachedOptions()) === 1;
     }
 
     public function isHidden(): bool

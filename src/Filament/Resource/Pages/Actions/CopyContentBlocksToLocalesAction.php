@@ -4,6 +4,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Resource\Pages\Actions
 
 use Filament\Actions\Action;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Actions\CopyContentBlocksToLocalesActionHandler;
@@ -28,7 +29,7 @@ class CopyContentBlocksToLocalesAction extends Action
 
         $this->button();
 
-        $this->icon('heroicon-o-language');
+        $this->icon(Heroicon::Language);
 
         // hide if there is only one locale available
         $this->hidden(fn ($livewire) => method_exists($livewire, 'getTranslatableLocales') && count($livewire->getTranslatableLocales()) <= 1);

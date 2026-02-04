@@ -24,8 +24,8 @@ class SEOKeywordsField extends TagsInput
                     return [];
                 }
 
-                if (method_exists($livewire, 'getActiveFormsLocale')) {
-                    $locale = $livewire->getActiveFormsLocale();
+                if (method_exists($livewire, 'getActiveSchemaLocale')) {
+                    $locale = $livewire->getActiveSchemaLocale();
                 }
 
                 if ($locale) {
