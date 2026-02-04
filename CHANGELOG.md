@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.8.1 - 2026-02-04
+
+* Add CodeColumn and CodeFilter for tables
+* Add ViewPageAction for redirecting to the view url of the page via the Linkable interface
+* Improve CTA label to adapt it to the chosen type
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v2.8.0...v2.8.1
+
 ## v2.8.0 - 2026-02-03
 
 ### What's Changed
