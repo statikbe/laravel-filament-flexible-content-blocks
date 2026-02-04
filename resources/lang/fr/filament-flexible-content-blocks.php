@@ -12,6 +12,8 @@ return [
     'filter.is_published.published_label' => 'Publié',
     'filter.is_published.unpublished_label' => 'Non publié',
 
+    'filter.code.label' => 'Code',
+
     'table_action.publish.publish_notification_success_title' => 'Publié !',
     'table_action.publish.publish_notification_success_msg' => 'La page est maintenant publiée.',
     'table_action.publish.publish_notification_error_title' => 'Erreur',
