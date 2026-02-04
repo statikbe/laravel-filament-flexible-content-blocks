@@ -22,7 +22,7 @@ class ViewPageAction extends Action
             ->color('gray')
             ->icon('heroicon-s-eye')
             ->url(function (Linkable $record, FilamentPage $livewire): string {
-                $locale = app()->getLocale();
+                $locale = $livewire->getActiveActionsLocale() ?? $livewire->getActiveFormsLocale() ?? app()->getLocale();
 
                 return $record->getPreviewUrl($locale);
             })

@@ -7,6 +7,7 @@ return [
     'columns.is_published_state_unpublished' => 'Onbeschikbaar',
     'columns.is_published_state_published_future_info' => 'wordt gepubliceerd op :date',
     'columns.is_published_state_unpublished_future_info' => 'wordt onbeschikbaar op :date',
+    'columns.code' => 'Code',
 
     'filter.is_published.label' => 'Toon gepubliceerden:',
     'filter.is_published.published_label' => 'Gepubliceerd',

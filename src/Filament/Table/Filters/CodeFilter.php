@@ -4,12 +4,15 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Filters;
 
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\CodeField;
 
 class CodeFilter extends SelectFilter
 {
     public static function create(): static
     {
-        return static::make('code')
+        $field = CodeField::FIELD;
+
+        return static::make($field)
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.filter.code.label'))
             ->searchable()
             ->options(function (CodeFilter $filter): array {
@@ -17,18 +20,18 @@ class CodeFilter extends SelectFilter
 
                 return $optionsQuery
                     ->clone()
-                    ->select('code')
-                    ->whereNotNull('code')
-                    ->where('code', '!=', '')
+                    ->select(CodeField::FIELD)
+                    ->whereNotNull(CodeField::FIELD)
+                    ->where(CodeField::FIELD, '!=', '')
                     ->distinct()
-                    ->orderBy('code')
-                    ->pluck('code', 'code')
+                    ->orderBy(CodeField::FIELD)
+                    ->pluck(CodeField::FIELD, CodeField::FIELD)
                     ->toArray();
 
             })
-            ->query(function (Builder $query, array $data): Builder {
+            ->query(function (Builder $query, array $data) use ($field): Builder {
                 if (filled($data['value'])) {
-                    return $query->where('code', $data['value']);
+                    return $query->whereRaw("LOWER($field) LIKE ?", ['%'.strtolower($data['value']).'%']);
                 }
 
                 return $query;

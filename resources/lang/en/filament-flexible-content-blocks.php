@@ -7,6 +7,7 @@ return [
     'columns.is_published_state_unpublished' => 'Unavailable',
     'columns.is_published_state_published_future_info' => 'will be published on :date',
     'columns.is_published_state_unpublished_future_info' => 'will be unavailable on :date',
+    'columns.code' => 'Code',
 
     'filter.is_published.label' => 'Show published:',
     'filter.is_published.published_label' => 'Published',
