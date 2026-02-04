@@ -12,6 +12,8 @@ return [
     'filter.is_published.published_label' => 'Gepubliceerd',
     'filter.is_published.unpublished_label' => 'Niet gepubliceerd',
 
+    'filter.code.label' => 'Code',
+
     'table_action.publish.publish_notification_success_title' => 'Gepubliceerd!',
     'table_action.publish.publish_notification_success_msg' => 'De pagina is nu gepubliceerd.',
     'table_action.publish.publish_notification_error_title' => 'Error',
