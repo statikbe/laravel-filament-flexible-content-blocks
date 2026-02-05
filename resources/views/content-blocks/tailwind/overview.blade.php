@@ -1,11 +1,15 @@
-@if($getOverviewItems())
+@php
+    $overviewItems = $getOverviewItems();
+@endphp
+
+@if ($overviewItems)
     <section class="section {{ $getBackgroundColourClass() }}">
         <div class="container">
             @if($title)
                 <h2>{{$replaceParameters($title)}}</h2>
             @endif
             <div @class(['grid gap-4 ', 'sm:grid-cols-2 md:grid-cols-' . $gridColumns => $gridColumns > 1])>
-                @foreach($getOverviewItems() as $overviewItem)
+                @foreach($overviewItems as $overviewItem)
                     @php
                         /* @var \Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasOverviewAttributes&Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\Linkable $overviewItem */
                     @endphp
