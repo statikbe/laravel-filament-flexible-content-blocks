@@ -65,7 +65,7 @@ class PublishAction extends Action
         $this->icon(function (Model&HasPageAttributes $record) {
             $isPublished = $record->isPublished();
 
-            return $isPublished ? Heroicon::DocumentArrowDown : Heroicon::DocumentArrowUp;
+            return $isPublished ? Heroicon::EyeSlash : Heroicon::GlobeAlt;
         });
         $this->color('gray');
     }
