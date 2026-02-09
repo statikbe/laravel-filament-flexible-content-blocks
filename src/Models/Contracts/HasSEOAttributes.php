@@ -2,8 +2,15 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Models\Contracts;
 
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+
 interface HasSEOAttributes
 {
+    /**
+     * Returns the media-library relation to the hero image.
+     */
+    public function seoImage(): MorphMany;
+
     /**
      * Returns the SEO title
      */
