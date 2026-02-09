@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Models\Contracts;
 
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 
 /**
@@ -10,6 +11,11 @@ use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
  */
 interface HasHeroImageAttributes
 {
+    /**
+     * Returns the media-library relation to the hero image.
+     */
+    public function heroImage(): MorphMany;
+
     /**
      * Adds a hero image to the media library collection
      */
