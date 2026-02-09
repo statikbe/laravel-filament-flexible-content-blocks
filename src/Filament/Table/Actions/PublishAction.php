@@ -70,7 +70,7 @@ class PublishAction extends Action
             if ($page->isPublished()) {
                 return 'heroicon-o-eye-slash';
             } else {
-                return 'heroicon-o-eye';
+                return 'heroicon-o-globe';
             }
         });
         $this->color('secondary');
