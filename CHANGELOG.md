@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.8.2 - 2026-02-09
+
+- Add seoImage(): MorphMany & heroImage(): MorphMany relationship to interface
+- Reduce duplicate queries in overview block
+- fix phpstan errors
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v2.8.1...v2.8.2
+
 ## v2.8.1 - 2026-02-04
 
 * Add CodeColumn and CodeFilter for tables
