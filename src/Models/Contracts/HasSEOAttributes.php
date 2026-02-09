@@ -4,6 +4,11 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Models\Contracts;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
+/**
+ * @property string|null $seo_title
+ * @property string|null $seo_description
+ * @property array|null $seo_keywords
+ */
 interface HasSEOAttributes
 {
     /**
