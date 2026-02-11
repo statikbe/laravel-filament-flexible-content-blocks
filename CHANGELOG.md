@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v2.8.5 - 2026-02-11
+
+Add getter for page title, to make this more extendable
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v2.8.4...v2.8.5
+
 ## v2.8.4 - 2026-02-10
 
 Fix icon on publish action
