@@ -370,16 +370,16 @@ You can use the SEO library of your preference to render the SEO tags on the pag
 
 Do the step below to ensure that tailwind will pick up the css classes used by the flexible content blocks components.
 
-1. In the tailwind config of your filament back-end, add the following lines to the `content` array:
+1. In the tailwind CSS file (probably in `resources/css/filament/theme.css`) of your filament back-end, add the following line:
 ```
-'./config/filament-flexible-content-blocks.php',
+@source '../../../../resources/views/filament';
 ```
 
-2. Likewise, in the tailwind config of your front-end, add the following lines to the `content` array:
+2. Likewise, in the CSS of your front-end, add the following lines:
 
 ```
-'./vendor/statikbe/laravel-filament-flexible-content-blocks/**/*.blade.php',
-'./config/filament-flexible-content-blocks.php',
+@source "../../vendor/statikbe/laravel-filament-flexible-content-blocks/**/*.blade.php";
+@source "../../config/filament-flexible-content-blocks.php";
 ```
 
 ## AI features
