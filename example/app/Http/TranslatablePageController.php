@@ -23,7 +23,7 @@ class TranslatablePageController extends Controller
 
         return view('translatable-pages.index', [
             'page' => $page,
-            'title' => $page->title,
+            'title' => $page->getTitle(),
         ]);
     }
 }

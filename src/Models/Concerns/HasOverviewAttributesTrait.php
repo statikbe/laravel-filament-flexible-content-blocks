@@ -33,8 +33,8 @@ trait HasOverviewAttributesTrait
 
     public function getOverviewTitle(): ?string
     {
-        if (! $this->overview_title && isset($this->title)) {
-            return $this->title;
+        if (! $this->overview_title && $this->getTitle()) {
+            return $this->getTitle();
         }
         if (! $this->overview_title && isset($this->seo_title)) {
             return $this->seo_title;

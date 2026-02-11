@@ -25,6 +25,14 @@ trait HasPageAttributesTrait
     }
 
     /**
+     * Returns the title of the page
+     */
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function isPublished(): bool

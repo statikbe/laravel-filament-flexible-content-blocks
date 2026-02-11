@@ -14,6 +14,11 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 interface HasPageAttributes
 {
     /**
+     * Returns the title of the page
+     */
+    public function getTitle(): ?string;
+
+    /**
      * Returns whether the page is published or visible, based on the begin and end publishing dates.
      */
     public function isPublished(): bool;

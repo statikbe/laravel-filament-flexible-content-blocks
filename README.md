@@ -353,7 +353,7 @@ title and full screen image, and the `<x-flexible-content-blocks>` component ren
 __Note:__ The `x-flexible-hero` component requires [Alpine.js](https://alpinejs.dev/).  
 
 ```html
-<x-layouts.flexible title="{{ $page->title }}" wide="true">
+<x-layouts.flexible title="{{ $page->getTitle() }}" wide="true">
     <x-flexible-hero :page="$page" />
     <div>
         <x-flexible-content-blocks :page="$page">
