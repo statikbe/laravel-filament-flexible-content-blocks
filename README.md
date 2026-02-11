@@ -38,6 +38,11 @@ correct stylesheet. See [the preview block configuration](documentation%2Fconfig
 :rocket: For a complete, out-of-the-box, content management solution, check out our new [Filament Flexible Content Block Pages](https://github.com/statikbe/laravel-filament-flexible-content-block-pages) package with page management,
 a menu builder, tag management and many SEO features.
 
+## Versions
+
+- For Filament v3 use `statikbe/laravel-filament-flexible-content-blocks:^3.0`
+- For Filament v4 & v5 use `statikbe/laravel-filament-flexible-content-blocks:^4.0`
+
 ## Upgrades
 
 ### Upgrade to v2
@@ -370,7 +375,7 @@ You can use the SEO library of your preference to render the SEO tags on the pag
 
 Do the step below to ensure that tailwind will pick up the css classes used by the flexible content blocks components.
 
-1. In the tailwind CSS file (probably in `resources/css/filament/theme.css`) of your filament back-end, add the following line:
+1. In the tailwind CSS file (probably in `resources/css/filament/admin/theme.css`) of your filament back-end, add the following line:
 ```
 @source '../../../../resources/views/filament';
 ```

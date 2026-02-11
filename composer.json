@@ -18,21 +18,19 @@
         {
             "name": "Sten Govaerts",
             "email": "sten@statik.be",
+            "homepage": "https://github.com/sten",
             "role": "Developer"
         },
         {
-            "name": "Stijn Elskens",
-            "email": "stijn@statik.be",
+            "name": "Seppe Van Besauw",
+            "email": "seppe@statik.be",
+            "homepage": "https://github.com/sevbesau",
             "role": "Developer"
         },
         {
             "name": "Kristof Serré",
             "email": "kristof@statik.be",
-            "role": "Developer"
-        },
-        {
-            "name": "Kobe Christiaensen",
-            "email": "kobe@statik.be",
+            "homepage": "https://github.com/kristofser",
             "role": "Developer"
         }
     ],
