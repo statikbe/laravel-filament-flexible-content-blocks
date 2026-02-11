@@ -13,6 +13,3 @@ parameters:
     ignoreErrors:
         # Ignore unused trait warnings - these traits are meant for package consumers
         - '#^Trait .+ is used zero times and is not analysed\.$#'
-        -
-            identifier: larastan.noEnvCallsOutsideOfConfig
-            path: src/FilamentFlexibleContentBlocksServiceProvider.php
