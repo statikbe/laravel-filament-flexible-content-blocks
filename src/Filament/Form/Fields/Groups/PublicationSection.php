@@ -2,7 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Groups;
 
-use Filament\Forms\Components\Section;
+use Filament\Schemas\Components\Section;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\PublishingBeginsAtField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\PublishingEndsAtField;
 

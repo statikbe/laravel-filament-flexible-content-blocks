@@ -18,31 +18,29 @@
         {
             "name": "Sten Govaerts",
             "email": "sten@statik.be",
+            "homepage": "https://github.com/sten",
             "role": "Developer"
         },
         {
-            "name": "Stijn Elskens",
-            "email": "stijn@statik.be",
+            "name": "Seppe Van Besauw",
+            "email": "seppe@statik.be",
+            "homepage": "https://github.com/sevbesau",
             "role": "Developer"
         },
         {
             "name": "Kristof Serré",
             "email": "kristof@statik.be",
-            "role": "Developer"
-        },
-        {
-            "name": "Kobe Christiaensen",
-            "email": "kobe@statik.be",
+            "homepage": "https://github.com/kristofser",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.2",
         "dereuromark/media-embed": "^0.6",
-        "filament/filament": "^3.2",
-        "filament/spatie-laravel-media-library-plugin": "^3.2",
-        "filament/spatie-laravel-translatable-plugin": "^3.2",
-        "illuminate/contracts": "^9.0|^10.0|^11.0|^12.0",
+        "filament/filament": "^4.0",
+        "filament/spatie-laravel-media-library-plugin": "^4.0",
+        "lara-zeus/spatie-translatable": "^1.0",
+        "illuminate/contracts": "^11.28|^12.0",
         "openai-php/laravel": "^0.11.0",
         "spatie/laravel-package-tools": "^1.13.0",
         "spatie/laravel-sluggable": "^3.4",
@@ -50,9 +48,10 @@
         "spatie/laravel-medialibrary": "^11.0"
     },
     "require-dev": {
+        "filament/upgrade": "^4.0",
+        "larastan/larastan": "^2.0|^3.0",
         "laravel/pint": "^1.0",
         "nunomaduro/collision": "^8.4",
-        "larastan/larastan": "^2.0|^3.0",
         "orchestra/testbench": "^9.0|^10.0",
         "pestphp/pest": "^3.0",
         "pestphp/pest-plugin-arch": "^3.0",

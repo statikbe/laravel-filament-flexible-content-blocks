@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Columns;
 
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Model;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasPageAttributes;
@@ -23,15 +24,9 @@ class PublishedColumn extends TextColumn
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.columns.is_published'))
             ->getStateUsing(function (Model $record) {
                 /** @var Model&HasPageAttributes $record */
-                if ($record->isPublished()) {
-                    return static::STATE_PUBLISHED;
-                } else {
-                    return static::STATE_UNPUBLISHED;
-                }
+                return $record->isPublished() ? static::STATE_PUBLISHED : static::STATE_UNPUBLISHED;
             })
-            ->formatStateUsing(function (TextColumn $column, string $state) use ($options): string {
-                /** @var Model&HasPageAttributes $record */
-                $record = $column->getRecord();
+            ->formatStateUsing(function (string $state, Model&HasPageAttributes $record) use ($options): string {
                 $formattedState = $options[$state];
                 if ($record->willBecomePublished()) {
                     $publishingBeginsAt = $record->getAttribute('publishing_begins_at');
@@ -51,8 +46,8 @@ class PublishedColumn extends TextColumn
                 return $formattedState;
             })
             ->icons([
-                'heroicon-o-eye' => static::STATE_PUBLISHED,
-                'heroicon-o-eye-slash' => static::STATE_UNPUBLISHED,
+                static::STATE_PUBLISHED => Heroicon::Eye,
+                static::STATE_UNPUBLISHED => Heroicon::EyeSlash,
             ])
             ->colors([
                 'success' => static::STATE_PUBLISHED,

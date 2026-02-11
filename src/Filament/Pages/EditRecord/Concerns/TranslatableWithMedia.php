@@ -2,10 +2,11 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Pages\EditRecord\Concerns;
 
-use Filament\Resources\Pages\EditRecord\Concerns\Translatable;
+use BadMethodCallException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\ValidationException;
+use LaraZeus\SpatieTranslatable\Resources\Pages\EditRecord\Concerns\Translatable;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasTranslatableMedia;
 
 trait TranslatableWithMedia
@@ -111,7 +112,7 @@ trait TranslatableWithMedia
         if (method_exists($this->getRecord(), 'getTranslatableMediaCollections')) {
             $translatableAttributes = array_merge($translatableAttributes, $this->getRecord()->getTranslatableMediaCollections());
         } else {
-            throw new \BadMethodCallException('The model does not implement the HasTranslatableMedia interface. If this is not implemented translated images will not change when the language switch changes.');
+            throw new BadMethodCallException('The model does not implement the HasTranslatableMedia interface. If this is not implemented translated images will not change when the language switch changes.');
         }
 
         return $translatableAttributes;

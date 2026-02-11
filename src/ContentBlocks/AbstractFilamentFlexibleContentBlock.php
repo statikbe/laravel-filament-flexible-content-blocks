@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
+use Filament\Forms\Components\RichEditor\RichContentRenderer;
 use Illuminate\Support\Str;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocksServiceProvider;
@@ -26,6 +27,11 @@ abstract class AbstractFilamentFlexibleContentBlock extends AbstractContentBlock
     public static function getContentSummary(array $state): ?string
     {
         return '';
+    }
+
+    public static function convertRichTextToText(mixed $value): ?string
+    {
+        return is_array($value) ? RichContentRenderer::make($value)->toText() : $value;
     }
 
     public static function getName(): string

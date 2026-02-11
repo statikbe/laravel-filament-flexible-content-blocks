@@ -3,8 +3,10 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Actions;
 
 use Carbon\Carbon;
+use Exception;
+use Filament\Actions\Action;
 use Filament\Notifications\Notification;
-use Filament\Tables\Actions\Action;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasPageAttributes;
@@ -18,16 +20,14 @@ class PublishAction extends Action
 
     public function setUp(): void
     {
-        $this->action(function () {
+        $this->action(function (Model&HasPageAttributes $record) {
             try {
-                /** @var Model&HasPageAttributes $page */
-                $page = $this->getRecord();
-                if (! $page->isPublished()) {
-                    $page->setAttribute('publishing_begins_at', Carbon::now());
-                    if ($page->wasUnpublished()) {
-                        $page->setAttribute('publishing_ends_at', null);
+                if (! $record->isPublished()) {
+                    $record->setAttribute('publishing_begins_at', Carbon::now());
+                    if ($record->wasUnpublished()) {
+                        $record->setAttribute('publishing_ends_at', null);
                     }
-                    $page->save();
+                    $record->save();
 
                     Notification::make()
                         ->success()
@@ -35,8 +35,8 @@ class PublishAction extends Action
                         ->body(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.table_action.publish.publish_notification_success_msg'))
                         ->send();
                 } else {
-                    $page->setAttribute('publishing_ends_at', Carbon::now());
-                    $page->save();
+                    $record->setAttribute('publishing_ends_at', Carbon::now());
+                    $record->save();
 
                     Notification::make()
                         ->success()
@@ -44,7 +44,7 @@ class PublishAction extends Action
                         ->body(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.table_action.publish.unpublish_notification_success_msg'))
                         ->send();
                 }
-            } catch (\Exception $ex) {
+            } catch (Exception $ex) {
                 Log::error($ex);
                 Notification::make()
                     ->danger()
@@ -55,24 +55,18 @@ class PublishAction extends Action
 
             return response();
         });
-        $this->label(function () {
-            /** @var Model&HasPageAttributes $page */
-            $page = $this->getRecord();
-            if ($page->isPublished()) {
-                return trans('filament-flexible-content-blocks::filament-flexible-content-blocks.table_action.publish.unpublish_lbl');
-            } else {
-                return trans('filament-flexible-content-blocks::filament-flexible-content-blocks.table_action.publish.publish_lbl');
-            }
+        $this->label(function (Model&HasPageAttributes $record) {
+            $isPublished = $record->isPublished();
+
+            return $isPublished
+                ? trans('filament-flexible-content-blocks::filament-flexible-content-blocks.table_action.publish.unpublish_lbl')
+                : trans('filament-flexible-content-blocks::filament-flexible-content-blocks.table_action.publish.publish_lbl');
         });
-        $this->icon(function () {
-            /** @var Model&HasPageAttributes $page */
-            $page = $this->getRecord();
-            if ($page->isPublished()) {
-                return 'heroicon-o-eye-slash';
-            } else {
-                return 'heroicon-o-globe-alt';
-            }
+        $this->icon(function (Model&HasPageAttributes $record) {
+            $isPublished = $record->isPublished();
+
+            return $isPublished ? Heroicon::EyeSlash : Heroicon::GlobeAlt;
         });
-        $this->color('secondary');
+        $this->color('gray');
     }
 }

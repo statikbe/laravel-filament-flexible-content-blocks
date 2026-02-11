@@ -2,11 +2,12 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Exceptions;
 
+use Exception;
 use Illuminate\Database\Eloquent\Model;
 
-class LinkableModelNotFoundException extends \Exception
+class LinkableModelNotFoundException extends Exception
 {
-    private ?Model $record = null;
+    private Model $record;
 
     public static function create(string $message)
     {

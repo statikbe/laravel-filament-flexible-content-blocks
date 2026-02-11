@@ -2,11 +2,11 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
 
-use Filament\Forms\ComponentContainer;
-use Filament\Forms\Components\Actions\Action;
+use Filament\Actions\Action;
 use Filament\Forms\Components\Builder;
 use Filament\Resources\Pages\Page;
-use Filament\Support\Enums\MaxWidth;
+use Filament\Schemas\Schema;
+use Filament\Support\Enums\Width;
 use Livewire\Component as Livewire;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 
@@ -42,7 +42,7 @@ class ContentBlocksField extends Builder
                 areInteractive: FilamentFlexibleBlocksConfig::blockPreviewsAreInteractive())
             ->editAction(function (Action $action) {
                 $action->slideOver()
-                    ->modalWidth(MaxWidth::FiveExtraLarge);
+                    ->modalWidth(Width::FiveExtraLarge);
             })
             ->blockIcons()
             ->blockNumbers(false)
@@ -70,7 +70,7 @@ class ContentBlocksField extends Builder
      * as the block in the other translation.
      * {@inheritDoc}
      */
-    public function getChildComponentContainers(bool $withHidden = false): array
+    public function getChildSchemas(bool $withHidden = false): array
     {
         return collect($this->getState())
             ->filter(function ($itemData): bool {
@@ -78,9 +78,9 @@ class ContentBlocksField extends Builder
                 return is_array($itemData) && array_key_exists('type', $itemData) && $this->hasBlock($itemData['type']);
             })
             ->map(
-                fn (array $itemData, $itemIndex): ComponentContainer => $this
+                fn (array $itemData, $itemIndex): Schema => $this
                     ->getBlock($itemData['type'])
-                    ->getChildComponentContainer()
+                    ->getChildSchema()
                     ->statePath("{$itemIndex}.data")
                     ->inlineLabel(false)
                     ->getClone(),

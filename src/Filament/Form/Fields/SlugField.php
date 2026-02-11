@@ -3,12 +3,13 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
 
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Get;
-use Filament\Forms\Set;
 use Filament\Resources\Pages\Page;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\HtmlString;
 use Illuminate\Support\Str;
+use Spatie\Sluggable\HasSlug;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Concerns\HasTranslatableHint;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\Linkable;
 
@@ -38,7 +39,7 @@ class SlugField extends TextInput
             })
             // make the slug required on edit. on create, the slug is not required so if kept blank a slug is generated.
             ->required(fn (?Model $record): bool => $record && $record->getKey() > 0)
-            // hide slug field on creation, because the spatie sluggable will overwrite it anyways:
+            // hide the slug field on creation, because the spatie sluggable will overwrite it anyways:
             ->hidden(function (?Model $record, Page $livewire, Get $get, Set $set): bool {
                 if (empty($record)) {
                     return true;
@@ -46,7 +47,7 @@ class SlugField extends TextInput
 
                 if (isset($record->translatable) && in_array(static::FIELD, $record->translatable)) {
                     if (method_exists($record, 'getTranslation')) {
-                        $locale = $livewire->getActiveFormsLocale();
+                        $locale = $livewire->getActiveSchemaLocale();
 
                         $noSlug = empty($record->getTranslation(static::FIELD, $locale, false));
                         // update translated slug in form:
@@ -66,14 +67,14 @@ class SlugField extends TextInput
     protected static function getUrlWithReplacementSlug(Page $livewire): string
     {
         $linkModel = $livewire->getResource()::getModel();
-        /* @var Linkable $link */
+        /* @var Linkable|HasSlug $link */
         $link = new $linkModel;
 
         if (method_exists($link, 'setTranslation')) {
-            $locale = $livewire->getActiveFormsLocale();
-            $link->setTranslation('slug', $locale, static::URL_REPLACEMENT_SLUG);
+            $locale = $livewire->getActiveSchemaLocale();
+            $link->setTranslation(static::FIELD, $locale, static::URL_REPLACEMENT_SLUG);
         } else {
-            $link->slug = static::URL_REPLACEMENT_SLUG;
+            $link->{static::FIELD} = static::URL_REPLACEMENT_SLUG;
             $locale = app()->getLocale();
         }
 

@@ -2,7 +2,10 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
-use Filament\Forms\Components\Grid;
+use Closure;
+use Filament\Schemas\Components\Grid;
+use Filament\Support\Icons\Heroicon;
+use Illuminate\Database\Eloquent\Model;
 use MediaEmbed\MediaEmbed;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
@@ -22,7 +25,7 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
     /**
      * Create a new component instance.
      */
-    public function __construct(HasContentBlocks&HasMedia $record, ?array $blockData)
+    public function __construct(Model&HasContentBlocks&HasMedia $record, ?array $blockData)
     {
         parent::__construct($record, $blockData);
 
@@ -39,15 +42,15 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
         return $state['embed_url'];
     }
 
-    public static function getIcon(): string
+    public static function getIcon(): Heroicon|string
     {
-        return 'heroicon-o-video-camera';
+        return Heroicon::VideoCamera;
     }
 
     /**
      * {@inheritDoc}
      */
-    protected static function makeFilamentSchema(): array|\Closure
+    protected static function makeFilamentSchema(): array|Closure
     {
         return [
             Grid::make(2)->schema([
@@ -55,7 +58,7 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
                     ->media()
                     ->label(static::getFieldLabel('embed_url'))
                     ->hint(static::getFieldLabel('help'))
-                    ->hintIcon('heroicon-s-question-mark-circle')
+                    ->hintIcon(Heroicon::QuestionMarkCircle)
                     ->required(),
                 BlockSpatieMediaLibraryFileUpload::make('overlay_image')
                     ->collection(static::getName())

@@ -2,8 +2,8 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Groups;
 
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Section;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\HeroImageCopyrightField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\HeroImageField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\HeroImageTitleField;
@@ -28,8 +28,9 @@ class HeroImageSection extends Section
         return static::make($enableVideoUrlField ?
                 trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.hero_image_or_video_section_title') :
                 trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.hero_image_section_title'))
+            ->columnSpanFull()
             ->schema([
-                Grid::make(2)->schema($fields),
+                Grid::make(2)->columnSpanFull()->schema($fields),
             ]);
     }
 }

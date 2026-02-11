@@ -2,7 +2,9 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks\Exceptions;
 
-class CallToActionNotDefinedException extends \Exception
+use Exception;
+
+class CallToActionNotDefinedException extends Exception
 {
     public static function create(string $message)
     {

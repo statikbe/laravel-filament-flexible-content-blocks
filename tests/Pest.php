@@ -2,6 +2,7 @@
 
 use Filament\Facades\Filament;
 use Illuminate\Support\Facades\Storage;
+use Orchestra\Testbench\Factories\UserFactory;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\CallToActionBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\HtmlBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\ImageBlock;
@@ -36,7 +37,7 @@ function setupFilamentPanel(): void
 {
     Filament::setCurrentPanel(Filament::getPanel('admin'));
 
-    $user = \Orchestra\Testbench\Factories\UserFactory::new()->create();
+    $user = UserFactory::new()->create();
     test()->actingAs($user);
 }
 

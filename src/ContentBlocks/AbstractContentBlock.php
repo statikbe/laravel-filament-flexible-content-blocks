@@ -4,6 +4,9 @@ namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
 use Closure;
 use Filament\Forms\Components\Builder\Block;
+use Filament\Support\Icons\Heroicon;
+use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\View\Component;
 use Spatie\MediaLibrary\HasMedia;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Builder\ContentBlockWithPreview;
@@ -24,7 +27,7 @@ abstract class AbstractContentBlock extends Component
 
     protected static Block $block;
 
-    public HasContentBlocks&HasMedia $record;
+    public Model&HasContentBlocks&HasMedia $record;
 
     public ?array $blockData;
 
@@ -33,7 +36,7 @@ abstract class AbstractContentBlock extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(HasContentBlocks&HasMedia $record, ?array $blockData)
+    public function __construct(Model&HasContentBlocks&HasMedia $record, ?array $blockData)
     {
         $this->record = $record;
         $this->blockData = $blockData;
@@ -55,7 +58,7 @@ abstract class AbstractContentBlock extends Component
     /**
      * Get the heroicon of this block
      */
-    abstract public static function getIcon(): string;
+    abstract public static function getIcon(): Heroicon|string;
 
     /**
      * Get translated label of this block
@@ -96,7 +99,7 @@ abstract class AbstractContentBlock extends Component
      */
     protected static function getFilamentBlockSchema(): Closure
     {
-        return function (\Filament\Forms\Components\Component $component) {
+        return function (\Filament\Schemas\Components\Component $component) {
             return array_merge([
                 // keep track of block id:
                 BlockIdField::create(),
@@ -108,14 +111,14 @@ abstract class AbstractContentBlock extends Component
     /**
      * Returns the block's form schema consisting of an list of Filament form components or a closure that returns such a list.
      *
-     * @return array<\Filament\Forms\Components\Component>|Closure
+     * @return array<\Filament\Schemas\Components\Component>|Closure
      */
     abstract protected static function makeFilamentSchema(): array|Closure;
 
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
+     * @return View|Closure|string
      */
     abstract public function render();
 

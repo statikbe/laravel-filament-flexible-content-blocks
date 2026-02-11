@@ -3,6 +3,7 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Concerns;
 
 use Filament\Forms\Components\Field;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 
@@ -23,7 +24,7 @@ trait HasTranslatableHint
 
         $this->hintIcon = function (?Model $record, Field $component) {
             if ($record && isset($record->translatable) && in_array($component->getName(), $record->translatable)) {
-                return 'heroicon-o-language';
+                return Heroicon::Language;
             }
 
             return null;

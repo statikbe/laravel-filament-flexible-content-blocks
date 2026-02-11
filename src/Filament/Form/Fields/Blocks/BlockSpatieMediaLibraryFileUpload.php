@@ -5,7 +5,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks;
 use Closure;
 use Filament\Forms\Components\Concerns\CanBeValidated;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Forms\Get;
+use Filament\Schemas\Components\Utilities\Get;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Features\SupportFileUploads\TemporaryUploadedFile;
@@ -30,6 +30,9 @@ class BlockSpatieMediaLibraryFileUpload extends SpatieMediaLibraryFileUpload
         parent::setUp();
 
         self::addImageEditor($this);
+
+        // TODO: extract to config option
+        $this->disk('public');
 
         $this->customProperties(function (Get $get) {
             return ['block' => $get(BlockIdField::FIELD)];

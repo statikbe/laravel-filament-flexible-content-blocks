@@ -3,9 +3,11 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
 use Closure;
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Grid;
+use Filament\Support\Icons\Heroicon;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
@@ -44,7 +46,7 @@ class CallToActionBlock extends AbstractFilamentFlexibleContentBlock
     /* @var CallToActionData[] $callToActions */
     public ?array $callToActions;
 
-    public function __construct(HasContentBlocks&HasMedia $record, ?array $blockData)
+    public function __construct(Model&HasContentBlocks&HasMedia $record, ?array $blockData)
     {
         parent::__construct($record, $blockData);
 
@@ -57,9 +59,9 @@ class CallToActionBlock extends AbstractFilamentFlexibleContentBlock
         $this->setBlockStyle($blockData);
     }
 
-    public static function getIcon(): string
+    public static function getIcon(): Heroicon|string
     {
-        return 'heroicon-o-cursor-arrow-rays';
+        return Heroicon::CursorArrowRays;
     }
 
     public static function getNameSuffix(): string
@@ -69,7 +71,7 @@ class CallToActionBlock extends AbstractFilamentFlexibleContentBlock
 
     public static function getContentSummary(array $state): ?string
     {
-        return $state['title'] ?? $state['text'];
+        return static::convertRichTextToText($state['title'] ?? $state['text']);
     }
 
     /**

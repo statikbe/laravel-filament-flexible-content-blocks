@@ -56,14 +56,14 @@ interface HasPageAttributes
     /**
      * Returns the formatted timestamp of the beginning of the publication.
      *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute<string, never>
+     * @return Attribute<string, never>
      */
     public function publishingBeginsAtFormatted(): Attribute;
 
     /**
      * Returns the formatted timestamp of the end of the publication.
      *
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute<string, never>
+     * @return Attribute<string, never>
      */
     public function publishingEndsAtFormatted(): Attribute;
 }

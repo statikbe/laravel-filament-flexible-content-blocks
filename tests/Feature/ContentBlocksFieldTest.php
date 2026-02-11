@@ -3,31 +3,38 @@
 use Filament\Facades\Filament;
 use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Builder\Block;
+use Filament\Resources\Pages\Page as FilamentPage;
 use Livewire\Livewire;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\ImageBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\QuoteBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextImageBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\VideoBlock;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Actions\ViewPageAction;
 use Statikbe\FilamentFlexibleContentBlocks\Tests\Models\Page;
-use Statikbe\FilamentFlexibleContentBlocks\Tests\Resources\PageResource;
+use Statikbe\FilamentFlexibleContentBlocks\Tests\Models\TranslatablePage;
+use Statikbe\FilamentFlexibleContentBlocks\Tests\Resources\PageResource\Pages\CreatePage;
 
 use function Pest\Laravel\assertDatabaseHas;
 
 beforeEach(function () {
     setupFilamentPanel();
     setupDefaultContentBlocks([
-        \Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextImageBlock::class,
-        \Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\ImageBlock::class,
-        \Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\VideoBlock::class,
-        \Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\QuoteBlock::class,
+        TextImageBlock::class,
+        ImageBlock::class,
+        VideoBlock::class,
+        QuoteBlock::class,
     ]);
 });
 
 it('can render content blocks field in create page', function () {
-    $component = Livewire::test(PageResource\Pages\CreatePage::class);
+    $component = Livewire::test(CreatePage::class);
 
     $component->assertFormExists();
     $component->assertFormFieldExists('content_blocks');
 });
 
 it('can create a page with empty content blocks', function () {
-    Livewire::test(PageResource\Pages\CreatePage::class)
+    Livewire::test(CreatePage::class)
         ->fillForm([
             'title' => 'Test Page',
             'slug' => 'test-page',
@@ -49,7 +56,7 @@ it('can create a page with empty content blocks', function () {
 });
 
 it('can create a page with text-image content block', function () {
-    Livewire::test(PageResource\Pages\CreatePage::class)
+    Livewire::test(CreatePage::class)
         ->fillForm([
             'title' => 'Test Page Block',
             'slug' => 'test-page-block',
@@ -84,7 +91,7 @@ it('can create a page with text-image content block', function () {
 });
 
 it('can create a page with multiple content blocks', function () {
-    Livewire::test(PageResource\Pages\CreatePage::class)
+    Livewire::test(CreatePage::class)
         ->fillForm([
             'title' => 'Test Multiple',
             'slug' => 'test-multiple',
@@ -131,7 +138,7 @@ it('can create a page with multiple content blocks', function () {
 // Filament Builder features, not package-specific functionality
 
 it('content blocks field is a builder component', function () {
-    $component = Livewire::test(PageResource\Pages\CreatePage::class);
+    $component = Livewire::test(CreatePage::class);
 
     // Verify the form exists and has the content_blocks field
     $component->assertFormExists();
@@ -143,7 +150,7 @@ it('content blocks field is a builder component', function () {
 
 it('content blocks builder has multiple block types available', function () {
     // Test that we can add different block types through the form
-    Livewire::test(PageResource\Pages\CreatePage::class)
+    Livewire::test(CreatePage::class)
         ->fillForm([
             'title' => 'Test Multiple Block Types',
             'slug' => 'test-multiple-block-types',
@@ -199,4 +206,62 @@ it('preserves content blocks data integrity', function () {
     // Verify HTML and special characters are preserved
     expect($contentBlocks[0]['data']['text'])->toBe('<p>Rich <strong>HTML</strong> content</p>')
         ->and($contentBlocks[1]['data']['quote'])->toBe('Quote with "special" characters & symbols');
+});
+
+/*
+|--------------------------------------------------------------------------
+| ViewPageAction Tests - Helper Functions
+|--------------------------------------------------------------------------
+*/
+
+function createTranslatablePageWithSlugs(array $slugs = ['en' => 'about-us', 'nl' => 'over-ons', 'fr' => 'a-propos']): TranslatablePage
+{
+    return TranslatablePage::factory()->create([
+        'title' => array_map(fn ($slug) => ucwords(str_replace('-', ' ', $slug)), $slugs),
+        'slug' => $slugs,
+    ]);
+}
+
+function createViewPageActionWithLocale($record, ?string $activeLocale): ViewPageAction
+{
+    $livewire = Mockery::mock(FilamentPage::class);
+    $livewire->shouldReceive('getActiveSchemaLocale')->andReturn($activeLocale);
+
+    return ViewPageAction::make()
+        ->record($record)
+        ->livewire($livewire);
+}
+
+/*
+|--------------------------------------------------------------------------
+| ViewPageAction Tests
+|--------------------------------------------------------------------------
+*/
+
+it('can resolve view page action url with correct slug for active schema locale', function () {
+    // Arrange
+    $record = createTranslatablePageWithSlugs();
+    $action = createViewPageActionWithLocale($record, 'fr');
+
+    // Act
+    $url = $action->getUrl();
+
+    // Assert - URL should contain the FRENCH slug
+    expect($url)->toContain('a-propos')
+        ->and($url)->not->toContain('about-us')
+        ->and($url)->not->toContain('over-ons');
+});
+
+it('can resolve view page action url with fallback to app locale when no active schema locale', function () {
+    // Arrange
+    $record = createTranslatablePageWithSlugs();
+    app()->setLocale('nl');
+    $action = createViewPageActionWithLocale($record, null);
+
+    // Act
+    $url = $action->getUrl();
+
+    // Assert - should fallback to app locale 'nl' and use Dutch slug
+    expect($url)->toContain('over-ons')
+        ->and($url)->not->toContain('about-us');
 });

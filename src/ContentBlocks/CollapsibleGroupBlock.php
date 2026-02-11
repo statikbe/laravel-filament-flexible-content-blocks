@@ -7,6 +7,8 @@ use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Support\Icons\Heroicon;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Spatie\MediaLibrary\HasMedia;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBackgroundColour;
@@ -46,7 +48,7 @@ class CollapsibleGroupBlock extends AbstractFilamentFlexibleContentBlock
 
     public Collection $collapsibleItems;
 
-    public function __construct(HasMedia&HasContentBlocks $record, ?array $blockData)
+    public function __construct(Model&HasMedia&HasContentBlocks $record, ?array $blockData)
     {
         parent::__construct($record, $blockData);
 
@@ -74,12 +76,12 @@ class CollapsibleGroupBlock extends AbstractFilamentFlexibleContentBlock
 
     public static function getContentSummary(array $state): ?string
     {
-        return $state[static::GROUP_TITLE_FIELD] ?? $state[static::GROUP_INTRO_FIELD];
+        return static::convertRichTextToText($state[static::GROUP_TITLE_FIELD] ?? $state[static::GROUP_INTRO_FIELD]);
     }
 
-    public static function getIcon(): string
+    public static function getIcon(): Heroicon|string
     {
-        return 'heroicon-o-bars-arrow-down';
+        return Heroicon::BarsArrowDown;
     }
 
     protected static function makeFilamentSchema(): array|Closure
@@ -123,5 +125,20 @@ class CollapsibleGroupBlock extends AbstractFilamentFlexibleContentBlock
     protected static function getItemTextToolbarButtons(): array
     {
         return static::ENABLED_TOOLBAR_BUTTONS;
+    }
+
+    public function getSearchableContent(): array
+    {
+        $searchable = [];
+
+        $this->addSearchableContent($searchable, $this->groupTitle);
+        $this->addSearchableContent($searchable, $this->groupIntro);
+
+        foreach ($this->collapsibleItems as $item) {
+            $this->addSearchableContent($searchable, $item->title);
+            $this->addSearchableContent($searchable, $item->text);
+        }
+
+        return $searchable;
     }
 }

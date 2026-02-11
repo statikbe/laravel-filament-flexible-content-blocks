@@ -3,8 +3,10 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Type;
 
 use Closure;
+use Exception;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\Select;
+use Filament\Resources\Resource;
 use Illuminate\Database\Connection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -16,9 +18,9 @@ use function Filament\Support\get_model_label;
 /**
  * Selectable type for different models, where different types of models or data can be selected.
  * This class helps with implementing the necessary functionality for a Select component.
- * For instance, for CTAs.
+ * For instance for CTAs.
  *
- * In case the type or model needs a different label in the Select component, you can overwrite
+ * In case, the type or model needs a different label in the Select component, you can overwrite
  * `getOptionLabelFromRecordUsing` with a custom callback.
  */
 abstract class AbstractType
@@ -98,7 +100,10 @@ abstract class AbstractType
             $keyName = $query->getModel()->getKeyName();
 
             if ($this->hasOptionLabelFromRecordUsingCallback()) {
-                $locale = $component->getLivewire()->getActiveFormsLocale();
+                $locale = null;
+                if (method_exists($component->getLivewire(), 'getActiveSchemaLocale')) {
+                    $locale = $component->getLivewire()->getActiveSchemaLocale();
+                }
 
                 return $query
                     ->get()
@@ -133,7 +138,10 @@ abstract class AbstractType
             $keyName = $query->getModel()->getKeyName();
 
             if ($this->hasOptionLabelFromRecordUsingCallback()) {
-                $locale = $component->getLivewire()->getActiveFormsLocale();
+                $locale = null;
+                if (method_exists($component->getLivewire(), 'getActiveSchemaLocale')) {
+                    $locale = $component->getLivewire()->getActiveSchemaLocale();
+                }
 
                 return $query
                     ->get()
@@ -166,7 +174,10 @@ abstract class AbstractType
             }
 
             if ($this->hasOptionLabelFromRecordUsingCallback()) {
-                $locale = $component->getLivewire()->getActiveFormsLocale();
+                $locale = null;
+                if (method_exists($component->getLivewire(), 'getActiveSchemaLocale')) {
+                    $locale = $component->getLivewire()->getActiveSchemaLocale();
+                }
 
                 return $this->getOptionLabelFromRecord($record, $locale);
             }
@@ -265,6 +276,7 @@ abstract class AbstractType
         }
 
         if ($resource = Filament::getModelResource($this->getModel())) {
+            /** @var class-string<resource> $resource */
             return Str::ucfirst($resource::getModelLabel());
         }
 
@@ -285,7 +297,7 @@ abstract class AbstractType
     public function getTitleColumnName(): string
     {
         if (blank($this->titleColumnName)) {
-            throw new \Exception("Type [{$this->getModel()}] must have a [titleColumnName()] set.");
+            throw new Exception("Type [{$this->getModel()}] must have a [titleColumnName()] set.");
         }
 
         return $this->titleColumnName;

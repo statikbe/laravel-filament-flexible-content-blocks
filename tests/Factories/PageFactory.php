@@ -4,10 +4,11 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Tests\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Statikbe\FilamentFlexibleContentBlocks\Tests\Models\Page;
 
 class PageFactory extends Factory
 {
-    protected $model = \Statikbe\FilamentFlexibleContentBlocks\Tests\Models\Page::class;
+    protected $model = Page::class;
 
     public function definition(): array
     {
@@ -16,16 +17,16 @@ class PageFactory extends Factory
         return [
             'title' => $title,
             'slug' => Str::slug($title),
-            'intro' => $this->faker->paragraph(),
+            'intro' => '<p>'.$this->faker->paragraph().'</p>',
             'hero_image_copyright' => $this->faker->name(),
             'hero_image_title' => $this->faker->sentence(3),
             'publishing_begins_at' => now()->subDay(),
             'publishing_ends_at' => null,
             'seo_title' => $this->faker->sentence(6),
-            'seo_description' => $this->faker->paragraph(),
+            'seo_description' => $this->faker->paragraph(), // Textarea, not RichEditor
             'seo_keywords' => json_encode([$this->faker->word(), $this->faker->word()]),
             'overview_title' => $this->faker->sentence(4),
-            'overview_description' => $this->faker->paragraph(),
+            'overview_description' => '<p>'.$this->faker->paragraph().'</p>',
             'content_blocks' => json_encode([]),
             'author_id' => null,
             'parent_id' => null,

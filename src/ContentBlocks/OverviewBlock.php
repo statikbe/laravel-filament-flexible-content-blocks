@@ -3,9 +3,11 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
 use Closure;
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Grid;
+use Filament\Support\Icons\Heroicon;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Spatie\MediaLibrary\HasMedia;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBackgroundColour;
@@ -30,7 +32,7 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
 
     public int $gridColumns = 3;
 
-    public function __construct(HasMedia&HasContentBlocks $record, ?array $blockData)
+    public function __construct(Model&HasMedia&HasContentBlocks $record, ?array $blockData)
     {
         parent::__construct($record, $blockData);
 
@@ -41,9 +43,9 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
         $this->setBlockStyle($blockData);
     }
 
-    public static function getIcon(): string
+    public static function getIcon(): Heroicon|string
     {
-        return 'heroicon-o-rectangle-stack';
+        return Heroicon::RectangleStack;
     }
 
     protected static function makeFilamentSchema(): array|Closure
@@ -66,7 +68,7 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
                     $overviewItemField,
                 ])
                 ->itemLabel(function (array $state) use ($overviewItemField): ?string {
-                    if ($state['overview_model'] && $state['overview_id'] && $overviewItemField->getTypes()[$state['overview_model']]) {
+                    if (isset($state['overview_model']) && $state['overview_model'] && $state['overview_id'] && $overviewItemField->getTypes()[$state['overview_model']]) {
                         return $overviewItemField->getTypes()[$state['overview_model']]->getLabel().' #'.$state['overview_id'];
                     } else {
                         return null;
