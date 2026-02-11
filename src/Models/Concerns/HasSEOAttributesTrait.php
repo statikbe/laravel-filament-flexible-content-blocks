@@ -37,8 +37,8 @@ trait HasSEOAttributesTrait
 
     public function getSEOTitle(): ?string
     {
-        if (! $this->seo_title && isset($this->title)) {
-            return $this->title;
+        if (! $this->seo_title && $this->getTitle()) {
+            return $this->getTitle();
         }
 
         return $this->seo_title;

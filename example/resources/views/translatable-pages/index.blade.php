@@ -2,7 +2,7 @@
     /* @var \App\Models\TranslatablePage $page */
 @endphp
 
-<x-layouts.base title="{{ $page->title }}" wide="true">
+<x-layouts.base title="{{ $page->getTitle() }}" wide="true">
 
     <x-flexible-hero :page="$page" />
 

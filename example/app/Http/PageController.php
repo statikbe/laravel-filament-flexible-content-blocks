@@ -21,7 +21,7 @@ class PageController extends Controller
 
         return view('pages.index', [
             'page' => $page,
-            'title' => $page->title,
+            'title' => $page->getTitle(),
         ]);
     }
 }

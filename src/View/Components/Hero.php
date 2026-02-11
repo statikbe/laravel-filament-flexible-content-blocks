@@ -33,8 +33,8 @@ class Hero extends Component
     {
         $this->page = $page;
 
-        if (isset($page->title)) {
-            $this->title = $page->title;
+        if ($page->getTitle()) {
+            $this->title = $page->getTitle();
         }
 
         if (isset($page->intro)) {
