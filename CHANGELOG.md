@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v4.0.0 - 2026-02-12
+
+### What's Changed
+
+* Filament v4 compatibility by @sten, @sevbesau, @AurelDemiri, @lukasdewijn  in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/86
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v2.8.5...v4.0.0
+
 ## v3.0.0 - 2026-02-11
 
 - Add getter for page title, to make this more extendable
