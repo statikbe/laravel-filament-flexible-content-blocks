@@ -37,9 +37,9 @@
     "require": {
         "php": "^8.2",
         "dereuromark/media-embed": "^0.6",
-        "filament/filament": "^4.0",
-        "filament/spatie-laravel-media-library-plugin": "^4.0",
-        "lara-zeus/spatie-translatable": "^1.0",
+        "filament/filament": "^4.0|^5.0",
+        "filament/spatie-laravel-media-library-plugin": "^4.0|^5.0",
+        "lara-zeus/spatie-translatable": "^1.0|^2.0",
         "illuminate/contracts": "^11.28|^12.0",
         "openai-php/laravel": "^0.11.0",
         "spatie/laravel-package-tools": "^1.13.0",
@@ -48,7 +48,7 @@
         "spatie/laravel-medialibrary": "^11.0"
     },
     "require-dev": {
-        "filament/upgrade": "^4.0",
+        "filament/upgrade": "^4.0|^5.0",
         "larastan/larastan": "^2.0|^3.0",
         "laravel/pint": "^1.0",
         "nunomaduro/collision": "^8.4",
