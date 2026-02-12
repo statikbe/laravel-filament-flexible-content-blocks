@@ -38,10 +38,12 @@ correct stylesheet. See [the preview block configuration](documentation%2Fconfig
 :rocket: For a complete, out-of-the-box, content management solution, check out our new [Filament Flexible Content Block Pages](https://github.com/statikbe/laravel-filament-flexible-content-block-pages) package with page management,
 a menu builder, tag management and many SEO features.
 
-## Versions
+## Versions & compatibility
 
-- For Filament v3 use `statikbe/laravel-filament-flexible-content-blocks:^3.0` and for development use branch `v3`.
-- For Filament v4 & v5 use `statikbe/laravel-filament-flexible-content-blocks:^4.0` and for development use branch `main`.
+| Filament Version | Package Version | Development Branch |
+|---|---|---|
+| v3 | `statikbe/laravel-filament-flexible-content-blocks:^3.0` | `v3` |
+| v4 & v5 | `statikbe/laravel-filament-flexible-content-blocks:^4.0` | `main` |
 
 ## Upgrades
 
