@@ -37,8 +37,8 @@ class Hero extends Component
             $this->title = $page->getTitle();
         }
 
-        if (isset($page->intro)) {
-            $this->intro = $page->intro;
+        if ($page->getIntro()) {
+            $this->intro = $page->getIntro();
         }
 
         if (isset($page->hero_image_title)) {

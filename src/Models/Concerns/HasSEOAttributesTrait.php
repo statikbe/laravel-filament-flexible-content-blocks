@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Statikbe\FilamentFlexibleContentBlocks\Facades\FilamentFlexibleContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Enums\ImageFormat;
 
@@ -41,16 +42,16 @@ trait HasSEOAttributesTrait
             return $this->getTitle();
         }
 
-        return $this->seo_title;
+        return FilamentFlexibleContentBlocks::replaceParameters($this->seo_title);
     }
 
     public function getSEODescription(): ?string
     {
-        if (! $this->seo_description && isset($this->intro)) {
-            return Str::squish(strip_tags($this->intro));
+        if (! $this->seo_description && $this->getIntro()) {
+            return Str::squish(strip_tags($this->getIntro()));
         }
 
-        return Str::squish($this->seo_description);
+        return Str::squish(FilamentFlexibleContentBlocks::replaceParameters($this->seo_description));
     }
 
     protected function registerSEOImageMediaCollectionAndConversion()
