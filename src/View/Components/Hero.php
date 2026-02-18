@@ -41,12 +41,12 @@ class Hero extends Component
             $this->intro = $page->getIntro();
         }
 
-        if (isset($page->hero_image_title)) {
-            $this->heroImageTitle = $page->hero_image_title;
+        if ($page->getHeroImageTitle()) {
+            $this->heroImageTitle = $page->getHeroImageTitle();
         }
 
-        if (isset($page->hero_image_copyright)) {
-            $this->heroImageCopyright = $page->hero_image_copyright;
+        if ($page->getHeroImageCopyright()) {
+            $this->heroImageCopyright = $page->getHeroImageCopyright();
         }
 
         if (isset($page->hero_call_to_actions)) {
