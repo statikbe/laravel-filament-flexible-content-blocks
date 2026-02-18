@@ -5,6 +5,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Models\Concerns;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Statikbe\FilamentFlexibleContentBlocks\Facades\FilamentFlexibleContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasPageAttributes;
 
@@ -29,7 +30,7 @@ trait HasPageAttributesTrait
      */
     public function getTitle(): ?string
     {
-        return $this->title;
+        return FilamentFlexibleContentBlocks::replaceParameters($this->title);
     }
 
     /**

@@ -7,6 +7,7 @@ use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Statikbe\FilamentFlexibleContentBlocks\Facades\FilamentFlexibleContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Enums\ImageFormat;
 
@@ -36,23 +37,23 @@ trait HasOverviewAttributesTrait
         if (! $this->overview_title && $this->getTitle()) {
             return $this->getTitle();
         }
-        if (! $this->overview_title && isset($this->seo_title)) {
-            return $this->seo_title;
+        if (! $this->overview_title && $this->getSEOTitle()) {
+            return $this->getSEOTitle();
         }
 
-        return $this->overview_title;
+        return FilamentFlexibleContentBlocks::replaceParameters($this->overview_title);
     }
 
     public function getOverviewDescription(): ?string
     {
-        if (! $this->overview_description && isset($this->intro)) {
-            return $this->intro;
+        if (! $this->overview_description && $this->getIntro()) {
+            return $this->getIntro();
         }
-        if (! $this->overview_description && isset($this->seo_description)) {
-            return $this->seo_description;
+        if (! $this->overview_description && $this->getSEODescription()) {
+            return $this->getSEODescription();
         }
 
-        return $this->overview_description;
+        return FilamentFlexibleContentBlocks::replaceParameters($this->overview_description);
     }
 
     protected function registerOverviewImageMediaCollectionAndConversion()

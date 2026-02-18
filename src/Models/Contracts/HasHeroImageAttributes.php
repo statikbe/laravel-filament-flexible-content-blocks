@@ -45,4 +45,14 @@ interface HasHeroImageAttributes
      * Checks if there is a hero image set.
      */
     public function hasHeroImage(): bool;
+
+    /**
+     * Returns the title of the hero image
+     */
+    public function getHeroImageTitle(): ?string;
+
+    /**
+     * Returns the copyright description of the hero image
+     */
+    public function getHeroImageCopyright(): ?string;
 }
