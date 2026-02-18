@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v3.0.1 - 2026-02-18
+
+### What's Changed
+
+* Add getters and parameter replacement to title, intro, seo_title, seo_description, overview_title, overview_description, hero_title & hero_copyright
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v3.0.0...v3.0.1
+
 ## v4.0.0 - 2026-02-12
 
 ### What's Changed
