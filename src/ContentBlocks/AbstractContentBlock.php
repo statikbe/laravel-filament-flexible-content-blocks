@@ -58,7 +58,7 @@ abstract class AbstractContentBlock extends Component
     /**
      * Get the heroicon of this block
      */
-    abstract public static function getIcon(): Heroicon|string;
+    abstract public static function getIcon(): \BackedEnum|string;
 
     /**
      * Get translated label of this block

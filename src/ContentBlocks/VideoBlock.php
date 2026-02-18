@@ -42,7 +42,7 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
         return $state['embed_url'];
     }
 
-    public static function getIcon(): Heroicon|string
+    public static function getIcon(): \BackedEnum|string
     {
         return Heroicon::VideoCamera;
     }

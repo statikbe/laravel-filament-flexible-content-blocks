@@ -64,7 +64,7 @@ class ImageBlock extends AbstractFilamentFlexibleContentBlock
         return $state['image_title'];
     }
 
-    public static function getIcon(): Heroicon|string
+    public static function getIcon(): \BackedEnum|string
     {
         return Heroicon::Camera;
     }

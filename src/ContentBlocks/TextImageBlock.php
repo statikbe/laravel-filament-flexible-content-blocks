@@ -76,7 +76,7 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
         return static::convertRichTextToText($state['title'] ?? $state['text']);
     }
 
-    public static function getIcon(): Heroicon|string
+    public static function getIcon(): \BackedEnum|string
     {
         return Heroicon::Photo;
     }

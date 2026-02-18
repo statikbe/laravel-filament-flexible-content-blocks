@@ -52,7 +52,7 @@ class TextBlock extends AbstractFilamentFlexibleContentBlock
         return $state['title'] ?? $state['content'];
     }
 
-    public static function getIcon(): Heroicon|string
+    public static function getIcon(): \BackedEnum|string
     {
         return Heroicon::Bars3BottomLeft;
     }

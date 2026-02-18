@@ -28,7 +28,7 @@ class HtmlBlock extends AbstractFilamentFlexibleContentBlock
         return 'html';
     }
 
-    public static function getIcon(): Heroicon|string
+    public static function getIcon(): \BackedEnum|string
     {
         return Heroicon::CodeBracket;
     }

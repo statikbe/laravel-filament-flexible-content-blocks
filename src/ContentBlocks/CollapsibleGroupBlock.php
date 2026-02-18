@@ -79,7 +79,7 @@ class CollapsibleGroupBlock extends AbstractFilamentFlexibleContentBlock
         return static::convertRichTextToText($state[static::GROUP_TITLE_FIELD] ?? $state[static::GROUP_INTRO_FIELD]);
     }
 
-    public static function getIcon(): Heroicon|string
+    public static function getIcon(): \BackedEnum|string
     {
         return Heroicon::BarsArrowDown;
     }

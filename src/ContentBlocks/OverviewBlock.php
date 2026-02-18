@@ -43,7 +43,7 @@ class OverviewBlock extends AbstractFilamentFlexibleContentBlock
         $this->setBlockStyle($blockData);
     }
 
-    public static function getIcon(): Heroicon|string
+    public static function getIcon(): \BackedEnum|string
     {
         return Heroicon::RectangleStack;
     }

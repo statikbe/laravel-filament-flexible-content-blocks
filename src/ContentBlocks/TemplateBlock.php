@@ -23,7 +23,7 @@ class TemplateBlock extends AbstractFilamentFlexibleContentBlock
         $this->template = $blockData[static::FIELD_TEMPLATE] ?? null;
     }
 
-    public static function getIcon(): Heroicon|string
+    public static function getIcon(): \BackedEnum|string
     {
         return Heroicon::RectangleGroup;
     }
