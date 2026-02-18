@@ -7,6 +7,7 @@ use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Statikbe\FilamentFlexibleContentBlocks\Facades\FilamentFlexibleContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasHeroImageAttributes;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Enums\ImageFormat;
@@ -91,12 +92,22 @@ trait HasHeroImageAttributesTrait
         return $this->getImageHtml(
             $this->getFallbackImageMedia($this->heroImage()->first(), $this->getHeroImageCollection()),
             $conversion ?? $this->getHeroImageConversionName(),
-            $this->hero_image_title,
+            $this->getHeroImageTitle(),
             $attributes);
     }
 
     public function hasHeroImage(): bool
     {
         return $this->hasMedia($this->getHeroImageCollection());
+    }
+
+    public function getHeroImageTitle(): ?string
+    {
+        return FilamentFlexibleContentBlocks::replaceParameters($this->hero_image_title);
+    }
+
+    public function getHeroImageCopyright(): ?string
+    {
+        return FilamentFlexibleContentBlocks::replaceParameters($this->hero_image_copyright);
     }
 }
