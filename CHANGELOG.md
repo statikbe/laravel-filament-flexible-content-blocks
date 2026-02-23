@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v3.1.0 - 2026-02-23
+
+* Configurable rich text editor, see documentation
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v3.0.2...v3.1.0
+
 ## v3.0.2 - 2026-02-18
 
 Add getters and parameter replacement to title, intro, seo_title, seo_description, overview_title, overview_description, hero_title & hero_copyright
