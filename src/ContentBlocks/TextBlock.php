@@ -3,13 +3,13 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
 use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Spatie\MediaLibrary\HasMedia;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBackgroundColour;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBlockStyle;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BackgroundColourField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockStyleField;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\FlexibleRichEditorField;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 
 /**
@@ -62,11 +62,8 @@ class TextBlock extends AbstractFilamentFlexibleContentBlock
         return [
             TextInput::make('title')
                 ->label(static::getFieldLabel('title')),
-            RichEditor::make('content')
+            FlexibleRichEditorField::create('content', static::class)
                 ->label(static::getFieldLabel('label'))
-                ->disableToolbarButtons([
-                    'attachFiles',
-                ])
                 ->required(),
             Grid::make(2)->schema([
                 BackgroundColourField::create(static::class),

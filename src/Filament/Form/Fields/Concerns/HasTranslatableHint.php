@@ -13,23 +13,30 @@ trait HasTranslatableHint
 {
     public function addsTranslatableHint(): static
     {
-        $this->hint = function (?Model $record, Field $component) {
+        static::applyTranslatableHint($this);
+
+        return $this;
+    }
+
+    public static function applyTranslatableHint(Field $field): Field
+    {
+        $field->hint(function (?Model $record, Field $component) {
             if ($record && isset($record->translatable) && in_array($component->getName(), $record->translatable)) {
                 return trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.translatable_hint');
             }
 
             return null;
-        };
+        });
 
-        $this->hintIcon = function (?Model $record, Field $component) {
+        $field->hintIcon(function (?Model $record, Field $component) {
             if ($record && isset($record->translatable) && in_array($component->getName(), $record->translatable)) {
                 return 'heroicon-o-language';
             }
 
             return null;
-        };
+        });
 
-        return $this;
+        return $field;
     }
 
     protected function hasTranslatableField(?Model $record, Field $component, Component $livewire): bool

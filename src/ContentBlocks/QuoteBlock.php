@@ -4,7 +4,6 @@ namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
 use Closure;
 use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Get;
 use Spatie\MediaLibrary\HasMedia;
@@ -18,6 +17,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Backgroun
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockSpatieMediaLibraryFileUpload;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockStyleField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\ImagePositionField;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\FlexibleRichEditorField;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
 
@@ -72,11 +72,8 @@ class QuoteBlock extends AbstractFilamentFlexibleContentBlock
     protected static function makeFilamentSchema(): array|Closure
     {
         return [
-            RichEditor::make('quote')
+            FlexibleRichEditorField::create('quote', static::class)
                 ->label(static::getFieldLabel('quote'))
-                ->disableToolbarButtons([
-                    'attachFiles',
-                ])
                 ->required(),
             TextInput::make('author')
                 ->label(static::getFieldLabel('author'))

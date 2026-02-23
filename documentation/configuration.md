@@ -210,6 +210,75 @@ Below is a detailed example:
 ],
 ```
 
+## Rich editor
+
+The rich text editor used in content blocks is configurable. You can swap the editor component (e.g. to use TipTap instead of Filament's default RichEditor) and configure which toolbar buttons are shown.
+
+### Configuration
+
+```php
+'rich_editor' => [
+    'configurator' => DefaultRichEditorConfigurator::class,
+    'toolbar_buttons' => null,
+    'disabled_toolbar_buttons' => [
+        'attachFiles',
+    ],
+],
+```
+
+- **`configurator`**: The class responsible for creating rich editor instances. Must implement `RichEditorConfigurator`. The default creates Filament's built-in `RichEditor`.
+- **`toolbar_buttons`**: A positive list of buttons to enable. When set, only these buttons are shown and `disabled_toolbar_buttons` is ignored. Set to `null` to use the editor's defaults.
+- **`disabled_toolbar_buttons`**: A list of buttons to exclude from the editor's defaults. Only applies when `toolbar_buttons` is `null`.
+
+### Per-block toolbar override
+
+You can override toolbar buttons for specific blocks via the `block_specific` config:
+
+```php
+'block_specific' => [
+    CollapsibleGroupBlock::class => [
+        'rich_editor' => [
+            'toolbar_buttons' => ['bold', 'italic', 'link', 'bulletList', 'orderedList'],
+        ],
+    ],
+],
+```
+
+### Using a custom editor (e.g. TipTap)
+
+To swap the editor, create a configurator class that implements `RichEditorConfigurator`:
+
+```php
+use FilamentTiptapEditor\TiptapEditor;
+use Filament\Forms\Components\Field;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Contracts\RichEditorConfigurator;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\FlexibleRichEditorField;
+
+class TipTapEditorConfigurator implements RichEditorConfigurator
+{
+    public function make(string $name, ?string $blockClass = null): Field
+    {
+        $editor = TiptapEditor::make($name);
+
+        $toolbarButtons = FlexibleRichEditorField::getToolbarButtons($blockClass);
+        if ($toolbarButtons !== null) {
+            $editor->tools($toolbarButtons);
+        }
+
+        return $editor;
+    }
+}
+```
+
+Then set it in the config:
+
+```php
+'rich_editor' => [
+    'configurator' => \App\Filament\TipTapEditorConfigurator::class,
+    'toolbar_buttons' => null,
+],
+```
+
 ## Image editor
 
 Filament has an [image editor](https://filamentphp.com/docs/3.x/forms/fields/file-upload#setting-the-image-editors-mode) 

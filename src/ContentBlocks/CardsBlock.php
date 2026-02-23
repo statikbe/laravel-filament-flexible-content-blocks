@@ -6,7 +6,6 @@ use Closure;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
@@ -25,6 +24,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToAct
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CardData;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\GridColumnsField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\ImageConversionTypeField;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\FlexibleRichEditorField;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
@@ -79,11 +79,8 @@ class CardsBlock extends AbstractFilamentFlexibleContentBlock
                     TextInput::make('title')
                         ->label(static::getFieldLabel('card_title'))
                         ->maxLength(255),
-                    RichEditor::make('text')
-                        ->label(static::getFieldLabel('card_text'))
-                        ->disableToolbarButtons([
-                            'attachFiles',
-                        ]),
+                    FlexibleRichEditorField::create('text', static::class)
+                        ->label(static::getFieldLabel('card_text')),
                     BlockSpatieMediaLibraryFileUpload::make('image')
                         ->collection(static::getName())
                         ->label(static::getFieldLabel('card_image'))

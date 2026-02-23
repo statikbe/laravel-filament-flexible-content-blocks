@@ -12,6 +12,7 @@ use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\QuoteBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TemplateBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextImageBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\VideoBlock;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\DefaultRichEditorConfigurator;
 
 return [
     /*
@@ -152,6 +153,31 @@ return [
         'viewport' => [
             'width' => 1920,
             'height' => 1080,
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Rich editor
+    |--------------------------------------------------------------------------
+    |
+    | Configure the rich text editor used in content blocks. You can swap the editor component by providing
+    | a custom configurator class that implements the RichEditorConfigurator interface.
+    | For example, to use the TipTap editor, create a configurator that returns a TiptapEditor instance.
+    |
+    | Toolbar buttons can be configured globally here, or per block in the 'block_specific' section.
+    |
+    | - toolbar_buttons: A positive list of buttons to enable. When set, only these buttons are shown.
+    | - disabled_toolbar_buttons: A list of buttons to disable from the editor defaults.
+    |
+    | If both are null, the editor defaults are used with 'attachFiles' disabled.
+    | If toolbar_buttons is set, disabled_toolbar_buttons is ignored.
+    */
+    'rich_editor' => [
+        'configurator' => DefaultRichEditorConfigurator::class,
+        'toolbar_buttons' => null,
+        'disabled_toolbar_buttons' => [
+            'attachFiles',
         ],
     ],
 
@@ -455,6 +481,17 @@ return [
             'call_to_action_number_of_items' => [
                 'min' => 1,
                 'max' => 3,
+            ],
+        ],
+        CollapsibleGroupBlock::class => [
+            'rich_editor' => [
+                'toolbar_buttons' => [
+                    'bold',
+                    'italic',
+                    'link',
+                    'bulletList',
+                    'orderedList',
+                ],
             ],
         ],
         /*

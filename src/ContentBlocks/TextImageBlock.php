@@ -3,7 +3,6 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
 use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
@@ -20,6 +19,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToAct
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CallToActionData;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\ImageConversionTypeField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\ImagePositionField;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\FlexibleRichEditorField;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
@@ -86,11 +86,8 @@ class TextImageBlock extends AbstractFilamentFlexibleContentBlock
         return [
             TextInput::make('title')
                 ->label(static::getFieldLabel('title')),
-            RichEditor::make('text')
+            FlexibleRichEditorField::create('text', static::class)
                 ->label(static::getFieldLabel('text'))
-                ->disableToolbarButtons([
-                    'attachFiles',
-                ])
                 ->required(),
             Grid::make(2)->schema([
                 BlockSpatieMediaLibraryFileUpload::make('image')

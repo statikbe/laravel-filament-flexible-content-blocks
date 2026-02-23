@@ -23,6 +23,12 @@ class TestCase extends Orchestra
 {
     protected function setUp(): void
     {
+        // Clear compiled views to prevent stale cached views from other branches:
+        $viewsPath = __DIR__.'/../vendor/orchestra/testbench-core/laravel/storage/framework/views';
+        if (is_dir($viewsPath)) {
+            array_map('unlink', glob("{$viewsPath}/*.php"));
+        }
+
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(

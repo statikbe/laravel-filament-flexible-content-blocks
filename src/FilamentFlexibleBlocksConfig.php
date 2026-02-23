@@ -244,8 +244,8 @@ class FilamentFlexibleBlocksConfig
     {
         if (isset($configuredConversions[$collectionName]['extra_conversions'])) {
             foreach ($configuredConversions[$collectionName]['extra_conversions'] as $extraConversionName => $extraConversionData) {
-                $conversion = $record->addMediaConversion($extraConversionName);
-                self::mergeConfiguredImageConversion($configuredConversions[$collectionName]['extra_conversions'][$extraConversionName], $conversion);
+                $conversion = $record->addMediaConversion((string) $extraConversionName);
+                self::mergeConfiguredImageConversion($extraConversionData, $conversion);
             }
         }
     }
@@ -556,6 +556,61 @@ class FilamentFlexibleBlocksConfig
     public static function getBlockPreviewStylesheet(): string
     {
         return config('filament-flexible-content-blocks.block_preview.stylesheet', 'resources/css/app.css');
+    }
+
+    /**
+     * @param  class-string|null  $blockClass
+     * @return class-string<\Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Contracts\RichEditorConfigurator>
+     */
+    public static function getRichEditorConfigurator(?string $blockClass = null): string
+    {
+        if ($blockClass) {
+            $configurator = config("filament-flexible-content-blocks.block_specific.{$blockClass}.rich_editor.configurator");
+            if ($configurator !== null) {
+                return $configurator;
+            }
+        }
+
+        return config(
+            'filament-flexible-content-blocks.rich_editor.configurator',
+            \Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\DefaultRichEditorConfigurator::class
+        );
+    }
+
+    /**
+     * @param  class-string|null  $blockClass
+     * @return string[]|null
+     */
+    public static function getRichEditorToolbarButtons(?string $blockClass = null): ?array
+    {
+        if ($blockClass) {
+            $buttons = config(
+                "filament-flexible-content-blocks.block_specific.{$blockClass}.rich_editor.toolbar_buttons"
+            );
+            if ($buttons !== null) {
+                return $buttons;
+            }
+        }
+
+        return config('filament-flexible-content-blocks.rich_editor.toolbar_buttons');
+    }
+
+    /**
+     * @param  class-string|null  $blockClass
+     * @return string[]|null
+     */
+    public static function getDisabledRichEditorToolbarButtons(?string $blockClass = null): ?array
+    {
+        if ($blockClass) {
+            $buttons = config(
+                "filament-flexible-content-blocks.block_specific.{$blockClass}.rich_editor.disabled_toolbar_buttons"
+            );
+            if ($buttons !== null) {
+                return $buttons;
+            }
+        }
+
+        return config('filament-flexible-content-blocks.rich_editor.disabled_toolbar_buttons');
     }
 
     public static function getCallToActionNumberOfItems(string $blockClass, string $settingName, int $defaultValue): int

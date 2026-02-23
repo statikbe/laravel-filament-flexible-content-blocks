@@ -4,7 +4,6 @@ namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
 use Closure;
 use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Illuminate\Support\Collection;
@@ -12,6 +11,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBackgroundColour;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BackgroundColourField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CollapsibleItemData;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\FlexibleRichEditorField;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 
 class CollapsibleGroupBlock extends AbstractFilamentFlexibleContentBlock
@@ -31,14 +31,6 @@ class CollapsibleGroupBlock extends AbstractFilamentFlexibleContentBlock
     const ITEM_TEXT_FIELD = 'text';
 
     const ITEM_IS_OPEN_BY_DEFAULT_FIELD = 'is_open_by_default';
-
-    const ENABLED_TOOLBAR_BUTTONS = [
-        'bold',
-        'italic',
-        'link',
-        'bulletList',
-        'orderedList',
-    ];
 
     public ?string $groupTitle;
 
@@ -88,9 +80,8 @@ class CollapsibleGroupBlock extends AbstractFilamentFlexibleContentBlock
             TextInput::make(static::GROUP_TITLE_FIELD)
                 ->label(static::getFieldLabel('group_title'))
                 ->maxLength(255),
-            RichEditor::make(static::GROUP_INTRO_FIELD)
-                ->label(static::getFieldLabel('group_intro'))
-                ->toolbarButtons(static::getIntroToolbarButtons()),
+            FlexibleRichEditorField::create(static::GROUP_INTRO_FIELD, static::class)
+                ->label(static::getFieldLabel('group_intro')),
             BackgroundColourField::create(static::class),
             Repeater::make(static::COLLAPSIBLE_ITEMS_FIELD)
                 ->label(static::getFieldLabel('collapsible_items'))
@@ -99,9 +90,8 @@ class CollapsibleGroupBlock extends AbstractFilamentFlexibleContentBlock
                         ->label(static::getFieldLabel('item_title'))
                         ->required()
                         ->maxLength(255),
-                    RichEditor::make(static::ITEM_TEXT_FIELD)
+                    FlexibleRichEditorField::create(static::ITEM_TEXT_FIELD, static::class)
                         ->label(static::getFieldLabel('item_text'))
-                        ->toolbarButtons(static::getItemTextToolbarButtons())
                         ->required(),
                     Toggle::make(static::ITEM_IS_OPEN_BY_DEFAULT_FIELD)
                         ->label(static::getFieldLabel('item_is_open_by_default'))
@@ -113,15 +103,5 @@ class CollapsibleGroupBlock extends AbstractFilamentFlexibleContentBlock
                 ->collapsible()
                 ->minItems(1),
         ];
-    }
-
-    protected static function getIntroToolbarButtons(): array
-    {
-        return static::ENABLED_TOOLBAR_BUTTONS;
-    }
-
-    protected static function getItemTextToolbarButtons(): array
-    {
-        return static::ENABLED_TOOLBAR_BUTTONS;
     }
 }

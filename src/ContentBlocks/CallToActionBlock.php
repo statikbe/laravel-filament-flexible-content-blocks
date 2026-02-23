@@ -4,7 +4,6 @@ namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
 use Closure;
 use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\TextInput;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
@@ -19,6 +18,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockSpat
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockStyleField;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\CallToActionRepeater;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Data\CallToActionData;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\FlexibleRichEditorField;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
@@ -80,11 +80,8 @@ class CallToActionBlock extends AbstractFilamentFlexibleContentBlock
         return [
             TextInput::make('title')
                 ->label(static::getFieldLabel('title')),
-            RichEditor::make('text')
-                ->label(static::getFieldLabel('text'))
-                ->disableToolbarButtons([
-                    'attachFiles',
-                ]),
+            FlexibleRichEditorField::create('text', static::class)
+                ->label(static::getFieldLabel('text')),
             Grid::make(2)->schema([
                 BlockSpatieMediaLibraryFileUpload::make('image')
                     ->collection(static::getName())
