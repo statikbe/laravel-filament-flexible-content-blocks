@@ -61,7 +61,7 @@ class QuoteBlock extends AbstractFilamentFlexibleContentBlock
 
     public static function getContentSummary(array $state): ?string
     {
-        return $state['quote'];
+        return FlexibleRichEditorField::toPlainText($state['quote'], static::class);
     }
 
     public static function getIcon(): string

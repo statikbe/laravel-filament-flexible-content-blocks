@@ -54,4 +54,14 @@ class FlexibleRichEditorField
     {
         return FilamentFlexibleBlocksConfig::getDisabledRichEditorToolbarButtons($blockClass);
     }
+
+    /**
+     * Convert rich editor content to plain text for display in summaries and labels.
+     *
+     * @param  class-string|null  $blockClass
+     */
+    public static function toPlainText(mixed $content, ?string $blockClass = null): string
+    {
+        return static::getConfigurator($blockClass)->toPlainText($content);
+    }
 }

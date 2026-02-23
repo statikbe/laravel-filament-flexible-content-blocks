@@ -46,7 +46,7 @@ class TextBlock extends AbstractFilamentFlexibleContentBlock
 
     public static function getContentSummary(array $state): ?string
     {
-        return $state['title'] ?? $state['content'];
+        return $state['title'] ?? FlexibleRichEditorField::toPlainText($state['content'], static::class);
     }
 
     public static function getIcon(): string

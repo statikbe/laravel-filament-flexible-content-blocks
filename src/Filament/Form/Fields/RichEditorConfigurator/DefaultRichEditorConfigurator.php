@@ -28,4 +28,13 @@ class DefaultRichEditorConfigurator implements RichEditorConfigurator
 
         return $editor;
     }
+
+    public function toPlainText(mixed $content): string
+    {
+        if (! is_string($content)) {
+            return '';
+        }
+
+        return strip_tags($content);
+    }
 }

@@ -270,7 +270,11 @@ FlexibleRichEditorField::createTranslatable('description')
 
 ### Using a custom editor (e.g. TipTap)
 
-To swap the editor, create a configurator class that implements `RichEditorConfigurator`:
+To swap the editor, create a configurator class that implements `RichEditorConfigurator`.
+
+The interface has two methods:
+- **`make()`**: Creates and configures the editor field.
+- **`toPlainText()`**: Converts the editor's stored content to plain text. This is used for block labels and content summaries in the admin panel. The default implementation strips HTML tags, but editors like TipTap store content as a JSON structure that needs different handling.
 
 ```php
 use FilamentTiptapEditor\TiptapEditor;
@@ -290,6 +294,19 @@ class TipTapEditorConfigurator implements RichEditorConfigurator
         }
 
         return $editor;
+    }
+
+    public function toPlainText(mixed $content): string
+    {
+        if (is_string($content)) {
+            return strip_tags($content);
+        }
+
+        if (is_array($content)) {
+            return strip_tags(tiptap_converter()->asHTML($content));
+        }
+
+        return '';
     }
 }
 ```

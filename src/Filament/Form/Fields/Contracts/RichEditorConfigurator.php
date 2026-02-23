@@ -12,4 +12,9 @@ interface RichEditorConfigurator
      * @param  class-string|null  $blockClass
      */
     public function make(string $name, ?string $blockClass = null): Field;
+
+    /**
+     * Convert rich editor content to plain text for display in summaries and labels.
+     */
+    public function toPlainText(mixed $content): string;
 }
