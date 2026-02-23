@@ -244,6 +244,30 @@ You can override toolbar buttons for specific blocks via the `block_specific` co
 ],
 ```
 
+### Using the rich editor in custom blocks
+
+Use `FlexibleRichEditorField::create()` to create a rich editor field that respects the global and block-specific configuration:
+
+```php
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\FlexibleRichEditorField;
+
+// In a content block's getFilamentForm() method:
+FlexibleRichEditorField::create('text', static::class)
+    ->label('Text')
+    ->required();
+```
+
+The second argument (`static::class`) enables block-specific toolbar overrides from the `block_specific` config.
+
+If your field is translatable (i.e. stored in a Spatie Translatable column), use `createTranslatable()` instead.
+This adds a translatable hint icon and label to the field when the model has the field in its `$translatable` array:
+
+```php
+FlexibleRichEditorField::createTranslatable('description')
+    ->label('Description')
+    ->required();
+```
+
 ### Using a custom editor (e.g. TipTap)
 
 To swap the editor, create a configurator class that implements `RichEditorConfigurator`:
