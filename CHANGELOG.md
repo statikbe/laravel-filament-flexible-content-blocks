@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v3.1.3 - 2026-02-23
+
+* Add flexible rich editor transformer for editors with a different data structure.
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v3.1.2...v3.1.3
+
 ## v3.1.2 - 2026-02-23
 
 * refactor namespace of rich editor configurator
