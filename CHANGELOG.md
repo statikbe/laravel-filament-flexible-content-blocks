@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v3.1.2 - 2026-02-23
+
+* refactor namespace of rich editor configurator
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v3.1.1...v3.1.2
+
 ## v3.1.1 - 2026-02-23
 
 * Add createTranslatable to FlexibleRichEditorField to create a rich editor with a helper text for translatable fields
