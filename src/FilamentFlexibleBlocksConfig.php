@@ -573,7 +573,7 @@ class FilamentFlexibleBlocksConfig
 
         return config(
             'filament-flexible-content-blocks.rich_editor.configurator',
-            \Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\DefaultRichEditorConfigurator::class
+            Filament\Form\Fields\RichEditorConfigurator\DefaultRichEditorConfigurator::class
         );
     }
 

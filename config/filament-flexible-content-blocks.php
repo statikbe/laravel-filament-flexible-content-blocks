@@ -12,7 +12,7 @@ use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\QuoteBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TemplateBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextImageBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\VideoBlock;
-use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\DefaultRichEditorConfigurator;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\RichEditorConfigurator\DefaultRichEditorConfigurator;
 
 return [
     /*

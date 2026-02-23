@@ -1,10 +1,11 @@
 <?php
 
-namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields;
+namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\RichEditorConfigurator;
 
 use Filament\Forms\Components\Field;
 use Filament\Forms\Components\RichEditor;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Contracts\RichEditorConfigurator;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\FlexibleRichEditorField;
 
 class DefaultRichEditorConfigurator implements RichEditorConfigurator
 {
