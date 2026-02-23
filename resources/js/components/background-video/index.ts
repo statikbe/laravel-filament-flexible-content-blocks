@@ -113,7 +113,7 @@ function initBackgroundVideoComponent() {
 
                 /* we use the amplifier to make sure the "black padding" - added by youtube - is not visible anymore */
                 const amplifier = containerWidth < 500
-                    ? 1.1
+                    ? 1.25
                     : 1.4;
 
                 const newVideoWidth = Math.ceil(containerHeight * (videoRatio) * amplifier);
