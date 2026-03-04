@@ -2,6 +2,43 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v3.1.3 - 2026-02-23
+
+* Add flexible rich editor transformer for editors with a different data structure.
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v3.1.2...v3.1.3
+
+## v3.1.2 - 2026-02-23
+
+* refactor namespace of rich editor configurator
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v3.1.1...v3.1.2
+
+## v3.1.1 - 2026-02-23
+
+* Add createTranslatable to FlexibleRichEditorField to create a rich editor with a helper text for translatable fields
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v4.0.1...v3.1.1
+
+## v3.1.0 - 2026-02-23
+
+* Configurable rich text editor, see documentation
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v3.0.2...v3.1.0
+
+## v3.0.2 - 2026-02-18
+
+Add getters and parameter replacement to title, intro, seo_title, seo_description, overview_title, overview_description, hero_title & hero_copyright
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v3.0.1...v3.0.2
+
+## v4.0.1 - 2026-02-18
+
+- Add getters and parameter replacement to title, intro, seo_title, seo_description, overview_title, overview_description, hero_title & hero_copyright
+- Fix typing for icons from Heroicon to \BackedEnum to allow any icon set.
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v4.0.0...v4.0.1
+
 ## v3.0.1 - 2026-02-18
 
 ### What's Changed
