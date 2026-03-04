@@ -87,7 +87,7 @@ trait HasImage
     /**
      * Returns the image url for the given UUID.
      */
-    protected function getMediaUrl(string $blockId, ?string $collection = null, ?string $conversion = null): ?string
+    protected function getMediaUrl(string $blockId, ?string $collection = null, ?string $conversion = ''): ?string
     {
         $media = $this->getMedia($blockId, $collection);
 
