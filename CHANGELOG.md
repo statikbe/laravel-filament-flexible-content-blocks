@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v4.0.2 - 2026-03-04
+
+Make the default value of getMediaUrl conversion argument compatible with media-library.
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v4.0.1...v4.0.2
+
 ## v3.1.4 - 2026-03-04
 
 Make the default value of getMediaUrl conversion argument compatible with media-library.
