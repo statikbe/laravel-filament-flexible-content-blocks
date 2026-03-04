@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v3.1.4 - 2026-03-04
+
+Make the default value of getMediaUrl conversion argument compatible with media-library.
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v3.1.3...v3.1.4
+
 ## v3.1.3 - 2026-02-23
 
 * Add flexible rich editor transformer for editors with a different data structure.
