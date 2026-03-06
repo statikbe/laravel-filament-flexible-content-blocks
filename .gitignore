@@ -11,3 +11,6 @@ testbench.yaml
 vendor
 node_modules
 .phpunit.cache
+composer.json.*
+composer.lock.*
+.claude/settings.local.json
