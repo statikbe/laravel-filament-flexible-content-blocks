@@ -70,15 +70,16 @@ abstract class AbstractType
                 default => 'like',
             };
 
-            $query->where(function (Builder $query) use ($searchOperator, $search): Builder {
+            $grammar = $databaseConnection->getQueryGrammar();
+
+            $query->where(function (Builder $query) use ($searchOperator, $search, $grammar): Builder {
                 $isFirst = true;
 
                 foreach ($this->getSearchColumns() as $searchColumnName) {
                     $whereClause = $isFirst ? 'where' : 'orWhere';
-                    $search = Str::lower($search);
 
                     $query->{$whereClause}(
-                        DB::raw("lower(`$searchColumnName`)"),
+                        DB::raw('lower('.$grammar->wrap($searchColumnName).')'),
                         $searchOperator,
                         "%{$search}%",
                     );
