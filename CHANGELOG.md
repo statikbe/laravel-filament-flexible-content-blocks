@@ -2,6 +2,20 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v4.0.3 - 2026-03-06
+
+- Improve quote wrapping in AbstractType query builder
+- Fix SQL injection and database portability in AuthorField search
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v4.0.2...v4.0.3
+
+## v3.1.5 - 2026-03-06
+
+- Improve quote wrapping in AbstractType query builder
+- Fix SQL injection and database portability in AuthorField search
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v3.1.4...v3.1.5
+
 ## v4.0.2 - 2026-03-04
 
 Make the default value of getMediaUrl conversion argument compatible with media-library.
