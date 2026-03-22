@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v3.1.6 - 2026-03-22
+
+* Make the published scope compatible with postgresql.
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v3.1.5...v3.1.6
+
 ## v4.0.4 - 2026-03-22
 
 ### What's Changed
