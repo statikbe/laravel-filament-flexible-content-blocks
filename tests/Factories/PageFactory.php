@@ -4,10 +4,11 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Tests\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Statikbe\FilamentFlexibleContentBlocks\Tests\Models\Page;
 
 class PageFactory extends Factory
 {
-    protected $model = \Statikbe\FilamentFlexibleContentBlocks\Tests\Models\Page::class;
+    protected $model = Page::class;
 
     public function definition(): array
     {

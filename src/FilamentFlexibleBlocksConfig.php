@@ -9,6 +9,8 @@ use Illuminate\Routing\Route;
 use Illuminate\Routing\RouteCollection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Spatie\Image\Enums\CropPosition;
 use Spatie\Image\Exceptions\InvalidManipulation;
 use Spatie\MediaLibrary\Conversions\Conversion;
@@ -23,6 +25,7 @@ use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\QuoteBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TemplateBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextImageBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\VideoBlock;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Contracts\RichEditorConfigurator;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasOverviewAttributes;
 use Statikbe\FilamentFlexibleContentBlocks\Replacer\TextParameterReplacer;
 
@@ -74,8 +77,8 @@ class FilamentFlexibleBlocksConfig
     /**
      * @return array<string, string>
      *
-     * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     public static function getLinkRoutes(): array
     {
@@ -131,7 +134,7 @@ class FilamentFlexibleBlocksConfig
     /**
      * @param  class-string<Model>  $modelClass
      *
-     * @throws \Spatie\Image\Exceptions\InvalidManipulation
+     * @throws InvalidManipulation
      */
     public static function mergeConfiguredModelImageConversion(string $modelClass, string $collectionName, string $conversionName, Conversion &$conversion): Conversion
     {
@@ -143,7 +146,7 @@ class FilamentFlexibleBlocksConfig
     /**
      * @param  class-string<AbstractContentBlock>  $blockClass
      *
-     * @throws \Spatie\Image\Exceptions\InvalidManipulation
+     * @throws InvalidManipulation
      */
     public static function mergeConfiguredFlexibleBlockImageConversion(string $blockClass, string $collectionName, string $conversionName, Conversion &$conversion): Conversion
     {
@@ -155,7 +158,7 @@ class FilamentFlexibleBlocksConfig
     /**
      * @param  array<string, array>  $configuredConversions
      *
-     * @throws \Spatie\Image\Exceptions\InvalidManipulation
+     * @throws InvalidManipulation
      */
     private static function mergeConfiguredImageConversions(array $configuredConversions, string $collectionName, string $conversionName, Conversion &$conversion): Conversion
     {
@@ -560,7 +563,7 @@ class FilamentFlexibleBlocksConfig
 
     /**
      * @param  class-string|null  $blockClass
-     * @return class-string<\Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Contracts\RichEditorConfigurator>
+     * @return class-string<RichEditorConfigurator>
      */
     public static function getRichEditorConfigurator(?string $blockClass = null): string
     {

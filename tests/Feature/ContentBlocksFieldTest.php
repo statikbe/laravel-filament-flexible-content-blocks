@@ -4,6 +4,10 @@ use Filament\Facades\Filament;
 use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Builder\Block;
 use Livewire\Livewire;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\ImageBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\QuoteBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextImageBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\VideoBlock;
 use Statikbe\FilamentFlexibleContentBlocks\Tests\Models\Page;
 use Statikbe\FilamentFlexibleContentBlocks\Tests\Resources\PageResource;
 
@@ -12,10 +16,10 @@ use function Pest\Laravel\assertDatabaseHas;
 beforeEach(function () {
     setupFilamentPanel();
     setupDefaultContentBlocks([
-        \Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextImageBlock::class,
-        \Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\ImageBlock::class,
-        \Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\VideoBlock::class,
-        \Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\QuoteBlock::class,
+        TextImageBlock::class,
+        ImageBlock::class,
+        VideoBlock::class,
+        QuoteBlock::class,
     ]);
 });
 

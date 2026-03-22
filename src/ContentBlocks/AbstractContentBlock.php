@@ -4,6 +4,7 @@ namespace Statikbe\FilamentFlexibleContentBlocks\ContentBlocks;
 
 use Closure;
 use Filament\Forms\Components\Builder\Block;
+use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 use Spatie\MediaLibrary\HasMedia;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Builder\ContentBlockWithPreview;
@@ -115,7 +116,7 @@ abstract class AbstractContentBlock extends Component
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
+     * @return View|Closure|string
      */
     abstract public function render();
 

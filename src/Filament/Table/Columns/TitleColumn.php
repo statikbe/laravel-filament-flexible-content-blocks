@@ -7,7 +7,7 @@ use Filament\Tables\Columns\TextColumn;
 /**
  * Text column with a limit of 50 and a tooltip that shows the whole title if it is too long.
  */
-class TitleColumn extends \Filament\Tables\Columns\TextColumn
+class TitleColumn extends TextColumn
 {
     public static function create(): static
     {
