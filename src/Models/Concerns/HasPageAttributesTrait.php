@@ -112,18 +112,21 @@ trait HasPageAttributesTrait
 
     private function createPublishedSubquery(Builder &$publishedQuery): Builder
     {
-        $publishedQuery->orWhere(function (Builder $option1) {
+        $now = Carbon::now();
+
+        $publishedQuery->orWhere(function (Builder $option1) use ($now) {
             $option1->whereNull('publishing_begins_at')
                 ->whereNotNull('publishing_ends_at')
-                ->whereRaw('publishing_ends_at > now()');
-        })->orWhere(function (Builder $option2) {
+                ->where('publishing_ends_at', '>', $now);
+        })->orWhere(function (Builder $option2) use ($now) {
             $option2->whereNotNull('publishing_begins_at')
                 ->whereNotNull('publishing_ends_at')
-                ->whereRaw('now() between `publishing_begins_at` and `publishing_ends_at`');
-        })->orWhere(function (Builder $option3) {
+                ->where('publishing_begins_at', '<=', $now)
+                ->where('publishing_ends_at', '>=', $now);
+        })->orWhere(function (Builder $option3) use ($now) {
             $option3->whereNotNull('publishing_begins_at')
                 ->whereNull('publishing_ends_at')
-                ->whereRaw('publishing_begins_at < now()');
+                ->where('publishing_begins_at', '<', $now);
         })->orWhere(function (Builder $option4) {
             $option4->whereNull('publishing_begins_at')
                 ->whereNull('publishing_ends_at');
