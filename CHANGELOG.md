@@ -2,6 +2,15 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v4.0.4 - 2026-03-22
+
+### What's Changed
+
+* Bump ramsey/composer-install from 3 to 4 by @dependabot[bot] in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/91
+* Make the published scope compatible with postgresql
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v4.0.3...v4.0.4
+
 ## v4.0.3 - 2026-03-06
 
 - Improve quote wrapping in AbstractType query builder
