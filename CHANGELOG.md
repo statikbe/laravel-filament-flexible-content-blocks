@@ -2,6 +2,19 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v4.1.0 - 2026-04-02
+
+### What's Changed
+
+* Laravel 13 support by @vanneszias in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/93
+* Bump dependabot/fetch-metadata from 2.5.0 to 3.0.0 by @dependabot[bot] in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/92
+
+### New Contributors
+
+* @vanneszias made their first contribution in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/93
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v4.0.4...v4.1.0
+
 ## v3.1.6 - 2026-03-22
 
 * Make the published scope compatible with postgresql.
