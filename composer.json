@@ -35,7 +35,7 @@
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "dereuromark/media-embed": "^0.6",
         "filament/filament": "^4.0|^5.0",
         "filament/spatie-laravel-media-library-plugin": "^4.0|^5.0",
