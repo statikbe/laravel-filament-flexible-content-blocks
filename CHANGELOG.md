@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v3.1.7 - 2026-04-21
+
+* Tweaked video ration amplifier for small screens to make sure there are no black borders at the top or bottom.
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v3.1.6...v3.1.7
+
 ## v4.1.0 - 2026-04-02
 
 ### What's Changed
