@@ -18,28 +18,26 @@ class SEOKeywordsField extends TagsInput
         return static::make(self::FIELD)
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_component.seo_keywords_lbl'))
             ->required($required)
-            ->suggestions(function (?Model $record, Livewire $livewire) {
-                $locale = null;
+            ->suggestions(function (?Model $record, Livewire $livewire): array {
                 if (! $record) {
                     return [];
                 }
 
-                if (method_exists($livewire, 'getActiveSchemaLocale')) {
-                    $locale = $livewire->getActiveSchemaLocale();
-                }
+                $locale = method_exists($livewire, 'getActiveSchemaLocale')
+                    ? $livewire->getActiveSchemaLocale()
+                    : null;
 
-                if ($locale) {
-                    $keywords = $record::select("seo_keywords->$locale as seo_keywords")
+                $query = $locale
+                    ? $record::select("seo_keywords->$locale as seo_keywords")
                         ->whereNotNull("seo_keywords->$locale")
-                        ->get();
-                } else {
-                    $keywords = $record::select('seo_keywords')
-                        ->whereNotNull('seo_keywords')
-                        ->get();
-                }
+                    : $record::select('seo_keywords')
+                        ->whereNotNull('seo_keywords');
 
-                return $keywords->map(fn ($item) => json_decode($item))
-                    ->reduce(fn ($carry, $item) => $carry ? array_unique(array_merge($carry, $item->seo_keywords)) : $item->seo_keywords) ?? [];
+                return $query->get()
+                    ->flatMap(fn ($item) => (array) (json_decode($item, true)['seo_keywords'] ?? []))
+                    ->unique()
+                    ->values()
+                    ->all();
             })
             ->addsTranslatableHint();
     }
