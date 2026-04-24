@@ -23,9 +23,11 @@ class SEOKeywordsField extends TagsInput
                     return [];
                 }
 
-                $locale = method_exists($livewire, 'getActiveSchemaLocale')
-                    ? $livewire->getActiveSchemaLocale()
-                    : null;
+                $locale = match (true) {
+                    method_exists($livewire, 'getActiveSchemaLocale') => $livewire->getActiveSchemaLocale(),
+                    property_exists($livewire, 'activeLocale') => $livewire->activeLocale,
+                    default => null,
+                };
 
                 $query = $locale
                     ? $record::select("seo_keywords->$locale as seo_keywords")
@@ -34,7 +36,8 @@ class SEOKeywordsField extends TagsInput
                         ->whereNotNull('seo_keywords');
 
                 return $query->get()
-                    ->flatMap(fn ($item) => (array) (json_decode($item, true)['seo_keywords'] ?? []))
+                    ->flatMap(fn (Model $item) => collect($item->seo_keywords ?? [])->flatten())
+                    ->filter(fn ($value): bool => is_string($value))
                     ->unique()
                     ->values()
                     ->all();
