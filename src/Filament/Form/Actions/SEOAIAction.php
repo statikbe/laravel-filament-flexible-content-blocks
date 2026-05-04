@@ -94,6 +94,6 @@ class SEOAIAction extends Action
 
                 return trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_action.seo_ai_action.name');
             })
-            ->action(fn (Set $set, Model&HasPageAttributes&HasContentBlocks $record) => static::invoke($set, $record));
+            ->action(fn ($set, Model&HasPageAttributes&HasContentBlocks $record) => static::invoke($set, $record));
     }
 }
