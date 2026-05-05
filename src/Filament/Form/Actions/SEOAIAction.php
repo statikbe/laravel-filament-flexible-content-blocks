@@ -16,6 +16,19 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasPageAttributes;
 use Throwable;
 
+/**
+ * Filament v4's parameter resolver for Action closures does not register
+ * Filament\Schemas\Components\Utilities\Set::class as a typed injection
+ * (see vendor/filament/actions/src/Action.php::resolveDefaultClosureDependencyForEvaluationByType).
+ * The vendor closure typehints `Set $set`, so resolution falls through to
+ * Laravel's container, which throws a BindingResolutionException because
+ * Set requires a Component constructor argument. Filament swallows the
+ * exception and the button silently does nothing.
+ *
+ * Filament v4 still resolves $set/$get by parameter NAME via Action::
+ * resolveDefaultClosureDependencyForEvaluationByName(), so we re-bind the
+ * action closure with a name-based parameter and no Set typehint.
+ */
 class SEOAIAction extends Action
 {
     const NAME = 'AIseo';
