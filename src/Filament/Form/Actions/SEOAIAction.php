@@ -36,7 +36,7 @@ class SEOAIAction extends Action
     protected static function getAIParameters($title, $html): array
     {
         return [
-            'model' => 'gpt-3.5-turbo',
+            'model' => 'gpt-4o-mini',
             'messages' => [
                 [
                     'role' => 'system',
