@@ -1,5 +1,6 @@
 <?php
 
+use Filament\Actions\Testing\TestAction;
 use Illuminate\Http\UploadedFile;
 use Livewire\Livewire;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -423,6 +424,62 @@ it('action is hidden when only one locale is available', function () {
 
     // Action should be hidden (we can't directly test visibility, but can verify locales)
     expect(config('filament-flexible-content-blocks.supported_locales'))->toHaveCount(1);
+});
+
+it('copies rich editor content as html, not tiptap json (form variant)', function () {
+    $page = TranslatablePage::factory()->create([
+        'code' => 'richeditor-copy-test',
+        'title' => ['en' => 'Test'],
+        'slug' => ['en' => 'test'],
+        'content_blocks' => [
+            'en' => [
+                [
+                    'type' => 'text-image',
+                    'data' => [
+                        'block_id' => BlockIdField::generateBlockId(),
+                        'title' => 'EN Title',
+                        'text' => '<p>Hello world</p>',
+                    ],
+                ],
+            ],
+            'nl' => [],
+        ],
+    ]);
+
+    $component = Livewire::test(EditTranslatablePage::class, [
+        'record' => $page->getRouteKey(),
+    ]);
+
+    // Simulate the state shape that exists after the RichEditor field hydrates in the browser:
+    // the `text` field becomes a TipTap document (array), not the raw HTML string.
+    $data = $component->get('data');
+    $builderKey = array_key_first($data['content_blocks']);
+    $data['content_blocks'][$builderKey]['data']['text'] = [
+        'type' => 'doc',
+        'content' => [[
+            'type' => 'paragraph',
+            'content' => [[
+                'type' => 'text',
+                'text' => 'Hello world',
+            ]],
+        ]],
+    ];
+    $component->set('data', $data);
+
+    $component->callAction(TestAction::make('copy_content_blocks_to_other_locales')->schemaComponent(true));
+
+    $page->refresh();
+
+    $nlBlocks = $page->getTranslation('content_blocks', 'nl');
+    $nlBlocks = is_string($nlBlocks) ? json_decode($nlBlocks, true) : $nlBlocks;
+
+    expect($nlBlocks)->toHaveCount(1);
+
+    $text = $nlBlocks[0]['data']['text'] ?? null;
+
+    expect($text)
+        ->toBeString('rich editor text should dehydrate to HTML, not be stored as TipTap JSON array')
+        ->and($text)->toContain('Hello world');
 });
 
 it('does not copy blocks from other locales to EN', function () {

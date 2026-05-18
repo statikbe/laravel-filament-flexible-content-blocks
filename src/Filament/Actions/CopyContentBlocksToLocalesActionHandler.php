@@ -3,6 +3,7 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Actions;
 
 use Exception;
+use Filament\Forms\Components\RichEditor\RichContentRenderer;
 use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -112,12 +113,34 @@ class CopyContentBlocksToLocalesActionHandler
 
             foreach ($dataBlock as $var => $data) {
                 if (is_array($data)) {
-                    $dataBlock[$var] = $this->convertBlockIdAndCopyImagesToBlock($record, $data);
+                    if ($this->isTipTapDocument($data)) {
+                        $dataBlock[$var] = $this->convertTipTapDocumentToHtml($data);
+                    } else {
+                        $dataBlock[$var] = $this->convertBlockIdAndCopyImagesToBlock($record, $data);
+                    }
                 }
             }
         }
 
         return $contentBlock;
+    }
+
+    /**
+     * The form-level copy action reads raw form state, which for `RichEditor` fields is a
+     * TipTap document array, not the rendered HTML. Persisting that array as-is would store
+     * `{"type":"doc",...}` in the translated `content_blocks` slot, so we dehydrate it here.
+     */
+    private function isTipTapDocument(array $value): bool
+    {
+        return ($value['type'] ?? null) === 'doc' && is_array($value['content'] ?? null);
+    }
+
+    private function convertTipTapDocumentToHtml(array $document): string
+    {
+        return RichContentRenderer::make()
+            ->getEditor()
+            ->setContent($document)
+            ->getHtml();
     }
 
     private function copyImage(Model&HasMedia $record, Media $oldMediaItem, ?string $blockId): string
