@@ -3,6 +3,7 @@
 namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Actions;
 
 use Exception;
+use Filament\Forms\Components\RichEditor\RichContentRenderer;
 use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -112,12 +113,36 @@ class CopyContentBlocksToLocalesActionHandler
 
             foreach ($dataBlock as $var => $data) {
                 if (is_array($data)) {
-                    $dataBlock[$var] = $this->convertBlockIdAndCopyImagesToBlock($record, $data);
+                    if ($this->isTipTapDocument($data)) {
+                        $dataBlock[$var] = $this->convertTipTapDocumentToHtml($data);
+                    } else {
+                        $dataBlock[$var] = $this->convertBlockIdAndCopyImagesToBlock($record, $data);
+                    }
                 }
             }
         }
 
         return $contentBlock;
+    }
+
+    /**
+     * The form-level copy action reads raw form state. For `RichEditor` fields under Filament v4
+     * that state is a TipTap document array (`{"type":"doc","content":[...]}`), so we detect it
+     * by shape and dehydrate to HTML before persisting into other locales.
+     *
+     * @todo Remove this sniff once the form-level action dehydrates schema state up front
+     *       (same path as the page-level action, which receives already-HTML state).
+     */
+    private function isTipTapDocument(array $value): bool
+    {
+        return ($value['type'] ?? null) === 'doc'
+            && is_array($value['content'] ?? null)
+            && array_is_list($value['content']);
+    }
+
+    private function convertTipTapDocumentToHtml(array $document): string
+    {
+        return RichContentRenderer::make($document)->toHtml();
     }
 
     private function copyImage(Model&HasMedia $record, Media $oldMediaItem, ?string $blockId): string
