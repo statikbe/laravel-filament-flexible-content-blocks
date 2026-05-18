@@ -2,6 +2,16 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v4.1.1 - 2026-05-18
+
+### What's Changed
+
+* fix: copy rich editor content as html, not tiptap json by @sevbesau in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/96
+* fix: use PHP 8.3+ matrix and --no-coverage to fix CI failures by @vanneszias in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/94
+* Bump dependabot/fetch-metadata from 3.0.0 to 3.1.0 by @dependabot[bot] in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/95
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v4.1.0...v4.1.1
+
 ## v3.1.7 - 2026-04-21
 
 * Tweaked video ration amplifier for small screens to make sure there are no black borders at the top or bottom.
