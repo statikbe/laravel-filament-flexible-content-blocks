@@ -49,7 +49,7 @@ class TextBlock extends AbstractFilamentFlexibleContentBlock
 
     public static function getContentSummary(array $state): ?string
     {
-        return $state['title'] ?? $state['content'];
+        return static::convertRichTextToText($state['title'] ?? $state['content']);
     }
 
     public static function getIcon(): \BackedEnum|string
