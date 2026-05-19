@@ -2,6 +2,13 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v4.1.2 - 2026-05-19
+
+- Remove overridden function that was needed in Filament v3 to fix a bug with the Builder form component and translatable package
+- Fix bug in deprecated TextBlock
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v4.1.1...v4.1.2
+
 ## v4.1.1 - 2026-05-18
 
 ### What's Changed
