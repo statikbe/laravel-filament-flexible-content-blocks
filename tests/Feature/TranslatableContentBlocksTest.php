@@ -1,11 +1,13 @@
 <?php
 
+use Filament\Actions\Testing\TestAction;
 use Livewire\Livewire;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\QuoteBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\TextImageBlock;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\VideoBlock;
 use Statikbe\FilamentFlexibleContentBlocks\Tests\Models\TranslatablePage;
 use Statikbe\FilamentFlexibleContentBlocks\Tests\Resources\TranslatablePageResource\Pages\CreateTranslatablePage;
+use Statikbe\FilamentFlexibleContentBlocks\Tests\Resources\TranslatablePageResource\Pages\EditTranslatablePage;
 
 beforeEach(function () {
     setupFilamentPanel();
@@ -269,6 +271,46 @@ it('maintains separate content blocks when switching locales multiple times via 
     $nlBlocks = is_string($nlBlocks) ? json_decode($nlBlocks, true) : $nlBlocks;
     expect($nlBlocks)->toHaveCount(1)
         ->and($nlBlocks[0]['type'])->toBe('video');
+});
+
+it('inserts a block via the inline addBetween action on a translatable resource', function () {
+    // Regression test for issue #97: the v3-era `getChildSchemas` override caused the inline
+    // "+" action between existing blocks to silently drop the new block on translatable
+    // resources. Removing the override fixes it; this test locks the behavior in.
+    $textImageName = TextImageBlock::getName();
+    $quoteName = QuoteBlock::getName();
+    $videoName = VideoBlock::getName();
+
+    $page = TranslatablePage::factory()->create([
+        'title' => ['en' => 'EN', 'nl' => 'NL'],
+        'slug' => ['en' => 'en', 'nl' => 'nl'],
+        'code' => 'inline-add-between-test',
+        'content_blocks' => [
+            'en' => [
+                ['type' => $textImageName, 'data' => ['title' => 'First']],
+                ['type' => $quoteName, 'data' => ['quote' => 'Last']],
+            ],
+            'nl' => [],
+        ],
+    ]);
+
+    $component = Livewire::test(EditTranslatablePage::class, ['record' => $page->getRouteKey()]);
+
+    $blockKeys = array_keys($component->get('data.content_blocks'));
+    [$firstKey] = $blockKeys;
+
+    $component->callAction(
+        TestAction::make('addBetween')
+            ->schemaComponent('content_blocks')
+            ->arguments(['afterItem' => $firstKey, 'block' => $videoName])
+    );
+
+    $blocks = array_values($component->get('data.content_blocks'));
+
+    expect($blocks)->toHaveCount(3)
+        ->and($blocks[0]['type'])->toBe($textImageName)
+        ->and($blocks[1]['type'])->toBe($videoName)
+        ->and($blocks[2]['type'])->toBe($quoteName);
 });
 
 it('preserves content blocks structure when saving with multiple locales', function () {

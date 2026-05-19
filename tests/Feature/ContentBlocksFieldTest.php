@@ -1,5 +1,6 @@
 <?php
 
+use Filament\Actions\Testing\TestAction;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\Builder;
 use Filament\Forms\Components\Builder\Block;
@@ -13,6 +14,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Actions\ViewPageAction
 use Statikbe\FilamentFlexibleContentBlocks\Tests\Models\Page;
 use Statikbe\FilamentFlexibleContentBlocks\Tests\Models\TranslatablePage;
 use Statikbe\FilamentFlexibleContentBlocks\Tests\Resources\PageResource\Pages\CreatePage;
+use Statikbe\FilamentFlexibleContentBlocks\Tests\Resources\PageResource\Pages\EditPage;
 
 use function Pest\Laravel\assertDatabaseHas;
 
@@ -206,6 +208,45 @@ it('preserves content blocks data integrity', function () {
     // Verify HTML and special characters are preserved
     expect($contentBlocks[0]['data']['text'])->toBe('<p>Rich <strong>HTML</strong> content</p>')
         ->and($contentBlocks[1]['data']['quote'])->toBe('Quote with "special" characters & symbols');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Inline "add between" action — regression coverage for issue #97
+|--------------------------------------------------------------------------
+*/
+
+it('inserts a block via the inline addBetween action', function () {
+    // Block names are registered with the package prefix (see AbstractFilamentFlexibleContentBlock::getName()),
+    // which is what the block picker passes as the `block` argument.
+    $textImageName = TextImageBlock::getName();
+    $quoteName = QuoteBlock::getName();
+    $videoName = VideoBlock::getName();
+
+    $page = Page::factory()->create([
+        'content_blocks' => [
+            ['type' => $textImageName, 'data' => ['title' => 'First']],
+            ['type' => $quoteName, 'data' => ['quote' => 'Last']],
+        ],
+    ]);
+
+    $component = Livewire::test(EditPage::class, ['record' => $page->getRouteKey()]);
+
+    $blockKeys = array_keys($component->get('data.content_blocks'));
+    [$firstKey] = $blockKeys;
+
+    $component->callAction(
+        TestAction::make('addBetween')
+            ->schemaComponent('content_blocks')
+            ->arguments(['afterItem' => $firstKey, 'block' => $videoName])
+    );
+
+    $blocks = array_values($component->get('data.content_blocks'));
+
+    expect($blocks)->toHaveCount(3)
+        ->and($blocks[0]['type'])->toBe($textImageName)
+        ->and($blocks[1]['type'])->toBe($videoName)
+        ->and($blocks[2]['type'])->toBe($quoteName);
 });
 
 /*
