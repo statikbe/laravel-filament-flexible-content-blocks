@@ -55,7 +55,7 @@ trait HasHeroImageAttributesTrait
                 }
 
                 // add extra conversion for SEO image format, when the hero is used as fallback for the SEO image:
-                if (method_exists($this, 'heroImage')) {
+                if (method_exists($this, 'heroImage') && method_exists($this, 'getSEOImageConversionName')) {
                     $seoConversion = $this->addMediaConversion($this->getSEOImageConversionName())
                         ->fit(Fit::Crop, 1200, 630)
                         ->format(ImageFormat::WEBP->value);
