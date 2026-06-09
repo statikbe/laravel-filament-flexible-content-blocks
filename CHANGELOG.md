@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v4.1.3 - 2026-06-09
+
+- Fix bug with hero image conversions when the SEO image is not used.
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v4.1.2...v4.1.3
+
 ## v4.1.2 - 2026-05-19
 
 - Remove overridden function that was needed in Filament v3 to fix a bug with the Builder form component and translatable package
