@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v4.1.4 - 2026-06-10
+
+Make select search & ordering locale-aware for translatable columns and add better Postgresql query support.
+
+Search and order on the active locale's value via JSON arrow paths (title->en) instead of the raw JSON document, fixing PostgreSQL's "ordering operator for type json" error and matching readable text on MySQL/MariaDB/PostgreSQL. Filter search columns to those that exist, guard against an empty WHERE matching all rows, and add tests.
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v4.1.3...v4.1.4
+
 ## v4.1.3 - 2026-06-09
 
 - Fix bug with hero image conversions when the SEO image is not used.
