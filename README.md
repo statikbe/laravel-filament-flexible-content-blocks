@@ -33,6 +33,7 @@ The key goals of this package are:
 - Content block previews! You can now show a preview of what the block looks like on the actual page, styled with the 
 correct stylesheet. See [the preview block configuration](documentation%2Fconfiguration.md#block-previews).
 - :art: Simple asset manager, see [Filament Flexible Blocks Asset Manager](https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager)
+- Filament theme to easily render content blocks within Filament.
 
 **NOTE:**
 :rocket: For a complete, out-of-the-box, content management solution, check out our new [Filament Flexible Content Block Pages](https://github.com/statikbe/laravel-filament-flexible-content-block-pages) package with page management,
