@@ -389,6 +389,77 @@ Do the step below to ensure that tailwind will pick up the css classes used by t
 @source "../../config/filament-flexible-content-blocks.php";
 ```
 
+## Themes
+
+The package ships several sets of Blade views ("themes") that decide how the blocks are rendered. Pick one with the `theme` option in `config/filament-flexible-content-blocks.php`:
+
+```php
+'theme' => 'tailwind', // 'tailwind' (default), 'bootstrap4-kul' or 'filament'
+```
+
+Each theme is a directory of views under `resources/views/content-blocks/<theme>` and `resources/views/components/<theme>`. To tweak the markup of a theme, [publish the views](#installation) and edit the copies under `resources/views/vendor/filament-flexible-content-blocks`.
+
+| Theme | Use case                                                                                                                                                                                                                                                |
+|-------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `tailwind` | Public, front-end pages styled with Tailwind (the default, see [Setup the controller and Blade view](#4-setup-the-controller-and-blade-view)).                                                                                                          |
+| `bootstrap4-kul` | Front-end pages on a [Bootstrap 4 design system for KULeuven](https://stijl.kuleuven.be/releases/1.0.2/stijlgids/).                                                                                                                                     |
+| `filament` | Renders the blocks with native Filament UI components so the content displays *inside* a Filament panel — e.g. a read-only "view" page for editorially-managed content — instead of a public front-end. Useful for documentation pages inside Filament. |
+
+### Filament theme
+
+Enable it in [the config](./documentation/configuration.md#frontend-theme):
+
+```php
+'theme' => 'filament',
+```
+
+Because this theme is built on Filament's own components (`<x-filament::section>`, `<x-filament::button>`, `<x-filament::link>`), its classes have to be compiled by your **Filament panel theme**, not your front-end CSS. Create a [custom Filament theme](https://filamentphp.com/docs/styling/overview#creating-a-custom-theme) and add the following to its CSS (e.g. `resources/css/filament/admin/theme.css`):
+
+1. The typography plugin — the text and rich-text blocks render with `prose`:
+
+```css
+@plugin '@tailwindcss/typography';
+```
+
+2. `@source` directives so Tailwind scans the theme's views **and the package config**. The image-width and background-colour utility classes are defined in the config file (not in the Blade), so it has to be scanned too:
+
+```css
+/* the first line covers published views, the second the package defaults */
+@source '../../../../resources/views/vendor/filament-flexible-content-blocks/**/*.blade.php';
+@source '../../../../vendor/statikbe/laravel-filament-flexible-content-blocks/resources/views/**/*.blade.php';
+@source '../../../../config/filament-flexible-content-blocks.php';
+```
+
+3. Styling for the background-colour classes. Each block outputs the class name configured under `background_colours` in the config file (`content-block_bg--default`, `content-block_bg--primary`, …) — the theme applies the class, your CSS decides how it looks. The default option is meant to be a no-op so the block stays flat; the others can be turned into tinted panels, for example:
+
+```css
+.content-block_bg--default {
+    /* keep the block flat: no background, border or padding */
+}
+
+.content-block_bg--primary,
+.content-block_bg--secondary,
+.content-block_bg--light {
+    padding: 1.5rem;
+    border: 1px solid var(--color-gray-200);
+    border-radius: 0.75rem;
+}
+.dark .content-block_bg--primary,
+.dark .content-block_bg--secondary,
+.dark .content-block_bg--light {
+    border-color: var(--color-gray-700);
+}
+
+.content-block_bg--primary { background-color: var(--color-primary-50); }
+.dark .content-block_bg--primary { background-color: var(--color-primary-950); }
+.content-block_bg--secondary { background-color: var(--color-gray-100); }
+.dark .content-block_bg--secondary { background-color: var(--color-gray-800); }
+.content-block_bg--light { background-color: var(--color-gray-50); }
+.dark .content-block_bg--light { background-color: var(--color-gray-900); }
+```
+
+Then rebuild the theme (`npm run build`, `vite build`, or your project's build command).
+
 ## AI features
 
 We are dreaming up some exciting new AI-based features to ease content creation and translation. The first has arrived:
