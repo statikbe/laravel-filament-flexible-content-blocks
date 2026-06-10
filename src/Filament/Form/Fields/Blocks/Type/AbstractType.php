@@ -10,7 +10,6 @@ use Filament\Resources\Resource;
 use Illuminate\Database\Connection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 use function Filament\Support\get_model_label;
@@ -45,6 +44,14 @@ abstract class AbstractType
 
     protected string $model;
 
+    /**
+     * Memoized list of configured search columns that actually exist on the
+     * model's table, keyed by "connection.table".
+     *
+     * @var array<string, array<int, string>>
+     */
+    protected array $existingSearchColumns = [];
+
     protected function setUp(): void
     {
         $this->getSearchResultsUsing(function (Select $component, ?string $search): array {
@@ -56,38 +63,36 @@ abstract class AbstractType
                 ]) ?? $query;
             }
 
-            if (empty($query->getQuery()->orders)) {
-                $query->orderBy($this->getTitleColumnName());
+            $locale = $this->resolveLocale($component);
+
+            $this->applyDefaultOrder($query, $locale);
+
+            $model = $query->getModel();
+
+            // Only search columns that actually exist on the model's table, so a
+            // model that does not define every configured column (e.g. no
+            // overview_title / overview_description) does not break the query.
+            $searchColumns = $this->getExistingSearchColumns($query);
+
+            // Without any searchable column there is nothing to match against.
+            // Returning early avoids an empty where(...) group, which SQL treats
+            // as "match everything" and would return every record.
+            if (empty($searchColumns)) {
+                return [];
             }
 
-            $search = strtolower($search);
-
-            /** @var Connection $databaseConnection */
-            $databaseConnection = $query->getConnection();
-
-            $searchOperator = match ($databaseConnection->getDriverName()) {
-                'pgsql' => 'ilike',
-                default => 'like',
-            };
-
-            $grammar = $databaseConnection->getQueryGrammar();
-
-            $query->where(function (Builder $query) use ($searchOperator, $search, $grammar): Builder {
-                $isFirst = true;
-
-                foreach ($this->getSearchColumns() as $searchColumnName) {
-                    $whereClause = $isFirst ? 'where' : 'orWhere';
-
-                    $query->{$whereClause}(
-                        DB::raw('lower('.$grammar->wrap($searchColumnName).')'),
-                        $searchOperator,
+            // whereLike (caseSensitive: false) lets Laravel pick the correct
+            // case-insensitive operator per driver (ilike on PostgreSQL, like on
+            // MySQL). For translatable columns the reference is a JSON arrow path
+            // for the active locale, so we match the human-readable string rather
+            // than the raw JSON document.
+            $query->where(function (Builder $query) use ($search, $searchColumns, $model, $locale): void {
+                foreach ($searchColumns as $searchColumnName) {
+                    $query->orWhereLike(
+                        $this->resolveColumnReference($model, $searchColumnName, $locale),
                         "%{$search}%",
                     );
-
-                    $isFirst = false;
                 }
-
-                return $query;
             });
 
             $baseQuery = $query->getQuery();
@@ -101,11 +106,6 @@ abstract class AbstractType
             $keyName = $query->getModel()->getKeyName();
 
             if ($this->hasOptionLabelFromRecordUsingCallback()) {
-                $locale = null;
-                if (method_exists($component->getLivewire(), 'getActiveSchemaLocale')) {
-                    $locale = $component->getLivewire()->getActiveSchemaLocale();
-                }
-
                 return $query
                     ->get()
                     ->mapWithKeys(fn (Model $record) => [
@@ -132,18 +132,13 @@ abstract class AbstractType
                 ]) ?? $query;
             }
 
-            if (empty($query->getQuery()->orders)) {
-                $query->orderBy($this->getTitleColumnName());
-            }
+            $locale = $this->resolveLocale($component);
+
+            $this->applyDefaultOrder($query, $locale);
 
             $keyName = $query->getModel()->getKeyName();
 
             if ($this->hasOptionLabelFromRecordUsingCallback()) {
-                $locale = null;
-                if (method_exists($component->getLivewire(), 'getActiveSchemaLocale')) {
-                    $locale = $component->getLivewire()->getActiveSchemaLocale();
-                }
-
                 return $query
                     ->get()
                     ->mapWithKeys(fn (Model $record) => [
@@ -175,12 +170,7 @@ abstract class AbstractType
             }
 
             if ($this->hasOptionLabelFromRecordUsingCallback()) {
-                $locale = null;
-                if (method_exists($component->getLivewire(), 'getActiveSchemaLocale')) {
-                    $locale = $component->getLivewire()->getActiveSchemaLocale();
-                }
-
-                return $this->getOptionLabelFromRecord($record, $locale);
+                return $this->getOptionLabelFromRecord($record, $this->resolveLocale($component));
             }
 
             return $record->getAttributeValue($this->getTitleColumnName());
@@ -190,6 +180,90 @@ abstract class AbstractType
             // default implementation, please overwrite if your model differs:
             return method_exists($record, 'translate') ? $record->translate($this->getTitleColumnName(), $locale ?? app()->getLocale()) : $record->{$this->getTitleColumnName()};
         });
+    }
+
+    /**
+     * Apply the default ordering on the title column when the query is not
+     * already ordered. For translatable columns the active locale's value is
+     * extracted via a JSON arrow path, which both keeps the ordering on the
+     * human-readable string and avoids PostgreSQL's "could not identify an
+     * ordering operator for type json" error.
+     */
+    protected function applyDefaultOrder(Builder $query, ?string $locale = null): void
+    {
+        if (! empty($query->getQuery()->orders)) {
+            return;
+        }
+
+        /** @var Connection $connection */
+        $connection = $query->getConnection();
+        $columnReference = $this->resolveColumnReference($query->getModel(), $this->getTitleColumnName(), $locale);
+        $column = $connection->getQueryGrammar()->wrap($columnReference);
+
+        // Lowercase so the ordering is case-insensitive on every driver.
+        $query->orderByRaw('lower('.$column.')');
+    }
+
+    /**
+     * Resolve the active locale for the Select component, falling back to the
+     * application locale when the Livewire component does not expose one.
+     */
+    protected function resolveLocale(Select $component): string
+    {
+        $livewire = $component->getLivewire();
+
+        if (method_exists($livewire, 'getActiveSchemaLocale')) {
+            return $livewire->getActiveSchemaLocale() ?? app()->getLocale();
+        }
+
+        return app()->getLocale();
+    }
+
+    /**
+     * Resolve the column reference to use in a query. For translatable columns
+     * this returns a JSON arrow path (e.g. "title->en") so the active locale's
+     * value is compared instead of the raw JSON document; other columns are
+     * returned unchanged.
+     */
+    protected function resolveColumnReference(Model $model, string $column, ?string $locale): string
+    {
+        if ($locale !== null
+            && method_exists($model, 'isTranslatableAttribute')
+            && $model->isTranslatableAttribute($column)) {
+            return "{$column}->{$locale}";
+        }
+
+        return $column;
+    }
+
+    /**
+     * Return the configured search columns that actually exist on the model's
+     * table. The schema lookup is memoized per table so it is not repeated on
+     * every search request.
+     *
+     * @return array<int, string>
+     */
+    protected function getExistingSearchColumns(Builder $query): array
+    {
+        /** @var Connection $connection */
+        $connection = $query->getConnection();
+        $table = $query->getModel()->getTable();
+
+        // Key the cache by connection and table so a query swapped onto a
+        // different connection (e.g. a tenant database) with the same table name
+        // does not reuse another connection's column lookup.
+        $cacheKey = $connection->getName().'.'.$table;
+
+        if (! isset($this->existingSearchColumns[$cacheKey])) {
+            $schemaBuilder = $connection->getSchemaBuilder();
+
+            $this->existingSearchColumns[$cacheKey] = array_values(array_filter(
+                $this->getSearchColumns() ?? [],
+                fn (string $column): bool => $schemaBuilder->hasColumn($table, $column),
+            ));
+        }
+
+        return $this->existingSearchColumns[$cacheKey];
     }
 
     public function model(string $model): static

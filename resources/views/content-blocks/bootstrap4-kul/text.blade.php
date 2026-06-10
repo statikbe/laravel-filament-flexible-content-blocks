@@ -1,3 +1,11 @@
+@php
+    /**
+     * @deprecated This block has very similar or fewer functionality than other blocks.
+     * This block has been removed from the default blocks in the configuration.
+     * Use TextImageBlock or CallToActionBlock.
+     */
+@endphp
+
 @if ($content)
     <section class="row">
         <div class="col-xs-12">
