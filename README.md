@@ -125,7 +125,8 @@ Here is a brief overview of the choices made:
 
 ## Usage
 
-There is [an example project](https://github.com/statikbe/laravel-filament-package-sampler) of all the package features, which includes:
+If you are looking for a CMS-like page builder that makes use of this content blocks package, check out our [Filament Flexible Content Block Pages](https://github.com/statikbe/laravel-filament-flexible-content-block-pages).
+If you want to apply it to a different context, there is [an example project](https://github.com/statikbe/laravel-filament-package-sampler) of all the package features, which includes:
 - migrations
 - data models for default & translatable pages
 - Filament resources & pages
@@ -221,6 +222,9 @@ If you want to implement a nested URL structure, check [this documentation](docu
 ### 3. Setup the Filament resource
 
 Create a filament resource and its page with the filament command.
+
+If your model is translatable, add the [`FlexibleContentBlocksTranslatable`](./src/Filament/Resource/Concerns/FlexibleContentBlocksTranslatable.php) 
+trait, to use the locales configured by this package.
 
 #### Setup the table
 
