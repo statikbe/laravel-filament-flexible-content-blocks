@@ -2,6 +2,16 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v4.1.6 - 2026-07-22
+
+### What's Changed
+
+* Fix bug in PublishedColumn when sorting.
+* Fix plumbphp security warnings.
+* Bump actions/checkout from 6 to 7 by @dependabot[bot] in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/99
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v4.1.5...v4.1.6
+
 ## v4.1.5 - 2026-06-12
 
 Add FlexibleContentBlocksTranslatable trait to use in a Filament resource. The trait extends the LaraZeus Translatable trait but uses the locales configured by this package. This is useful for cases, where you want a subset of your default locales for content blocks. E.g. when you only want content blocks in English but your site has translation files for many more languages.
