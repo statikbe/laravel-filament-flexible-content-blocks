@@ -4,7 +4,9 @@ namespace Statikbe\FilamentFlexibleContentBlocks\Filament\Table\Columns;
 
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasPageAttributes;
 
 class PublishedColumn extends TextColumn
@@ -22,6 +24,22 @@ class PublishedColumn extends TextColumn
 
         return static::make('is_published')
             ->label(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.columns.is_published'))
+            ->sortable(query: function (Builder $query, string $direction): Builder {
+                // 'is_published' is a computed state, not a real column, so sorting is
+                // expressed as a CASE mirroring the four cases in scopePublished()/isPublished().
+                $now = Carbon::now()->toDateTimeString();
+
+                return $query->orderByRaw(
+                    'CASE
+                        WHEN publishing_begins_at IS NULL AND publishing_ends_at IS NULL THEN 1
+                        WHEN publishing_begins_at IS NULL AND publishing_ends_at IS NOT NULL AND publishing_ends_at > ? THEN 1
+                        WHEN publishing_begins_at IS NOT NULL AND publishing_ends_at IS NOT NULL AND publishing_begins_at <= ? AND publishing_ends_at >= ? THEN 1
+                        WHEN publishing_begins_at IS NOT NULL AND publishing_ends_at IS NULL AND publishing_begins_at < ? THEN 1
+                        ELSE 0
+                    END '.$direction,
+                    [$now, $now, $now, $now]
+                );
+            })
             ->getStateUsing(function (Model $record) {
                 /** @var Model&HasPageAttributes $record */
                 return $record->isPublished() ? static::STATE_PUBLISHED : static::STATE_UNPUBLISHED;
