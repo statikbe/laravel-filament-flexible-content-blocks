@@ -1,4 +1,6 @@
-<section class="section section--default" aria-label="video">
+<div class="content-block content-block--video"
+         aria-label="video"
+>
     <div class="container">
         @if ($hasOverlayImage())
             <div x-data="{ isPlaying: false, embedUrl: '{{ $getEmbedSrc() }}' }" class="cursor-pointer group" aria-hidden="true">
@@ -42,4 +44,4 @@
             </div>
         @endif
     </div>
-</section>
+</div>
