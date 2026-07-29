@@ -1,4 +1,4 @@
-<div class="section section--default">
+<div class="content-block content-block--quote">
     <div class="container">
         <blockquote @class([
             'pl-6 border-l-2 border-gray-200',
