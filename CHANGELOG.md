@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v4.1.8 - 2026-09-18
+
+- add Laravel Boost skills to aid AI development
+
 ## v4.1.7 - 2026-07-29
 
 ### What's Changed
