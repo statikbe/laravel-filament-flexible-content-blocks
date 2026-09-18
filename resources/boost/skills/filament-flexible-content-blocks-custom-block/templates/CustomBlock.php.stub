@@ -1,0 +1,188 @@
+<?php
+
+namespace App\ContentBlocks;
+
+use Closure;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Components\Grid;
+use Filament\Support\Icons\Heroicon;
+use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\MediaCollections\HtmlableMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBackgroundColour;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasBlockStyle;
+use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\Concerns\HasImage;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BackgroundColourField;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockSpatieMediaLibraryFileUpload;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\BlockStyleField;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasMediaAttributes;
+
+/**
+ * Custom content block.
+ *
+ * IMPORTANT: custom blocks extend AbstractContentBlock.
+ * Never extend AbstractFilamentFlexibleContentBlock: that class is internal to the
+ * filament-flexible-content-blocks package and resolves the block name, its labels and its view inside
+ * the package's own namespaces.
+ *
+ * Remove the traits, fields and methods this block does not need.
+ */
+class FaqBlock extends AbstractContentBlock
+{
+    use HasBackgroundColour;
+    use HasBlockStyle;
+    use HasImage;
+
+    public ?string $title;
+
+    /** @var array<int, array{question: string, answer: string}> */
+    public array $questions;
+
+    public ?string $imageTitle;
+
+    public function __construct(Model&HasContentBlocks&HasMedia $record, ?array $blockData)
+    {
+        // must run first: it generates the block id that the media lookups rely on.
+        parent::__construct($record, $blockData);
+
+        $this->title = $blockData['title'] ?? null;
+        $this->questions = $blockData['questions'] ?? [];
+        $this->imageTitle = $blockData['image_title'] ?? null;
+        $this->backgroundColourType = $blockData['background_colour'] ?? null;
+
+        $this->setBlockStyle($blockData);
+    }
+
+    /**
+     * Unique, stable identifier. Stored as the `type` key in the content_blocks JSON and used as the
+     * media collection name. Renaming it orphans existing content and images.
+     */
+    public static function getName(): string
+    {
+        return 'faq';
+    }
+
+    public static function getIcon(): \BackedEnum|string
+    {
+        return Heroicon::QuestionMarkCircle;
+    }
+
+    public static function getLabel(): string
+    {
+        return trans('content-blocks.faq.label');
+    }
+
+    public static function getFieldLabel(string $field): string
+    {
+        return trans("content-blocks.faq.{$field}");
+    }
+
+    /**
+     * Shown in the collapsed block header, so editors can tell instances apart.
+     */
+    public static function getContextualLabel(?array $state): ?string
+    {
+        $title = $state['title'] ?? null;
+
+        return $title ? static::getLabel().' - '.$title : static::getLabel();
+    }
+
+    protected static function makeFilamentSchema(): array|Closure
+    {
+        return [
+            TextInput::make('title')
+                ->label(static::getFieldLabel('title'))
+                ->maxLength(255),
+            Repeater::make('questions')
+                ->label(static::getFieldLabel('questions'))
+                ->schema([
+                    TextInput::make('question')
+                        ->label(static::getFieldLabel('question'))
+                        ->required()
+                        ->maxLength(255),
+                    RichEditor::make('answer')
+                        ->label(static::getFieldLabel('answer'))
+                        ->disableToolbarButtons(['attachFiles'])
+                        ->required(),
+                ])
+                ->collapsible()
+                ->defaultItems(1),
+            Grid::make(2)->schema([
+                // use BlockSpatieMediaLibraryFileUpload, never SpatieMediaLibraryFileUpload:
+                // it tags the media with the block id, so several instances keep their own image.
+                BlockSpatieMediaLibraryFileUpload::make('image')
+                    ->collection(static::getName())
+                    ->label(static::getFieldLabel('image'))
+                    ->maxFiles(1),
+                TextInput::make('image_title')
+                    ->label(static::getFieldLabel('image_title'))
+                    ->maxLength(255),
+            ]),
+            Grid::make(2)->schema([
+                BackgroundColourField::create(static::class),
+                BlockStyleField::create(static::class),
+            ]),
+        ];
+    }
+
+    /**
+     * Only needed when the block uploads images. Called for every block registered on the model.
+     */
+    public static function addMediaCollectionAndConversion(HasMedia&HasMediaAttributes $record): void
+    {
+        $record->addMediaCollection(static::getName())
+            ->registerMediaConversions(function (Media $media) use ($record) {
+                static::addCropImageConversion($record, 1200, 630);
+                static::addContainImageConversion($record, 1200, 630);
+
+                // thumbnail for the Filament upload field:
+                $record->addFilamentThumbnailMediaConversion();
+            });
+    }
+
+    public function getImageMedia(?string $conversion = null, array $attributes = []): ?HtmlableMedia
+    {
+        return $this->getHtmlableMedia(
+            $this->getBlockId(),
+            $conversion ?? self::CONVERSION_CROP,
+            $this->imageTitle,
+            $attributes
+        );
+    }
+
+    public function getImageUrl(?string $conversion = null): ?string
+    {
+        return $this->getMediaUrl(
+            blockId: $this->getBlockId(),
+            conversion: $conversion ?? self::CONVERSION_CROP
+        );
+    }
+
+    public function render()
+    {
+        // the block style suffix selects content-blocks/faq-{style}.blade.php; '' for the default style.
+        return view('content-blocks.faq'.$this->getBlockStyleTemplateSuffix());
+    }
+
+    /**
+     * @return array<string>
+     */
+    public function getSearchableContent(): array
+    {
+        $searchable = [];
+
+        $this->addSearchableContent($searchable, $this->title);
+
+        foreach ($this->questions as $question) {
+            $this->addSearchableContent($searchable, $question['question'] ?? null);
+            $this->addSearchableContent($searchable, $question['answer'] ?? null);
+        }
+
+        return $searchable;
+    }
+}

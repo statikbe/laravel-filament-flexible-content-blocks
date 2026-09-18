@@ -489,6 +489,23 @@ You can easily create your own content block by extending [AbstractContentBlock]
 __Note:__ Do NOT use [AbstractFilamentFlexibleContentBlock.php](src%2FContentBlocks%2FAbstractFilamentFlexibleContentBlock.php)
 to extend from, because this super class contains logic to add the package's own namespace to the custom block.
 
+## AI coding agents
+
+This package ships [Laravel Boost](https://laravel.com/framework/docs/boost) guidelines and agent skills,
+so AI coding agents know how to work with it. If your project has Boost installed, run
+`php artisan boost:install` (or `php artisan boost:update --discover`) and the following are installed
+for the agents you selected:
+
+- __AI guidelines__: a short overview of the package, loaded upfront.
+- __`filament-flexible-content-blocks-setup` skill__: wiring the package onto a model - migration, model
+  contracts and traits, the Filament resource form and table, the front-end Blade view and Tailwind sources.
+- __`filament-flexible-content-blocks-custom-block` skill__: writing a custom content block, including a
+  block class and Blade view template to start from. It explains, amongst others, that custom blocks must
+  extend [AbstractContentBlock](src%2FContentBlocks%2FAbstractContentBlock.php) and never
+  [AbstractFilamentFlexibleContentBlock](src%2FContentBlocks%2FAbstractFilamentFlexibleContentBlock.php).
+
+The sources live in [`resources/boost`](resources%2Fboost).
+
 ## Configuration
 
 A lot of the customisation of content blocks and their behaviour can be done through the configuration file. 
