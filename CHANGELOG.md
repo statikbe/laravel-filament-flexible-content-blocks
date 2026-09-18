@@ -2,6 +2,16 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v4.1.7 - 2026-07-29
+
+### What's Changed
+
+* Fix translation string of SEO AI action
+* Bump vite from 7.3.1 to 8.1.5 by @dependabot[bot] in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/102
+* Bump typescript from 5.9.3 to 7.0.2 by @dependabot[bot] in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/101
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v4.1.6...v4.1.7
+
 ## v4.1.6 - 2026-07-22
 
 ### What's Changed
