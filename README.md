@@ -33,6 +33,7 @@ The key goals of this package are:
 - Content block previews! You can now show a preview of what the block looks like on the actual page, styled with the 
 correct stylesheet. See [the preview block configuration](documentation%2Fconfiguration.md#block-previews).
 - :art: Simple asset manager, see [Filament Flexible Blocks Asset Manager](https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager)
+- [Laravel Boost](https://laravel.com/ai/boost) skills.
 
 **NOTE:**
 :rocket: For a complete, out-of-the-box, content management solution, check out our new [Filament Flexible Content Block Pages](https://github.com/statikbe/laravel-filament-flexible-content-block-pages) package with page management,
@@ -416,6 +417,10 @@ OPENAI_ORGANIZATION=org-...
 ```
 
 You will find the SEO AI action already set up in the `SEOFields` group.
+
+### AI development
+
+There is [Laravel Boost](https://laravel.com/ai/boost) support for [AI coding agents](#ai-coding-agents).
 
 ## Blocks
 
