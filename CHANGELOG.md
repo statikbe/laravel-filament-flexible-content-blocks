@@ -2,6 +2,17 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v4.2 - 2026-10-13
+
+### What's Changed
+
+* Filament theme for rendering content blocks within Filament. by @sten in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/98
+* Bump vite from 8.2.2 to 8.3.0 by @dependabot[bot] in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/106
+* Bump vite from 8.3.0 to 8.3.1 by @dependabot[bot] in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/107
+* Bump vite from 8.3.1 to 8.3.3 by @dependabot[bot] in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/108
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v4.1.8...v4.2
+
 ## v4.1.8 - 2026-09-18
 
 - add Laravel Boost skills to aid AI development
