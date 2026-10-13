@@ -13,7 +13,7 @@
     <div class="container">
         <div class="max-w-2xl py-3 text-balance">
             @if ($title)
-                <h2>{{ $replaceParameters($title) }}</h2>
+                <h2 class="text-balance">{{ $replaceParameters($title) }}</h2>
             @endif
 
             <div class="text-base canBeRichEditorContent">

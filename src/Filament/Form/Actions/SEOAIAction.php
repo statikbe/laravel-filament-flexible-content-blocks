@@ -87,7 +87,7 @@ class SEOAIAction extends Action
         } catch (Throwable $t) {
             Log::error($t);
             Notification::make()
-                ->title(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.generated_error'))
+                ->title(trans('filament-flexible-content-blocks::filament-flexible-content-blocks.form_action.seo_ai_action.generated_error'))
                 ->danger()
                 ->send();
         }

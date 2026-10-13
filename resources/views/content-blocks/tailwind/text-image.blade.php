@@ -9,11 +9,11 @@
             'md:grid-cols-2' => $hasImage() && $imagePosition !== 'center',
         ])>
             <div @class([
-                'max-w-2xl text-balance',
+                'max-w-2xl',
                 'order-2' => $hasImage() && $imagePosition === 'left',
             ])>
                 @if ($title)
-                    <h2>{{ $replaceParameters($title) }}</h2>
+                    <h2 class="text-balance">{{ $replaceParameters($title) }}</h2>
                 @endif
 
                 @if ($text)
@@ -23,7 +23,7 @@
                 @endif
 
                 @if ($callToActions)
-                    <div class="flex flex-wrap items-center gap-4 mt-6">
+                    <div class="flex flex-wrap items-center gap-x-4 gap-y-2 mt-4">
                         @foreach ($callToActions as $callToAction)
                             <x-flexible-call-to-action :data="$callToAction"></x-flexible-call-to-action>
                         @endforeach

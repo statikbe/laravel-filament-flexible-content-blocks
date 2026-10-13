@@ -1,16 +1,27 @@
-<section class="section {{ $getBackgroundColourClass() }}">
+<div
+    aria-hidden="true"
+    @class([
+        'content-block content-block--image',
+        $getBackgroundColourClass(),
+    ])
+>
     <div class="container">
         <div @class([
             'w-full',
             $getImageWidthClass(),
             '' => $imagePosition === 'left',
-            'mx-auto' => $imagePosition === 'center',
-            'ml-auto' => $imagePosition === 'right',
+            'mx-auto text-right' => $imagePosition === 'center',
+            'ml-auto text-right' => $imagePosition === 'right',
         ])>
-            {{ $getImageMedia(attributes: ['alt' => $imageTitle, 'class' => 'w-full', 'loading' => 'lazy']) }}
+            {{ $getImageMedia(attributes: [
+                'alt' => $imageTitle,
+                'class' => 'w-full',
+                'loading' => 'lazy',
+            ]) }}
+
             @if ($imageCopyright)
                 <small>&copy; {{ $replaceParameters($imageCopyright) }}</small>
             @endif
         </div>
     </div>
-</section>
+</div>

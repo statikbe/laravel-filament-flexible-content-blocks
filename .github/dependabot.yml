@@ -10,3 +10,16 @@ updates:
       interval: "weekly"
     labels:
       - "dependencies"
+    # Wait for updates to age before opening PRs, so the community has time to
+    # vet a release (mitigates xz-utils style supply-chain attacks).
+    cooldown:
+      default-days: 7
+
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "dependencies"
+    cooldown:
+      default-days: 7

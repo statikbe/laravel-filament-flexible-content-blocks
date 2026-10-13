@@ -34,6 +34,7 @@ The key goals of this package are:
 correct stylesheet. See [the preview block configuration](documentation%2Fconfiguration.md#block-previews).
 - :art: Simple asset manager, see [Filament Flexible Blocks Asset Manager](https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager)
 - Filament theme to easily render content blocks within Filament.
+- [Laravel Boost](https://laravel.com/ai/boost) skills.
 
 **NOTE:**
 :rocket: For a complete, out-of-the-box, content management solution, check out our new [Filament Flexible Content Block Pages](https://github.com/statikbe/laravel-filament-flexible-content-block-pages) package with page management,
@@ -126,7 +127,8 @@ Here is a brief overview of the choices made:
 
 ## Usage
 
-There is [an example project](https://github.com/statikbe/laravel-filament-package-sampler) of all the package features, which includes:
+If you are looking for a CMS-like page builder that makes use of this content blocks package, check out our [Filament Flexible Content Block Pages](https://github.com/statikbe/laravel-filament-flexible-content-block-pages).
+If you want to apply it to a different context, there is [an example project](https://github.com/statikbe/laravel-filament-package-sampler) of all the package features, which includes:
 - migrations
 - data models for default & translatable pages
 - Filament resources & pages
@@ -222,6 +224,9 @@ If you want to implement a nested URL structure, check [this documentation](docu
 ### 3. Setup the Filament resource
 
 Create a filament resource and its page with the filament command.
+
+If your model is translatable, add the [`FlexibleContentBlocksTranslatable`](./src/Filament/Resource/Concerns/FlexibleContentBlocksTranslatable.php) 
+trait, to use the locales configured by this package.
 
 #### Setup the table
 
@@ -485,6 +490,10 @@ OPENAI_ORGANIZATION=org-...
 
 You will find the SEO AI action already set up in the `SEOFields` group.
 
+### AI development
+
+There is [Laravel Boost](https://laravel.com/ai/boost) support for [AI coding agents](#ai-coding-agents).
+
 ## Blocks
 
 To build your content, the package provides the default blocks listed below. 
@@ -556,6 +565,23 @@ You can easily create your own content block by extending [AbstractContentBlock]
 
 __Note:__ Do NOT use [AbstractFilamentFlexibleContentBlock.php](src%2FContentBlocks%2FAbstractFilamentFlexibleContentBlock.php)
 to extend from, because this super class contains logic to add the package's own namespace to the custom block.
+
+## AI coding agents
+
+This package ships [Laravel Boost](https://laravel.com/framework/docs/boost) guidelines and agent skills,
+so AI coding agents know how to work with it. If your project has Boost installed, run
+`php artisan boost:install` (or `php artisan boost:update --discover`) and the following are installed
+for the agents you selected:
+
+- __AI guidelines__: a short overview of the package, loaded upfront.
+- __`filament-flexible-content-blocks-setup` skill__: wiring the package onto a model - migration, model
+  contracts and traits, the Filament resource form and table, the front-end Blade view and Tailwind sources.
+- __`filament-flexible-content-blocks-custom-block` skill__: writing a custom content block, including a
+  block class and Blade view template to start from. It explains, amongst others, that custom blocks must
+  extend [AbstractContentBlock](src%2FContentBlocks%2FAbstractContentBlock.php) and never
+  [AbstractFilamentFlexibleContentBlock](src%2FContentBlocks%2FAbstractFilamentFlexibleContentBlock.php).
+
+The sources live in [`resources/boost`](resources%2Fboost).
 
 ## Configuration
 

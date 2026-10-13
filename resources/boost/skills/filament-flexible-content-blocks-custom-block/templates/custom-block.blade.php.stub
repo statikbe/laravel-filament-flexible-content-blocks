@@ -1,0 +1,37 @@
+{{--
+    Front-end view of the custom FAQ block: resources/views/content-blocks/faq.blade.php
+
+    Every public property and public method of the block class is available here; methods come through
+    as closures, so call them as $getBackgroundColourClass() and $replaceParameters($text).
+
+    Always pipe editor-entered text through $replaceParameters() so the configured
+    text_parameter_replacer can substitute :placeholder tokens.
+--}}
+<div @class([
+    'content-block content-block--faq',
+    $getBackgroundColourClass(),
+])>
+    <div class="container">
+        @if ($title)
+            <h2 class="text-balance">{{ $replaceParameters($title) }}</h2>
+        @endif
+
+        @if ($hasImage())
+            <figure>
+                {{ $getImageMedia(attributes: ['class' => 'w-full', 'loading' => 'lazy']) }}
+            </figure>
+        @endif
+
+        <dl>
+            @foreach ($questions as $index => $question)
+                {{-- getBlockId() keeps DOM ids unique when the same block is used more than once --}}
+                <div id="faq-{{ $getBlockId() }}-{{ $index }}">
+                    <dt>{{ $replaceParameters($question['question']) }}</dt>
+                    <dd class="canBeRichEditorContent">
+                        {!! $replaceParameters($question['answer']) !!}
+                    </dd>
+                </div>
+            @endforeach
+        </dl>
+    </div>
+</div>
