@@ -74,7 +74,7 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
         if (! $mediaObject) {
             return '';
         }
-        $mediaObject->setAttribute($attributes);
+        $mediaObject = $mediaObject->withAttribute($attributes);
 
         return $mediaObject->getEmbedCode();
     }
@@ -86,7 +86,7 @@ class VideoBlock extends AbstractFilamentFlexibleContentBlock
             return '';
         }
 
-        $mediaObject->setAttribute($attributes);
+        $mediaObject = $mediaObject->withAttribute($attributes);
 
         return $mediaObject->getEmbedSrc();
     }

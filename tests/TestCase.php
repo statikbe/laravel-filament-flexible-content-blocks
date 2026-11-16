@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\MediaLibrary\MediaLibraryServiceProvider;
+use Spatie\Sluggable\SluggableServiceProvider;
 use Spatie\Translatable\TranslatableServiceProvider;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocksServiceProvider;
 use Statikbe\FilamentFlexibleContentBlocks\Tests\Models\User;
@@ -33,7 +34,7 @@ class TestCase extends Orchestra
 
     protected function getPackageProviders($app)
     {
-        return [
+        $providers = [
             // Sorted alphabetically by full namespace for Filament v4 compatibility
             // See: https://github.com/filamentphp/filament/discussions/17917
             BladeHeroiconsServiceProvider::class,        // BladeUI\Heroicons\...
@@ -51,6 +52,13 @@ class TestCase extends Orchestra
             FilamentFlexibleContentBlocksServiceProvider::class, // Statikbe\...\...ServiceProvider
             TestPanelProvider::class,                    // Statikbe\...\...PanelProvider
         ];
+
+        // spatie/laravel-sluggable v4 ships a service provider that registers its action config.
+        if (class_exists(SluggableServiceProvider::class)) {
+            $providers[] = SluggableServiceProvider::class;
+        }
+
+        return $providers;
     }
 
     protected function getEnvironmentSetUp($app)
