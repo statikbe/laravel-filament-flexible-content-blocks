@@ -1,5 +1,36 @@
 # Upgrades
 
+## v4.3
+
+v4.3 widens the supported dependency ranges. No code changes are needed for most applications, but check the points below.
+
+### spatie/laravel-sluggable 4, 5 and 6 are now supported
+
+The constraint is now `^3.4|^4.0|^5.0|^6.0`. Composer picks the highest version your PHP and Laravel versions allow:
+v5 and v6 require PHP 8.4 and Laravel 13, so other setups stay on v3 or v4. Slug generation and route binding of
+`HasSlugAttributeTrait` and `HasTranslatedSlugAttributeTrait` behave the same on every version, including resolving
+translated slugs in any supported locale.
+
+If your application ends up on sluggable v6, check your own models:
+
+- **UUID or ULID models:** combining a slug trait with Laravel's `HasUuids` or `HasUlids` now causes a trait conflict.
+  Use the combined traits from sluggable instead (e.g. `Spatie\Sluggable\HasSlugWithUuids`). See the
+  [sluggable upgrade guide](https://github.com/spatie/laravel-sluggable/blob/main/UPGRADING.md).
+- **Inherited slug traits:** apply `HasSlugAttributeTrait` or `HasTranslatedSlugAttributeTrait` only once in a model's
+  inheritance chain. Re-adding it in a subclass can cause recursive route binding.
+
+### dereuromark/media-embed 1.x is now required
+
+The constraint changed from `^0.6` to `^1.0`. In v1 the `MediaObject` is immutable: `setAttribute()` is replaced by
+`withAttribute()`, which returns a new instance. If you extended `VideoBlock` or call `MediaObject::setAttribute()`
+yourself, switch to `withAttribute()` and use the returned object. If your application requires `dereuromark/media-embed:^0.6`
+directly, update that constraint as well. v1 also adds default iframe attributes (`title`, `loading`, `referrerpolicy`)
+to video embeds.
+
+### openai-php/laravel 0.20 to 0.22 are now supported
+
+The constraint is now `^0.19|^0.20|^0.21|^0.22`. The API and config keys this package uses are unchanged.
+
 ## v2.1.0
 
 Since v2.1.0 the media UUID is no longer stored in the block data. This has impact on the Cards Block. 
