@@ -2,6 +2,20 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## v4.3.0 - 2026-11-16
+
+### What's Changed
+
+* Bump shivammathur/setup-php from 2.37.2 to 2.40.0 by @dependabot[bot] in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/109
+* Bump vite from 8.3.3 to 8.3.4 by @dependabot[bot] in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/110
+* Bump stefanzweifel/git-auto-commit-action from 7.2.0 to 7.2.1 by @dependabot[bot] in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/111
+* Bump vite from 8.3.4 to 8.3.5 by @dependabot[bot] in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/112
+* Bump vite from 8.3.5 to 8.3.7 by @dependabot[bot] in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/114
+* chore(deps): allow the latest dependency majors by @vanneszias in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/113
+* test: cover translated slug route binding across locales + v4.3 upgrade notes by @sten in https://github.com/statikbe/laravel-filament-flexible-content-blocks/pull/115
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-content-blocks/compare/v4.2...v4.3.0
+
 ## v4.2 - 2026-10-13
 
 ### What's Changed
