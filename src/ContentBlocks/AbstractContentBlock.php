@@ -124,7 +124,12 @@ abstract class AbstractContentBlock extends Component
 
     public static function getPreviewView(): string
     {
-        $themePrefix = FilamentFlexibleBlocksConfig::getViewThemePrefix();
+        return static::getPreviewViewForModel();
+    }
+
+    public static function getPreviewViewForModel(?object $model = null): string
+    {
+        $themePrefix = FilamentFlexibleBlocksConfig::getViewThemePrefix($model);
 
         return "filament-flexible-content-blocks::content-blocks.{$themePrefix}preview";
     }

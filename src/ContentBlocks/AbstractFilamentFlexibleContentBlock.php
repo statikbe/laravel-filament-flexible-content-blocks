@@ -6,6 +6,7 @@ use Filament\Forms\Components\RichEditor\RichContentRenderer;
 use Illuminate\Support\Str;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleContentBlocksServiceProvider;
+use Statikbe\FilamentFlexibleContentBlocks\View\ThemeScopedView;
 
 /**
  * Adds extra convenience functionality for content blocks to deal with package specific logic, such as
@@ -67,7 +68,7 @@ abstract class AbstractFilamentFlexibleContentBlock extends AbstractContentBlock
 
     public function render()
     {
-        $themePrefix = FilamentFlexibleBlocksConfig::getViewThemePrefix();
+        $themePrefix = FilamentFlexibleBlocksConfig::getViewThemePrefix($this->record);
 
         $templateSuffix = static::getNameSuffix();
         if (method_exists($this, 'getBlockStyleTemplateSuffix')) {
@@ -77,7 +78,7 @@ abstract class AbstractFilamentFlexibleContentBlock extends AbstractContentBlock
             }
         }
 
-        return view("filament-flexible-content-blocks::content-blocks.{$themePrefix}{$templateSuffix}");
+        return ThemeScopedView::make("filament-flexible-content-blocks::content-blocks.{$themePrefix}{$templateSuffix}", $this->record);
     }
 
     public function getSearchableContent(): array

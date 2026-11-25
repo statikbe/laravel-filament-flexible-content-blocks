@@ -6,6 +6,7 @@ use Illuminate\View\Component;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasContentBlocks;
+use Statikbe\FilamentFlexibleContentBlocks\View\ThemeScopedView;
 
 class ContentBlocks extends Component
 {
@@ -14,8 +15,11 @@ class ContentBlocks extends Component
      */
     public array $contentBlocks = [];
 
+    public HasContentBlocks $page;
+
     public function __construct(HasContentBlocks $page)
     {
+        $this->page = $page;
         $this->contentBlocks = $this->createBlocks($page);
     }
 
@@ -44,9 +48,9 @@ class ContentBlocks extends Component
 
     public function render()
     {
-        $themePrefix = FilamentFlexibleBlocksConfig::getViewThemePrefix();
+        $themePrefix = FilamentFlexibleBlocksConfig::getViewThemePrefix($this->page);
 
-        return view("filament-flexible-content-blocks::components.{$themePrefix}content-blocks");
+        return ThemeScopedView::make("filament-flexible-content-blocks::components.{$themePrefix}content-blocks", $this->page);
     }
 
     /**

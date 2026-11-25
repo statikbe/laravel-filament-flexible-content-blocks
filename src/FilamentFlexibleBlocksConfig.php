@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleContentBlocks;
 
+use Closure;
 use Exception;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Illuminate\Database\Eloquent\Model;
@@ -296,11 +297,42 @@ class FilamentFlexibleBlocksConfig
         return config('filament-flexible-content-blocks.theme', 'tailwind');
     }
 
-    public static function getViewThemePrefix(): string
+    /**
+     * Models that are currently being rendered, innermost last. See withTheme().
+     *
+     * @var array<object>
+     */
+    private static array $themeScope = [];
+
+    /**
+     * A model can override the global theme by defining `getContentBlocksTheme(): ?string`.
+     * Without an explicit model, the model of the surrounding withTheme() scope is used.
+     */
+    public static function getViewThemePrefix(?object $model = null): string
     {
-        $theme = FilamentFlexibleBlocksConfig::getTheme();
+        $model ??= end(self::$themeScope) ?: null;
+        $modelTheme = ($model && method_exists($model, 'getContentBlocksTheme')) ? $model->getContentBlocksTheme() : null;
+        $theme = $modelTheme ?: FilamentFlexibleBlocksConfig::getTheme();
 
         return $theme ? $theme.'.' : '';
+    }
+
+    /**
+     * Runs the callback with the model's theme as the default theme for every getViewThemePrefix() call inside it.
+     */
+    public static function withTheme(?object $model, Closure $callback): mixed
+    {
+        if (! $model) {
+            return $callback();
+        }
+
+        self::$themeScope[] = $model;
+
+        try {
+            return $callback();
+        } finally {
+            array_pop(self::$themeScope);
+        }
     }
 
     public static function getAuthorModel(): string

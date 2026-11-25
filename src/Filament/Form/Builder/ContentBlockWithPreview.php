@@ -7,6 +7,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Vite;
 use Statikbe\FilamentFlexibleContentBlocks\ContentBlocks\AbstractContentBlock;
 use Statikbe\FilamentFlexibleContentBlocks\FilamentFlexibleBlocksConfig;
+use Statikbe\FilamentFlexibleContentBlocks\View\ThemeScopedView;
 
 class ContentBlockWithPreview extends Block
 {
@@ -27,13 +28,10 @@ class ContentBlockWithPreview extends Block
         $component = new $this->contentBlockClass($this->getRecord(), $data);
         $stylesheetPath = FilamentFlexibleBlocksConfig::getBlockPreviewStylesheet();
 
-        return view(
-            $component->getPreviewView(),
-            [
-                'component' => $component,
-                'stylesheet' => $stylesheetPath ? Vite::asset($stylesheetPath) : null,
-            ],
-        );
+        return ThemeScopedView::make($component->getPreviewViewForModel($this->getRecord()), $this->getRecord())->with([
+            'component' => $component,
+            'stylesheet' => $stylesheetPath ? Vite::asset($stylesheetPath) : null,
+        ]);
     }
 
     public function contentBlockClass(string $contentBlockClass): static
