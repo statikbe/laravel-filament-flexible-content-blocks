@@ -13,6 +13,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasHeroImageAttribut
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasHeroVideoAttribute;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasIntroAttribute;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasPageAttributes;
+use Statikbe\FilamentFlexibleContentBlocks\View\ThemeScopedView;
 
 class Hero extends Component
 {
@@ -91,8 +92,8 @@ class Hero extends Component
 
     public function render()
     {
-        $themePrefix = FilamentFlexibleBlocksConfig::getViewThemePrefix();
+        $themePrefix = FilamentFlexibleBlocksConfig::getViewThemePrefix($this->page);
 
-        return view("filament-flexible-content-blocks::components.{$themePrefix}hero");
+        return ThemeScopedView::make("filament-flexible-content-blocks::components.{$themePrefix}hero", $this->page);
     }
 }

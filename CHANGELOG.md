@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-filament-flexible-content-blocks` will be documented in this file.
 
+## Unreleased
+
+* Models can choose their own content block theme by defining `getContentBlocksTheme(): ?string`. The theme applies to everything rendered inside `ContentBlocks`, `Hero`, a block or the editor preview through a theme scope, so embedded components need no arguments. `FilamentFlexibleBlocksConfig::withTheme()` opens such a scope
+* Added the missing `text` block view to the `filament` theme
+* Added `AbstractContentBlock::getPreviewViewForModel(?object $model)` for the themed editor preview lookup. `getPreviewView()` is unchanged and keeps its signature
+
 ## v4.3.0 - 2026-11-16
 
 ### What's Changed

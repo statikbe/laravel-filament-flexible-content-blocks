@@ -466,6 +466,19 @@ Because this theme is built on Filament's own components (`<x-filament::section>
 
 Then rebuild the theme (`npm run build`, `vite build`, or your project's build command).
 
+### Theme per model
+
+A model can pick its own theme instead of the global one by defining `getContentBlocksTheme()`. Return `null` or an empty string to fall back to the config theme. No interface is needed.
+
+```php
+public function getContentBlocksTheme(): ?string
+{
+    return 'filament';
+}
+```
+
+The `ContentBlocks` and `Hero` components, the blocks of that model and the block preview in the editor render inside a theme scope of that model. Every component they embed (`Card`, `CallToAction`, `OverviewCard`, `BackgroundVideo` and your own) picks up the model theme through `FilamentFlexibleBlocksConfig::getViewThemePrefix()`, so nothing has to be passed down. To render something outside those components in a model's theme, wrap it in `FilamentFlexibleBlocksConfig::withTheme($model, fn () => ...)`.
+
 ## AI features
 
 We are dreaming up some exciting new AI-based features to ease content creation and translation. The first has arrived:
