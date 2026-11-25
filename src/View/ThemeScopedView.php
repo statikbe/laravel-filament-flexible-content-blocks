@@ -13,10 +13,10 @@ class ThemeScopedView extends View
 {
     private ?object $themeModel = null;
 
-    public static function make(string $view, ?object $model): static
+    public static function make(string $view, ?object $model): self
     {
         $base = view($view);
-        $scoped = new static($base->getFactory(), $base->getEngine(), $base->name(), $base->getPath(), $base->getData());
+        $scoped = new self($base->getFactory(), $base->getEngine(), $base->name(), $base->getPath(), $base->getData());
         $scoped->themeModel = $model;
 
         return $scoped;
